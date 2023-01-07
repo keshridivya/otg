@@ -1,0 +1,145 @@
+@media only screen and (max-width: 991px) {
+    .banner-content {
+        top: 5%;
+    }
+    .search-form {
+        padding: 0px 15px;
+    }
+    .search-form button[type="submit"] {
+        width: 25px;
+    }
+    .banner-content h2 {
+        padding: 15px 10px;
+        font-size: 0.8rem;
+    }
+    .banner-btn a {
+        font-size: 0.8rem;
+        padding: 10px 15px;
+    }
+    .banner-btn {
+        padding: 0px 20px;
+        margin-top: 6%;
+    }
+    .banner-content h2 {
+        margin-bottom: 5%;
+    }
+    .banners .slick-dots {
+        bottom: 5px;
+    }
+    .section-header .heading {
+        font-size: 1.5rem;
+    }
+    .section-header .sub-heading {
+        font-size: 1.2rem;
+    }
+    .about-info p {
+        font-size: 1rem;
+    }
+    .section-header {
+        margin-bottom: 20px;
+    }
+    .theme-btn {
+        padding: 2px 26px;
+        margin-top: 1rem;
+    }
+    .theme-btn a {
+        font-size: 1.2rem;
+    }
+    .what-we-do-tab .nav-pills .nav-item .nav-link {
+        font-size: 1rem;
+    }
+    .what-we-do-tab .tab-content {
+        padding: 40px 0;
+    }
+    .offer-section .mega-title {
+        font-size: 1.5rem;
+    }
+    .offer-section .mega-subtitle {
+        font-size: 1.2rem;
+    }
+    .offer-section .hero {
+        background-position: 95% 50% !important;
+    }
+    .counter-content .counter-title {
+        font-size: 1rem;
+    }
+    .counter-content .counter-number {
+        font-size: 1.5rem;
+        margin-bottom: 0;
+    }
+    .counter-column:last-child::before {
+        content: none;
+    }
+    .counter-column:nth-child(2)::after {
+        content: none;
+    }
+    .benefits-list ul li {
+        padding: 1rem;
+    }
+    .benefits-list ul li p {
+        font-size: 1rem;
+    }
+    .benefits-list ul li i {
+        font-size: 1rem;
+    }
+    .how-help {
+        padding: 2rem 1rem;
+    }
+    .extended-offer-content h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+    .extended-offer-content {
+        align-items: center;
+    }
+    .slider-nav .slick-prev {
+        display: none !important;
+    }
+    .popular-service-slider .slick-prev {
+        left: 0;
+        z-index: 2;
+    }
+    .popular-service-slider .slick-next {
+        right: 0;
+        z-index: 2;
+    }
+    .popular-warrenties-slider .slick-prev {
+        left: 0;
+        z-index: 2;
+    }
+    .popular-warrenties-slider .slick-next {
+        right: 0;
+        z-index: 2;
+    }
+    .customer-icon i {
+        font-size: 1.5rem;
+    }
+    .customer-details {
+        padding: 10px;
+        margin: 10px;
+    }
+    .customer-testimonial {
+        margin: 0;
+        padding: 15px;
+    }
+    .customer-msg p {
+        font-size: 1rem;
+        text-align: justify;
+    }
+    .slider-single .slick-next {
+        right: -5px;
+    }
+    .slider-single .slick-prev {
+        display: block !important;
+        left: -5px;
+    }
+    .topbar-icon img {
+        height: 60px;
+    }
+    .topbar-title p {
+        font-size: 1rem;
+    }
+    .footer-topbar {
+        margin-top: -20%;
+    }
+}
