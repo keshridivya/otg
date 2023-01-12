@@ -59,6 +59,10 @@ $route['maintenance']='welcome/maintenance';
 $route['maintenance/(:any)']='welcome/maintenance/$1';
 $route['services']='welcome/services';
 $route['logout']='welcome/logout';
+$route['checkout']='welcome/checkout';
+$route['cart/(:any)']='welcome/cart/$1';
+// $route['update_cart']='welcome/update_cart';
+
 
 
 

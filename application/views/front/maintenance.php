@@ -189,9 +189,10 @@
                                                                             <div class="plan-price">
                                                                                 <h2><i class="fa fa-inr" aria-hidden="true"></i><?php echo $plandata['cplan_price'];?></h2>
                                                                             </div>
+                                                                            <!-- <?php echo $plandata['$cplan_id'];?> -->
                                                                             <div class="plan-btns">
                                                                                 <a href="">View More</a>
-                                                                                <a href="">Add to Cart</a>
+                                                                                <a href="<?php echo base_url('cart/'.$plandata['cplan_id'])?>">Add to Cart</a>
                                                                             </div>
                                                                     </div>
                                                                 </div>
@@ -242,7 +243,7 @@
                                                                             </div>
                                                                             <div class="plan-btns">
                                                                                 <a href="">View More</a>
-                                                                                <a href="">Add to Cart</a>
+                                                                                <a href="<?php echo base_url('cart/'.$plandata['cplan_id'])?>">Add to Cart</a>
                                                                             </div>
                                                                     </div>
                                                                 </div>

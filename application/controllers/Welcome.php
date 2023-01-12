@@ -19,7 +19,11 @@ class Welcome extends CI_Controller {
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
 
-	 
+	 function __construct()
+	 {
+		parent::__construct();
+		$this->load->library('cart');
+	 }
 	public function index()
 
 	{
@@ -72,7 +76,24 @@ class Welcome extends CI_Controller {
 				$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
 				$page_data['customers']=$customers_table;
 				$bookings_table=$this->db->get_where('bookings',array('cust_id'=>$session_cust))->result_array();
-			
+				if($this->input->post('submit') == 'edit'){
+				
+					$data=array(
+						"cust_name"=>$this->input->post('customer_name'),
+						"contact"=>$this->input->post('customer_contact'),
+						"email_id"=>$this->input->post('customer_email'),
+						"city"=>$this->input->post('customer_city'),
+						"address"=>$this->input->post('customer_address'),
+						"pincode"=>$this->input->post('customer_pincode'),
+						"modified_on"=>date('Y-m-d h:i:s')
+					);
+					$this->db->where('cust_id',$session_cust);
+					$this->db->update('customer',$data);
+					
+
+				
+					
+				}
 				$page_data['bookings_table']=$bookings_table;
 				$page_data['page']="account";
 				$this->load->view('index',$page_data);
@@ -179,6 +200,7 @@ class Welcome extends CI_Controller {
 					$bookings_table=$this->db->get_where('bookings',array('cust_id'=>$session_cust))->result_array();
 					//user edit details start here
 							if($this->input->post('submit') == 'edit'){
+								echo "reached here";
 								$data=array(
 									"cust_name"=>$this->input->post('customer_name'),
 									"contact"=>$this->input->post('customer_contact'),
@@ -191,6 +213,7 @@ class Welcome extends CI_Controller {
 								);
 								$this->db->where('cust_id',$session_cust);
 								$this->db->update('customer',$data);
+								
 							}
 						$page_data['bookings_table']=$bookings_table;
 						$page_data['page']="account";
@@ -228,11 +251,46 @@ class Welcome extends CI_Controller {
 		$page_data['plans_data']=$plans_data;
 		$page_data['page']="maintenance";
 		$this->load->view('index',$page_data);
+		$this->load->library('cart');
+	
+
+		
+	}
+	public function addtocart(){
+		
+	}
+	public function cart($id){
+		$plans=$this->db->get_where('category_plans',array('cplan_id'=>$id))->result_array();
+		$products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
+		$this->load->library('cart');
+
+
+		$data=array(
+			'id'=>$plans[0]['cplan_id'],
+			'qty'=>1,
+			'price'=>$plans[0]['cplan_price'],
+			'name'=>$plans[0]['cplan_name'],
+			'image'=>$products[0]['cproduct_img'],
+			'product_name'=>$products[0]['cproduct_name'],
+			'product_category'=>$products[0]['category_name'],
+
+		);
+		$this->cart->insert($data);
+		$cart_data=array();
+		$page_data['cartItems']=$this->cart->contents();
+				
+
+		$page_data['page_title']="My Cart";
+
+		$page_data['page']="cart";
+		$this->load->view('index',$page_data);
+		
+	
 	}
 	public function services()
 	{
 		$page_data['page_title']="Our Services";
-		$product_data=$this->db->get_where('category_product',array('category_name'=>'Maintenance and repair'))->result_array();
+		$product_data=$this->db->get_where('category_product',array('category_name'=>'Maintenance and repair','status'=>'active'))->result_array();
 		$page_data['product_data']=$product_data;
 		$page_data['page']="services";
 		$this->load->view('index',$page_data);
@@ -250,10 +308,64 @@ class Welcome extends CI_Controller {
 				$this->load->view('index',$page_data);
 		}
 	}
+	public function checkout(){
+		$this->load->library('cart');
+
+		if($this->cart->total_items()<=0){
+			redirect(base_url('services'));
+		}
+		if($this->session->userdata['cid']){
+			$session_cust=$this->session->userdata['cid'];
+					//redirect to dashboard
+			$ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+		}elseif($this->session->userdata('custid')){
+			$session_cust=$this->session->userdata['custid'];
+			//redirect to dashboard
+			$ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+		}
+			$page_data['ex_cust']=$ex_cust;
+		$page_data['cartItems']=$this->cart->contents();
+		$page_data['page']="checkout";
+		$this->load->view('index',$page_data);
+	}
+
 	public function logout()
 	{
 		$this->session->sess_destroy();
 		redirect(base_url('sign-up'));
 	}
+	//  function updateItemqty(){
+	// 	$update=0;
+	// 	$rowid=$this->input->get('rowid');
+	// 	$qty=$this->input->get('qty');
+	// 	print_r($qty);
+	// 	if(!empty($rowid) && !empty($qty)){
+	// 		$data=array(
+	// 			'rowid'=>$rowid,
+	// 			'qty'=>$qty
+	// 		);
+	// 		print_r($data);
+	// 		$update=$this->cart->update($data);
+	// 	}
+	// 	echo $update?'ok':'err';
+
+	// }
+	public function update_cart(){
+		$id=$this->input->post('id');
+		$qty=$this->input->post('qty');
+		$data=array(
+		'rowid'=>$id,
+		'qty'=>$qty,
+		);
+		$this->cart->update($data);
+		
+	
+	}
+	public function removeItem($rowid){
+		$remove=$this->cart->remove($rowid);
+		redirect('cart/');
+			}
+
+
 	
 }

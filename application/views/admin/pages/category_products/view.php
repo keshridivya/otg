@@ -26,7 +26,7 @@
                                         <tr>
                                             
                                             <th>Category Product Image</th>
-                                            <th>Category Product Id</th>
+                                            <!-- <th>Category Product Id</th> -->
                                             <th>Category Name</th>
                                             <th>Category Product Name</th>
                                             
@@ -46,7 +46,7 @@
                                     <tr>
                                        
                                         <td><img src='<?php echo base_url($cpro['cproduct_img']);?>' /></td>
-                                        <td><?php echo $cpro['cproduct_id']; ?></td>
+                                        <!-- <td><?php echo $cpro['cproduct_id']; ?></td> -->
                                         <td><?php echo $cpro['category_name']; ?></td>
                                                                             
                                         <td><?php echo $cpro['cproduct_name']; ?></td>                                    

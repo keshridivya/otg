@@ -288,10 +288,10 @@
                         </button>
                     </div>
                 	<div class="site-cart">
-                    	<a href="#;" class="site-header__cart" title="Cart">
+                    	<a href="<?php echo base_url('cart/');?>" class="site-header__cart" title="Cart">
                         	<!-- <i class="icon anm anm-bag-l"></i> -->
                             <img src="/assets/images/cart.png" alt="">
-                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">2</span>
+                            <span  class=""><?php echo "hello" ?></span>
                         </a>
                         <!--Minicart Popup-->
                         <!-- <div id="header-cart" class="block block-cart">

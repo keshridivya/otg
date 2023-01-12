@@ -6,10 +6,10 @@
 
         </div>
         <div class="col-lg-6">
-            <div class="add-btn">
+            <!-- <div class="add-btn">
 
                 <a href="<?php echo base_url()?>admin/bookings/add" class="pull-right">Add New</a>
-            </div>
+            </div> -->
 
         </div>
 
