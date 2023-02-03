@@ -51,7 +51,50 @@
   32. Related Product Slider
   33. Infinite Scroll js
 *************************************************/
+// var a = 0;
+// $(window).scroll(function() {
 
+//     var oTop = $('#dome-section').offset().top - window.innerHeight;
+//     if (a == 0 && $(window).scrollTop() > oTop) {
+//         let valuesDisplays = document.querySelectorAll('.counter-number');
+//         let interval = 1000;
+//         valuesDisplays.forEach((valuesDisplay) => {
+//             let startValue = 0;
+//             let endValue = parseInt(valuesDisplay.getAttribute("data-val"));
+//             let duration = Math.floor(interval / endValue);
+//             let counter = setInterval(function() {
+//                 startValue += 1;
+//                 valuesDisplay.textContent = startValue;
+//                 if (startValue == endValue) {
+//                     clearInterval(counter);
+//                 }
+//             }, duration)
+//         });
+//     }
+// });
+
+
+$('.counter-number').each(function() {
+    let $this = $(this),
+        countTo = $this.attr('data-val');
+    
+    $({ countNum: $this.text()}).animate({
+      countNum: countTo
+    },
+  
+    {
+      duration: 6000,
+      easing:'linear',
+      step: function() {
+        $this.text(Math.floor(this.countNum));
+      },
+      complete: function() {
+        $this.text(this.countNum);
+      }
+    });  
+    
+  
+  });
 (function($) {
     // Start of use strict
     'use strict';
@@ -120,17 +163,17 @@
      6. Minicart Dropdown ---------------------
      ------------------------------------------ */
     function minicart_dropdown() {
-        $(".site-header__cart").on("click", function(i) {
-            i.preventDefault();
-            $("#header-cart").slideToggle();
-        });
+        // $(".site-header__cart").on("click", function(i) {
+        //     i.preventDefault();
+        //     $("#header-cart").slideToggle();
+        // });
         // Hide Cart on document click
-        $("body").on("click", function(event) {
-            var $target = $(event.target);
-            if (!$target.parents().is(".site-cart") && !$target.is(".site-cart")) {
-                $("body").find("#header-cart").slideUp();
-            }
-        });
+        // $("body").on("click", function(event) {
+        //     var $target = $(event.target);
+        //     if (!$target.parents().is(".site-cart") && !$target.is(".site-cart")) {
+        //         $("body").find("#header-cart").slideUp();
+        //     }
+        // });
     }
     minicart_dropdown();
 

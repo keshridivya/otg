@@ -131,14 +131,7 @@ class Admin extends CI_Controller {
 					redirect('admin/customer');
 				}
 				break;
-			case 'active':
-				echo "ID:".$id."";
-				echo "active";
-				break;
-			case 'inactive':
-				echo "ID:".$id."";
-				echo "inactive";
-				break;
+			
 			
 			default:
 				# code...
@@ -208,7 +201,7 @@ class Admin extends CI_Controller {
 				$bookings_data=$this->db->get_where('bookings',array('request_id'=>$id))->result_array();
 			
 				$page_data['book_data']=$bookings_data;
-			
+				$page_data['message']="";
 				$page_data['page_title']="Edit bookings";
 				$page_data['page']="amc/form";
 				$page_data['action']="edit";
@@ -346,6 +339,24 @@ class Admin extends CI_Controller {
 				
 					if($this->db->insert('bookings',$data)){
 						$page_data['message']="Successfully created.";
+						$booking=$this->db->get_where("bookings",array('request_id'=>$id))->result_array();
+					$cust_mail=$this->db->get_where("customer",array('cust_id'=>$booking[0]['cust_id']))->result_array();
+				
+					if($this->input->post('eng_name') && $this->input->post('eng_name')!=" "){
+						$this->load->library('email');
+						$this->email->from('mywebsiteauth1@gmail.com','OTG Cares');
+						$this->email->to($cust_mail[0]['email_id']);
+						$this->email->subject("Engineer Assigned for you order");
+						$this->email->message("Engineer is assigned for you order"."\r\n"."Ordere Id: ".$booking[0]['request_id']."\r\n".$cust_mail[0]["cust_name"]."\r\n"."Engineer name: ".$booking[0]['eng_name']."\r\n");
+						$this->email->set_newline("\r\n");
+						$this->email->send();
+						if($this->email->send()){
+							show_error($this->email->print_debugger());
+						}
+						else{
+							$page_data['message']="Problem occured while email notification";
+						}
+					}
 					}else{
 						$page_data['message']="Problem occured while adding bookings.";
 
@@ -373,8 +384,27 @@ class Admin extends CI_Controller {
 						"modified_on"=>date('Y-m-d h:i:s')
 
 					);
+					
 					$this->db->where('request_id',$id);
 					$this->db->update('bookings',$data);
+					$booking=$this->db->get_where("bookings",array('request_id'=>$id))->result_array();
+					$cust_mail=$this->db->get_where("customer",array('cust_id'=>$booking[0]['cust_id']))->result_array();
+				
+					if($this->input->post('e_name') && $this->input->post('e_name')!=" "){
+						$this->load->library('email');
+						$this->email->from('mywebsiteauth1@gmail.com','OTG Cares');
+						$this->email->to($cust_mail[0]['email_id']);
+						$this->email->subject("Engineer Assigned for you order");
+						$this->email->message("Engineer is assigned for you order"."\r\n"."Ordere Id: ".$booking[0]['request_id']."\r\n".$cust_mail[0]["cust_name"]."\r\n"."Engineer name: ".$booking[0]['eng_name']."\r\n");
+						$this->email->set_newline("\r\n");
+						$this->email->send();
+						if($this->email->send()){
+							show_error($this->email->print_debugger());
+						}
+						else{
+							$page_data['message']="Problem occured while email notification";
+						}
+					}
 				}
 				$bookings_data=$this->db->get_where('bookings',array('request_id'=>$id))->result_array();
 			
@@ -383,7 +413,10 @@ class Admin extends CI_Controller {
 				$page_data['catp']=$catep_data;
 				$plans_data=$this->db->get("category_plans")->result_array();
 				$page_data['plans']=$plans_data;
+				$engineer_data=$this->db->get("engineer")->result_array();
+				$page_data['engineers']=$engineer_data;	
 				$page_data['page_title']="Edit bookings";
+				$page_data['message']="";
 				$page_data['page']="bookings/form";
 				$page_data['action']="edit";
 
@@ -398,14 +431,7 @@ class Admin extends CI_Controller {
 					redirect('admin/bookings');
 				}
 				break;
-			case 'active':
-				echo "ID:".$id."";
-				echo "active";
-				break;
-			case 'inactive':
-				echo "ID:".$id."";
-				echo "inactive";
-				break;
+			
 			
 			default:
 				
@@ -485,14 +511,7 @@ class Admin extends CI_Controller {
 					redirect('admin/engineer');
 				}
 				break;
-			case 'active':
-				echo "ID:".$id."";
-				echo "active";
-				break;
-			case 'inactive':
-				echo "ID:".$id."";
-				echo "inactive";
-				break;
+			
 			
 			default:
 				# code...
@@ -573,19 +592,75 @@ class Admin extends CI_Controller {
 					redirect('admin/category');
 				}
 				break;
-			case 'active':
-				echo "ID:".$id."";
-				echo "active";
-				break;
-			case 'inactive':
-				echo "ID:".$id."";
-				echo "inactive";
-				break;
+			
 			
 			default:
 				# code...
 				break;
 		}
+	}
+	public function plans_features($action,$id="false"){
+		switch($action){
+			case 'view':
+				$plan_features=$this->db->get('plan_features')->result_array();
+		       $page_data['plan_features']=$plan_features;
+
+				$plans=$this->db->get("category_plans")->result_array();
+				$page_data['plans']=$plans;
+				$page_data['page_title']="Our Plan Features";
+				$page_data['page']="plans_features/view";
+				$this->load->view('admin/index',$page_data);
+				
+				break;
+				case 'edit':
+				
+					// if($this->input->post()){
+						
+						
+					// 	$data=array(
+					// 		"category_name"=>$this->input->post('ct_name'),
+					// 		"cproduct_name"=>$this->input->post('cp_name'),
+					// 		"cproduct_desc"=>$this->input->post('cp_desc'),
+					// 		"status"=>$this->input->post('cp_status'),
+							
+					// 		"modified_on"=>date('Y-m-d h:i:s')
+	
+					// 	);
+	
+						
+					// 	$this->db->where('cproduct_id',$id);
+					// 	$this->db->update('category_product',$data);
+					// }
+					$plan_features=$this->db->get_where("plan_features",array('cfeature_id'=>$id))->result_array();
+					$page_data['plan_features']=$plan_features;
+					
+					$plans=$this->db->get_where("category_plans",array('cplan_id'=>$plan_features[0]['cplan_id']))->result_array();
+					$page_data['plans']=$plans;
+					$all_plans=$this->db->get("category_plans")->result_array();
+					$page_data['all_plans']=$all_plans;
+					
+					$page_data['page_title']="Edit Plans Features";
+					$page_data['page']="plans_features/form";
+					$page_data['action']="edit";
+					$page_data['message']=" ";
+					
+	
+					$this->load->view('admin/index',$page_data);
+	
+					break;
+					case 'delete':
+				
+						if($id){
+							$this->db->where('cfeature_id',$id);
+							$this->db->delete('plan_features');
+							redirect('admin/plans_features');
+						}
+						break;
+				default:
+				# code...
+				break;
+		}
+
 	}
 
 	//Product page in admin
@@ -608,7 +683,7 @@ class Admin extends CI_Controller {
 				
 				break;
 			case 'add':
-				if($this->input->post()){
+				if($this->input->post('send')){
 					
 					$data=array(
 						"category_name"=>$this->input->post('ct_name'),
@@ -627,8 +702,9 @@ class Admin extends CI_Controller {
 
 					}
 				}
+				$page_data['message']="";
 				$page_data['page_title']="add Category";
-				$page_data['page']="category_products/form";
+				$page_data['page']="category_products/add";
 				$page_data['action']="add";
 				$categ_data=$this->db->get("category")->result_array();
 				$page_data['cato']=$categ_data;
@@ -639,9 +715,13 @@ class Admin extends CI_Controller {
 			case 'edit':
 				
 				if($this->input->post()){
+					$uploaded_data='0';
 					if($_FILES['cp_photo']['name']!= ""){
 								$absolute_path=base_url('uploads/category/');
 						$uploaded_data=$this->uploadimg(array('upload_path'=>'./uploads/category/','name'=>'cp_photo'));
+					}
+					else{
+						$data['uploaded_data']=$this->input->post('cp_photoedit');
 					}
 					
 					$data=array(
@@ -649,12 +729,10 @@ class Admin extends CI_Controller {
 						"cproduct_name"=>$this->input->post('cp_name'),
 						"cproduct_desc"=>$this->input->post('cp_desc'),
 						"status"=>$this->input->post('cp_status'),
-						
 						"modified_on"=>date('Y-m-d h:i:s')
-
 					);
 
-					if(count($uploaded_data)>=1){
+					if(is_countable($uploaded_data) && count($uploaded_data)>=1){
 						$data['cproduct_img']='uploads/category/'.$uploaded_data['file_name'];
 					}
 					$this->db->where('cproduct_id',$id);
@@ -667,6 +745,7 @@ class Admin extends CI_Controller {
 				$page_data['page_title']="Edit Products";
 				$page_data['page']="category_products/form";
 				$page_data['action']="edit";
+				$page_data['message']=" ";
 				$categ_data=$this->db->get("category")->result_array();
 				$page_data['cato']=$categ_data;
 
@@ -680,14 +759,6 @@ class Admin extends CI_Controller {
 					$this->db->delete('category_product');
 					redirect('admin/category_products');
 				}
-				break;
-			case 'active':
-				echo "ID:".$id."";
-				echo "active";
-				break;
-			case 'inactive':
-				echo "ID:".$id."";
-				echo "inactive";
 				break;
 			
 			default:
@@ -775,14 +846,7 @@ class Admin extends CI_Controller {
 					redirect('admin/subcategory');
 				}
 				break;
-			case 'active':
-				echo "ID:".$id."";
-				echo "active";
-				break;
-			case 'inactive':
-				echo "ID:".$id."";
-				echo "inactive";
-				break;
+			
 			
 			default:
 				# code...
@@ -883,14 +947,7 @@ class Admin extends CI_Controller {
 					redirect('admin/plans');
 				}
 				break;
-			case 'active':
-				echo "ID:".$id."";
-				echo "active";
-				break;
-			case 'inactive':
-				echo "ID:".$id."";
-				echo "inactive";
-				break;
+			
 			
 			default:
 				# code...
@@ -898,7 +955,18 @@ class Admin extends CI_Controller {
 		}
 	}
 	
-
+		// public function plans_features($action,$id=false){
+		// 	switch ($action){
+		// 		case 'view':
+		// 			// echo "View";
+		// 			$cfeatures_data=$this->db->get("plan_features")->result_array();
+		// 			$page_data['page_title']="Plan Features";
+		// 			$page_data['cfeatures']=$cfeatures_data;
+		// 			$page_data['page']="plans_features/view";
+		// 			$this->load->view('admin/index',$page_data);
+		// 			break;
+		// 	}
+		// }
 	//file upload
 	
 	//Logout session

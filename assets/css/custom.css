@@ -8,7 +8,7 @@
 }
 
 .site-header__cart img {
-    height: 25px;
+    height: 40px;
 }
 
 .search-trigger img {
@@ -16,15 +16,19 @@
 }
 
 .section-header .heading {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     color: var(--var-brown);
     font-weight: 700;
 }
 
 .section-header .sub-heading {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--var-green);
     font-weight: 600;
+}
+
+.banner-slider-section {
+    padding-top: 0;
 }
 
 .banner-img img {
@@ -38,9 +42,10 @@
 
 .banner-content {
     position: absolute;
-    top: 20%;
-    left: 5%;
+    top: 50%;
+    left: 50%;
     width: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .search-form {
@@ -57,8 +62,9 @@
     padding: 30px 25px;
     font-size: 3rem;
     font-weight: 700;
-    color: var(--var-brown);
-    text-align: left;
+    /* color: var(--var-brown); */
+    color: #fff;
+    text-align: center;
     margin-bottom: 10%;
 }
 
@@ -90,11 +96,12 @@
 .banner-btn {
     padding: 30px 55px;
     margin-top: 10%;
+    text-align: center;
 }
 
 .banner-btn a {
     padding: 10px 55px;
-    background-color: var(--var-brown);
+    background-color: var(--var-green);
     color: white;
     border-radius: 25px;
     font-size: 1.5rem;
@@ -129,9 +136,8 @@
 }
 
 .about-info p {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--var-brown);
-    font-weight: 600;
     text-align: center;
 }
 
@@ -144,7 +150,7 @@
 }
 
 .theme-btn a {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-decoration: none;
     color: var(--var-green);
     font-weight: 600;
@@ -165,12 +171,12 @@
 }
 
 .what-we-do-tab .nav-pills .nav-item:last-child {
-    border-left: 3px solid gainsboro;
+    /* border-left: 3px solid gainsboro; */
     width: 40%;
 }
 
 .what-we-do-tab .nav-pills .nav-item .nav-link {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--var-green);
     text-align: center;
     font-weight: 700;
@@ -199,7 +205,7 @@
 }
 
 .main-product-title p {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--var-brown);
     font-weight: 600;
 }
@@ -218,9 +224,10 @@
 .popular-img {
     background-color: #fff;
     border-radius: 15px;
-    margin: 10px;
+    /* margin: 10px; */
     display: flex;
     justify-content: center;
+    height: 150px;
 }
 
 .popular-title {
@@ -311,7 +318,7 @@
 }
 
 .offer-section .mega-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     text-align: left;
 }
 
@@ -332,13 +339,14 @@
 }
 
 .counter-content .counter-number {
-    font-size: 3rem;
+    font-size: 2.8rem;
     color: var(--var-green);
     font-weight: 600;
+    margin-bottom: 0;
 }
 
 .counter-content .counter-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--var-brown);
     font-weight: 600;
 }
@@ -392,7 +400,7 @@
 }
 
 .benefits-list ul li {
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .benefits-list ul li i {
@@ -402,7 +410,7 @@
 }
 
 .benefits-list ul li p {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     color: var(--var-brown);
     display: inline;
     font-weight: 600;
@@ -439,12 +447,12 @@
 }
 
 .customer-icon {
-    padding: 10px 12px;
+    padding: 5px 8px;
     background-color: var(--var-brown);
     border-radius: 45px;
     height: 100%;
     width: auto;
-    margin-right: 15%;
+    margin-right: 10%;
 }
 
 .customer-icon i {
@@ -465,9 +473,9 @@
 .customer-details {
     display: flex;
     align-items: center;
-    padding: 25px;
+    padding: 15px;
     border-radius: 15px;
-    margin: 20px;
+    margin: 15px;
 }
 
 .slider-nav .slick-current.slick-active .customer-details {
@@ -498,7 +506,7 @@
 }
 
 .customer-msg p {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--var-brown);
 }
 
@@ -581,7 +589,7 @@
 
 .topbar-title p {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--var-brown);
     font-weight: 600;
 }
@@ -623,7 +631,7 @@
 }
 
 .about-us-content p {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--var-brown);
     font-weight: 600;
     text-align: justify;
@@ -697,7 +705,7 @@
 }
 
 .vision-content p {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--var-brown);
     font-weight: 600;
     text-align: justify;
@@ -768,13 +776,13 @@
 }
 
 .feature-title h2 {
-    color: var(--var-green);
-    font-size: 2rem;
+    color: var(--var-yellow);
+    font-size: 1.8rem;
     text-align: center;
 }
 
 .maintenance-features {
-    padding: 3rem 2rem;
+    padding: 2rem 1rem;
     background-color: #fff;
     border-radius: 15px;
     height: 100%;
@@ -802,7 +810,7 @@
 
 .feature-list ul li p {
     display: inline;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--var-brown);
     font-weight: 600;
 }
@@ -813,19 +821,19 @@
 
 .type-tabs .nav-pills .nav-link {
     color: var(--var-green);
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     padding: 1rem;
     margin: 0 1rem;
 }
 
 .type-tabs .nav-pills .nav-link.active {
-    background-color: transparent;
-    box-shadow: 0px 17px 35px -35px rgba(0, 0, 0, 0.2);
+    /* background-color: transparent; */
+    box-shadow: 0px 25px 35px -30px rgba(0, 0, 0, 0.5);
 }
 
 .type-plans {
-    padding: 4rem 0;
+    padding: 2rem 0;
 }
 
 .type-plan-details {
@@ -833,6 +841,7 @@
     background-color: #fff;
     border-radius: 15px;
     margin-top: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .plan-title {
@@ -841,7 +850,7 @@
 }
 
 .plan-title h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--var-brown);
     text-align: center;
@@ -862,7 +871,7 @@
 }
 
 .plan-price h2 {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
     color: var(--var-green);
     font-weight: 700;
     text-align: center;
@@ -897,7 +906,7 @@
 }
 
 .icons-title p {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: var(--var-brown);
     font-weight: 700;
 }
@@ -1077,4 +1086,245 @@
     color: var(--var-brown);
     font-weight: 600;
     font-size: 1.5rem;
+}
+
+.new-booking .form-control[readonly] {
+    background-color: #fff;
+}
+
+.new-booking input {
+    border: none;
+}
+
+.new-booking .form-control:focus {
+    border: none;
+    box-shadow: none;
+}
+
+.final-summery .card {
+    height: 100%;
+}
+
+.invoice {
+    margin: 40px auto;
+    text-align: left;
+    width: 100%;
+}
+
+.invoice td {
+    padding: 5px 0;
+}
+
+.invoice .invoice-items {
+    width: 100%;
+}
+
+.invoice .invoice-items td {
+    border-top: #eee 1px solid;
+}
+
+.invoice .invoice-items .total td {
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+    font-weight: 700;
+}
+
+.alignright {
+    text-align: right;
+}
+
+.counter-content h2 span {
+    font-size: 3rem;
+    color: var(--var-green);
+}
+
+.counter-content h2 .counter-number {
+    display: inline-block;
+}
+
+.cart-row.delete-item i {
+    color: red;
+}
+
+.cart-row.delete-item {
+    justify-content: center;
+}
+
+.one-order {
+    margin: 15px 10px;
+}
+
+.accnt-row {
+    border-bottom: 1px solid #555;
+    padding: 15px 0;
+}
+
+.accnt-row:last-child {
+    border-bottom: none;
+}
+
+.quick-plans {
+    max-height: 600px;
+}
+
+.accord-content {
+    display: flex;
+}
+
+.product-title h6 {
+    text-align: left;
+    width: 100%;
+}
+
+.accord-content .product-title p {
+    font-size: 0.8rem;
+    text-align: left;
+}
+
+.product-accordion a::after {
+    content: "\f107";
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+}
+
+a.collapsed::after {
+    content: "\f106";
+}
+
+.product_accordion-section {
+    background-color: #fff;
+    padding: 1.5rem 1rem;
+    border-radius: 15px;
+}
+
+.product-accordion {
+    padding: 0 0 0 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.product-acc-price {
+    padding: 0 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.product-acc-price i {
+    color: var(--var-green);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.product-acc-price h5 {
+    margin-bottom: 0;
+    color: var(--var-green);
+}
+
+.accord-text {
+    background-color: #fff;
+    border-radius: 15px;
+    padding-top: 1rem;
+}
+
+
+/* New css for plans  */
+
+.plan-table {
+    display: flex;
+}
+
+.plan-title h2 {
+    font-size: 1rem;
+}
+
+.plan-desc {
+    padding: 0;
+}
+
+.plan-title {
+    margin: 0;
+    padding: 0.5rem;
+}
+
+.plan-desc p {
+    font-size: 1rem;
+}
+
+.plan-title {
+    border-bottom: none;
+}
+
+.plan-title h2 {
+    margin-bottom: 0;
+}
+
+.type-plan-details {
+    padding: 1rem;
+}
+
+.plan-price {
+    padding: 0 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.plan-price h2 {
+    font-size: 1rem;
+}
+
+.plan-btns a:first-child {
+    border-right: none;
+}
+
+.plan-btns {
+    padding: 0;
+    background-color: transparent;
+}
+
+.plan-btns a {
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    height: min-content;
+    background-color: var(--var-yellow);
+    border-radius: 15px;
+}
+
+.plan-btns {
+    display: flex;
+    align-items: center;
+}
+
+.lvl1.sign-in a {
+    padding: 1rem;
+    border: 2px solid var(--var-yellow);
+    border-radius: 15px;
+}
+
+.plan-features {
+    list-style: none;
+}
+
+.plan-features li i {
+    color: var(--var-green);
+}
+
+.plan-features li p {
+    display: inline;
+}
+
+.ban-overlay {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+}
+
+.popular-warrenties-slider.future-verticals .popular-img {
+    background-color: transparent;
+}
+
+.popular-warrenties-slider.future-verticals .popular-img img {
+    border-radius: 15px;
 }

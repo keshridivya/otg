@@ -60,7 +60,17 @@ $route['maintenance/(:any)']='welcome/maintenance/$1';
 $route['services']='welcome/services';
 $route['logout']='welcome/logout';
 $route['checkout']='welcome/checkout';
-$route['cart/(:any)']='welcome/cart/$1';
+$route['cart']='welcome/cart';
+$route['update_cart']='welcome/update_cart';
+$route['summery']='welcome/summery';
+$route['receipt']='welcome/receipt';
+$route['blog']='welcome/blog';
+
+
+
+$route['addtocart/(:any)']='welcome/addtocart/$1';
+$route['removeItem/(:any)']='welcome/removeItem/$1';
+
 // $route['update_cart']='welcome/update_cart';
 
 
@@ -132,13 +142,23 @@ $route['admin/subcategory/delete/(:any)']="admin/subcategory/delete/$1";
 $route['admin/subcategory/active/(:any)']="admin/subcategory/active/$1";
 $route['admin/subcategory/inactive/(:any)']="admin/subcategory/inactive/$1";
 
-//admin Subcategories
+//admin Plans
 $route['admin/plans']="admin/plans/view";
 $route['admin/plans/add']="admin/plans/add";
 $route['admin/plans/edit/(:any)']="admin/plans/edit/$1";
 $route['admin/plans/delete/(:any)']="admin/plans/delete/$1";
 $route['admin/plans/active/(:any)']="admin/plans/active/$1";
 $route['admin/plans/inactive/(:any)']="admin/plans/inactive/$1";
+//admin Plans features
+$route['admin/plans_features']="admin/plans_features/view";
+$route['admin/plans_features/add']="admin/plans_features/add";
+$route['admin/plans_features/edit/(:any)']="admin/plans_features/edit/$1";
+$route['admin/plans_features/delete/(:any)']="admin/plans_features/delete/$1";
+
+//admin blog
+$route['admin/blog']='admin/blog/view';
+$route['admin/blog/add']='admin/blog/add';
+
 
 
 

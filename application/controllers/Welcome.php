@@ -106,7 +106,7 @@ class Welcome extends CI_Controller {
 			
 		}
 		elseif ($this->input->post('submit') == 'register' || $this->session->userdata('custid') ){
-			
+			$all_customers=$this->db->get("customer")->result_array();
 								$config=array(
 										array(
 												'field' => 'username',
@@ -127,7 +127,7 @@ class Welcome extends CI_Controller {
 										array(
 												'field' => 'email_id',
 												'label' => 'Email',
-												'rules' => 'required|valid_email'
+												'rules' => 'required|valid_email|is_unique[customer.email_id]'
 										),
 										
 										array(
@@ -170,6 +170,19 @@ class Welcome extends CI_Controller {
 					
 					if($this->db->insert('customer',$data)){
 						$page_data['message']="Successfully Registered.";
+						$this->load->library('email');
+						$this->email->from('mywebsiteauth1@gmail.com','OTG Cares');
+						$this->email->to($data['email_id']);
+						$this->email->subject("New User Registered");
+						$this->email->message("Thank you for registration".$data["cust_name"]."\r\n"."Customer Id".$data["new_cust_id"]."\r\n"."Welcome to OTG cares.");
+						$this->email->set_newline("\r\n");
+						$this->email->send();
+						if($this->email->send()){
+							show_error($this->email->print_debugger());
+						}
+						else{
+							$page_data['message']="Problem occured while email notification";
+						}
 						$customers_login=$this->db->get_where("customer",array('email_id'=>$data['email_id'],'password'=>$data['password']))->result_array();
 						// print_r($customers_login);
 						$custid=$customers_login[0]['cust_id'];
@@ -187,6 +200,7 @@ class Welcome extends CI_Controller {
 					
 				}else{
 					// echo validation_errors();
+					
 				}
 				
 				
@@ -249,6 +263,13 @@ class Welcome extends CI_Controller {
 		$page_data['subcat_data']=$subcat_data;
 		$plans_data=$this->db->get_where('category_plans',array('cproduct_name'=>$product_arg))->result_array();
 		$page_data['plans_data']=$plans_data;
+		$plan_features=$this->db->get('plan_features')->result_array();
+		$page_data['plan_features']=$plan_features;
+
+		$product_features=$this->db->get_where('product_features',array('cproduct_id'=>$product_data[0]['cproduct_id']))->result_array();
+		$page_data['product_features']=$product_features;
+		$product_benefits=$this->db->get_where('product_benefits',array('cproduct_id'=>$product_data[0]['cproduct_id']))->result_array();
+		$page_data['product_benefits']=$product_benefits;
 		$page_data['page']="maintenance";
 		$this->load->view('index',$page_data);
 		$this->load->library('cart');
@@ -256,15 +277,9 @@ class Welcome extends CI_Controller {
 
 		
 	}
-	public function addtocart(){
-		
-	}
-	public function cart($id){
-		$plans=$this->db->get_where('category_plans',array('cplan_id'=>$id))->result_array();
+	 function addtocart($proid){
+		$plans=$this->db->get_where('category_plans',array('cplan_id'=>$proid))->result_array();
 		$products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
-		$this->load->library('cart');
-
-
 		$data=array(
 			'id'=>$plans[0]['cplan_id'],
 			'qty'=>1,
@@ -276,7 +291,11 @@ class Welcome extends CI_Controller {
 
 		);
 		$this->cart->insert($data);
-		$cart_data=array();
+		redirect(base_url('cart'));
+	}
+
+	public function cart(){
+	
 		$page_data['cartItems']=$this->cart->contents();
 				
 
@@ -302,7 +321,17 @@ class Welcome extends CI_Controller {
 			$page_data['page_title']="My Account";
 			$page_data['page']="account";
 			$this->load->view('index',$page_data);
-		}else{
+		}
+		//if user register while checking out
+		elseif($this->session->userdata('newid')){
+			$session_cust=$this->session->userdata('newid');
+			$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+			$page_data['customers']=$customers_table;
+			$page_data['page_title']="My Account";
+			$page_data['page']="account";
+			$this->load->view('index',$page_data);
+		}
+		else{
 			$page_data['page']="sign_up";
 				$page_data['message']="";
 				$this->load->view('index',$page_data);
@@ -314,19 +343,161 @@ class Welcome extends CI_Controller {
 		if($this->cart->total_items()<=0){
 			redirect(base_url('services'));
 		}
+		//if user logged in
 		if($this->session->userdata['cid']){
+			$page_data['cartItems']=$this->cart->contents();
+
 			$session_cust=$this->session->userdata['cid'];
-					//redirect to dashboard
+					
 			$ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
-		}elseif($this->session->userdata('custid')){
+			if($this->input->post()){
+				redirect(base_url('summery'));
+			}
+
+		}//if user registered
+		elseif($this->session->userdata('custid')){
+			$page_data['cartItems']=$this->cart->contents();
+
 			$session_cust=$this->session->userdata['custid'];
-			//redirect to dashboard
+			
 			$ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+				if($this->input->post()){
+				redirect(base_url('summery'));
+			}
+
+		}//user added to cart without logging in
+		else{
+			$page_data['cartItems']=$this->cart->contents();
+			if($this->input->post()){
+				$data=array(
+					"cust_name"=>$this->input->post('c_name'),
+					"contact"=>$this->input->post('c_contact'),
+					"email_id"=>$this->input->post('c_email'),
+					"password"=>sha1($this->input->post('c_password')),
+					"city"=>$this->input->post('c_city'),
+					"address"=>$this->input->post('c_address'),
+					"pincode"=>$this->input->post('c_pincode'),
+					"created_on"=>date('Y-m-d h:i:s'),
+					"modified_on"=>date('Y-m-d h:i:s')
+
+				);
+					if($this->db->insert('customer',$data)){
+						$page_data['message']="Successfully created.";
+						$customers_login=$this->db->get_where("customer",array('email_id'=>$data['email_id'],'password'=>$data['password']))->result_array();
+						// print_r($customers_login);
+						$newid=$customers_login[0]['cust_id'];
+						$newemail=$customers_login[0]['email_id'];
+						$this->session->set_userdata('newid',$newid);
+						$this->session->set_userdata('newemail',$newemail);
+						if($this->session->userdata('newid')){
+						redirect(base_url('summery'));
+						}
+						
+					}else{
+						$page_data['message']="Problem occured while adding customer.";
+		
+					}
+				
+
+			}
+		
 		}
-			$page_data['ex_cust']=$ex_cust;
+						
+		$page_data['ex_cust']=$ex_cust;
 		$page_data['cartItems']=$this->cart->contents();
 		$page_data['page']="checkout";
 		$this->load->view('index',$page_data);
+	}
+	
+	
+	public function summery(){
+		if($this->session->userdata('cid')){
+			$session_cust=$this->session->userdata('cid');
+			$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+			$page_data['customers']=$customers_table;
+		}elseif($this->session->userdata('custid')){
+			$session_cust=$this->session->userdata('custid');
+			$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+			$page_data['customers']=$customers_table;
+		}
+		else{
+			$session_cust=$this->session->userdata('newid');
+			$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+			$page_data['customers']=$customers_table;	
+		}
+		$page_data['cartItems']=$this->cart->contents();
+		if($this->input->post()){
+				$data=array(
+					"cust_id"=>$this->input->post('customer_id'),
+					"cust_name"=>$this->input->post('c_name'),
+					"service_plan"=>$this->input->post('s_plan'),
+
+					"service_device"=>$this->input->post('s_device'),
+					"quantity"=>$this->input->post('quantity'),
+					"total_amount"=>$this->input->post('t_amnt'),
+					"status"=>'new',
+					"created_on"=>date('Y-m-d h:i:s')
+				
+
+				);
+							
+				$customer_email=$this->db->get_where("customer",array('cust_id'=>$data['cust_id']))->result_array();
+					// print_r($customer_email);
+					// print_r($customer_email['email_id']);
+				if($this->db->insert('bookings',$data)){
+					$page_data['message']="Successfully created.";
+						
+					$booking_data=$this->db->get_where("bookings",array('cust_id'=>$data['cust_id'],'created_on'=>$data['created_on'],'status'=>$data['status']))->result_array();
+						// print_r($customers_login);
+						$reqid=$booking_data[0]['request_id'];
+						
+						
+						$this->session->set_userdata('reqid',$reqid);
+					
+						redirect(base_url('receipt'));
+				}else{
+					$page_data['message']="Problem occured while adding bookings.";
+
+				}
+
+		}
+		$page_data['page_title']="Order Summery";
+			$page_data['page']="summery";
+			$this->load->view('index',$page_data);
+		
+	}
+	public function receipt(){
+		$page_data['cartItems']=$this->cart->contents();
+		if($this->session->userdata('reqid')){
+
+						
+			$reqid=$this->session->userdata('reqid');
+			$new_booking=$this->db->get_where("bookings",array('request_id'=>$reqid))->result_array();
+			$cust_mail=$this->db->get_where("customer",array('cust_id'=>$new_booking[0]['cust_id']))->result_array();
+							
+						$this->load->library('email');
+						$this->email->from('mywebsiteauth1@gmail.com','OTG Cares');
+						$this->email->to($cust_mail[0]['email_id']);
+						$this->email->subject("New Service Booked");
+						$this->email->message("Thank you for your order"." ".$new_booking[0]["cust_name"]."\r\n"."Request Id"." ".$new_booking[0]["new_request_id"]."\r\n"."Order Details"."\r\n"."Order Id".$new_booking[0]['request_id']."\r\n"."Your name: ".$new_booking[0]['cust_name']."\r\n"."Service: ".$new_booking[0]['service_plan']." for ".$new_booking[0]['service_device']."\r\n"."Charges: &#8377;".$new_booking[0]['total_amount']);
+						$this->email->set_newline("\r\n");
+						$this->email->send();
+						if($this->email->send()){
+							show_error($this->email->print_debugger());
+						}
+						else{
+							$page_data['message']="Problem occured while email notification";
+						}
+		}
+		$page_data['new_booking']=$new_booking;
+		$page_data['message']="New Service Booked";
+
+		$page_data['page_title']="Order Receipt";
+		$page_data['page']="receipt";
+		$this->load->view('index',$page_data);
+		$this->session->unset_userdata('reqid');
+		$this->cart->destroy();
+
 	}
 
 	public function logout()
@@ -334,22 +505,7 @@ class Welcome extends CI_Controller {
 		$this->session->sess_destroy();
 		redirect(base_url('sign-up'));
 	}
-	//  function updateItemqty(){
-	// 	$update=0;
-	// 	$rowid=$this->input->get('rowid');
-	// 	$qty=$this->input->get('qty');
-	// 	print_r($qty);
-	// 	if(!empty($rowid) && !empty($qty)){
-	// 		$data=array(
-	// 			'rowid'=>$rowid,
-	// 			'qty'=>$qty
-	// 		);
-	// 		print_r($data);
-	// 		$update=$this->cart->update($data);
-	// 	}
-	// 	echo $update?'ok':'err';
-
-	// }
+	
 	public function update_cart(){
 		$id=$this->input->post('id');
 		$qty=$this->input->post('qty');
@@ -358,14 +514,17 @@ class Welcome extends CI_Controller {
 		'qty'=>$qty,
 		);
 		$this->cart->update($data);
-		
-	
+		echo json_encode($data);
 	}
 	public function removeItem($rowid){
-		$remove=$this->cart->remove($rowid);
-		redirect('cart/');
+		$this->cart->remove($rowid);
+		redirect(base_url('cart'));
 			}
 
-
+public function blog(){
+	$page_data['page_title']="Blog";
+	$page_data['page']="blog";
+	$this->load->view('index',$page_data);
+}
 	
 }

@@ -129,33 +129,36 @@
                         </div>
                      </div>
                      <div class="col-lg-12 d-flex justify-content-center">
-                        <div class="dome-section text-center">
+                        <div class="dome-section text-center" id="dome-section">
                            <div class="row  pb-5 pt-4 justify-content-center">
-                              <div class="col-lg-10 counter-column">
+                              <div class="col-lg-10 col-sm-12 counter-column">
                                  <div class="counter-content">
-                                    <h2 class="counter-number">
-                                       300+
+                                    <h2>
+                                       <p class="counter-number" data-val="200">000</p>
+                                          <span  class="counter-sign">+</span>
                                     </h2>
                                     <p class="counter-title">Brands Covered</p>
                                  </div>
                               </div>
-                              <div class="col-lg-4 counter-column">
+                              <div class="col-lg-4 col-4 counter-column">
                                  <div class="counter-content">
-                                    <h2 class="counter-number">
-                                       5000+
+                                    <h2>
+                                       <p class="counter-number" data-val="5000">0000</p>
+                                       <span  class="counter-sign">+</span>
                                     </h2>
                                     <p class="counter-title">Happy Customers</p>
                                  </div>
                               </div>
-                              <div class="col-lg-3 counter-column">
+                              <div class="col-lg-3 col-4 counter-column">
                                  <div class="counter-logo">
                                     <img src="assets/images/logo/counter-logo.png" alt="">
                                  </div>
                               </div>
-                              <div class="col-lg-4 counter-column">
+                              <div class="col-lg-4 col-4 counter-column">
                                  <div class="counter-content">
-                                    <h2 class="counter-number">
-                                       120+
+                                    <h2>
+                                       <p class="counter-number" data-val="120">000</p>
+                                       <span class="counter-sign">+</span>
                                     </h2>
                                     <p class="counter-title">Retail Stores</p>
                                  </div>
@@ -169,24 +172,24 @@
                            <h4 class="sub-heading">Services from OTG cares benefits your devices</h4>
                         </div>
                         <div class="benefits-list">
-                           <ul>
-                              <li>
-                                 <i class="fa-solid fa-check"></i>
-                                 <p> Improves Cooling And Performance</p>
-                              </li>
-                              <li>
-                                 <i class="fa-solid fa-check"></i>
-                                 <p> Reduces Power Consumption</p>
-                              </li>
-                              <li>
-                                 <i class="fa-solid fa-check"></i>
-                                 <p> Enhances The Life Of The Appliance</p>
-                              </li>
-                              <li>
-                                 <i class="fa-solid fa-check"></i>
-                                 <p> Ensures Significant Reduction In Frequent Breakdown</p>
-                              </li>
-                           </ul>
+                        <ul>
+							<li class='d-flex'>
+								<i class="fa-solid fa-check mr-1"></i>
+								<p> Improves Cooling And Performance</p>
+							</li>
+							<li class='d-flex'>
+								<i class="fa-solid fa-check mr-1"></i>
+								<p> Reduces Power Consumption</p>
+							</li>
+							<li class='d-flex'>
+								<i class="fa-solid fa-check mr-1"></i>
+								<p> Enhances The Life Of The Appliance</p>
+							</li>
+							<li class='d-flex'>
+								<i class="fa-solid fa-check mr-1"></i>
+								<p> Ensures Significant Reduction In Frequent Breakdown</p>
+							</li>
+						</ul>
                         </div>
                      </div>
                   </div>

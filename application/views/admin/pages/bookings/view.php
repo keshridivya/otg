@@ -29,6 +29,7 @@
                                             <th>Customer  Name</th>
                                             <th>Service Plan</th>
                                             <th>Service Device</th>
+                                            <th>Quantity</th>
                                             <th>Engineer Name</th>
                                             <th>Status</th>
                                             <th>Total Amount</th>
@@ -42,11 +43,40 @@
                                    foreach($bookings_data as $book){
                                     ?>
                                     <tr>
-                                        <td><?php echo $book['request_id']; ?></td>
+                                        <td><?php echo $book['new_request_id']; ?></td>
                                         <td><?php echo $book['cust_id']; ?></td>
-                                    <td><?php echo $book['cust_name']; ?></td>
-                                        <td><?php echo $book['service_plan']; ?></td>
-                                        <td><?php echo $book['service_device']; ?></td>
+                                        <td><?php echo $book['cust_name']; ?></td>
+                                        <td> <ul style="list-style:none; padding-left:0;">
+                                            
+                                        <?php
+                                         $book_plans=explode(",", $book['service_plan']);
+                                                foreach($book_plans as $plans){
+                                            
+                                               
+                                         ?>
+                                         <li><?php echo $plans;?></li>
+                                         <?php
+                                          }
+                                         ?>
+                                         </ul>
+                                         
+                                        </td>
+                                        <td>
+                                            <ul style="list-style:none; padding-left:0;">
+                                                    <?php
+                                                    $book_devices=explode(" ", $book['service_device']);
+                                                            foreach($book_devices as $device){
+                                                        
+                                                        
+                                                    ?>
+                                                    <li><?php echo $device;?></li>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                            </ul>
+                                          
+                                        </td>
+                                        <td><?php echo $book['quantity']; ?></td>
                                         <td><?php echo $book['eng_name']; ?></td>
                                         <td><?php echo $book['status']; ?></td> 
                                         <td><?php echo $book['total_amount']; ?></td>                                                                       
@@ -54,7 +84,7 @@
                                         <td><?php echo $book['modified_on']?></td>                                    
                                         <td>
                                           <a href="<?php echo base_url('admin/bookings/edit/'.$book['request_id']); ?>"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a> 
-                                          <a href="<?php echo base_url('admin/bookings/delete/'.$book['request_id']); ?>"><i class="fas fa-trash" aria-hidden="true"></i></a>  
+                                          <a href="" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-trash" aria-hidden="true"></i></a>  
                                         </td>
                                     </tr>
                                     <?php
@@ -69,4 +99,18 @@
                     </div>
 
                 </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        Are you sure?
+      </div>
+      <div class="modal-footer">
+          <a type="button" class="btn btn-secondary" href="<?php echo base_url('admin/bookings/delete/'.$book['request_id']); ?>">Delete</a>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
                 <!-- /.container-fluid -->

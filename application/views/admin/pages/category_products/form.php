@@ -13,7 +13,7 @@
                     <div class="col-lg-12">
                         <div class="p-5">
                           <?php
-                          if($message){
+                          if(!$message==" "){
                             echo "<div class='alert alert-info'>".$message."</div>";
                           }
                           ?>
@@ -25,6 +25,7 @@
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="cp_photo">Product Photo</label>
                                         <input type="file" name="cp_photo" id="cp_photo" class="form-control">
+                                        <input type="hidden" name="cp_photoedit" id="cp_photo" value='<?php echo $cpro_data[0]['cproduct_img']; ?>'>
                                         <?php
                                         if($cpro_data[0]['cproduct_img']){
                                            echo "<img src='".base_url($cpro_data[0]['cproduct_img'])."'/>";

@@ -65,11 +65,34 @@ Table of Content:
 @import url('../../../../css.css');
 @import url('../../../../css-1.css');
 @import url('../../../../css-2.css');
-@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap'); */
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap'); */
+
+
+/* @import url('https://fonts.cdnfonts.com/css/axiforma'); */
+
+@font-face {
+    font-family: 'Axiforma-Light';
+    src: url('../fonts/axiforma/Axiforma-Light.woff2') format('woff2'), url('../fonts/axiforma/Axiforma-Light.woff') format('woff'), url('../fonts/axiforma/Axiforma-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Axiforma-Semi-bold';
+    src: url('../fonts/axiforma/Axiforma-SemiBold.woff2') format('woff2'), url('../fonts/axiforma/Axiforma-SemiBold.woff') format('woff'), url('../fonts/axiforma/Axiforma-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+}
+
 :root {
     --var-green: #0db19e;
     --var-yellow: #f8b11b;
     --var-brown: #4c3418;
+    --var-regular: 600;
 }
 
 
@@ -101,9 +124,13 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     /* font-family: "Poppins", Helvetica, Tahoma, Arial, serif; */
-    font-family: 'Mulish', sans-serif;
+    /* font-family: 'Mulish', sans-serif; */
+    /* font-family: 'Axiforma-Light'; */
+    /* font-family: 'Montserrat', sans-serif; */
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: "Gilroy bold",sans-serif;
     color: #424242;
-    font-weight: 400;
+    font-weight: 300;
     margin: 0;
     padding: 0;
     background-color: #EEF3F4;
@@ -205,7 +232,9 @@ a:hover {
 
 p {
     margin: 0 0 24px;
+    font-family: "Gilroy Regular",sans-serif;
 }
+
 
 pre {
     background: #f5f5f5;
@@ -352,9 +381,13 @@ h5,
 .h5,
 h6,
 .h6 {
+    /* font-family: 'Axiforma-Semi-bold'; */
+    /* font-family: 'Montserrat', sans-serif; */
+    font-family: 'Roboto', sans-serif;
+    font-family: "Gilroy bold",sans-serif;
     color: #000;
     margin: 0 0 10px;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.2;
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -369,7 +402,7 @@ h2,
 .h2 {
     font-size: 19px;
     letter-spacing: 0.03em;
-    text-transform: uppercase;
+    text-transform: capitalize !important;
 }
 
 h3,
@@ -1736,12 +1769,12 @@ textarea:-ms-input-placeholder {
 ========================================================================*/
 
 .section {
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .section-header {
-    margin-bottom: 35px;
+    margin-bottom: 1rem;
 }
 
 .pb-section {
@@ -4964,12 +4997,47 @@ table {
 .grid-item {
     width: 50%;
 }
-
+.accordionspan{
+    display: none ;
+}
 @media (max-width: 575px) {
     .grid-sizer,
     .grid-item {
         width: 100%;
     }
+    .logo {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin: 0;
+    }
+    .site-header__cart img {
+        height: 24px !important;
+    }
+    .site-header__cart-count {
+        width: 12px;
+        height: 12px;
+}
+.accordionspan{
+    display: block !important;
+}
+.accordionanchor{
+    background: #efeeec;
+}
+.learn_more-banner{
+    display: none;
+}
+.banner-content {
+    width: 70% !important;
+}
+.carousel-indicators {
+    bottom: -7px;
+}
+.searchbar{
+    height: 30px;
+}
+.product-accordion {
+    padding:0 !important;
+}
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
@@ -7449,9 +7517,9 @@ body.home15-funiture-template {
     padding: 12px 20px
 }
 
-.newsletter-left #Subscribe:hover {
+/* .newsletter-left #Subscribe:hover {
     background: !important
-}
+} */
 
 
 /*======================================================================
@@ -7804,4 +7872,41 @@ body.home15-funiture-template {
     filter: blur(5px);
     transition: filter 400ms, -webkit-filter 400ms;
     -webkit-transition: filter 400ms, -webkit-filter 400ms;
+}
+.carousel-indicators li {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+/* .nav-pills .nav-item .nav-link.active{
+    background-color:var(--var-green) !important;
+    color:white !important;
+} */
+.accordionanchor{
+    width: 100%;
+    text-align: right;
+    padding: 10px 10px;
+}
+.accordionspan{
+    float: left;
+    font-size: 12px;
+}
+.type-plan-details {
+    border: 1px solid #d3cfca;
+}
+
+.tab-pane {
+  transition: all 0.3s;
+  transform: translateY(1rem);
+}
+ 
+.tab-pane.show {
+  transform: translateY(0rem);
+}
+.nav-pills .nav-item a.active{
+    border-color: #f8b11b;
+    border: 2px solid #f8b11b;
+    background-color: rgba(253,185,19,.2) !important;
+    border-radius: 8px;
+    color: var(--var-brown);
 }

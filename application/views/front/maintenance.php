@@ -1,5 +1,4 @@
-
-    
+<!-- <?php print_r($plan_features);?> -->
 
     <!--Body Content-->
     <div id="page-content">
@@ -18,12 +17,12 @@
                   </div>
                   <div class="row justify-content-center product-info">
                     
-                     <div class="col-lg-6">
+                     <div class="col-lg-5">
                         <div class="product-img">
                             <img src="<?php echo base_url($product_data[0]['cproduct_img']) ?>" alt="">
                         </div>
                      </div>
-                     <div class="col-lg-6">
+                     <div class="col-lg-5">
                         <div class="product-title">
                             <h2><?php echo $product_data[0]['cproduct_name'];?></h2>
                             <p><?php echo $product_data[0]['cproduct_desc']?></p>
@@ -33,74 +32,65 @@
                </div>
             </div>
             <!--End Our benefits will change the way you buy parts-->
-            <div class="section feature">
+            <div class="section feature" style='padding-top:0'>
 
                     <div class="container">
-                        <div class="row">
+                        <div class="row justify-content-center">
+                            <?php
+                            if(!empty($product_benefits)){
+                            
+                         
+                            ?>
                             <div class="col-lg-6">
                                 <div class="maintenance-features">
                                     <div class="feature-title">
                                             
-                                            <h2 class="heading">OTG CARES</h2>
+                                            <h2 class="heading">Benefits</h2>
                                           
                                            
                                     </div>
                                     <div class="feature-list">
                                         <ul>
-                                            <li>
+                                        <?php
+                                             foreach($product_benefits as $benefits){
+                                                ?>
+                                                 <li>
                                                 <i class="fa-solid fa-check"></i>
-                                                <p> Ensures the appliance can be used safely.</p>
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                <p> Reduces power consumption.</p>
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                <p> Enhances the life of the appliance.</p>
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                <p> Ensures significant reduction in frequent breakdown.</p>
-                                            </li>
+                                                <p><?php echo $benefits['benefits'];?></p>
+                                                 </li>
+                                                <?php
+                                             }
+                                            ?>
+                                           
                                         </ul>
                                     </div>
                                 </div>
                             </div>
+                            <?php
+                               }
+                            ?>
                             <div class="col-lg-6">
                                 <div class="maintenance-features">
                                     <div class="feature-title">
                                             
-                                            <h2 class="heading">Services & Features</h2>
+                                            <h2 class="heading">Features</h2>
                                           
                                            
                                     </div>
                                     <div class="feature-list">
                                         <ul>
-                                            <li>
+                                            <?php
+                                             foreach($product_features as $features){
+                                                ?>
+                                                 <li>
                                                 <i class="fa-solid fa-check"></i>
-                                                <p> Extended manufacturer's warranty for the appliance.</p>
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                <p> Covers all faults & breakdowns.</p>
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                <p> Free home Service.</p>
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                <p> Assured quality repairs by professional technicians.</p>
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                <p> Seamless online service for service activation and service request.</p>
-                                            </li>
-                                            <li>
-                                                <i class="fa-solid fa-check"></i>
-                                                <p> Warranty on spare parts.</p>
-                                            </li>
+                                                <p><?php echo $features['feature'];?></p>
+                                                 </li>
+                                                <?php
+                                             }
+                                            ?>
+
+                                        
                                         </ul>
                                     </div>
                                 </div>
@@ -108,6 +98,7 @@
                         </div>
                     </div>
             </div>
+                                                  
             <div class="section">
                 <div class="container">
                     <div class="row">
@@ -140,12 +131,7 @@
                                          } 
                                         }
                                         ?>
-                                    <!-- <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="pill" href="#home">Windows Air Conditioner</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="pill" href="#menu1">Split Air Conditioner</a>
-                                    </li> -->
+                                    
                                   
                                 </ul>
 
@@ -153,7 +139,6 @@
                             </div>
 
                             <div class="type-plans">
-                                    <!-- Tab panes -->
                                     <div class="tab-content">
                                      <?php
                                        
@@ -166,17 +151,56 @@
                                             <div class="type-content">
                                                 <div class="container">
                                                     <div class="row">
+                                                  
                                                         <?php 
-                                                        // print_r($plans_data['cplan_name']);
+                                                        
                                                         foreach($plans_data as $plandata){
+                                                            print_r($plandata);
                                                             $catplans=$plandata['subcat_name'];
-                                                            print_r($catplans);
+                                                         
 
                                                             if($catplans==''){
                                                                 print_r($catplans);
                                                                 ?>
-                                                                <div class="col-lg-6">
-                                                                    <div class="type-plan-details">
+                                                                <div class="col-lg-4">
+                                                                <div class="product_accordion-section">
+                                                                <div class="accord-content">
+                                                                  <div class="product-title">
+                                                                    <h6><?php echo $plandata['cplan_name'];?></h6>
+                                                                           <p>Lorem ipsum dolor sit amet, anfdsconsectetuer
+                                                                                    adipiscing elit, sed diam nonum Lorem ipsum dolor
+                                                                                    sit amet, consectetuer adipiscing elit, sed diam.</p>
+                                                                  </div>
+                                                                  <div class="product-acc-price">
+                                                                    <h5><i class="fa fa-inr" aria-hidden="true"></i><?php echo $plandata['cplan_price'];?></h5>
+                                                                  </div>
+                                                                  <div class="product-accordion">
+                                                                    <a href="#" class="" data-toggle="collapse" data-target="<?php echo "#faq".$plandata['cplan_id'];?>" aria-expanded="true" aria-controls="<?php echo "faq".$plandata['cplan_id'];?>"></a>
+                                                              
+                                                                  </div>
+                                                                </div>
+                                                             
+                                                                <div id="<?php echo "faq".$plandata['cplan_id'];?>" class="accord-text collapse " aria-labelledby="<?php echo "faqhead".$plandata['cplan_id'];?>" data-parent="#faq" >
+                                                                <ul class="plan-features">
+
+                                                                          
+                                                                        <?php
+
+
+                                                                            foreach($plan_features as $plans_features){
+                                                                              if($plans_features['cplan_id']==$plandata['cplan_id']){
+                                                                        ?>
+                                                                            <li><i class="fa-solid fa-check"></i> <p><?php echo $plans_features['cplan_features']; ?></p></li>
+
+                                                                        <?php 
+                                                                              }
+                                                                          }
+                                                                          ?>
+                                                                        </ul>  
+                                                                
+                                                                </div>
+                                                              </div>
+                                                                    <!-- <div class="type-plan-details">
                                                                             <div class="plan-title">
                                                                                 <h2 class="heading"><?php echo $plandata['cplan_name'];?></h2>
                                                                                     
@@ -189,12 +213,20 @@
                                                                             <div class="plan-price">
                                                                                 <h2><i class="fa fa-inr" aria-hidden="true"></i><?php echo $plandata['cplan_price'];?></h2>
                                                                             </div>
-                                                                            <!-- <?php echo $plandata['$cplan_id'];?> -->
+                                                                        
                                                                             <div class="plan-btns">
                                                                                 <a href="">View More</a>
-                                                                                <a href="<?php echo base_url('cart/'.$plandata['cplan_id'])?>">Add to Cart</a>
+                                                                                <a href="<?php echo base_url('addtocart/'.$plandata['cplan_id'])?>">Add to Cart</a>
                                                                             </div>
-                                                                    </div>
+                                                                            <div class="product-accordion">
+                                                                                <a href="#" class="" data-toggle="collapse" data-target="#faq1" aria-expanded="true" aria-controls="<?php echo "faq".$plandata['cplan_id'];?>">dasdas</a>
+                                                              
+                                                                             </div>
+                                                                             <div id="faq1" class="collapse accord-text" aria-labelledby="<?php echo "faqhead".$plandata['cplan_id'];?>" data-parent="#faq">
+                                                                               fsdfsdgsdgsdg asfjaoieruoirej mnrkjhfoia
+                                                                             </div>
+
+                                                                    </div> -->
                                                                 </div>
                                                                 <?php
                                                                 
@@ -221,30 +253,57 @@
                                                 <div class="container">
                                                     <div class="row">
                                                         <?php 
-                                                        // print_r($subcat_data[$i]['subcat_name']);
+                                                        
                                                         foreach($plans_data as $plandata){
                                                             $catplans=$plandata['subcat_name'];
                                                             if($catplans==$subcat_data[$i]['subcat_name']){
-                                                                // print_r($catplans);
+                                                               
                                                                 ?>
-                                                                 <div class="col-lg-6">
+                                                                <div class="col-lg-6">
                                                                     <div class="type-plan-details">
+                                                                        <div class="plan-table">
+                                                                      
+                                                                            <div class="plan-desc">
                                                                             <div class="plan-title">
                                                                                 <h2 class="heading"><?php echo $plandata['cplan_name'];?></h2>
                                                                                     
                                                                             </div>
-                                                                            <div class="plan-desc">
-                                                                                <p>Lorem ipsum dolor sit amet, anfdsconsectetuer
-                                                                                    adipiscing elit, sed diam nonum Lorem ipsum dolor
-                                                                                    sit amet, consectetuer adipiscing elit, sed diam</p>
+                                                                                 <p>Lorem ipsum dolor sit amet, anfdsconsectetuer
+                                                                                    adipiscing elit dolor sit amet, anfdscon.</p>
                                                                             </div>
                                                                             <div class="plan-price">
                                                                                 <h2><i class="fa fa-inr" aria-hidden="true"></i><?php echo $plandata['cplan_price'];?></h2>
                                                                             </div>
                                                                             <div class="plan-btns">
-                                                                                <a href="">View More</a>
-                                                                                <a href="<?php echo base_url('cart/'.$plandata['cplan_id'])?>">Add to Cart</a>
+                                                                                <a href="<?php echo base_url('addtocart/'.$plandata['cplan_id'])?>">Add</a>
                                                                             </div>
+                                                                            <div class="product-accordion">
+                                                                                <a href="#" class="accordionanchor" data-toggle="collapse" data-target="<?php echo "#faq".$plandata['cplan_id'];?>" aria-expanded="true" aria-controls="<?php echo "faq".$plandata['cplan_id'];?>"><span class='accordionspan'>All Benefit Plans</span></a>
+                                                                             </div>
+                                                                        </div>
+                                                                           
+                                                                             <div id="<?php echo "faq".$plandata['cplan_id'];?>" class="collapse accord-text" aria-labelledby="<?php echo "faqhead".$plandata['cplan_id'];?>" data-parent="#faq">
+                                                                             <ul class="plan-features">
+
+                                                                          
+                                                                             <?php
+                                                                            //  $plan_features=$this->db->get_where('plan_features',array('cplan_id'=>$plandata['cplan_id']))->result_array();
+                                                                   
+                                                                            
+                                                                                foreach($plan_features as $plans_features){
+                                                                                    if($plans_features['cplan_id']==$plandata['cplan_id']){
+                                                                                        // print_r($plans_features);
+                                                                
+                                                                          ?>
+                                                                          <li><i class="fa-solid fa-check"></i> <p><?php echo $plans_features['cplan_features']; ?></p></li>
+
+                                                                          <?php 
+                                                                           }
+                                                                }
+                                                                          ?>
+                                                                             </ul>
+                                                                            
+                                                                             </div>
                                                                     </div>
                                                                 </div>
                                                                 <?php
@@ -315,7 +374,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-lg-2">
+                        <div class="col-lg-2 col-4">
                             <div class="bottom-icons">
                                 <div class="icons-img">
                                     <img src="<?php echo base_url('assets/images/icons/plan.png')?>" alt="">
@@ -325,7 +384,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-2 col-4">
                             <div class="bottom-icons">
                                 <div class="icons-img">
                                     <img src="<?php echo base_url('assets/images/icons/cart.png')?>" alt="">
@@ -335,7 +394,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-2 col-4">
                             <div class="bottom-icons">
                                 <div class="icons-img">
                                     <img src="<?php echo base_url('assets/images/icons/grab.png')?>" alt="">

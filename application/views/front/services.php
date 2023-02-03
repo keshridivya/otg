@@ -2,9 +2,13 @@
 
     
     <!--Body Content-->
+    <style>
+        /* .row {
+        margin-right: 0px; 
+         margin-left: 0px;
+    } */
+    </style>
     <div id="page-content">
-      
-          
                 <!--Parallax Section-->
                         <div class="sub-banner">
                         <div class="hero hero--large hero__overlay bg-size">
@@ -29,7 +33,7 @@
             
                 <div class="section">
                     <div class="container">
-                        <div class="row">
+                        <div class="row" style='margin-right:-15px;margin-left:-15px'>
 
                             <div class="col-lg-12">
                                     <div class="section-header text-center">
@@ -37,8 +41,9 @@
                                  
                                 </div>
                             </div>
+                            
                             <div class="col-lg-12">
-                                <div class="row">
+                                <div class="row" style='margin-right:-15px;margin-left:-15px'>
                                 <?php
                                        
                                        for($i = 0; $i < count($product_data); $i++) {
@@ -48,7 +53,7 @@
 
                                         
                                        ?>
-                                       <div class="col-lg-3">
+                                       <div class="col-lg-3 col-6">
                                         <div class="service-product-content">
                                             <div class="service-product-img">
                                                 <img src="<?php echo base_url($product_data[$i]['cproduct_img'])?>" alt="">

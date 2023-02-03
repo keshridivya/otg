@@ -3,7 +3,7 @@
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800"><?php echo $action?></h1>
                     
-                    <?php echo $book_data['request_id']; ?>
+                  
 
                     <!-- DataTales Example -->
                     <div class="card o-hidden border-0 shadow-lg my-5">
@@ -43,8 +43,19 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <label for="e_name">Engineer Name</label>
-                                    <input type="text" name="e_name" value="<?php echo $book_data[0]['eng_name'];?>" id="e_name" class="form-control form-control-user" 
-                                        placeholder="Engineer Name">
+                                        <select name="e_name" id="e_name" class="form-control">
+                                                <?php
+                                                        foreach($engineers as $eng){
+                                                        $engn=$eng['eng_name'];
+                                                        ?>
+                                       <option value="<?php echo $engn; ?>" <?php echo ($book_data[0]['eng_name']==$engn) ? 'selected': ''; ?> ><?php echo $engn; ?></option>
+
+                                                <?php
+                                                 }
+                                                ?>
+                                        </select>
+                                    <!-- <input type="text" name="e_name" value="<?php echo $book_data[0]['eng_name'];?>" id="e_name" class="form-control form-control-user" 
+                                        placeholder="Engineer Name"> -->
                                     </div>
                                     <div class="col-sm-6">
                                         <label for="b_status">Status</label>
