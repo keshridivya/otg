@@ -2,25 +2,19 @@
 
     
     <!--Body Content-->
-    <style>
-        /* .row {
-        margin-right: 0px; 
-         margin-left: 0px;
-    } */
-    </style>
     <div id="page-content">
                 <!--Parallax Section-->
                         <div class="sub-banner">
                         <div class="hero hero--large hero__overlay bg-size">
                             <img class="bg-img blur-up" src="assets/images/banner/services.jpg" alt="" />
                             <div class="hero__inner">
-                                <div class="row justify-content-center">
+                                <div class="row justify-content-center" style=' margin-right: 0px;margin-left: 0px;'>
                                     <div class="col-lg-10">
                                         <div class="sub-banner_content">
-                                                <form id="" class="search-form text-center">
+                                                <!-- <form id="" class="search-form text-center">
                                                     <button type="submit"><img src="assets/images/search.png" alt=""></button>
                                                     <input type="search" id="searchinput" >
-                                                </form>
+                                                </form> -->
                                                 <h2 class="sub-banner_content">SERVICES</h2>
                                         </div>
                                     </div>

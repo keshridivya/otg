@@ -2,27 +2,20 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Admin extends CI_Controller {
+	 
+	 function __construct()
+	 {
+		parent::__construct();
+		$this->load->model('Menu','menu',true);
+		// if(!$this->session->userdata('a_id')){
+		// 	redirect(base_url('admin')); 
+		// }
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/userguide3/general/urls.html 
-	 * */
-	
+	 }
 	public function index()
 	{
 		
-		if($this->input->post()){
+		if(@$this->input->post()){
 			$email=$this->input->post('email');
 			$password=sha1($this->input->post('password'));
 			$result=$this->db->get_where('admin',array('email_id'=>$email,'password'=>$password,'status'=>'active'))->result_array();
@@ -33,7 +26,7 @@ class Admin extends CI_Controller {
 			$this->session->set_userdata('e_id',$aemail);
 		
 		}
-		if($this->session->userdata['a_id']){
+		if(@$this->session->userdata['a_id']){
 			//redirect to dashboard
 			$customers_table=$this->db->get("customer")->result_array();
 			$bookings_table=$this->db->get("bookings")->result_array();
@@ -484,6 +477,7 @@ class Admin extends CI_Controller {
 						"eng_name"=>$this->input->post('e_name'),
 						"contact"=>$this->input->post('e_contact'),
 						"email_id"=>$this->input->post('e_email'),
+						"status"=>$this->input->post('status'),
 						"password"=>sha1($this->input->post('e_password')),
 						"ongoing-booking"=>$this->input->post('e_booking'),
 						"modified_on"=>date('Y-m-d h:i:s')
@@ -663,6 +657,145 @@ class Admin extends CI_Controller {
 
 	}
 
+	//product features in admin
+	public function product_features($action,$id='false'){
+		switch($action){
+			case 'view':
+		       $page_data['products']=$this->menu->product_feature();
+				$page_data['page_title']="Our Product Features";
+				$page_data['page']="product_features/view";
+				$this->load->view('admin/index',$page_data);
+				
+				break;
+				case 'add';
+					if($this->input->post()){
+						$data=array(
+							"cproduct_id"=>$this->input->post('product_name'),
+							"feature"=>$this->input->post('feature'),
+							"created_on"=>date('Y-m-d h:i:s'),
+						);
+						if($this->db->insert('product_features',$data)){
+							$page_data['message']="Successfully Created.";
+						}else{
+							$page_data['message']="Problem occured while adding customer.";
+						}
+
+					}
+
+					$page_data['category_product']=$this->db->get('category_product')->result_array();
+					$page_data['page_title']="Add Product Features";
+					$page_data['page']="product_features/form";
+					$page_data['action']="add";
+					$page_data['message']="";
+					
+					$this->load->view('admin/index',$page_data);
+					break;
+				case 'edit':
+					if($this->input->post()){
+						$data=array(
+							"feature"=>$this->input->post('feature'),
+							"modified_on"=>date('Y-m-d h:i:s'),
+						);
+						$this->db->where('id',$id);
+						if($this->db->update('product_features',$data)){
+							$page_data['message']="Successfully Updated.";
+						}else{
+							$page_data['message']="Problem occured while adding customer.";
+						}
+					}
+
+					$page_data['products']=$this->menu->product_feature_edit($id);
+					$page_data['page_title']="Edit Product Features";
+					$page_data['page']="product_features/form";
+					$page_data['action']="edit";
+					$page_data['message']="";
+					
+					$this->load->view('admin/index',$page_data);
+	
+					break;
+					case 'delete':
+				
+						if($id){
+							$this->db->where('id',$id);
+							$this->db->delete('product_features');
+							redirect('admin/product_features');
+						}
+						break;
+				default:
+				# code...
+				break;
+		}
+	}
+
+	//product benefits in admin
+	public function product_benefit($action,$id='false'){
+		switch($action){
+			case 'view':
+		       $page_data['products']=$this->menu->product_benefit();
+				$page_data['page_title']="Our Product Benefits";
+				$page_data['page']="product_benefit/view";
+				$this->load->view('admin/index',$page_data);
+				
+				break;
+				case 'add';
+					if($this->input->post()){
+						$data=array(
+							"cproduct_id"=>$this->input->post('product_name'),
+							"benefits"=>$this->input->post('benefits'),
+							"created_on"=>date('Y-m-d h:i:s'),
+						);
+						if($this->db->insert('product_benefits',$data)){
+							$page_data['message']="Successfully Created.";
+						}else{
+							$page_data['message']="Problem occured while adding customer.";
+						}
+					}
+
+					$page_data['category_product']=$this->db->get('category_product')->result_array();
+					$page_data['page_title']="Add Product Benfit";
+					$page_data['page']="product_benefit/form";
+					$page_data['action']="add";
+					$page_data['message']="";
+					
+					$this->load->view('admin/index',$page_data);
+					break;
+				case 'edit':
+					if($this->input->post()){
+						$data=array(
+							"benefits"=>$this->input->post('benefits'),
+							"modified_on"=>date('Y-m-d h:i:s'),
+						);
+						$this->db->where('id',$id);
+						if($this->db->update('product_benefits',$data)){
+							$page_data['message']="Successfully Updated.";
+						}else{
+							$page_data['message']="Problem occured while adding customer.";
+						}
+					}
+
+					$page_data['products']=$this->menu->product_benefit_edit($id);
+					$page_data['page_title']="Edit Product Benefit";
+					$page_data['page']="product_benefit/form";
+					$page_data['action']="edit";
+					$page_data['message']="";
+					
+					$this->load->view('admin/index',$page_data);
+	
+					break;
+					case 'delete':
+				
+						if($id){
+							$this->db->where('id',$id);
+							$this->db->delete('product_benefits');
+							redirect('admin/product_benefit');
+						}
+						break;
+				default:
+				# code...
+				break;
+		}
+	}
+
 	//Product page in admin
 	public function category_products($action,$id=false){
 		switch ($action) {
@@ -684,6 +817,10 @@ class Admin extends CI_Controller {
 				break;
 			case 'add':
 				if($this->input->post('send')){
+					if($_FILES['cp_photo']['name']!= ""){
+						$absolute_path=base_url('uploads/category/');
+				$uploaded_data=$this->uploadimg(array('upload_path'=>'./uploads/category/','name'=>'cp_photo'));
+			}
 					
 					$data=array(
 						"category_name"=>$this->input->post('ct_name'),
@@ -694,6 +831,9 @@ class Admin extends CI_Controller {
 						"modified_on"=>date('Y-m-d h:i:s')
 
 					);
+					if(is_countable($uploaded_data) && count($uploaded_data)>=1){
+						$data['cproduct_img']='uploads/category/'.$uploaded_data['file_name'];
+					}
 				
 					if($this->db->insert('category_product',$data)){
 						$page_data['message']="Successfully created.";
@@ -766,6 +906,252 @@ class Admin extends CI_Controller {
 				break;
 		}
 	}
+
+	//testimonial 
+	public function testimonial($action,$id=false){
+		switch ($action) {
+			case 'view':
+				$testimonial_data=$this->db->get("testimonials")->result_array();
+				$page_data['page_title']="Our Testimonials";
+				$page_data['testimonial_data']=$testimonial_data;
+				$page_data['page']="testimonial/view";
+				$this->load->view('admin/index',$page_data);
+				
+				break;
+			case 'add':
+				if($this->input->post('submit')){
+					if($_FILES['file']['name']!= ""){
+						$absolute_path=base_url('uploads/testimonial/');
+				$uploaded_testimonial=$this->uploadimg(array('upload_path'=>'./uploads/testimonial/','name'=>'file'));	}
+					$data=array(
+						"name"=>$this->input->post('name'),
+						"comapny_name"=>$this->input->post('comapny_name'),
+						"short_desc"=>$this->input->post('short_desc'),
+						"long_desc"=>$this->input->post('testimonial'),
+						"status"=>$this->input->post('cp_status'),
+						"created_date"=>date('Y-m-d h:i:s'),
+					);
+					if(is_countable($uploaded_testimonial) && count($uploaded_testimonial)>=1){
+						$data['file']='uploads/testimonial/'.$uploaded_testimonial['file_name'];
+					}
+					if($this->db->insert('testimonials',$data)){
+						$page_data['message']="Successfully created.";
+					}else{
+						$page_data['message']="Problem occured while adding customer.";
+					}
+				}
+				$page_data['message']="";
+				$page_data['page_title']="Add Testimonials";
+				$page_data['page']="testimonial/form";
+				$page_data['action']="add";
+				// $testimonial_data=$this->db->get("testimonials")->result_array();
+				// $page_data['cato']=$categ_data;
+
+				$this->load->view('admin/index',$page_data);
+			
+				break;
+			case 'edit':
+				
+				if($this->input->post()){
+					$data=array(
+						"name"=>$this->input->post('name'),
+						"comapny_name"=>$this->input->post('comapny_name'),
+						"short_desc"=>$this->input->post('short_desc'),
+						"long_desc"=>$this->input->post('testimonial'),
+						"status"=>$this->input->post('cp_status'),
+						"modified_date"=>date('Y-m-d h:i:s'),
+					);
+
+					$this->db->where('id',$id);
+					$this->db->update('testimonials',$data);
+				}
+				$testimonial_data=$this->db->get_where('testimonials',array('id'=>$id))->result_array();
+				$page_data['testimonial_data']=$testimonial_data;
+				$page_data['page_title']="Edit Products";
+				$page_data['page']="testimonial/form";
+				$page_data['action']="edit";
+				$page_data['message']=" ";
+				$categ_data=$this->db->get("testimonials")->result_array();
+				$page_data['cato']=$categ_data;
+
+				$this->load->view('admin/index',$page_data);
+
+				break;
+			case 'delete':
+				if($id){
+					$this->db->where('id',$id);
+					$this->db->delete('testimonials');
+					redirect('admin/testimonial');
+				}
+				break;
+			
+			default:
+				# code...
+				break;
+		}
+	}
+
+	//our client in admin
+	public function client($action,$id=false){
+		switch($action){
+			case 'view':
+				$client_data=$this->db->get("our_client")->result_array();
+				$page_data['page_title']="Our Clients";
+				$page_data['client']=$client_data;
+				$page_data['page']="client/view";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'add':
+				    $uploadedclient_data='0';
+				
+					if(@$this->input->post()){
+						if($_FILES['logo']['name']!= ""){
+							$absolute_path=base_url('uploads/our_client/');
+							$uploadedclient_data=$this->uploadimg3(array('upload_path'=>'./uploads/our_client/','name'=>'logo'));
+						}
+						$data=array(
+							'status'=>$this->input->post('status'),
+							'created_date'=>date('y-m-d h:i:s'),
+						);
+
+						if(is_countable($uploadedclient_data) && count($uploadedclient_data)>=1){
+							$data['client_logo']='uploads/our_client/'.$uploadedclient_data['file_name'];
+						}
+						if($this->db->insert('our_client',$data)){
+							$page_data['message']="Successfully created.";
+						}else{
+							$page_data['message']="Problem occured while adding customer.";
+	
+						}
+					}
+				$page_data['page_title']="Add Client";
+				$page_data['page']="client/form";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'edit';
+				if(@$id){
+					$client_data=$this->db->get_where("our_client",array('id'=>$id))->result_array();
+					$page_data['client']=$client_data;
+				}
+				$uploadedclient_data='0';
+
+				if(@$this->input->post()){
+					if($_FILES['logo']['name']!= ""){
+						$absolute_path=base_url('uploads/our_client/');
+						$uploadedclient_data=$this->uploadimg3(array('upload_path'=>'./uploads/our_client/','name'=>'logo'));
+					}
+					else{
+						$data['client_logo']=$this->input->post('file');
+					}
+					$data=array(
+						'client_logo'=>$this->input->post('file'),
+						'status'=>$this->input->post('status'),
+						'modified_date'=>date('y-m-d h:i:s'),
+					);
+
+				if(is_countable($uploadedclient_data) && count($uploadedclient_data)>=1){
+					$data['client_logo']='uploads/our_client/'.$uploadedclient_data['file_name'];
+				}
+				$this->db->where('id',$id);
+				$this->db->update('our_client',$data);
+			}
+			$page_data['page_title']='Edit Client';
+			$page_data['page']='client/form';
+			$this->load->view('admin/index',$page_data);
+			break;
+			case 'delete';
+			if($id){
+				$this->db->where('id',$id);
+			$this->db->delete('our_client');
+			redirect('admin/client');
+			}
+			break;	
+		}
+	}
+
+	//blog in admin
+	public function blog($action,$id=false){
+		switch($action){
+			case 'view':
+				$blog_data=$this->db->get("blog")->result_array();
+				$page_data['page_title']="Our Blogs";
+				$page_data['blog']=$blog_data;
+				$page_data['page']="blog/view";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'add':
+				    $uploadedblog_data='0';
+				
+					if(@$this->input->post()){
+						if($_FILES['file']['name']!= ""){
+							$absolute_path=base_url('uploads/blog/');
+							$uploadedblog_data=$this->uploadimg4(array('upload_path'=>'./uploads/blog/','name'=>'file'));
+						}
+						$data=array(
+							'name'=>$this->input->post('blog'),
+							'writtenby'=>$this->input->post('writtenby'),
+							'description'=>$this->input->post('editordata'),
+							'status'=>$this->input->post('cp_status'),
+							'created_date'=>date('y-m-d h:i:s'),
+						);
+
+						if(is_countable($uploadedblog_data) && count($uploadedblog_data)>=1){
+							$data['file']='uploads/blog/'.$uploadedblog_data['file_name'];
+						}
+						if($this->db->insert('blog',$data)){
+							$page_data['message']="Successfully created.";
+						}else{
+							$page_data['message']="Problem occured while adding customer.";
+	
+						}
+					}
+				$page_data['page_title']="Add Blog";
+				$page_data['page']="blog/form";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'edit';
+				if(@$id){
+					$client_data=$this->db->get_where("blog",array('id'=>$id))->result_array();
+					$page_data['blog']=$client_data;
+				}
+				$uploadedblog_data='0';
+
+				if(@$this->input->post()){
+					if($_FILES['file']['name']!= ""){
+						$absolute_path=base_url('uploads/blog/');
+						$uploadedblog_data=$this->uploadimg3(array('upload_path'=>'./uploads/blog/','name'=>'file'));
+					}
+					else{
+						$data['file']=$this->input->post('file');
+					}
+					$data=array(
+						'name'=>$this->input->post('blog'),
+							'writtenby'=>$this->input->post('writtenby'),
+							'description'=>$this->input->post('editordata'),
+							'status'=>$this->input->post('cp_status'),
+						'modified_date'=>date('y-m-d h:i:s'),
+					);
+
+				if(is_countable($uploadedblog_data) && count($uploadedblog_data)>=1){
+					$data['file']='uploads/blog/'.$uploadedblog_data['file_name'];
+				}
+				$this->db->where('id',$id);
+				$this->db->update('blog',$data);
+			}
+			$page_data['page_title']='Edit Blog';
+			$page_data['page']='blog/form';
+			$this->load->view('admin/index',$page_data);
+			break;
+			case 'delete';
+			if($id){
+				$this->db->where('id',$id);
+			$this->db->delete('blog');
+			redirect('admin/blog');
+			}
+			break;	
+		}
+	}
+
 	//Product page in admin
 	public function subcategory($action,$id=false){
 		switch ($action) {
@@ -991,15 +1377,73 @@ class Admin extends CI_Controller {
 					if ( ! $this->upload->do_upload($data['name']))
 					{
 						print_r($this->upload->display_errors());
-								
-							
 					}
 					else
 					{
 						return $this->upload->data();
+					}
+			}
+
+			public function uploadimg1($data)
+			{
+				// print_r($data);
+					$config['upload_path']          = $data['upload_path'];
+					$config['allowed_types']        = 'gif|jpg|png';
+					$config['max_size']             = 400;
+					$config['max_width']            = 1024;
+					$config['max_height']           = 768;
 	
-							
+					$this->load->library('upload', $config);
+	
+					if ( ! $this->upload->do_upload($data['name']))
+					{
+						print_r($this->upload->display_errors());
+					}
+					else
+					{
+						return $this->upload->data();
+					}
+			}
+
+			public function uploadimg3($data)
+			{
+				// print_r($data);
+					$config['upload_path']          = $data['upload_path'];
+					$config['allowed_types']        = 'gif|jpg|png';
+					$config['max_size']             = 400;
+					$config['max_width']            = 1074;
+					$config['max_height']           = 768;
+	
+					$this->load->library('upload', $config);
+	
+					if ( ! $this->upload->do_upload($data['name']))
+					{
+						print_r($this->upload->display_errors());
+					}
+					else
+					{
+						return $this->upload->data();
+					}
+			}
+
+			public function uploadimg4($data)
+			{
+				// print_r($data);
+					$config['upload_path']          = $data['upload_path'];
+					$config['allowed_types']        = 'gif|jpg|png';
+					$config['max_size']             = 400;
+					$config['max_width']            = 1074;
+					$config['max_height']           = 768;
+	
+					$this->load->library('upload', $config);
+	
+					if ( ! $this->upload->do_upload($data['name']))
+					{
+						print_r($this->upload->display_errors());
+					}
+					else
+					{
+						return $this->upload->data();
 					}
 			}
 }
-

@@ -23,20 +23,30 @@ class Welcome extends CI_Controller {
 	 {
 		parent::__construct();
 		$this->load->library('cart');
+		// $this->load->library('menu_all');
+		$this->load->model('Menu','menu',true);
+
 	 }
+	 	//menu list
+	
 	public function index()
-
 	{
-		
+		$page_data['dropdown']=$this->menu->menu_all();
+		$testimonial=$this->db->get_where('testimonials',array('status'=>'active'))->result_array();
+		$client=$this->db->get_where('our_client',array('status'=>'active'))->result_array();
 		$page_data['page_title']="Home";
-
 		$page_data['page']="home";
+		$page_data['testimonial']=$testimonial;
+		$page_data['client']=$client;
 		$this->load->view('index',$page_data);
 	}
+	// public function head(){
+	// 	$this->load->view('')
+	// }
 	public function about_us()
 	{
 		$page_data['page_title']="About Us";
-
+		$page_data['dropdown']=$this->menu->menu_all();
 		$page_data['page']="about";
 		$this->load->view('index',$page_data);
 	}
@@ -94,10 +104,12 @@ class Welcome extends CI_Controller {
 				
 					
 				}
+				$page_data['dropdown']=$this->menu->menu_all();
 				$page_data['bookings_table']=$bookings_table;
 				$page_data['page']="account";
 				$this->load->view('index',$page_data);
 			}else{
+				$page_data['dropdown']=$this->menu->menu_all();
 				$page_data['page']="sign_up";
 				$page_data['message']="";
 				$this->load->view('index',$page_data);
@@ -229,11 +241,13 @@ class Welcome extends CI_Controller {
 								$this->db->update('customer',$data);
 								
 							}
+							$page_data['dropdown']=$this->menu->menu_all();
 						$page_data['bookings_table']=$bookings_table;
 						$page_data['page']="account";
 					
 					$this->load->view('index',$page_data);
 				}else{
+					$page_data['dropdown']=$this->menu->menu_all();
 					$page_data['page']="sign_up";
 					$page_data['message']="";
 					$this->load->view('index',$page_data);
@@ -245,6 +259,7 @@ class Welcome extends CI_Controller {
 		}
 		
 		else{
+			$page_data['dropdown']=$this->menu->menu_all();
 				$page_data['page_title']="Sign Up";
 				$page_data['message']="";
 				$page_data['page']="sign_up";
@@ -252,6 +267,8 @@ class Welcome extends CI_Controller {
 		}
 		
 	}
+	
+
 	public function maintenance($action)
 	{
 	
@@ -269,6 +286,7 @@ class Welcome extends CI_Controller {
 		$product_features=$this->db->get_where('product_features',array('cproduct_id'=>$product_data[0]['cproduct_id']))->result_array();
 		$page_data['product_features']=$product_features;
 		$product_benefits=$this->db->get_where('product_benefits',array('cproduct_id'=>$product_data[0]['cproduct_id']))->result_array();
+		$page_data['dropdown']=$this->menu->menu_all();
 		$page_data['product_benefits']=$product_benefits;
 		$page_data['page']="maintenance";
 		$this->load->view('index',$page_data);
@@ -295,21 +313,17 @@ class Welcome extends CI_Controller {
 	}
 
 	public function cart(){
-	
+		$page_data['dropdown']=$this->menu->menu_all();
 		$page_data['cartItems']=$this->cart->contents();
-				
-
 		$page_data['page_title']="My Cart";
-
 		$page_data['page']="cart";
 		$this->load->view('index',$page_data);
-		
-	
 	}
 	public function services()
 	{
 		$page_data['page_title']="Our Services";
 		$product_data=$this->db->get_where('category_product',array('category_name'=>'Maintenance and repair','status'=>'active'))->result_array();
+		$page_data['dropdown']=$this->menu->menu_all();
 		$page_data['product_data']=$product_data;
 		$page_data['page']="services";
 		$this->load->view('index',$page_data);
@@ -317,7 +331,7 @@ class Welcome extends CI_Controller {
 	public function account()
 	{
 		if($this->session->userdata('cid') || $this->session->userdata('custid')){
-				
+			$page_data['dropdown']=$this->menu->menu_all();
 			$page_data['page_title']="My Account";
 			$page_data['page']="account";
 			$this->load->view('index',$page_data);
@@ -326,12 +340,14 @@ class Welcome extends CI_Controller {
 		elseif($this->session->userdata('newid')){
 			$session_cust=$this->session->userdata('newid');
 			$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+			$page_data['dropdown']=$this->menu->menu_all();
 			$page_data['customers']=$customers_table;
 			$page_data['page_title']="My Account";
 			$page_data['page']="account";
 			$this->load->view('index',$page_data);
 		}
 		else{
+			$page_data['dropdown']=$this->menu->menu_all();
 			$page_data['page']="sign_up";
 				$page_data['message']="";
 				$this->load->view('index',$page_data);
@@ -402,7 +418,7 @@ class Welcome extends CI_Controller {
 			}
 		
 		}
-						
+		$page_data['dropdown']=$this->menu->menu_all();		
 		$page_data['ex_cust']=$ex_cust;
 		$page_data['cartItems']=$this->cart->contents();
 		$page_data['page']="checkout";
@@ -461,6 +477,7 @@ class Welcome extends CI_Controller {
 				}
 
 		}
+		$page_data['dropdown']=$this->menu->menu_all();
 		$page_data['page_title']="Order Summery";
 			$page_data['page']="summery";
 			$this->load->view('index',$page_data);
@@ -470,7 +487,6 @@ class Welcome extends CI_Controller {
 		$page_data['cartItems']=$this->cart->contents();
 		if($this->session->userdata('reqid')){
 
-						
 			$reqid=$this->session->userdata('reqid');
 			$new_booking=$this->db->get_where("bookings",array('request_id'=>$reqid))->result_array();
 			$cust_mail=$this->db->get_where("customer",array('cust_id'=>$new_booking[0]['cust_id']))->result_array();
@@ -491,7 +507,7 @@ class Welcome extends CI_Controller {
 		}
 		$page_data['new_booking']=$new_booking;
 		$page_data['message']="New Service Booked";
-
+		$page_data['dropdown']=$this->menu->menu_all();
 		$page_data['page_title']="Order Receipt";
 		$page_data['page']="receipt";
 		$this->load->view('index',$page_data);
@@ -522,9 +538,26 @@ class Welcome extends CI_Controller {
 			}
 
 public function blog(){
+	$page_data['dropdown']=$this->menu->menu_all();
+	$page_data['blog']=$this->db->get_where('blog',array('status'=>'active'))->result_array();
 	$page_data['page_title']="Blog";
 	$page_data['page']="blog";
 	$this->load->view('index',$page_data);
 }
 	
+public function blogdetail($id){
+	$page_data['dropdown']=$this->menu->menu_all();
+	$page_data['blog']=$this->db->get_where('blog',array('id'=>$id))->result_array();
+	$page_data['page_title']="Blog Detail";
+	$page_data['page']="blogdetail";
+	$this->load->view('index',$page_data);
+}
+
+public function contact(){
+	$page_data['dropdown']=$this->menu->menu_all();
+	$page_data['page_title']="Contact Us";
+	$page_data['page']="contact";
+	$this->load->view('index',$page_data);
+}
+
 }

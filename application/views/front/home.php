@@ -3,7 +3,6 @@
 <!--Body Content-->
 <div id="page-content">
 	<!--Home slider-->
-
 	<div id="demo" class="carousel slide" data-ride="carousel">
 
 		<!-- Indicators -->
@@ -21,12 +20,8 @@
 					<img src="assets/images/banner/image-1.jpg" alt="">
 				</div>
 				<div class="banner-content">
-					<form id="" class="search-form text-center">
-						<button type="submit"><img src="assets/images/search.png" alt=""></button>
-						<input type="search" id="searchinput" class='searchbar'>
-					</form>
-					<h2 >Guarantied top quality maintenance & repairs</h2>
-					<div class="banner-btn learn_more-banner" >
+					<h2>Guaranteed top quality maintenance & repairs</h2>
+					<div class="banner-btn learn_more-banner">
 						<a href="<?php echo base_url();?>services">Learn More</a>
 					</div>
 				</div>
@@ -38,11 +33,7 @@
 					<img src="assets/images/banner/image-2.jpg" alt="">
 				</div>
 				<div class="banner-content">
-					<form id="" class="search-form text-center">
-						<button type="submit"><img src="assets/images/search.png" alt=""></button>
-						<input type="search" id="searchinput">
-					</form>
-					<h2>Guarantied top quality maintenance & repairs</h2>
+					<h2>Guaranteed top quality maintenance & repairs</h2>
 					<div class="banner-btn learn_more-banner">
 						<a href="<?php echo base_url();?>services">Learn More</a>
 					</div>
@@ -54,15 +45,24 @@
 					<img src="assets/images/banner/image-3.jpg" alt="">
 				</div>
 				<div class="banner-content">
-					<form id="" class="search-form text-center">
-						<button type="submit"><img src="assets/images/search.png" alt=""></button>
-						<input type="search" id="searchinput">
-					</form>
-					<h2>Guarantied top quality maintenance & repairs</h2>
+					<h2>Guaranteed top quality maintenance & repairs</h2>
 					<div class="banner-btn learn_more-banner">
 						<a href="<?php echo base_url();?>services">Learn More</a>
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class='mainsearchbardiv'>
+		<div class="searchbardiv row justify-content-center">
+			<div class="col-12 ">
+				<h2>Expert Care For Your Devices</h2>
+			</div>
+			<div class="col-12 col-md-6">
+				<form id="" class="search-form text-center">
+					<button type="submit"><img src="assets/images/search.png" alt=""></button>
+					<input type="search" id="searchinput" class='searchbar'>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -96,26 +96,237 @@
 	</div> -->
 	<!--End Our benefits will change the way you buy parts-->
 
-	<div class="section what-we-do"  style='padding-bottom:0'>
+	<div class="section what-we-do" style='padding-bottom:0'>
 		<div class="container">
 			<div class="row service-slider-row">
 				<div class="col-lg-12 mb-5 mab-sm-0">
 					<div class="section-header text-center">
-						<h2 class="heading">WHAT WE DO</h2>
+						<h2 class="heading">Maintenance & Repair
+							Services</h2>
 					</div>
 				</div>
 				<div class="col-lg-12">
 					<div class="what-we-do-tab">
-						<ul class="nav nav-pills">
+						<div class="row">
+						<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Air Conditioner'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-1">
+									<a class="main-product-content"
+										href="<?php echo base_url('maintenance/Air Conditioner')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/ac.png" alt="">
+										</div>
+										<div class="main-product-title">
+											<p>AC</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+							<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Refrigerator'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-2">
+									<a class="main-product-content"
+										href="<?php echo base_url('maintenance/Refrigerator')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/fridge.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Refridgerator</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+
+							<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Television'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-3">
+									<a class="main-product-content"
+										href="<?php echo base_url('maintenance/Television')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/television.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Television</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+							<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Washing Machine'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-4">
+									<a class="main-product-content"
+										href="<?php echo base_url('maintenance/Washing Machine')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/washing-machine.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Washing Machine</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+							<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Water Purifier'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-1">
+									<a class="main-product-content"
+										href="<?php echo base_url('maintenance/Water Purifier')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/filtration.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Water Purifier</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+
+							<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Laptop'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-2">
+									<a class="main-product-content" href="<?php echo base_url('maintenance/Laptop')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/laptop.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Laptop</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+							
+							<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Microwave'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-2">
+									<a class="main-product-content"
+										href="<?php echo base_url('maintenance/Microwave')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/microwave.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Microwave</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+							<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Printer'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-3">
+									<a class="main-product-content" href="<?php echo base_url('maintenance/Printer')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/printer.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Printer</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+							<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Mobile'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-3">
+									<a class="main-product-content" href="<?php echo base_url('maintenance/Mobile')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/mobile-phone.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Mobile</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+							<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Tablet'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-3">
+									<a class="main-product-content" href="<?php echo base_url('maintenance/Tablet')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/tablet.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Tablet</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+							<?php
+					foreach($dropdown as $drop){
+						if($drop['cproduct_name']=='Geyser'){
+					 ?>
+							<div class="col-4 col-md-2">
+								<div class="element element-3">
+									<a class="main-product-content" href="<?php echo base_url('maintenance/Geyser')?>">
+										<div class="main-product-icon">
+											<img src="<?php echo base_url();?>assets/images/icons/products/water-boiler.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Geyser</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<?php } } ?>
+
+						</div>
+						<!-- <ul class="nav nav-pills">
 							<li class="nav-item">
-								<a class="nav-link active" data-toggle="pill" href="#home">Maintenance & Repair Services</a>
+								<a class="nav-link active" data-toggle="pill" href="#home">Maintenance & Repair
+									Services</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link tab-btn" data-toggle="pill" href="#menu1">Extended Warranty</a>
 							</li>
-						</ul>
+						</ul> -->
 						<!-- Tab panes -->
-						<div class="tab-content">
+						<!-- <div class="tab-content">
 							<div class="tab-pane container active" id="home" data-aos="zoom-in">
 								<div class="main-service-sliders">
 									<div class="maintenance-slider">
@@ -123,7 +334,8 @@
 											<a class="main-product-content"
 												href="<?php echo base_url('maintenance/Air Conditioner')?>">
 												<div class="main-product-icon">
-													<img src="<?php echo base_url();?>assets/images/icons/products/ac.png" alt="">
+													<img src="<?php echo base_url();?>assets/images/icons/products/ac.png"
+														alt="">
 												</div>
 												<div class="main-product-title">
 													<p>AC</p>
@@ -143,7 +355,8 @@
 											</a>
 										</div>
 										<div class="element element-3">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Television')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Television')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/television.png"
 														alt="">
@@ -157,8 +370,7 @@
 											<a class="main-product-content"
 												href="<?php echo base_url('maintenance/Washing Machine')?>">
 												<div class="main-product-icon">
-													<img
-														src="<?php echo base_url();?>assets/images/icons/products/washing-machine.png"
+													<img src="<?php echo base_url();?>assets/images/icons/products/washing-machine.png"
 														alt="">
 												</div>
 												<div class="main-product-title">
@@ -179,7 +391,8 @@
 											</a>
 										</div>
 										<div class="element element-2">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Laptop')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Laptop')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/laptop.png"
 														alt="">
@@ -190,7 +403,8 @@
 											</a>
 										</div>
 										<div class="element element-2">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Microwave')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Microwave')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/microwave.png"
 														alt="">
@@ -201,7 +415,8 @@
 											</a>
 										</div>
 										<div class="element element-3">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Printer')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Printer')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/printer.png"
 														alt="">
@@ -212,7 +427,8 @@
 											</a>
 										</div>
 										<div class="element element-3">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Mobile')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Mobile')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/mobile-phone.png"
 														alt="">
@@ -223,7 +439,8 @@
 											</a>
 										</div>
 										<div class="element element-3">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Tablet')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Tablet')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/tablet.png"
 														alt="">
@@ -234,7 +451,8 @@
 											</a>
 										</div>
 										<div class="element element-3">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Geyser')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Geyser')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/water-boiler.png"
 														alt="">
@@ -254,7 +472,8 @@
 											<a class="main-product-content"
 												href="<?php echo base_url('maintenance/Air Conditioner')?>">
 												<div class="main-product-icon">
-													<img src="<?php echo base_url();?>assets/images/icons/products/ac.png" alt="">
+													<img src="<?php echo base_url();?>assets/images/icons/products/ac.png"
+														alt="">
 												</div>
 												<div class="main-product-title">
 													<p>AC</p>
@@ -274,7 +493,8 @@
 											</a>
 										</div>
 										<div class="element element-3">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Television')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Television')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/television.png"
 														alt="">
@@ -288,8 +508,7 @@
 											<a class="main-product-content"
 												href="<?php echo base_url('maintenance/Washing Machine')?>">
 												<div class="main-product-icon">
-													<img
-														src="<?php echo base_url();?>assets/images/icons/products/washing-machine.png"
+													<img src="<?php echo base_url();?>assets/images/icons/products/washing-machine.png"
 														alt="">
 												</div>
 												<div class="main-product-title">
@@ -310,7 +529,8 @@
 											</a>
 										</div>
 										<div class="element element-2">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Laptop')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Laptop')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/laptop.png"
 														alt="">
@@ -321,7 +541,8 @@
 											</a>
 										</div>
 										<div class="element element-2">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Microwave')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Microwave')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/microwave.png"
 														alt="">
@@ -332,7 +553,8 @@
 											</a>
 										</div>
 										<div class="element element-3">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Printer')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Printer')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/printer.png"
 														alt="">
@@ -343,7 +565,8 @@
 											</a>
 										</div>
 										<div class="element element-3">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Mobile')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Mobile')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/mobile-phone.png"
 														alt="">
@@ -354,7 +577,8 @@
 											</a>
 										</div>
 										<div class="element element-3">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Tablet')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Tablet')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/tablet.png"
 														alt="">
@@ -365,7 +589,8 @@
 											</a>
 										</div>
 										<div class="element element-3">
-											<a class="main-product-content" href="<?php echo base_url('maintenance/Geyser')?>">
+											<a class="main-product-content"
+												href="<?php echo base_url('maintenance/Geyser')?>">
 												<div class="main-product-icon">
 													<img src="<?php echo base_url();?>assets/images/icons/products/water-boiler.png"
 														alt="">
@@ -378,12 +603,159 @@
 									</div>
 								</div>
 							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--explore our services-->
+	<div class="section what-we-do" style='padding-bottom:0'>
+		<div class="container">
+			<div class="row service-slider-row">
+				<div class="col-lg-12 mb-5 mab-sm-0">
+					<div class="section-header text-center">
+						<h2 class="heading">Explore Our Services</h2>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="what-we-do-tab">
+						<div class="row">
+							<div class="col-4 col-md-2">
+								<div class="element element-1">
+									<a class="main-product-content" data-toggle="modal"
+										data-target="#exampleModal" style='cursor:pointer'>
+										<div class="">
+											<img src="<?php echo base_url();?>assets/images/Explore Our Services/extended warranty.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Extended Warranty</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-4 col-md-2">
+								<div class="element element-2">
+									<a class="main-product-content" data-toggle="modal"
+										data-target="#exampleModal" style='cursor:pointer'>
+										<div class="">
+											<img src="<?php echo base_url();?>assets/images/Explore Our Services/home care _ amc.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Home Care | Amc</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-4 col-md-2">
+								<div class="element element-3">
+									<a class="main-product-content" data-toggle="modal"
+										data-target="#exampleModal" style='cursor:pointer'>
+										<div class="">
+											<img src="<?php echo base_url();?>assets/images/Explore Our Services/damage protection plan.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Damage Protection Plan</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-4 col-md-2">
+								<div class="element element-4">
+									<a class="main-product-content" data-toggle="modal"
+										data-target="#exampleModal" style='cursor:pointer'>
+										<div class="">
+											<img src="<?php echo base_url();?>assets/images/Explore Our Services/cleaning & pest controls.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Cleaning & Pest Controls</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-4 col-md-2">
+								<div class="element element-2">
+									<a class="main-product-content" data-toggle="modal"
+										data-target="#exampleModal" style='cursor:pointer'>
+										<div class="">
+											<img src="<?php echo base_url();?>assets/images/Explore Our Services/car wash.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Car Wash</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-4 col-md-2">
+								<div class="element element-3">
+									<a class="main-product-content" data-toggle="modal"
+										data-target="#exampleModal" style='cursor:pointer'>
+										<div class="">
+											<img src="<?php echo base_url();?>assets/images/Explore Our Services/interior painting.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Interior Painting</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-4 col-md-2">
+								<div class="element element-1">
+									<a class="main-product-content" data-toggle="modal"
+										data-target="#exampleModal" style='cursor:pointer'>
+										<div class="">
+											<img src="<?php echo base_url();?>assets/images/Explore Our Services/electronics.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Electrician</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-4 col-md-2">
+								<div class="element element-2">
+									<a class="main-product-content" data-toggle="modal"
+										data-target="#exampleModal" style='cursor:pointer'>
+										<div class="">
+											<img src="<?php echo base_url();?>assets/images/Explore Our Services/carpenter.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Carpenter</p>
+										</div>
+									</a>
+								</div>
+							</div>
+
+							<div class="col-4 col-md-2">
+								<div class="element element-3">
+									<a class="main-product-content" data-toggle="modal"
+										data-target="#exampleModal" style='cursor:pointer'>
+										<div class="">
+											<img src="<?php echo base_url();?>assets/images/Explore Our Services/plumber.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Plumber</p>
+										</div>
+									</a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!--explore our services-->
 
 	<!--Popular Categories-->
 	<div class="section" style='padding-top:0'>
@@ -397,6 +769,7 @@
 				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="popular-slider-section">
 						<div class="popular-service-slider">
+							
 							<div class="item">
 								<a href="<?php echo base_url('maintenance/Air Conditioner')?>">
 									<div class="popular-img">
@@ -411,7 +784,8 @@
 							<div class="item">
 								<a href="<?php echo base_url('maintenance/Laptop')?>">
 									<div class="popular-img">
-										<img src="<?php echo base_url();?>assets/images/product-images/laptop.png" alt="">
+										<img src="<?php echo base_url();?>assets/images/product-images/laptop.png"
+											alt="">
 									</div>
 									<div class="popular-title">
 										<p>Laptop Repair Service</p>
@@ -422,7 +796,8 @@
 							<div class="item">
 								<a href="">
 									<div class="popular-img">
-										<img src="<?php echo base_url();?>assets/images/product-images/mobile.png" alt="">
+										<img src="<?php echo base_url();?>assets/images/product-images/mobile.png"
+											alt="">
 									</div>
 									<div class="popular-title">
 										<p>Mobile Repair Service</p>
@@ -432,7 +807,8 @@
 							</div>
 							<div class="item">
 								<div class="popular-img">
-									<img src="<?php echo base_url();?>assets/images/product-images/Washing-machine.png" alt="">
+									<img src="<?php echo base_url();?>assets/images/product-images/Washing-machine.png"
+										alt="">
 								</div>
 								<div class="popular-title">
 									<p>Washing Machine</p>
@@ -440,7 +816,8 @@
 							</div>
 							<div class="item">
 								<div class="popular-img">
-									<img src="<?php echo base_url();?>assets/images/icons/products/Water-purifier.png" alt="">
+									<img src="<?php echo base_url();?>assets/images/icons/products/Water-purifier.png"
+										alt="">
 								</div>
 								<div class="popular-title">
 									<p>Water Purifier</p>
@@ -631,12 +1008,12 @@
 		</div>
 	</div>
 	<!--End Popular Categories-->
-	<div class="section warrenty-offer-section"  style='padding-bottom:0'>
+	<div class="section warrenty-offer-section" style='padding-bottom:0'>
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="extended-offer-content">
-						<h2>EXTEND THE LIFE <br>OF YOUR Mobile</h2>
+						<h2>EXTEND THE LIFE <br>OF YOUR MOBILE</h2>
 						<div class="theme-btn extend-btn">
 							<a href="btn">Extended Warrenty</a>
 						</div>
@@ -663,7 +1040,21 @@
 					<div class="row">
 						<div class="col-lg-5 col-sm-12">
 							<div class="slider slider-nav">
+								<?php foreach($testimonial as $testarr){ ?>
 								<div>
+									<div class="customer-details">
+										<div class="customer-icon">
+											<i class="fa-solid fa-user"></i>
+										</div>
+										<div class="customer-title">
+											<h6><?= $testarr['name'] ?></h6>
+											<p><?= $testarr['comapny_name'] ?></p>
+
+										</div>
+									</div>
+								</div>
+								<?php } ?>
+								<!-- <div>
 									<div class="customer-details">
 										<div class="customer-icon">
 											<i class="fa-solid fa-user"></i>
@@ -727,27 +1118,36 @@
 
 										</div>
 									</div>
-								</div>
-								<div>
-									<div class="customer-details">
-										<div class="customer-icon">
-											<i class="fa-solid fa-user"></i>
-
-										</div>
-										<div class="customer-title">
-											<h6>Milton Austin</h6>
-											<p>Lorem Ipsum has been</p>
-
-										</div>
-									</div>
-								</div>
+								</div> -->
 
 							</div>
 						</div>
 
 						<div class="col-lg-7 col-sm-12">
 							<div class="slider slider-single">
+							<?php foreach($testimonial as $testarr){ ?>
 								<div>
+									<div class="customer-testimonial">
+										<div class="customer-subject">
+											<p><?= $testarr['short_desc'] ?></p>
+											<!-- <div class="customer-rating">
+												<i class="fa-solid fa-star"></i>
+												<i class="fa-solid fa-star"></i>
+												<i class="fa-solid fa-star"></i>
+												<i class="fa-solid fa-star"></i>
+												<i class="fa-regular fa-star-half-stroke"></i>
+											</div> -->
+
+										</div>
+										<div class="customer-msg">
+											<p>
+												"<?= $testarr['long_desc'] ?>"
+											</p>
+										</div>
+									</div>
+								</div>
+								<?php } ?>
+								<!-- <div>
 									<div class="customer-testimonial">
 										<div class="customer-subject">
 											<p>It Was A Great Experience!</p>
@@ -881,34 +1281,7 @@
 											</p>
 										</div>
 									</div>
-								</div>
-								<div>
-									<div class="customer-testimonial">
-										<div class="customer-subject">
-											<p>It Was A Great Experience!</p>
-											<div class="customer-rating">
-												<i class="fa-solid fa-star"></i>
-												<i class="fa-solid fa-star"></i>
-												<i class="fa-solid fa-star"></i>
-												<i class="fa-solid fa-star"></i>
-												<i class="fa-regular fa-star-half-stroke"></i>
-											</div>
-
-										</div>
-										<div class="customer-msg">
-											<p>
-												"A friend recommended your InstaRepair
-												service so I booked a service online for
-												my water purifier and it was a good
-												experience. Service was cashless and
-												convenient.
-												The team handled my request with
-												utmost professionalism & ensured the
-												service was done on time."
-											</p>
-										</div>
-									</div>
-								</div>
+								</div> -->
 
 							</div>
 						</div>
@@ -928,16 +1301,15 @@
 				</div>
 				<div class="col-lg-12">
 					<div class="partner-slider">
+						<?php
+						foreach($client as $client){
+						?>
 						<div class="item">
 							<div class="partner-logo">
-								<img src="assets/images/partner/annotationlogo.png" alt="">
+								<img src="<?= base_url($client['client_logo']) ?>" alt="">
 							</div>
 						</div>
-						<div class="item">
-							<div class="partner-logo">
-								<img src="assets/images/partner/monarch-logo.png" alt="">
-							</div>
-						</div>
+<?php } ?>
 
 					</div>
 				</div>
@@ -945,7 +1317,86 @@
 		</div>
 	</div>
 
+	<div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Enquiry Form</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="section-contact">
+						<div class="row justify-content-center">
+							<div class="col-12 col-lg-10 col-xl-8">
+								<div class="header-section text-center">
+									<!-- <h2 class="title">Get In Touch
+										<span class="dot"></span>
+										<span class="big-title">CONTACT</span>
+									</h2> -->
+									<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+										Aenean consectetur commodo risus, nec pellentesque turpis efficitur non.</p>
 
+								</div>
+							</div>
+						</div>
+						<div class="form-contact">
+							<form>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="single-input">
+											<i class="fas fa-user"></i>
+											<input type="text" name="name" placeholder="ENTER YOUR NAME">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="single-input">
+											<i class="fas fa-envelope"></i>
+											<input type="text" name="email" placeholder="ENTER YOUR EMAIL">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="single-input">
+											<i class="fas fa-phone"></i>
+											<input type="text" name="phoneNumber" placeholder="ENTER YOUR PHONE NUMBER">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="single-input">
+											<i class="fas fa-check"></i>
+											<input type="text" name="subject" placeholder="ENTER YOUR SUBJECT">
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="single-input">
+											<i class="fas fa-comment-dots"></i>
+											<textarea placeholder="ENTER YOUR MESSAGE"></textarea>
+										</div>
+									</div>
+									<div class="col-12">
+										<div class="submit-input text-center">
+											<input type="submit" name="submit" value="SUBMIT NOW">
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="banner-btn learn_more-banner">
+						<a href="http://localhost/otg_ci/services" data-dismiss="modal">Close</a>
+					</div>
+					<div class="banner-btn learn_more-banner">
+						<a href="http://localhost/otg_ci/services">Submit</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!--End Testimonial Slider-->
 
 </div>

@@ -86,7 +86,7 @@
 						<h4 class="h4">Policies</h4>
 						<ul>
 							<li><a href="#">Terms & Condition</a></li>
-							<li><a href="#">Privacy Police</a></li>
+							<li><a href="#">Privacy Policy</a></li>
 							<li><a href="#">Return & refund</a></li>
 
 						</ul>
@@ -95,7 +95,7 @@
 						<h4 class="h4">Contact Us</h4>
 						<ul class="addressFooter">
 							<li><i class="fa-solid fa-location-dot"></i>
-								<p>S-169, Haware Fantasia Business Park, Vashi, Navi Mumbai 400705</p>
+								<p>2<sup>nd</sup> Floor, Haware Fantasia Business Park, Vashi, Navi Mumbai 400705</p>
 							</li>
 							<li class="email"><i class="fa-solid fa-envelope"></i>
 								<p>support@otgcares.com</p>
@@ -445,7 +445,7 @@
 
 	$(".popular-warrenties-slider").slick({
 		slidesToShow: 3,
-		infinite: false,
+		infinite: true,
 		slidesToScroll: 1,
 		autoplay: false,
 		arrows: true,

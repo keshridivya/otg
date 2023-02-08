@@ -109,7 +109,11 @@
                         <a class="collapse-item" href="<?php echo base_url();?>admin/subcategory">Subcategories</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/plans">Plans</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/plans_features">Plan Features</a>
+                        <a class="collapse-item" href="<?php echo base_url();?>admin/product_features">Product Features</a>
+                        <a class="collapse-item" href="<?php echo base_url();?>admin/product_benefit">Product Benefit</a>
+                        <a class="collapse-item" href="<?php echo base_url();?>admin/client">Clients</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/blog">Blog</a>
+                        <a class="collapse-item" href="<?php echo base_url();?>admin/testimonial">Testimonial</a>
                     </div>
                 </div>
             </li>

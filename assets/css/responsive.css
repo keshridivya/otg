@@ -199,6 +199,9 @@
     html {
         overflow-x: hidden
     }
+    .mobile-submenu {
+        height: 529px;
+    }
     .megamenu>ul>li>a{
         font-size:13.4px !important;
 
@@ -353,7 +356,7 @@
         position: relative;
     }
     .mobile-submenu li {
-        width: 50%;
+        /* width: 50%; */
         float: left;
     }
     #MobileNav li.grid__item {
@@ -382,7 +385,8 @@
         line-height: 40px;
         position: absolute;
         right: 0;
-        top: 0;
+        /* top: 0; */
+        bottom: 20px;
         text-align: center
     }
     #MobileNav li a .lbl {

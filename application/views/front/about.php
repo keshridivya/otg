@@ -4,25 +4,22 @@
     
     <!--Body Content-->
     <div id="page-content">
-      
-          
                 <!--Parallax Section-->
                         <div class="sub-banner">
                         <div class="hero hero--large hero__overlay bg-size">
                             <img class="bg-img blur-up" src="assets/images/banner/about.png" alt="" />
                             <div class="hero__inner">
-                                <div class="row justify-content-center">
+                                <div class="row justify-content-center" style=' margin-right: 0px;margin-left: 0px;'>
                                     <div class="col-lg-10">
                                         <div class="sub-banner_content">
-                                                <form id="" class="search-form text-center">
+                                                <!-- <form id="" class="search-form text-center">
                                                     <button type="submit"><img src="assets/images/search.png" alt=""></button>
                                                     <input type="search" id="searchinput" >
-                                                </form>
+                                                </form> -->
                                                 <h2 class="sub-banner_content">One-stop Solution for All Your Needs</h2>
                                         </div>
                                     </div>
                                 </div>
-                               
                             </div>
                         </div>
                         </div>
@@ -200,25 +197,25 @@
                     <div class="row">
                     <div class="col-lg-12">
                         <div class="section-header text-center">
-                           <h2 class="heading">Our Team</h2>
+                           <h2 class="heading">Our Services</h2>
                         </div>
                      </div>
                         <div class="col-lg-3">
                             <div class="members-list">
                                 <div class="team-member left">
-                                    <h6>Milton Austin</h6>
+                                    <h6>Home Device Services</h6>
                                     <p>To add value to the customers’
                                         investment in the purchase of
                                         electronic devices and appliances</p>
                                 </div>
                                 <div class="team-member left">
-                                    <h6>Milton Austin</h6>
+                                    <h6>Cleaning & Pest Control</h6>
                                     <p>To add value to the customers’
                                         investment in the purchase of
                                         electronic devices and appliances</p>
                                 </div>
                                 <div class="team-member left">
-                                    <h6>Milton Austin</h6>
+                                    <h6>Plumber & Electrician</h6>
                                     <p>To add value to the customers’
                                         investment in the purchase of
                                         electronic devices and appliances</p>
@@ -234,19 +231,19 @@
                         <div class="col-lg-3">
                              <div class="members-list">
                                 <div class="team-member right">
-                                    <h6>Milton Austin</h6>
+                                    <h6>Carpenter</h6>
                                     <p>To add value to the customers’
                                         investment in the purchase of
                                         electronic devices and appliances</p>
                                 </div>
                                 <div class="team-member right">
-                                    <h6>Milton Austin</h6>
+                                    <h6>Car Wash</h6>
                                     <p>To add value to the customers’
                                         investment in the purchase of
                                         electronic devices and appliances</p>
                                 </div>
                                 <div class="team-member right">
-                                    <h6>Milton Austin</h6>
+                                    <h6>Interior Painting</h6>
                                     <p>To add value to the customers’
                                         investment in the purchase of
                                         electronic devices and appliances</p>

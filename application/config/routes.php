@@ -65,9 +65,9 @@ $route['update_cart']='welcome/update_cart';
 $route['summery']='welcome/summery';
 $route['receipt']='welcome/receipt';
 $route['blog']='welcome/blog';
-
-
-
+$route['menu_all']='welcome/menu_all';
+$route['blogdetail/(:any)']='welcome/blogdetail/$1';
+$route['contact']='welcome/contact';
 $route['addtocart/(:any)']='welcome/addtocart/$1';
 $route['removeItem/(:any)']='welcome/removeItem/$1';
 
@@ -158,6 +158,37 @@ $route['admin/plans_features/delete/(:any)']="admin/plans_features/delete/$1";
 //admin blog
 $route['admin/blog']='admin/blog/view';
 $route['admin/blog/add']='admin/blog/add';
+$route['admin/blog/edit/(:any)']='admin/blog/edit/$1';
+$route['admin/blog/delete/(:any)']="admin/blog/delete/$1";
+
+//admin testimonial
+$route['admin/testimonial']='admin/testimonial/view';
+$route['admin/testimonial/add']='admin/testimonial/add';
+$route['admin/testimonial/edit/(:any)']='admin/testimonial/edit/$1';
+$route['admin/testimonial/delete/(:any)']="admin/testimonial/delete/$1";
+
+//admin our client
+$route['admin/client']='admin/client/view';
+$route['admin/client/edit/(:any)']='admin/client/edit/$1';
+$route['admin/client/add/']='admin/client/add';
+$route['admin/client/delete/(:any)']="admin/client/delete/$1";
+
+//admin product features
+$route['admin/product_features']='admin/product_features/view';
+$route['admin/product_features/add']='admin/product_features/add';
+$route['admin/product_features/edit/(:any)']='admin/product_features/edit/$1';
+$route['admin/product_features/delete/(:any)']='admin/product_features/delete/$1';
+
+//admin product benefits
+$route['admin/product_benefit']='admin/product_benefit/view';
+$route['admin/product_benefit/add']='admin/product_benefit/add';
+$route['admin/product_benefit/edit/(:any)']='admin/product_benefit/edit/$1';
+$route['admin/product_benefit/delete/(:any)']='admin/product_benefit/delete/$1';
+
+
+//enginner
+$route['engineer']='engineer/index';
+
 
 
 

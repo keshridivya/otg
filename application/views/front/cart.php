@@ -22,14 +22,10 @@
                     <hr>
                                 <div class="row">
                                     <div class="col-lg-12">
-
-                                           
-                                          
                                                 <?php
                                                 if($this->cart->total_items()>0){
                                                     foreach($cartItems as $item){
                                                         ?>
-
                                                         <div class="row one-order">
                                                             <input type="hidden" value="<?= $item["rowid"]?>" name="<?= $item["rowid"]?>" id="rowid">
                                                             
@@ -62,7 +58,12 @@
                                                             <div class="col-lg-2 col-12 cart-row">
                                                                 <h6>Quantity</h6>
                                                             <input type="hidden" class="txt_csrfname" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>">
-                                                            <input type="number" class="form-control text-center item-qty" value="<?php echo $item['qty'];?>">
+                                                          <div class="d-flex">
+                                                          <input type='button' value='-' class='qtyminus minus qty' field='quantity'  />
+                                                            <input type="text" class="form-control text-center item-qty" value="<?php echo $item['qty'];?>" readonly>
+                                                            <input type='button' value='+' class='qtyplus plus qty' field='quantity' />
+                                                          </div>
+                                                           
                                                             </div>
                                                             <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>">
                                                             <!-- <td><input type="number" class="form-control text-center" value="<?php echo $item['qty'];?>" onchange="updatecartItem(this,'<?php echo $item['rowid']; ?>')"></td> -->
@@ -171,7 +172,20 @@
                 });
         });
     });
+	$(document).ready(function(){
+    $(".plus").on('click',function(){
+        $(".item-qty").val(parseInt($(".item-qty").val())+1).change();
+    });
 
+    $(".minus").on('click',function(){
+        let qty=$('.item-qty').val();
+        if(qty>0){
+            $(".item-qty").val(parseInt($(".item-qty").val())-1).change();
+        }
+        
+    });
+
+});
 
 
 

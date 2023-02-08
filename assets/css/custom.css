@@ -201,7 +201,10 @@
 }
 
 .main-product-title {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
+}
+.element{
+    margin-bottom: 15px;
 }
 
 .main-product-title p {
@@ -678,7 +681,7 @@
 }
 
 .vision-header .vision-icons {
-    margin-right: 1rem;
+    /* margin-right: 1rem; */
 }
 
 .vision-header h4 {
@@ -830,6 +833,8 @@
 .type-tabs .nav-pills .nav-link.active {
     /* background-color: transparent; */
     box-shadow: 0px 25px 35px -30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    text-align: center;
 }
 
 .type-plans {

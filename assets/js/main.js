@@ -183,7 +183,7 @@ $('.counter-number').each(function() {
     window.onscroll = function() { myFunction() };
 
     function myFunction() {
-        if ($(window).width() > 1199) {
+        if ($(window).width() > 300) {
             if ($(window).scrollTop() > 145) {
                 $('.header-wrap').addClass("stickyNav animated fadeInDown");
             } else {
@@ -223,7 +223,7 @@ $('.counter-number').each(function() {
         navLinks: '#siteNav .lvl1 > a',
         menuToggle: '.js-mobile-nav-toggle',
         mobilenav: '.mobile-nav-wrapper',
-        menuLinks: '#MobileNav .anm',
+        menuLinks: '#MobileNav .dropdownmenubar',
         closemenu: '.closemobileMenu'
     };
 
@@ -252,11 +252,17 @@ $('.counter-number').each(function() {
             $(selectors.menuToggle).removeClass('mobile-nav--close').addClass('mobile-nav--open');
         }
     });
+    // $(selectors.menuLinks).on('click', function(e) {
+    //     e.preventDefault();
+    //     $(this).toggleClass('anm-plus-l anm-minus-l');
+    //     $(this).parent().next().slideToggle();
+    // });
     $(selectors.menuLinks).on('click', function(e) {
         e.preventDefault();
-        $(this).toggleClass('anm-plus-l anm-minus-l');
-        $(this).parent().next().slideToggle();
+        $(this).children('.anm').toggleClass('anm-plus-l anm-minus-l');
+        $(this).next('ul').slideToggle();
     });
+
 
 
     /*-----------------------------------------
@@ -1086,6 +1092,100 @@ $('.counter-number').each(function() {
     /*-----------------------------------
       End Infinite Scroll js
       -------------------------------------*/
-
-
 })(jQuery);
+
+
+$(document).on('keyup','#username',function(){
+    fun_username();    
+})
+function fun_username(){
+    let username=$('#username').val();
+    let text=/^[A-Za-z ]+$/;
+
+    if(!text.test(username)){
+        $("#spanusername").show().html("Enter Alphabets only").css("color","red").focus();
+        $('.signupbtn').prop('disabled',true);
+        return false;
+    }
+    else{
+        $("#spanusername").hide();
+        $('.signupbtn').prop('disabled',false);
+    }
+}
+
+$(document).on('keyup','#mobile',function(){
+    fun_mobile();    
+})
+function fun_mobile(){
+    let mobile=$('#mobile').val();
+
+    if(mobile.length!=10){
+        $("#spanmobile").show().html("Please Enter Valid Mobile Number").css("color","red").focus();
+        $('.signupbtn').prop('disabled',true);
+        return false;
+    }
+    else{
+        $("#spanmobile").hide();
+        $('.signupbtn').prop('disabled',false);
+    }
+}
+
+$(document).on('keyup','#city',function(){
+    fun_city();    
+})
+function fun_city(){
+    let city=$('#city').val();
+    let text=/^[A-Za-z ]+$/;
+
+    if(!text.test(city)){
+        $("#spancity").show().html("Enter Alphabets only").css("color","red").focus();
+        $('.signupbtn').prop('disabled',true);
+        return false;
+    }
+    else{
+        $("#spancity").hide();
+        $('.signupbtn').prop('disabled',false);
+    }
+}
+
+$(document).on('keyup','#state',function(){
+    fun_state();    
+})
+function fun_state(){
+    let state=$('#state').val();
+    let text=/^[A-Za-z ]+$/;
+
+    if(!text.test(state)){
+        $("#spanstate").show().html("Enter Alphabets only").css("color","red").focus();
+        $('.signupbtn').prop('disabled',true);
+        return false;
+    }
+    else{
+        $("#spanstate").hide();
+        $('.signupbtn').prop('disabled',false);
+    }
+}
+
+$('.signupbtn').prop('disabled',true);
+$(document).on('submit','.signup',function(){
+    let username = $("#username").val();
+    let mobile = $("#mobile").val();
+    let email_id = $("#email_id").val();
+    let password = $("#password").val();
+    let city = $("#city").val();
+    let state = $("#state").val();
+    let address = $("#address").val();
+    let pincode = $("#pincode").val();
+
+    if(username==''|| mobile==''|| email_id==''|| password=='' || city=='' || state=='' ||address=='' || pincode=='' ) {
+        $("#errorsubmit").show().html("Please Fill All the Field").css("color","red").focus();
+        return false;
+
+    }
+    else{
+        $("#errorsubmit").hide()
+        $('.signupbtn').prop('disabled',false);
+        return true;
+
+    }
+})

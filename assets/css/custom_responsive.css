@@ -196,6 +196,12 @@
     .plan-table {
         display: block;
     }
+    .type-tabs .nav-pills .nav-link.active {
+        width: 123px !important;
+    }
+    .product-info {
+        padding: 0px 0;
+    }
     #MobileNav .dropdown.sub-header li {
         width: 50%;
         float: left;
@@ -215,7 +221,7 @@
         margin-left: auto;
     }
     .about-us-content h6 {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
     .dome-section {
         width: 90%;
@@ -259,7 +265,7 @@
         margin-top: .9rem;
     }
     .mobile-submenu {
-        height: 450px;
+        height: 429px;
     }
     .mobile-sublink p {
         font-size: 0.8rem;
@@ -284,15 +290,11 @@
     .sub-banner_content h2 {
         font-size: 1.5rem;
     }
-    .about-us-content p {
-        font-size: 1rem;
-    }
+
     .vision-content {
         width: 100%;
     }
-    .vision-content p {
-        font-size: 1rem;
-    }
+    
     .vision-content {
         height: auto;
         padding: 30px 35px;
@@ -301,15 +303,12 @@
         margin-bottom: 1rem;
     }
     .vision-header h4 {
-        font-size: 1.5rem;
+        font-size: 1rem;
     }
     .team-member.left {
         margin-bottom: 1rem;
     }
-    .team-member.left h6 {
-        text-align: center;
-        font-size: 1.2rem;
-    }
+
     .team-member.left p {
         text-align: justify;
     }

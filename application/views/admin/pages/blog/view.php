@@ -24,17 +24,36 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            
-                                            <th>Category Id</th>
-                                            <th>Category Name</th>
-                                            <th>Status</th>
-                                            
+                                            <th>S.no</th>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>description</th>
+                                            <th>Written By</th>
+                                            <th>status</th>
                                             <th>Created On</th>
-                                            <th>Modified On</th>
                                             <th>Action</th>
-
                                         </tr>
-                                   
+
+                                        <?php
+                        $count=1;
+                        foreach($blog as $blog){ ?>
+						<tr>
+							<td><?= $count; ?></td>
+                            <td><img src='<?php echo base_url($blog['file']); ?>' alt='logo'></td>
+							<td><?= $blog['name'] ?></td>
+							<td><?php echo substr($blog['description'],0,150); ?></td>
+							<td><?= $blog['writtenby'] ?></td>
+							<td><?= $blog['status'] ?></td>
+							<td><?= $blog['created_date'] ?></td>
+							<td>
+								<a href="<?php echo base_url('admin/blog/edit/'.$blog['id']); ?>"><i
+										class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+								<a href="" type="button" class="btn btn-primary" data-toggle="modal"
+									data-target="#exampleModal"><i class="fas fa-trash" aria-hidden="true"></i></a>
+							</td>
+						</tr>
+						<?php $count++; }
+                        ?>
                                 </table>
                             </div>
                         </div>
@@ -50,7 +69,7 @@
         Are you sure?
       </div>
       <div class="modal-footer">
-          <a type="button" class="btn btn-secondary" href="<?php echo base_url('admin/blog/delete/'.$cats['category_id']); ?>">Delete</a>
+          <a type="button" class="btn btn-secondary" href="<?php echo base_url('admin/blog/delete/'.$blog['id']); ?>">Delete</a>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
       </div>
     </div>

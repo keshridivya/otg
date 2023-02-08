@@ -51,6 +51,15 @@
                                         <input type="text" name="e_booking" value="<?php echo $eng_data[0]['ongoing-booking'];?>" id="e_booking" class="form-control form-control-user" 
                                             placeholder="Ongoing Booking id">
                                     </div>
+                                    <?php if($eng_data[0]['status']){ ?>
+                                    <div class="col-sm-4">
+                                        <label for="e_booking">Status</label>
+                                        <select name="status" id="" class='form-control'>
+                                            <option value="active" <?php if($eng_data[0]['status']=='active'){ echo 'selected'; } ?>>Active</option>
+                                            <option value="inactive" <?php if($eng_data[0]['status']=='inactive'){ echo 'selected'; } ?>>Inactive</option>
+                                        </select>
+                                    </div>
+                                    <?php } ?>
                                 </div>
                                
                                 <input type="submit" name="submit" class="btn btn-primary btn-user btn-block">

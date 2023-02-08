@@ -27,7 +27,7 @@
                                             <th>Engineer Id</th>
                                             <th>Engineer Name</th>
                                             <th>Email Id</th>
-                                          
+                                          <th>Status</th>
                                             <th>Contact</th>
                                             <th>Ongoing Booking</th>
                                             <th>Created On</th>
@@ -43,6 +43,7 @@
                                         <td><?php echo $eng['eng_id']; ?></td>
                                         <td><?php echo $eng['eng_name']; ?></td>
                                         <td><?php echo $eng['email_id']; ?></td>
+                                        <td><?php echo $eng['status']; ?></td>
                                         
                                         <td><?php echo $eng['contact']; ?></td> 
                                         <td><?php echo $eng['ongoing-booking']; ?></td>                                   
