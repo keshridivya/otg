@@ -18,7 +18,6 @@ class Engineer extends CI_Controller {
             if (@$this->form_validation->run() === false)
             {  
                 $this->load->view('engineer/login');
-                
             }
             else
             {
@@ -30,17 +29,32 @@ class Engineer extends CI_Controller {
             }else{
                 $eid=$query[0]['eng_id'];
                 $ename=$query[0]['eng_name'];
-                $this->session->set_userdata('eng_id',$eid);
+                $email=$query[0]['email_id'];
+                $this->session->set_userdata('e_id',$eid);
                 $this->session->set_userdata('e_name',$ename);
+                $this->session->set_userdata('e_mail',$email);
             }
             }
         }
-        if(@$this->session->userdata['eng_id']){
-            $page_data['page_title']="Dashboard";
+        if($this->session->userdata['e_id']){
+            $bookings_table=$this->db->get("bookings")->result_array();
+			$page_data['bookings']=$bookings_table;
             $page_data['page']="dashboard";
-            $this->load->view('admin/index',$page_data);
+            $this->load->view('engineer/index',$page_data);
         }else{
         $this->load->view('engineer/login',$page_data);
         }
+    }
+
+    public function myaccount(){
+        $id=$this->session->userdata['e_id'];
+        $page_data['info']=$this->db->get_where('engineer',array('eng_id'=>$id))->result_array();
+        $page_data['page']='myaccount';
+        $this->load->view('engineer/index',$page_data);
+    }
+
+    public function logout(){
+        $this->session->sess_destroy();
+        redirect(base_url('engineer'));
     }
 }
