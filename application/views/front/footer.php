@@ -62,7 +62,7 @@
 							<li><a href="<?php echo base_url();?>about-us">About Us</a></li>
 							<li><a href="<?php echo base_url();?>services">Services</a></li>
 							<li><a href="#">Track Order</a></li>
-							<li><a href="#">Contact Us</a></li>
+							<li><a href="<?php echo base_url();?>contact">Contact Us</a></li>
 							<li><a href="<?php echo base_url();?>sign-up">Sign In</a></li>
 
 						</ul>
@@ -95,7 +95,7 @@
 						<h4 class="h4">Contact Us</h4>
 						<ul class="addressFooter">
 							<li><i class="fa-solid fa-location-dot"></i>
-								<p>2<sup>nd</sup> Floor, Haware Fantasia Business Park, Vashi, Navi Mumbai 400705</p>
+								<p>2<sup>nd</sup> Floor, Haware Fantasia Business Park, Vashi, Navi Mumbai 400703</p>
 							</li>
 							<li class="email"><i class="fa-solid fa-envelope"></i>
 								<p>support@otgcares.com</p>

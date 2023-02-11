@@ -111,7 +111,7 @@
 						</a>
 
 					</li>
-					<li class="lvl1 parent dropdown"><a href="<?php echo base_url();?>services">Services<i
+					<li class="lvl1 parent dropdown"><a >Services<i
 								class="anm anm-angle-down-l"></i></a>
 						<ul class="dropdown">
 							<li><a href="" class="site-nav">Extended Warrenty</a></li>
@@ -137,12 +137,17 @@
 							</li>
 							<li><a href="" class="site-nav">Other Services<i class="anm anm-angle-right-l"></i></a>
 								<ul class="dropdown">
-									<li><a href="" class="site-nav">Home device services</a></li>
-									<li><a href="" class="site-nav">Cleaning & Pest control</a></li>
-									<li><a href="" class="site-nav">Plumber & electrician</a></li>
-									<li><a href="" class="site-nav">Carpenter</a></li>
-									<li><a href="" class="site-nav">Car wash</a></li>
-									<li><a href="" class="site-nav">Interior Painting</a></li>
+									<li><a href="<?php echo base_url();?>services" class="site-nav">Home device services</a></li>
+									<li><a href=""  data-toggle="modal"
+										data-target="#exampleModal" class="site-nav">Cleaning & Pest control</a></li>
+									<li><a href=""  data-toggle="modal"
+										data-target="#exampleModal" class="site-nav">Plumber & electrician</a></li>
+									<li><a href=""  data-toggle="modal"
+										data-target="#exampleModal" class="site-nav">Carpenter</a></li>
+									<li><a href=""  data-toggle="modal"
+										data-target="#exampleModal" class="site-nav">Car wash</a></li>
+									<li><a href=""  data-toggle="modal"
+										data-target="#exampleModal" class="site-nav">Interior Painting</a></li>
 
 								</ul>
 							</li>
@@ -221,7 +226,7 @@
 					 ?>
 						<div class="mobile-sublink col-6">
 							<p><?= $drop['cproduct_name']; ?></p>
-							<a
+							<a class="maintenancefont"
 								href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>"><?= $drop['category_name']; ?></a>
 						</div>
 						<?php } ?>
@@ -250,8 +255,6 @@
 					<li><a href="<?php echo base_url();?>services" class="site-nav">Extended Warrenty</a></li>
 					<li><a href="<?php echo base_url();?>services" class="site-nav">Home Care Plan/AMC</a></li>
 					<li><a href="" class="site-nav">Damage Protection Plan/Warrenty</a></li>
-
-
 
 					<li class=''><a href="" class="site-nav dropdownmenubar">Quick Repair <i
 								class="anm anm-plus-l"></i></a>

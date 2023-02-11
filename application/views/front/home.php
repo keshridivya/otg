@@ -621,8 +621,22 @@
 				</div>
 				<div class="col-lg-12">
 					<div class="what-we-do-tab">
-						<div class="row">
-							<div class="col-4 col-md-2">
+						<div class="row justify">
+							<div class="col-4 col-md-2 mobilenone colnone" >
+								<div class="element element-1">
+									<a class="main-product-content" data-toggle="modal"
+										data-target="#exampleModal" style='cursor:pointer'>
+										<div class="">
+											<img src="<?php echo base_url();?>assets/images/Explore Our Services/quick_repair.png"
+												alt="">
+										</div>
+										<div class="main-product-title">
+											<p>Quick Repair</p>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-4 col-md-2 colnone">
 								<div class="element element-1">
 									<a class="main-product-content" data-toggle="modal"
 										data-target="#exampleModal" style='cursor:pointer'>
@@ -636,7 +650,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="col-4 col-md-2">
+							<div class="col-4 col-md-2 colnone">
 								<div class="element element-2">
 									<a class="main-product-content" data-toggle="modal"
 										data-target="#exampleModal" style='cursor:pointer'>
@@ -650,7 +664,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="col-4 col-md-2">
+							<div class="col-4 col-md-2 colnone">
 								<div class="element element-3">
 									<a class="main-product-content" data-toggle="modal"
 										data-target="#exampleModal" style='cursor:pointer'>
@@ -664,7 +678,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="col-4 col-md-2">
+							<div class="col-4 col-md-2 colnone">
 								<div class="element element-4">
 									<a class="main-product-content" data-toggle="modal"
 										data-target="#exampleModal" style='cursor:pointer'>
@@ -678,7 +692,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="col-4 col-md-2">
+							<div class="col-4 col-md-2 colnone">
 								<div class="element element-2">
 									<a class="main-product-content" data-toggle="modal"
 										data-target="#exampleModal" style='cursor:pointer'>
@@ -692,7 +706,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="col-4 col-md-2">
+							<div class="col-4 col-md-2 colnone">
 								<div class="element element-3">
 									<a class="main-product-content" data-toggle="modal"
 										data-target="#exampleModal" style='cursor:pointer'>
@@ -706,7 +720,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="col-4 col-md-2">
+							<div class="col-4 col-md-2 colnone">
 								<div class="element element-1">
 									<a class="main-product-content" data-toggle="modal"
 										data-target="#exampleModal" style='cursor:pointer'>
@@ -720,7 +734,7 @@
 									</a>
 								</div>
 							</div>
-							<div class="col-4 col-md-2">
+							<div class="col-4 col-md-2 colnone">
 								<div class="element element-2">
 									<a class="main-product-content" data-toggle="modal"
 										data-target="#exampleModal" style='cursor:pointer'>
@@ -735,7 +749,7 @@
 								</div>
 							</div>
 
-							<div class="col-4 col-md-2">
+							<div class="col-4 col-md-2 colnone">
 								<div class="element element-3">
 									<a class="main-product-content" data-toggle="modal"
 										data-target="#exampleModal" style='cursor:pointer'>
@@ -757,10 +771,11 @@
 	</div>
 	<!--explore our services-->
 
+
 	<!--Popular Categories-->
-	<div class="section" style='padding-top:0'>
+	<div class="section  what-we-do" >
 		<div class="container">
-			<div class="row">
+			<div class="row service-slider-row">
 				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="section-header text-center">
 						<h2 class="heading">Popular Repair Services</h2>
