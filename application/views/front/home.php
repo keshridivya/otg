@@ -1063,7 +1063,11 @@
 										</div>
 										<div class="customer-title">
 											<h6><?= $testarr['name'] ?></h6>
+											<?php
+											if($testarr['comapny_name']!=''){ 
+											?>
 											<p><?= $testarr['comapny_name'] ?></p>
+											<?php } ?>
 
 										</div>
 									</div>
@@ -1332,85 +1336,7 @@
 		</div>
 	</div>
 
-	<div class="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-		aria-hidden="true">
-		<div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Enquiry Form</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<div class="section-contact">
-						<div class="row justify-content-center">
-							<div class="col-12 col-lg-10 col-xl-8">
-								<div class="header-section text-center">
-									<!-- <h2 class="title">Get In Touch
-										<span class="dot"></span>
-										<span class="big-title">CONTACT</span>
-									</h2> -->
-									<p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Aenean consectetur commodo risus, nec pellentesque turpis efficitur non.</p>
 
-								</div>
-							</div>
-						</div>
-						<div class="form-contact">
-							<form>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="single-input">
-											<i class="fas fa-user"></i>
-											<input type="text" name="name" placeholder="ENTER YOUR NAME">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="single-input">
-											<i class="fas fa-envelope"></i>
-											<input type="text" name="email" placeholder="ENTER YOUR EMAIL">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="single-input">
-											<i class="fas fa-phone"></i>
-											<input type="text" name="phoneNumber" placeholder="ENTER YOUR PHONE NUMBER">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="single-input">
-											<i class="fas fa-check"></i>
-											<input type="text" name="subject" placeholder="ENTER YOUR SUBJECT">
-										</div>
-									</div>
-									<div class="col-12">
-										<div class="single-input">
-											<i class="fas fa-comment-dots"></i>
-											<textarea placeholder="ENTER YOUR MESSAGE"></textarea>
-										</div>
-									</div>
-									<div class="col-12">
-										<div class="submit-input text-center">
-											<input type="submit" name="submit" value="SUBMIT NOW">
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<div class="banner-btn learn_more-banner">
-						<a href="http://localhost/otg_ci/services" data-dismiss="modal">Close</a>
-					</div>
-					<div class="banner-btn learn_more-banner">
-						<a href="http://localhost/otg_ci/services">Submit</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	
 	<!--End Testimonial Slider-->
 

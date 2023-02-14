@@ -225,7 +225,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="middle-img">
-                                <img src="assets/images/banner/team.png" alt="">
+                                <img src="assets/images/banner/team1.png" alt="">
                             </div>
                         </div>
                         <div class="col-lg-3">

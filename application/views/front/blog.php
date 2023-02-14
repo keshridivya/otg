@@ -40,7 +40,13 @@
     							<div class="card-body">
     								<h2 class="card-title"><?= $blog['name'] ?></h2>
 
-                                    <p class="bottom10"><span>By:</span><?= $blog['writtenby'] ?> <span>|</span> <span>Date:</span> Feb 22, 2017</p>
+                                    <p class="bottom10">
+										<?php
+										if($blog['writtenby']!=''){
+										?>
+										<span>By:</span><?= $blog['writtenby'] ?> <span> |
+											<?php } ?>
+											</span> <span>Date:</span> Feb 22, 2017</p>
     								<p class="card-text"><?= substr( $blog['description'],0,150) ?></p>
     								<a href="<?php base_url() ?>blogdetail/<?= $blog['id'] ?>" class="btn btn-offgreen">Read more</a>
     							</div>

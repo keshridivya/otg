@@ -558,6 +558,33 @@ public function contact(){
 	$page_data['page_title']="Contact Us";
 	$page_data['page']="contact";
 	$this->load->view('index',$page_data);
+
+	if($this->input->post()){
+		$this->load->library('email');
+
+		$this->email->from('divyani.gupta1145@gmail.com', 'Your Name');
+		$this->email->to('divyani.gupta1145@gmail.com');
+		$this->email->cc('divyani.gupta1145@gmail.com');
+		$this->email->bcc('divyani.gupta1145@gmail.com');
+
+		$this->email->subject('Email Test');
+		$this->email->message('Testing the email class.');
+
+		$this->email->send();
+	}
 }
 
+public function privacy(){
+	$page_data['dropdown']=$this->menu->menu_all();
+	$page_data['page_title']="Pivacy Policy";
+	$page_data['page']="privacy&policy";
+	$this->load->view('index',$page_data);
+}
+
+public function terms(){
+	$page_data['dropdown']=$this->menu->menu_all();
+	$page_data['page_title']="Terms & Condition";
+	$page_data['page']="terms";
+	$this->load->view('index',$page_data);
+}
 }

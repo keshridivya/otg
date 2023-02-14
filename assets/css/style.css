@@ -1376,10 +1376,114 @@ textarea:-ms-input-placeholder {
     .element{
         padding:0px 30px 0 30px;
     }
+
+}
+.contact-bg{
+    background: #fff;
+    border: 1px solid #cccccc;
+    padding: 30px 30px;
+    position: relative;
+    top: -135px;
+    z-index: 1;
+}
+.bottom40 {
+    margin-bottom: 40px !important;
+}
+.bottom40>div{
+    margin-top: 10px;
+    background-color:#f8b11b;
+height: 1px;
+}
+.line_1 {
+    width: 200px;
+}
+.line_2{
+    width: 150px;
+}
+.line_3{
+    width: 100px;
+}
+.btn_fill{
+    color:white;
+    background:#0cb49c;
+    padding:10px 30px;
+    border-radius:5px;
+}
+.socials{
+    display: flex;
+    list-style: none;
+    margin-top:20px;
+}
+.addressfoot{
+    list-style: none;
+
+}
+.socials>li{
+    margin-right: 10px;
+}
+#map iframe{
+    width:100%;
+    height:350px;
+}
+.modalOverly{
+    height:0 !important
+}
+.heading4{
+    font-size: .985rem;
+    color: var(--var-green);
+}
+/* .service-product-img>.servicesimg{
+    height:260px ;
+        } */
+        .contact-form1{
+        }
+.form-control:focus {
+    color: #393b3d;
+    border-color: rgb(250, 249, 247);
+    background-color: #fff !important;
+    box-shadow: 0 0 0 0.175rem rgb(235, 214, 169);
+}
+.contactloader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #fbb41c;
+    border-bottom: 16px solid #0db19e;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+.single-query>span{
+    color: red;
+}
+@media(max-width:350px){
+    /* .service-product-img>.servicesimg{
+        height:120px !important;
+            } */
 }
 @media (max-width:768px){
+    /* .service-product-img>.servicesimg{
+        height:150px;
+            } */
+            #map iframe{
+                width:100%;
+                height:220px;
+            }
     .mobilenone{
         display: none;
+    }
+    .heading4{
+        font-size: .685rem;
     }
     .vision-header .vision-icons img {
         width: 75%;

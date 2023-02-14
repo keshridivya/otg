@@ -40,7 +40,13 @@
     							<div class="card-body">
     								<h1 class="card-title"><?= $blog['name'] ?></h1>
 
-                                    <p class="bottom10"><span>By:</span><?= $blog['writtenby'] ?> <span>|</span> <span>Date:</span> Feb 22, 2017</p>
+                                    <p class="bottom10">
+									<?php
+										if($blog['writtenby']!=''){
+										?>
+										<span>By:</span><?= $blog['writtenby'] ?> <span> |
+											<?php } ?>
+											</span> <span>Date:</span> Feb 22, 2017</p>
     								<p class="card-text"><?=  $blog['description'] ?></p>
     							</div>
     						</div>

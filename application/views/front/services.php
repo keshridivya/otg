@@ -50,7 +50,7 @@
                                        <div class="col-lg-3 col-6">
                                         <div class="service-product-content">
                                             <div class="service-product-img">
-                                                <img src="<?php echo base_url($product_data[$i]['cproduct_img'])?>" alt="">
+                                                <img src="<?php echo base_url($product_data[$i]['cproduct_img'])?>" alt="" class='servicesimg'>
                                                 <h4><?php echo $product_data[$i]['cproduct_name']?></h4>
                                             </div>
                                             <a href="<?php echo base_url('maintenance/'.$product_data[$i]['cproduct_name']) ?>">View Plans</a>

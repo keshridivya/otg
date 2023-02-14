@@ -70,12 +70,10 @@ $route['blogdetail/(:any)']='welcome/blogdetail/$1';
 $route['contact']='welcome/contact';
 $route['addtocart/(:any)']='welcome/addtocart/$1';
 $route['removeItem/(:any)']='welcome/removeItem/$1';
+$route['privacy-policy']='welcome/privacy';
+$route['terms']='welcome/terms';
 
 // $route['update_cart']='welcome/update_cart';
-
-
-
-
 
 
 
