@@ -37,11 +37,16 @@
                                     <input type="text" class="form-control form-control-user" id="exampleFormControlInput1"  value='<?= $testimonial_data[0]['short_desc'] ?>'
                                         name="short_desc">
                                 </div>
-                                <!-- <div class="form-group">
+                                <div class="form-group">
                                     <label for="exampleFormControlInput1">Main Image</label>
+                                    <?php
+                                    if($blog[0]['file']){ ?>
+								<img src='<?php echo base_url($testimonial_data[0]['file']); ?>' alt='logo'>
+								<?php }
+                                    ?>
                                     <input type="file" class="form-control form-control-user" id="exampleFormControlInput1"
                                         name="file">
-                                </div> -->
+                                </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Testominal</label>
                                     <textarea id="summernote" name="testimonial" class="form-control form-control-user"><?= $testimonial_data[0]['long_desc'] ?></textarea>

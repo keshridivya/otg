@@ -99,10 +99,6 @@ class Welcome extends CI_Controller {
 					);
 					$this->db->where('cust_id',$session_cust);
 					$this->db->update('customer',$data);
-					
-
-				
-					
 				}
 				$page_data['dropdown']=$this->menu->menu_all();
 				$page_data['bookings_table']=$bookings_table;
@@ -177,7 +173,6 @@ class Welcome extends CI_Controller {
 						"pincode"=>$this->input->post('pincode'),
 						"created_on"=>date('Y-m-d h:i:s'),
 						"modified_on"=>date('Y-m-d h:i:s')
-	
 					);
 					
 					if($this->db->insert('customer',$data)){
@@ -251,11 +246,7 @@ class Welcome extends CI_Controller {
 					$page_data['page']="sign_up";
 					$page_data['message']="";
 					$this->load->view('index',$page_data);
-	
 				}
-				
-
-			
 		}
 		
 		else{
@@ -554,24 +545,63 @@ public function blogdetail($id){
 }
 
 public function contact(){
+	$this->load->library('phpmailer_lib');
+	if($this->input->post()){
+		$data=array(
+			'name'=>$this->input->post('name'),
+			'email'=>$this->input->post('email'),
+			'contact'=>$this->input->post('contact'),
+			'message'=>$this->input->post('message'),
+			'created_date'=>date('y-m-d')
+		);
+		if($this->db->insert('contact-form',$data)){
+		// PHPMailer object
+		$mail = $this->phpmailer_lib->load();
+				
+		//Server settings
+		$mail->SMTPDebug = 0; 
+		$mail->isSMTP();                             
+		$mail->Host       = 'smtp.hostinger.com';    
+		$mail->SMTPAuth   = true;                           
+		$mail->Username   = 'hr@otgcares.com';           
+		$mail->Password   = 'Admin@123';                          
+		$mail->SMTPSecure = 'ssl';          
+		$mail->Port       = 465;                            
+
+		//Recipients
+		$mail->setFrom('hr@otgcares.com', 'Enquiry from website');
+		$mail->addAddress('hr@otgcares.com');    
+		
+		//Content
+		$mail->isHTML(true);                               
+		$mail->Subject = 'Request for enquiry by ';
+		$mail->Body    = '<html>
+		<body>
+		<h3>You have a new response in your Contact Form</h3>
+		<p>Name : '.$data['name'].'</p>
+		<p>Email : '.$data['email'].'</p>
+		<p>Contact : '.$data['contact'].'</p>
+		<p>Message : '.$data['message'].'</p>
+		</body>
+		</html>';
+
+		if ($mail->send())
+			{
+				$page_data['message']="Thank you, We'll get in touch with you soon";
+			}
+			else
+			{
+				$page_data['message']='Something Went Wrong';
+			}
+		}
+		else{
+			$page_data['message']='Server Error Please try again ';
+		}
+	}
 	$page_data['dropdown']=$this->menu->menu_all();
 	$page_data['page_title']="Contact Us";
 	$page_data['page']="contact";
 	$this->load->view('index',$page_data);
-
-	if($this->input->post()){
-		$this->load->library('email');
-
-		$this->email->from('divyani.gupta1145@gmail.com', 'Your Name');
-		$this->email->to('divyani.gupta1145@gmail.com');
-		$this->email->cc('divyani.gupta1145@gmail.com');
-		$this->email->bcc('divyani.gupta1145@gmail.com');
-
-		$this->email->subject('Email Test');
-		$this->email->message('Testing the email class.');
-
-		$this->email->send();
-	}
 }
 
 public function privacy(){

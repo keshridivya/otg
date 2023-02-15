@@ -1432,9 +1432,9 @@ height: 1px;
     font-size: .985rem;
     color: var(--var-green);
 }
-/* .service-product-img>.servicesimg{
-    height:260px ;
-        } */
+.service-product-img>.servicesimg{
+    height:250px ;
+        }
         .contact-form1{
         }
 .form-control:focus {
@@ -1443,6 +1443,12 @@ height: 1px;
     background-color: #fff !important;
     box-shadow: 0 0 0 0.175rem rgb(235, 214, 169);
 }
+.loadhide{
+    display: none;
+  }
+  .loadshow{
+    display: block;
+  }
 .contactloader {
     border: 16px solid #f3f3f3;
     border-radius: 50%;
@@ -1450,8 +1456,13 @@ height: 1px;
     border-bottom: 16px solid #0db19e;
     width: 120px;
     height: 120px;
+    margin:auto;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
+  }
+  .text-pur{
+    color: #4c3418;
+    font-size: 20px;
   }
   
   @-webkit-keyframes spin {
@@ -1467,14 +1478,14 @@ height: 1px;
     color: red;
 }
 @media(max-width:350px){
-    /* .service-product-img>.servicesimg{
-        height:120px !important;
-            } */
+    .service-product-img>.servicesimg{
+        height:100px !important;
+            }
 }
 @media (max-width:768px){
-    /* .service-product-img>.servicesimg{
-        height:150px;
-            } */
+    .service-product-img>.servicesimg{
+        height:140px;
+            }
             #map iframe{
                 width:100%;
                 height:220px;

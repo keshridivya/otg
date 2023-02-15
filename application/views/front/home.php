@@ -108,7 +108,7 @@
 				<div class="col-lg-12">
 					<div class="what-we-do-tab">
 						<div class="row">
-						<?php
+							<?php
 					foreach($dropdown as $drop){
 						if($drop['cproduct_name']=='Air Conditioner'){
 					 ?>
@@ -117,7 +117,8 @@
 									<a class="main-product-content"
 										href="<?php echo base_url('maintenance/Air Conditioner')?>">
 										<div class="main-product-icon">
-											<img src="<?php echo base_url();?>assets/images/icons/products/ac.png" alt="">
+											<img src="<?php echo base_url();?>assets/images/icons/products/ac.png"
+												alt="">
 										</div>
 										<div class="main-product-title">
 											<p>AC</p>
@@ -222,7 +223,7 @@
 								</div>
 							</div>
 							<?php } } ?>
-							
+
 							<?php
 					foreach($dropdown as $drop){
 						if($drop['cproduct_name']=='Microwave'){
@@ -622,10 +623,10 @@
 				<div class="col-lg-12">
 					<div class="what-we-do-tab">
 						<div class="row justify">
-							<div class="col-4 col-md-2 mobilenone colnone" >
+							<div class="col-4 col-md-2 mobilenone colnone">
 								<div class="element element-1">
-									<a class="main-product-content" data-toggle="modal"
-										data-target="#exampleModal" style='cursor:pointer'>
+									<a class="main-product-content" data-toggle="modal" data-target="#exampleModal"
+										style='cursor:pointer'>
 										<div class="">
 											<img src="<?php echo base_url();?>assets/images/Explore Our Services/quick_repair.png"
 												alt="">
@@ -638,8 +639,8 @@
 							</div>
 							<div class="col-4 col-md-2 colnone">
 								<div class="element element-1">
-									<a class="main-product-content" data-toggle="modal"
-										data-target="#exampleModal" style='cursor:pointer'>
+									<a class="main-product-content" data-toggle="modal" data-target="#exampleModal"
+										style='cursor:pointer'>
 										<div class="">
 											<img src="<?php echo base_url();?>assets/images/Explore Our Services/extended warranty.png"
 												alt="">
@@ -652,8 +653,8 @@
 							</div>
 							<div class="col-4 col-md-2 colnone">
 								<div class="element element-2">
-									<a class="main-product-content" data-toggle="modal"
-										data-target="#exampleModal" style='cursor:pointer'>
+									<a class="main-product-content" data-toggle="modal" data-target="#exampleModal"
+										style='cursor:pointer'>
 										<div class="">
 											<img src="<?php echo base_url();?>assets/images/Explore Our Services/home care _ amc.png"
 												alt="">
@@ -666,8 +667,8 @@
 							</div>
 							<div class="col-4 col-md-2 colnone">
 								<div class="element element-3">
-									<a class="main-product-content" data-toggle="modal"
-										data-target="#exampleModal" style='cursor:pointer'>
+									<a class="main-product-content" data-toggle="modal" data-target="#exampleModal"
+										style='cursor:pointer'>
 										<div class="">
 											<img src="<?php echo base_url();?>assets/images/Explore Our Services/damage protection plan.png"
 												alt="">
@@ -680,8 +681,8 @@
 							</div>
 							<div class="col-4 col-md-2 colnone">
 								<div class="element element-4">
-									<a class="main-product-content" data-toggle="modal"
-										data-target="#exampleModal" style='cursor:pointer'>
+									<a class="main-product-content" data-toggle="modal" data-target="#exampleModal"
+										style='cursor:pointer'>
 										<div class="">
 											<img src="<?php echo base_url();?>assets/images/Explore Our Services/cleaning & pest controls.png"
 												alt="">
@@ -694,8 +695,8 @@
 							</div>
 							<div class="col-4 col-md-2 colnone">
 								<div class="element element-2">
-									<a class="main-product-content" data-toggle="modal"
-										data-target="#exampleModal" style='cursor:pointer'>
+									<a class="main-product-content" data-toggle="modal" data-target="#exampleModal"
+										style='cursor:pointer'>
 										<div class="">
 											<img src="<?php echo base_url();?>assets/images/Explore Our Services/car wash.png"
 												alt="">
@@ -708,8 +709,8 @@
 							</div>
 							<div class="col-4 col-md-2 colnone">
 								<div class="element element-3">
-									<a class="main-product-content" data-toggle="modal"
-										data-target="#exampleModal" style='cursor:pointer'>
+									<a class="main-product-content" data-toggle="modal" data-target="#exampleModal"
+										style='cursor:pointer'>
 										<div class="">
 											<img src="<?php echo base_url();?>assets/images/Explore Our Services/interior painting.png"
 												alt="">
@@ -722,8 +723,8 @@
 							</div>
 							<div class="col-4 col-md-2 colnone">
 								<div class="element element-1">
-									<a class="main-product-content" data-toggle="modal"
-										data-target="#exampleModal" style='cursor:pointer'>
+									<a class="main-product-content" data-toggle="modal" data-target="#exampleModal"
+										style='cursor:pointer'>
 										<div class="">
 											<img src="<?php echo base_url();?>assets/images/Explore Our Services/electronics.png"
 												alt="">
@@ -736,8 +737,8 @@
 							</div>
 							<div class="col-4 col-md-2 colnone">
 								<div class="element element-2">
-									<a class="main-product-content" data-toggle="modal"
-										data-target="#exampleModal" style='cursor:pointer'>
+									<a class="main-product-content" data-toggle="modal" data-target="#exampleModal"
+										style='cursor:pointer'>
 										<div class="">
 											<img src="<?php echo base_url();?>assets/images/Explore Our Services/carpenter.png"
 												alt="">
@@ -751,8 +752,8 @@
 
 							<div class="col-4 col-md-2 colnone">
 								<div class="element element-3">
-									<a class="main-product-content" data-toggle="modal"
-										data-target="#exampleModal" style='cursor:pointer'>
+									<a class="main-product-content" data-toggle="modal" data-target="#exampleModal"
+										style='cursor:pointer'>
 										<div class="">
 											<img src="<?php echo base_url();?>assets/images/Explore Our Services/plumber.png"
 												alt="">
@@ -773,7 +774,7 @@
 
 
 	<!--Popular Categories-->
-	<div class="section  what-we-do" >
+	<div class="section  what-we-do">
 		<div class="container">
 			<div class="row service-slider-row">
 				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
@@ -784,7 +785,7 @@
 				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="popular-slider-section">
 						<div class="popular-service-slider">
-							
+
 							<div class="item">
 								<a href="<?php echo base_url('maintenance/Air Conditioner')?>">
 									<div class="popular-img">
@@ -1058,9 +1059,16 @@
 								<?php foreach($testimonial as $testarr){ ?>
 								<div>
 									<div class="customer-details">
-										<div class="customer-icon">
-											<i class="fa-solid fa-user"></i>
-										</div>
+										
+											<?php
+											if($testarr['file']){
+												echo '<div class="customer-icon" style="background:white"><img src="'.base_url($testarr['file']).'" style="width:50px;height:50px;border-radius:50%"></div>';
+											}
+											else{
+                                                echo'<div class="customer-icon"><i class="fa-solid fa-user"></i></div>';
+											}
+											?>
+
 										<div class="customer-title">
 											<h6><?= $testarr['name'] ?></h6>
 											<?php
@@ -1144,7 +1152,7 @@
 
 						<div class="col-lg-7 col-sm-12">
 							<div class="slider slider-single">
-							<?php foreach($testimonial as $testarr){ ?>
+								<?php foreach($testimonial as $testarr){ ?>
 								<div>
 									<div class="customer-testimonial">
 										<div class="customer-subject">
@@ -1328,7 +1336,7 @@
 								<img src="<?= base_url($client['client_logo']) ?>" alt="">
 							</div>
 						</div>
-<?php } ?>
+						<?php } ?>
 
 					</div>
 				</div>
@@ -1337,7 +1345,7 @@
 	</div>
 
 
-	
+
 	<!--End Testimonial Slider-->
 
 </div>

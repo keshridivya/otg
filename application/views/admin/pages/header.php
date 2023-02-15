@@ -19,8 +19,7 @@
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url();?>assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<style>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"><style>
     .add-btn{
         float: right;
     }
@@ -114,6 +113,7 @@
                         <a class="collapse-item" href="<?php echo base_url();?>admin/client">Clients</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/blog">Blog</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/testimonial">Testimonial</a>
+                        <a class="collapse-item" href="<?php echo base_url();?>admin/contact">Enquiry Detail</a>
                     </div>
                 </div>
             </li>

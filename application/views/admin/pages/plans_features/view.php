@@ -58,7 +58,7 @@
                                         <td><?php echo $plans_features['modified_on']; ?></td>                                   
                                         <td>
                                           <a href="<?php echo base_url('admin/plans_features/edit/'.$plans_features['cfeature_id']); ?>"><i class="fas fa-pencil-alt" aria-hidden="true"></i></a> 
-                                          <a href="<?php echo base_url('admin/plans_features/delete/'.$plans_features['cfeature_id']); ?>"><i class="fas fa-trash" aria-hidden="true"></i></a>  
+                                          <a href="<?php echo base_url('admin/plans_features/delete/'.$plans_features['cfeature_id']); ?>" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash" aria-hidden="true"></i></a>  
         
                                         </td>
                                     </tr>

@@ -1090,6 +1090,7 @@ class Admin extends CI_Controller {
 						$data=array(
 							'name'=>$this->input->post('blog'),
 							'writtenby'=>$this->input->post('writtenby'),
+							'insert_date'=>$this->input->podt('blogdate'),
 							'description'=>$this->input->post('editordata'),
 							'status'=>$this->input->post('cp_status'),
 							'created_date'=>date('y-m-d h:i:s'),
@@ -1127,6 +1128,7 @@ class Admin extends CI_Controller {
 					$data=array(
 						'name'=>$this->input->post('blog'),
 							'writtenby'=>$this->input->post('writtenby'),
+							'insert_date'=>$this->input->podt('blogdate'),
 							'description'=>$this->input->post('editordata'),
 							'status'=>$this->input->post('cp_status'),
 						'modified_date'=>date('y-m-d h:i:s'),
@@ -1149,6 +1151,27 @@ class Admin extends CI_Controller {
 			redirect('admin/blog');
 			}
 			break;	
+		}
+	}
+
+	//contact in admin
+	public function contact($action,$id=false){
+		switch($action){
+			case 'view':
+				$contact_data=$this->db->get("contact-form")->result_array();
+				$page_data['page_title']="All Contact Query";
+				$page_data['contact_data']=$contact_data;
+				$page_data['page']="contact";
+				$this->load->view('admin/index',$page_data);
+				break;
+
+			case 'delete':
+				if($id){
+					$this->db->where('id',$id);
+				$this->db->delete('contact-form');
+				redirect('admin/contact');
+				}
+
 		}
 	}
 

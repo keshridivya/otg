@@ -183,6 +183,10 @@ $route['admin/product_benefit/add']='admin/product_benefit/add';
 $route['admin/product_benefit/edit/(:any)']='admin/product_benefit/edit/$1';
 $route['admin/product_benefit/delete/(:any)']='admin/product_benefit/delete/$1';
 
+//admin contact
+$route['admin/contact']='admin/contact/view';
+$route['admin/contact/delete/any(:any)']='admin/contact/delete/$1';
+
 
 //enginner login
 $route['engineer']='engineer/index';
