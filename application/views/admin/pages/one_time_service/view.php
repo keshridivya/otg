@@ -54,7 +54,7 @@
 						<td>
 							<a href="<?php echo base_url('admin/one_time_service/edit/'.$book['request_id']); ?>"><i
 									class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-							<a href="<?php echo base_url('admin/one_time_service/edit/'.$book['request_id']); ?>"
+							<a href="<?php echo base_url('admin/one_time_service/delete/'.$book['request_id']); ?>"
 								type="button" class="btn btn-primary"
 								onclick="return confirm('Are you sure you want to delete this item?');"><i
 									class="fas fa-trash" aria-hidden="true"></i></a>

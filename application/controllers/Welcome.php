@@ -617,4 +617,12 @@ public function terms(){
 	$page_data['page']="terms";
 	$this->load->view('index',$page_data);
 }
+
+public function tracker(){
+	$page_data['dropdown']=$this->menu->menu_all();
+	$page_data['page_title']="Track Service Request";
+	$page_data['page']="tracker";
+	$this->load->view('index',$page_data);
+}
+
 }

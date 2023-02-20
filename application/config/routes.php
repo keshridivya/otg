@@ -72,6 +72,7 @@ $route['addtocart/(:any)']='welcome/addtocart/$1';
 $route['removeItem/(:any)']='welcome/removeItem/$1';
 $route['privacy-policy']='welcome/privacy';
 $route['terms']='welcome/terms';
+$route['tracker']='welcome/tracker';
 
 // $route['update_cart']='welcome/update_cart';
 
@@ -193,6 +194,9 @@ $route['engineer']='engineer/index';
 
 //engineer myaccount
 $route['engineer/myaccount']='engineer/myaccount';
+
+//engineer ongoing
+$route['engineer/ongoing']='engineer/ongoing/view';
 
 
 

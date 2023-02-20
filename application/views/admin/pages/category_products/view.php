@@ -56,7 +56,7 @@
 						<td>
 							<a href="<?php echo base_url('admin/category_products/edit/'.$cpro['cproduct_id']); ?>"><i
 									class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-							<a href="<?php echo base_url('admin/category_products/edit/'.$cpro['cproduct_id']); ?>" type="button" class="btn btn-primary"
+							<a href="<?php echo base_url('admin/category_products/delete/'.$cpro['cproduct_id']); ?>" type="button" class="btn btn-primary"
 								onclick="return confirm('Are you sure you want to delete this item?');"><i
 									class="fas fa-trash" aria-hidden="true"></i></a>
 						</td>

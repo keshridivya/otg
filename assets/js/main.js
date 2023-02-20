@@ -1166,28 +1166,28 @@ function fun_state(){
     }
 }
 
-$('.signupbtn').prop('disabled',true);
-$(document).on('submit','.signup',function(){
-    let username = $("#username").val();
-    let mobile = $("#mobile").val();
-    let email_id = $("#email_id").val();
-    let password = $("#password").val();
-    let city = $("#city").val();
-    let state = $("#state").val();
-    let address = $("#address").val();
-    let pincode = $("#pincode").val();
+// $('.signupbtn').prop('disabled',true);
+// $(document).on('submit','.signup',function(){
+//     let username = $("#username").val();
+//     let mobile = $("#mobile").val();
+//     let email_id = $("#email_id").val();
+//     let password = $("#password").val();
+//     let city = $("#city").val();
+//     let state = $("#state").val();
+//     let address = $("#address").val();
+//     let pincode = $("#pincode").val();
 
-    if(username==''|| mobile==''|| email_id==''|| password=='' || city=='' || state=='' ||address=='' || pincode=='' ) {
-        $("#errorsubmit").show().html("Please Fill All the Field").css("color","red").focus();
-        return false;
-    }
-    else{
-        $("#errorsubmit").hide()
-        $('.signupbtn').prop('disabled',false);
-        return true;
+//     if(username==''|| mobile==''|| email_id==''|| password=='' || city=='' || state=='' ||address=='' || pincode=='' ) {
+//         $("#errorsubmit").show().html("Please Fill All the Field").css("color","red").focus();
+//         return false;
+//     }
+//     else{
+//         $("#errorsubmit").hide()
+//         $('.signupbtn').prop('disabled',false);
+//         return true;
 
-    }
-});
+//     }
+// });
 
 // Document is ready
 $(document).ready(function () {

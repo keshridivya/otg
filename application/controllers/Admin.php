@@ -7,10 +7,6 @@ class Admin extends CI_Controller {
 	 {
 		parent::__construct();
 		$this->load->model('Menu','menu',true);
-		// if(!$this->session->userdata('a_id')){
-		// 	redirect(base_url('admin')); 
-		// }
-
 	 }
 	public function index()
 	{
@@ -266,25 +262,22 @@ class Admin extends CI_Controller {
 				
 				if($this->input->post()){
 					$data=array(
-						"cust_name"=>$this->input->post('c_name'),
-						"service_plan"=>$this->input->post('s_plan'),
-						"service_device"=>$this->input->post('s_device'),
-						"eng_name"=>$this->input->post('e_name'),
-						"status"=>$this->input->post('b_status'),
-						"total_amount"=>$this->input->post('t_amnt'),
+						"description"=>$this->input->post('sc_desc'),
+						"eng_name"=>$this->input->post('engineer_name'),
+						"status"=>$this->input->post('sc_status'),
 						"modified_on"=>date('Y-m-d h:i:s')
-
 					);
 					$this->db->where('request_id',$id);
 					$this->db->update('bookings',$data);
 				}
 				$bookings_data=$this->db->get_where('bookings',array('request_id'=>$id))->result_array();
+				$engineer_data=$this->db->get('engineer')->result_array();
 			
-				$page_data['book_data']=$bookings_data;
-			
+				$page_data['bookings_data']=$bookings_data;
+				$page_data['engineer_data']=$engineer_data;
 				$page_data['page_title']="Edit bookings";
 				$page_data['page']="one_time_service/form";
-				$page_data['action']="edit";
+				$page_data['action']="Assign Engineer";
 
 				$this->load->view('admin/index',$page_data);
 

@@ -40,7 +40,7 @@
 							<td>
 								<a href="<?php echo base_url('admin/testimonial/edit/'.$testarr['id']); ?>"><i
 										class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-								<a href="<?php echo base_url('admin/testimonial/edit/'.$testarr['id']); ?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash" aria-hidden="true"></i></a>
+								<a href="<?php echo base_url('admin/testimonial/delete/'.$testarr['id']); ?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash" aria-hidden="true"></i></a>
 							</td>
 						</tr>
 						<?php $count++; }

@@ -156,7 +156,7 @@
 					<!-- <li class="lvl1"><a href="#">Contact Us <i class="anm anm-angle-down-l"></i></a>
                             
                               </li> -->
-					<li class="lvl1"><a href="#">Track Service<i class="anm anm-angle-down-l"></i></a>
+					<li class="lvl1"><a href="<?= base_url('tracker') ?>">Track Service<i class="anm anm-angle-down-l"></i></a>
 
 					</li>
 					<li><a href="<?php echo base_url();?>blog" class="site-nav">Blog</a></li>

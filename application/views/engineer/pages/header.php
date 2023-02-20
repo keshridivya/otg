@@ -18,6 +18,7 @@
 
     <!-- Custom styles for this template-->
     <link href="<?php echo base_url();?>assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/admin/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <style>
@@ -62,7 +63,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url();?>admin/customer">
+                <a class="nav-link" href="<?php echo base_url();?>engineer/ongoing">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Ongoing Assignment</span></a>
             </li>
