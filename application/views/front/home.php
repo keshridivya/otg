@@ -5,58 +5,76 @@
 	<!--Home slider-->
 	<div id="demo" class="carousel slide" data-ride="carousel">
 
-		<!-- Indicators -->
-		<ul class="carousel-indicators">
-			<li data-target="#demo" data-slide-to="0" class="active"></li>
-			<li data-target="#demo" data-slide-to="1"></li>
-			<li data-target="#demo" data-slide-to="2"></li>
-		</ul>
+    <!-- Indicators -->
+    <ul class="carousel-indicators">
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        <li data-target="#demo" data-slide-to="1"></li>
+        <li data-target="#demo" data-slide-to="2"></li>
+    </ul>
 
-		<!-- The slideshow -->
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<div class="ban-overlay"></div>
-				<div class="banner-img">
-					<img src="assets/images/banner/image-1.jpg" alt="">
-				</div>
-				<div class="banner-content">
-					<h2>Guaranteed top quality maintenance & repairs</h2>
-					<div class="banner-btn learn_more-banner">
-						<a href="<?php echo base_url();?>services">Learn More</a>
-					</div>
-				</div>
+    <!-- The slideshow -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <div class="ban-overlay"></div>
+            <div class="banner-img">
+                <?php
+            if($banner[0]['banner1']){
+                echo '<img src="'.base_url($banner[0]['banner1']).'" alt="banner1">';
+            }else{
+            ?>
+                <img src="assets/images/banner/image-1.jpg" alt="">
+                <?php } ?>
+            </div>
+            <!-- <div class="banner-content">
+            <h2>Guaranteed top quality maintenance & repairs</h2>
+            <div class="banner-btn learn_more-banner">
+                <a href="<?php echo base_url();?>services">Learn More</a>
+            </div>
+        </div> -->
 
-			</div>
-			<div class="carousel-item">
-				<div class="ban-overlay"></div>
-				<div class="banner-img">
-					<img src="assets/images/banner/image-2.jpg" alt="">
-				</div>
-				<div class="banner-content">
-					<h2>Guaranteed top quality maintenance & repairs</h2>
-					<div class="banner-btn learn_more-banner">
-						<a href="<?php echo base_url();?>services">Learn More</a>
-					</div>
-				</div>
-			</div>
-			<div class="carousel-item">
-				<div class="ban-overlay"></div>
-				<div class="banner-img">
-					<img src="assets/images/banner/image-3.jpg" alt="">
-				</div>
-				<div class="banner-content">
-					<h2>Guaranteed top quality maintenance & repairs</h2>
-					<div class="banner-btn learn_more-banner">
-						<a href="<?php echo base_url();?>services">Learn More</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+        </div>
+        <div class="carousel-item">
+            <div class="ban-overlay"></div>
+            <div class="banner-img">
+                <?php
+            if($banner[0]['banner2']){
+                echo '<img src="'.base_url($banner[0]['banner2']).'" alt="banner2">';
+            }else{
+            ?>
+                <img src="assets/images/banner/image-2.jpg" alt="">
+                <?php } ?>
+            </div>
+            <!-- <div class="banner-content">
+            <h2>Guaranteed top quality maintenance & repairs</h2>
+            <div class="banner-btn learn_more-banner">
+                <a href="<?php echo base_url();?>services">Learn More</a>
+            </div>
+        </div> -->
+        </div>
+        <div class="carousel-item">
+            <div class="ban-overlay"></div>
+            <div class="banner-img">
+                <?php
+            if($banner[0]['banner3']){
+                echo '<img src="'.base_url($banner[0]['banner3']).'" alt="banner3">';
+            }else{
+            ?>
+                <img src="assets/images/banner/image-3.jpg" alt="">
+                <?php } ?>
+            </div>
+            <!-- <div class="banner-content">
+            <h2>Guaranteed top quality maintenance & repairs</h2>
+            <div class="banner-btn learn_more-banner">
+                <a href="<?php echo base_url();?>services">Learn More</a>
+            </div>
+        </div> -->
+        </div>
+    </div>
+</div>
 	<div class='mainsearchbardiv'>
 		<div class="searchbardiv row justify-content-center">
 			<div class="col-12 ">
-				<h2>Expert Care For Your Devices</h2>
+				<h2>Guaranteed top quality maintenance & repairs</h2>
 			</div>
 			<div class="col-12 col-md-6">
 				<form id="" class="search-form text-center">
@@ -301,7 +319,7 @@
 					foreach($dropdown as $drop){
 						if($drop['cproduct_name']=='Geyser'){
 					 ?>
-							<div class="col-4 col-md-2">
+							<div class="col-4 col-md-2 mobile_none">
 								<div class="element element-3">
 									<a class="main-product-content" href="<?php echo base_url('maintenance/Geyser')?>">
 										<div class="main-product-icon">

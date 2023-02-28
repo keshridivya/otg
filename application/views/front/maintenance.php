@@ -103,6 +103,7 @@
 															</div>
 															<p><?= $plandata['cplan_desc'] ?></p>
 														</div>
+														<div class='float_right_justify'>
 														<div class="plan-price">
 															<h2><i class="fa fa-inr"
 																	aria-hidden="true"></i><?php echo $plandata['cplan_price'];?>
@@ -118,6 +119,7 @@
 																aria-expanded="true"
 																aria-controls="<?php echo "faq".$plandata['cplan_id'];?>"><span
 																	class='accordionspan'>Plan Benefits</span></a>
+														</div>
 														</div>
 													</div>
 
@@ -218,6 +220,7 @@
 															</div>
 															<p><?= $plandata['cplan_desc'] ?></p>
 														</div>
+														<div class='float_right_justify'>
 														<div class="plan-price">
 															<h2><i class="fa fa-inr"
 																	aria-hidden="true"></i><?php echo $plandata['cplan_price'];?>
@@ -233,6 +236,7 @@
 																aria-expanded="true"
 																aria-controls="<?php echo "faq".$plandata['cplan_id'];?>"><span
 																	class='accordionspan'>Plan Benefits</span></a>
+														</div>
 														</div>
 													</div>
 

@@ -268,7 +268,12 @@ class Admin extends CI_Controller {
 						"modified_on"=>date('Y-m-d h:i:s')
 					);
 					$this->db->where('request_id',$id);
-					$this->db->update('bookings',$data);
+					if($this->db->update('bookings',$data)){
+						$page_data['message']='Engineer Assign Successfully';
+					}
+					else{
+						$page_data['message']='Please try again';
+					}
 				}
 				$bookings_data=$this->db->get_where('bookings',array('request_id'=>$id))->result_array();
 				$engineer_data=$this->db->get('engineer')->result_array();
@@ -1147,6 +1152,61 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	//offer banner
+	public function offer($action,$id=false){
+		switch($action){
+			case 'view':
+				$banner_data=$this->db->get("banner")->result_array();
+				$page_data['page_title']="Offer Banner";
+				$page_data['banner']=$banner_data;
+				$page_data['page']="offer_banner/view";
+				$this->load->view('admin/index',$page_data);
+				break;
+
+			case 'edit';
+				if(@$id){
+					$client_data=$this->db->get_where("banner",array('id'=>$id))->result_array();
+					$page_data['banner']=$client_data;
+				}
+				$uploadedblog_data='0';
+
+				if(@$this->input->post()){
+					if($_FILES['file1']['name']!= ""){
+						$absolute_path=base_url('uploads/banner/');
+						$uploadedbanner_data1=$this->uploadimgbanner1(array('upload_path'=>'./uploads/banner/','name'=>'file1'));
+					}
+					
+					if($_FILES['file2']['name']!= ""){
+						$absolute_path=base_url('uploads/banner/');
+						$uploadedbanner_data2=$this->uploadimgbanner2(array('upload_path'=>'./uploads/banner/','name'=>'file2'));
+					}
+
+					if($_FILES['file3']['name']!= ""){
+						$absolute_path=base_url('uploads/banner/');
+						$uploadedbanner_data3=$this->uploadimgbanner3(array('upload_path'=>'./uploads/banner/','name'=>'file3'));
+					}
+					
+
+				if(is_countable($uploadedbanner_data1) && count($uploadedbanner_data1)>=1){
+					$data['banner1']='uploads/banner/'.$uploadedbanner_data1['file_name'];
+				}
+				if(is_countable($uploadedbanner_data2) && count($uploadedbanner_data2)>=1){
+					$data['banner2']='uploads/banner/'.$uploadedbanner_data2['file_name'];
+				}
+				if(is_countable($uploadedbanner_data3) && count($uploadedbanner_data3)>=1){
+					$data['banner3']='uploads/banner/'.$uploadedbanner_data3['file_name'];
+				}
+				$this->db->where('id',$id);
+				$this->db->update('banner',$data);
+			}
+			$page_data['page_title']='Edit Banner';
+			$page_data['page']='offer_banner/form';
+			$this->load->view('admin/index',$page_data);
+			break;
+		
+		}
+	}
+
 	//contact in admin
 	public function contact($action,$id=false){
 		switch($action){
@@ -1443,6 +1503,69 @@ class Admin extends CI_Controller {
 			}
 
 			public function uploadimg4($data)
+			{
+				// print_r($data);
+					$config['upload_path']          = $data['upload_path'];
+					$config['allowed_types']        = 'gif|jpg|png';
+					$config['max_size']             = 400;
+					$config['max_width']            = 1074;
+					$config['max_height']           = 768;
+	
+					$this->load->library('upload', $config);
+	
+					if ( ! $this->upload->do_upload($data['name']))
+					{
+						print_r($this->upload->display_errors());
+					}
+					else
+					{
+						return $this->upload->data();
+					}
+			}
+
+			public function uploadimgbanner1($data)
+			{
+				// print_r($data);
+					$config['upload_path']          = $data['upload_path'];
+					$config['allowed_types']        = 'gif|jpg|png';
+					$config['max_size']             = 400;
+					$config['max_width']            = 1074;
+					$config['max_height']           = 768;
+	
+					$this->load->library('upload', $config);
+	
+					if ( ! $this->upload->do_upload($data['name']))
+					{
+						print_r($this->upload->display_errors());
+					}
+					else
+					{
+						return $this->upload->data();
+					}
+			}
+
+			public function uploadimgbanner2($data)
+			{
+				// print_r($data);
+					$config['upload_path']          = $data['upload_path'];
+					$config['allowed_types']        = 'gif|jpg|png';
+					$config['max_size']             = 400;
+					$config['max_width']            = 1074;
+					$config['max_height']           = 768;
+	
+					$this->load->library('upload', $config);
+	
+					if ( ! $this->upload->do_upload($data['name']))
+					{
+						print_r($this->upload->display_errors());
+					}
+					else
+					{
+						return $this->upload->data();
+					}
+			}
+
+			public function uploadimgbanner3($data)
 			{
 				// print_r($data);
 					$config['upload_path']          = $data['upload_path'];

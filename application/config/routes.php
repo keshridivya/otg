@@ -188,6 +188,11 @@ $route['admin/product_benefit/delete/(:any)']='admin/product_benefit/delete/$1';
 $route['admin/contact']='admin/contact/view';
 $route['admin/contact/delete/any(:any)']='admin/contact/delete/$1';
 
+//admin offer banner
+$route['admin/offer']='admin/offer/view';
+$route['admin/offer/edit/(:any)']='admin/offer/edit/$1';
+
+
 
 //enginner login
 $route['engineer']='engineer/index';
@@ -197,7 +202,18 @@ $route['engineer/myaccount']='engineer/myaccount';
 
 //engineer ongoing
 $route['engineer/ongoing']='engineer/ongoing/view';
+$route['engineer/ongoing/edit/(:any)']='engineer/ongoing/edit/$1';
+$route['engineer/ongoing/add/(:any)']='engineer/ongoing/add/$1';
 
+//engineer all_assignment
+$route['engineer/reschedule']='engineer/reschedule/view';
+// $route['engineer/reschdule/edit/(:any)/(:any)']='engineer/reschedule/edit/$1/$2';
+// $route['engineer/reschdule/add/(:any)']='engineer/reschedule/add/$1';
+
+//engineer complete assignment
+$route['engineer/complete_assignment']='engineer/complete_assignment/view';
+
+$route['engineer/create']='engineer/create';
 
 
 

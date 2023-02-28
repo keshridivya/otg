@@ -26,7 +26,7 @@
 									<label for="sc_name">Product Name</label>
 									<input type="text" name="sc_device"
 										value="<?php echo $bookings_data[0]['service_device'];?>" id="sc_name"
-										class="form-control form-control-user" readonly>
+										class="form-control form-control-user" readonly required>
 								</div>
 								<div class="col-sm-6 mb-3 mb-sm-0 ">
 									<label for="sc_name">Service Plan</label>
@@ -37,7 +37,8 @@
 								<div class="col-sm-6 mb-3 mb-sm-0 mt-3">
 									<label for="cp_name">Engineer Name</label>
 
-									<select name="engineer_name" id="cp_name" class="form-control">
+									<select name="engineer_name" id="cp_name" class="form-control one_eng_name">
+										<option value="" disabled selected>Select Engineer</option>
 										<?php
                                        foreach($engineer_data as $engineer_data){
                                        ?>
@@ -51,7 +52,7 @@
 								</div>
 								<div class="col-sm-6 mt-3">
 									<label for="sc_status">Status</label>
-									<select class="form-control" name="sc_status" id="sc_status">
+									<select class="form-control" name="sc_status" id="sc_status" required>
 										<option value="new"
 											<?php echo ($bookings_data[0]['status']=='active') ? 'new': ''; ?>>New
 										</option>
@@ -63,15 +64,15 @@
 								</div>
 								<div class="col-sm-6 mt-3">
 									<label for="sc_desc">Description</label>
-									<textarea name="sc_desc" id="sc_desc" class="form-control"
-										rows="4"><?php echo $bookings_data[0]['description'];?></textarea>
+									<textarea name="sc_desc" id="sc_desc" class="form-control one_desc"
+										rows="4" required><?php echo $bookings_data[0]['description'];?></textarea>
 								</div>
 
 							</div>
 
-							<input type="submit" name="submit" class="btn btn-primary btn-user btn-block">
+							<input type="submit" name="submit" class="btn btn-primary btn-user btn-block one_time_service_submit">
 
-
+							<div class='error_message'></div>
 
 						</form>
 						<hr>

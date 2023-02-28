@@ -55,6 +55,7 @@
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url();?>assets/admin/js/demo/chart-area-demo.js"></script>
     <script src="<?php echo base_url();?>assets/admin/js/demo/chart-pie-demo.js"></script>
+    <script src="<?= base_url(); ?>assets/admin/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     <script src='<?= base_url('assets/admin/vendor/slider.js') ?>'></script>
     <script>

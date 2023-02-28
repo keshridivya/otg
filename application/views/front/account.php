@@ -126,8 +126,6 @@
                                 </div>
                                 <input type="submit" name="submit" value="edit" class="btn btn-primary submit-btn">
                                     
-                                
-                               
                             </form>
                         </div>
                         </div>

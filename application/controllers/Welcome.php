@@ -34,10 +34,12 @@ class Welcome extends CI_Controller {
 		$page_data['dropdown']=$this->menu->menu_all();
 		$testimonial=$this->db->get_where('testimonials',array('status'=>'active'))->result_array();
 		$client=$this->db->get_where('our_client',array('status'=>'active'))->result_array();
+		$banner=$this->db->get_where('banner',array('status'=>'active'))->result_array();
 		$page_data['page_title']="Home";
 		$page_data['page']="home";
 		$page_data['testimonial']=$testimonial;
 		$page_data['client']=$client;
+		$page_data['banner']=$banner;
 		$this->load->view('index',$page_data);
 	}
 	// public function head(){
@@ -50,6 +52,7 @@ class Welcome extends CI_Controller {
 		$page_data['page']="about";
 		$this->load->view('index',$page_data);
 	}
+
 	public function sign_up()
 	{
 		
@@ -70,8 +73,10 @@ class Welcome extends CI_Controller {
 				if(count($result)>0){
 					$cid=$result[0]['cust_id'];
 					$cemail=$result[0]['email_id'];
+					$cname=$result[0]['cust_name'];
 					$this->session->set_userdata('cid',$cid);
 					$this->session->set_userdata('cemail',$cemail);
+					$this->session->set_userdata('cname',$cname);
 				}else{
 					$page_data['message']="User not found";
 
@@ -82,27 +87,15 @@ class Welcome extends CI_Controller {
 			}
 			
 			if($this->session->userdata['cid']){
-				$session_cust=$this->session->userdata['cid'];
-				$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
-				$page_data['customers']=$customers_table;
-				$bookings_table=$this->db->get_where('bookings',array('cust_id'=>$session_cust))->result_array();
-				if($this->input->post('submit') == 'edit'){
-				
-					$data=array(
-						"cust_name"=>$this->input->post('customer_name'),
-						"contact"=>$this->input->post('customer_contact'),
-						"email_id"=>$this->input->post('customer_email'),
-						"city"=>$this->input->post('customer_city'),
-						"address"=>$this->input->post('customer_address'),
-						"pincode"=>$this->input->post('customer_pincode'),
-						"modified_on"=>date('Y-m-d h:i:s')
-					);
-					$this->db->where('cust_id',$session_cust);
-					$this->db->update('customer',$data);
-				}
+
+				$testimonial=$this->db->get_where('testimonials',array('status'=>'active'))->result_array();
+		$client=$this->db->get_where('our_client',array('status'=>'active'))->result_array();
+		$banner=$this->db->get_where('banner',array('status'=>'active'))->result_array();
 				$page_data['dropdown']=$this->menu->menu_all();
-				$page_data['bookings_table']=$bookings_table;
-				$page_data['page']="account";
+				$page_data['testimonial']=$testimonial;
+		$page_data['client']=$client;
+		$page_data['banner']=$banner;
+				$page_data['page']="home";
 				$this->load->view('index',$page_data);
 			}else{
 				$page_data['dropdown']=$this->menu->menu_all();
@@ -322,21 +315,42 @@ class Welcome extends CI_Controller {
 	public function account()
 	{
 		if($this->session->userdata('cid') || $this->session->userdata('custid')){
+			$session_cust=$this->session->userdata['cid'];
+				$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+				$page_data['customers']=$customers_table;
+				$bookings_table=$this->db->get_where('bookings',array('cust_id'=>$session_cust))->result_array();
+				if($this->input->post('submit') == 'edit'){
+				
+					$data=array(
+						"cust_name"=>$this->input->post('customer_name'),
+						"contact"=>$this->input->post('customer_contact'),
+						"email_id"=>$this->input->post('customer_email'),
+						"city"=>$this->input->post('customer_city'),
+						"address"=>$this->input->post('customer_address'),
+						"pincode"=>$this->input->post('customer_pincode'),
+						"modified_on"=>date('Y-m-d h:i:s')
+					);
+					$this->db->where('cust_id',$session_cust);
+					$this->db->update('customer',$data);
+				}
 			$page_data['dropdown']=$this->menu->menu_all();
 			$page_data['page_title']="My Account";
+							$page_data['bookings_table']=$bookings_table;
+
 			$page_data['page']="account";
 			$this->load->view('index',$page_data);
+			
 		}
 		//if user register while checking out
-		elseif($this->session->userdata('newid')){
-			$session_cust=$this->session->userdata('newid');
-			$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
-			$page_data['dropdown']=$this->menu->menu_all();
-			$page_data['customers']=$customers_table;
-			$page_data['page_title']="My Account";
-			$page_data['page']="account";
-			$this->load->view('index',$page_data);
-		}
+		// elseif($this->session->userdata('newid')){
+		// 	$session_cust=$this->session->userdata('newid');
+		// 	$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+		// 	$page_data['dropdown']=$this->menu->menu_all();
+		// 	$page_data['customers']=$customers_table;
+		// 	$page_data['page_title']="My Account";
+		// 	$page_data['page']="account";
+		// 	$this->load->view('index',$page_data);
+		// }
 		else{
 			$page_data['dropdown']=$this->menu->menu_all();
 			$page_data['page']="sign_up";

@@ -114,6 +114,7 @@
                         <a class="collapse-item" href="<?php echo base_url();?>admin/blog">Blog</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/testimonial">Testimonial</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/contact">Enquiry Detail</a>
+                        <a class="collapse-item" href="<?php echo base_url();?>admin/offer">Offer Banner</a>
                     </div>
                 </div>
             </li>

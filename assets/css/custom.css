@@ -858,7 +858,7 @@
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--var-brown);
-    text-align: center;
+    text-align: left;
 }
 
 .plan-desc {
@@ -1248,7 +1248,7 @@ a.collapsed::after {
 
 .plan-title {
     margin: 0;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
 }
 
 .plan-desc p {

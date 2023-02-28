@@ -51,6 +51,7 @@
 
     <!-- Page level plugins -->
     <script src="<?php echo base_url();?>assets/admin/vendor/chart.js/Chart.min.js"></script>
+    <script src="<?= base_url(); ?>assets/admin/js/admin_main.js"></script>
 
     <!-- Page level custom scripts -->
     <script src="<?php echo base_url();?>assets/admin/js/demo/chart-area-demo.js"></script>

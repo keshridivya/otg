@@ -111,8 +111,7 @@
 						</a>
 
 					</li>
-					<li class="lvl1 parent dropdown"><a >Services<i
-								class="anm anm-angle-down-l"></i></a>
+					<li class="lvl1 parent dropdown"><a>Services<i class="anm anm-angle-down-l"></i></a>
 						<ul class="dropdown">
 							<li><a href="" class="site-nav">Extended Warrenty</a></li>
 
@@ -137,17 +136,18 @@
 							</li>
 							<li><a href="" class="site-nav">Other Services<i class="anm anm-angle-right-l"></i></a>
 								<ul class="dropdown">
-									<li><a href="<?php echo base_url();?>services" class="site-nav">Home device services</a></li>
-									<li><a href=""  data-toggle="modal"
-										data-target="#exampleModal" class="site-nav">Cleaning & Pest control</a></li>
-									<li><a href=""  data-toggle="modal"
-										data-target="#exampleModal" class="site-nav">Plumber & electrician</a></li>
-									<li><a href=""  data-toggle="modal"
-										data-target="#exampleModal" class="site-nav">Carpenter</a></li>
-									<li><a href=""  data-toggle="modal"
-										data-target="#exampleModal" class="site-nav">Car wash</a></li>
-									<li><a href=""  data-toggle="modal"
-										data-target="#exampleModal" class="site-nav">Interior Painting</a></li>
+									<li><a href="<?php echo base_url();?>services" class="site-nav">Home device
+											services</a></li>
+									<li><a href="" data-toggle="modal" data-target="#exampleModal"
+											class="site-nav">Cleaning & Pest control</a></li>
+									<li><a href="" data-toggle="modal" data-target="#exampleModal"
+											class="site-nav">Plumber & electrician</a></li>
+									<li><a href="" data-toggle="modal" data-target="#exampleModal"
+											class="site-nav">Carpenter</a></li>
+									<li><a href="" data-toggle="modal" data-target="#exampleModal" class="site-nav">Car
+											wash</a></li>
+									<li><a href="" data-toggle="modal" data-target="#exampleModal"
+											class="site-nav">Interior Painting</a></li>
 
 								</ul>
 							</li>
@@ -156,15 +156,23 @@
 					<!-- <li class="lvl1"><a href="#">Contact Us <i class="anm anm-angle-down-l"></i></a>
                             
                               </li> -->
-					<li class="lvl1"><a href="<?= base_url('tracker') ?>">Track Service<i class="anm anm-angle-down-l"></i></a>
+					<li class="lvl1"><a href="<?= base_url('tracker') ?>">Track Service<i
+								class="anm anm-angle-down-l"></i></a>
 
 					</li>
 					<li><a href="<?php echo base_url();?>blog" class="site-nav">Blog</a></li>
 
 					<!-- <li><a href="" class="site-nav">Blog</a></li>
         <li><a href="" class="site-nav">Contact Us</a></li> -->
+					<?php
+					if(!@$this->session->userdata['cid']){
+					?>
 					<li class="lvl1 sign-in"><a href="<?php echo base_url();?>sign-up"><b>Sign In</b> <i
 								class="anm anm-angle-down-l"></i></a></li>
+					<?php }else{ ?>
+						<li class="lvl1 sign-in"><a href="<?php echo base_url();?>account"><b><?php echo "Hello"." ".$this->session->userdata['cname']?></b> <i
+								class="anm anm-angle-down-l"></i></a></li>
+						<?php } ?>
 					</ul>
 					</nav>
 					<!--End Desktop Menu-->
@@ -296,11 +304,14 @@
 			</li>
 			<li><a href="" class="site-nav">My Account</a></li>
 			<li><a href="<?php echo base_url();?>blog" class="site-nav">Blog</a></li>
-			<li><a href="" class="site-nav">Contact Us</a></li>
-
+			<li><a href="<?php echo base_url();?>contact" class="site-nav">Contact Us</a></li>
+			<?php
+if(!$this->session->userdata['cid']){
+?>
 			<li class="lvl1 signinbtn"><a href="<?php echo base_url();?>sign-up"> <i class='fas fa-user-circle'></i>
 					<b>Sign In</b></a>
 			</li>
+			<?php } ?>
 		</ul>
 	</div>
 	<!--End Mobile Menu-->

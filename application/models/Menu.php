@@ -88,7 +88,22 @@ class Menu extends CI_model {
         $this->db->select('*,bookings.created_on as created_date,bookings.total_amount as amt,customer.created_on as date');
         $this->db->from('customer');
         $this->db->join('bookings','bookings.cust_id=customer.cust_id ');
-        $this->db->where('bookings.eng_name ',$id);
+        $this->db->where(array('bookings.eng_name '=>$id,'bookings.status'=>'new'));
+        $query = $this->db->get();
+        // print_r($this->db->last_query());
+        if($query->num_rows()!=0){
+            return $query->result_array();
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function ongoing_assign_client($id,$eid){
+        $this->db->select('*,bookings.created_on as created_date,engineer.eng_name as e_name');
+        $this->db->from('engineer');
+        $this->db->join('bookings','bookings.eng_name=engineer.eng_id ');
+        $this->db->where(array('bookings.eng_name '=>$eid,'bookings.request_id'=>$id));
         $query = $this->db->get();
         if($query->num_rows()!=0){
             return $query->result_array();
@@ -97,5 +112,57 @@ class Menu extends CI_model {
             return false;
         }
     }
+
+    public function ongoing_assign_client_detail($id,$eid){
+        $this->db->select('*,bookings.created_on as created_date,engineer.eng_name as e_name');
+        $this->db->from('engineer');
+        $this->db->join('bookings','bookings.eng_name=engineer.eng_id ');
+        $this->db->join('customer','bookings.cust_id=customer.cust_id ');
+        $this->db->where(array('bookings.eng_name '=>$eid,'bookings.request_id'=>$id));
+        $query = $this->db->get();
+        if($query->num_rows()!=0){
+            return $query->result_array();
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function check_upload($id,$eid){
+        $this->db->select('*,bookings.created_on as created_date');
+        $this->db->from('engineer_client');
+        $this->db->join('bookings','bookings.request_id_value=engineer_client.booking_request_id ');
+        $this->db->where(array('bookings.eng_name '=>$eid,'bookings.request_id'=>$id));
+        $query = $this->db->get();
+                // print_r($this->db->last_query());
+
+        if($query->num_rows()!=0){
+            return $query->result_array();
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function reschedule($id){
+        $this->db->select('*,bookings.created_on as created_date,bookings.total_amount as amt');
+        $this->db->from('booking_items');
+        $this->db->join('bookings','bookings.request_id_value=booking_items.request_id ');
+        $this->db->join('customer','bookings.cust_id=customer.cust_id ');
+        $this->db->where(array('bookings.eng_name '=>$id,'bookings.status'=>'pending','booking_items.button'=>'Reschedule'));
+        $query = $this->db->get();
+        if($query->num_rows()!=0){
+            return $query->result_array();
+        }
+        else{
+            return false;
+        }
+    }
+
+    public function createData($data) {
+        $query = $this->db->insert('booking_items', $data);
+        return $query;
+    }
+    
 }
 ?>

@@ -41,7 +41,7 @@
                                    foreach($bookings_data as $book){
                                     ?>
 					<tr>
-						<td><?php echo $book['new_request_id']; ?></td>
+						<td><?php echo $book['request_id_value']; ?></td>
 						<td><?php echo $book['cust_id']; ?></td>
 						<td><?php echo $book['cust_name']; ?></td>
 						<td><?php echo $book['service_plan']; ?></td>
@@ -54,10 +54,11 @@
 						<td>
 							<a href="<?php echo base_url('admin/one_time_service/edit/'.$book['request_id']); ?>"><i
 									class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-							<a href="<?php echo base_url('admin/one_time_service/delete/'.$book['request_id']); ?>"
+
+							<!-- <a href="<?php echo base_url('admin/one_time_service/delete/'.$book['request_id']); ?>"
 								type="button" class="btn btn-primary"
 								onclick="return confirm('Are you sure you want to delete this item?');"><i
-									class="fas fa-trash" aria-hidden="true"></i></a>
+									class="fas fa-trash" aria-hidden="true"></i></a> -->
 						</td>
 					</tr>
 					<?php

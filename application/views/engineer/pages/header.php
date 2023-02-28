@@ -67,34 +67,27 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Ongoing Assignment</span></a>
             </li>
-             <!-- Divider -->
-             <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url();?>admin/bookings">
+            <hr class="sidebar-divider">
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url();?>engineer/complete_assignment">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Total Bookings</span></a>
+                    <span>Complete Assignment</span></a>
             </li>
+             <hr class="sidebar-divider"> -->
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url();?>admin/amc">
+                <a class="nav-link" href="<?php echo base_url();?>engineer/reschedule">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>AMC's</span></a>
+                    <span>Reschedule Assignment</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url();?>admin/one_time_service">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>One time services</span></a>
-            </li>
-             <!-- Divider -->
-             <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url();?>admin/engineer">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Engineers</span></a>
-            </li>
+           
+
             <!-- Heading -->
             <hr class="sidebar-divider">
           
-
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('engineer/myaccount') ?>" >
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    My Account
+                                </a></li>
             <!-- Divider -->
             <hr class="sidebar-divider">          
 
@@ -133,10 +126,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown1">
-                                <a class="dropdown-item" href="<?= base_url('engineer/myaccount') ?>" >
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    My Account
-                                </a>
+                                
                                 <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout

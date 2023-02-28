@@ -171,7 +171,7 @@
 						</ul>
 					</div>
 					<div class="col-12 col-sm-12 col-md-3 col-lg-2  contact-box">
-						<h4 class="h4">Contact Us</h4>
+						<h4 class="h4"><a href='<?php echo base_url();?>contact'>Contact Us</a></h4>
 						<ul class="addressFooter">
 							<li><i class="fa-solid fa-location-dot"></i>
 								<p>2<sup>nd</sup> Floor, Haware Fantasia Business Park, Vashi, Navi Mumbai 400703</p>
@@ -487,9 +487,9 @@
 
 	$(".popular-service-slider").slick({
 		slidesToShow: 3,
-		infinite: false,
+		infinite: true,
 		slidesToScroll: 1,
-		autoplay: false,
+		autoplay: true,
 		arrows: true,
 		nextArrow: '<span class="slick-next"><i class="fa-solid fa-angle-right"></i></span>',
 		prevArrow: '<span class="slick-prev"><i class="fa-solid fa-angle-left"></i></span>',

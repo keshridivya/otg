@@ -30,16 +30,16 @@
     						style="margin-left:14.14pt;text-align:justify;line-height:115%;padding-left:14.21pt;font-size:11pt">
     						<span>These terms and conditions (“</span><span style="font-weight:700">Terms</span><span>”)
     							govern the use
-    							of se1rvices made available on or through</span><a href="https://www.otgcares.com"
+    							of services made available on or through</span><a href="https://www.otgcares.com"
     							style="text-decoration:none"><span
     								class="Hyperlink">&nbsp;https://www.otgcares.com&nbsp;</span></a><span
-    							style="font-style:italic"></span><span>and/or the otgcares mobile app (collectively, the
+    							style="font-style:italic"></span><span>and/or the OTGcares mobile app (collectively, the
     							“</span><span style="font-weight:700">Platform</span><span>”, and together with the
     							services made
     							available on or through the Platform, the “</span><span
     							style="font-weight:700">Services</span><span>”).
     							These Terms also include our privacy policy, available at
-    							https://www.otgcares.com/privacy-policy
+    							https://www.otgcares.com/privacy-policy 
     							(“</span><span style="font-weight:700">Privacy Policy</span><span>”), and any
     							guidelines, additional, or
     							supplemental terms, policies, and disclaimers made available or issued by us from time
@@ -94,7 +94,7 @@
     				<ol type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:13.51pt;text-align:justify;line-height:115%;padding-left:14.84pt;font-size:11pt;font-weight:700">
-    						<span>1. SERVICES</span></li>
+    						<span> SERVICES</span></li>
     				</ol>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
@@ -105,7 +105,7 @@
     						Services include the provision of the Platform that enables you to arrange and schedule
     						different home-based
     						services with independent third-party service providers of those services (“</span><span
-    						style="font-weight:700">Service Professionals</span><span>”). As a part of the Services, otg
+    						style="font-weight:700">Service Professionals</span><span>”). As a part of the Services, OTG
     						facilitates the
     						transfer of payments to Service Professionals for the services they render to you and
     						collects payments on
@@ -121,16 +121,16 @@
     						style="font-weight:700">Pro
     						Services</span><span>”. The term “</span><span
     						style="font-weight:700">Services</span><span>”</span><span
-    						style="text-decoration:underline">does not </span><span>include the Pro Services. otg does
+    						style="text-decoration:underline">does not </span><span>include the Pro Services. OTG does
     						not provide the Pro
     						Services and is not responsible their provision. Service Professionals are solely liable and
     						responsible for
-    						the Pro Services that they offer or otherwise provide through the Platform. otg and its
+    						the Pro Services that they offer or otherwise provide through the Platform. OTG and its
     						affiliates</span><span style="text-decoration:underline">do not</span><span>employ Service
     						Professionals,
-    						nor are Service Professionals agents, contractors, or partners of otg or its affiliates.
+    						nor are Service Professionals agents, contractors, or partners of OTG or its affiliates.
     						Service
-    						Professionals do not have the ability to bind or represent otg.</span></p>
+    						Professionals do not have the ability to bind or represent OTG.</span></p>
     				<p class="ListParagraph"
     					style="margin-left:56.7pt;text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
@@ -144,7 +144,7 @@
     						only within India.
     						You agree that in the event you avail the Services or Pro Services from a legal jurisdiction
     						other than the
-    						territory of India, you will be deemed to have accepted the otg terms and conditions
+    						territory of India, you will be deemed to have accepted the OTG terms and conditions
     						applicable to that
     						jurisdiction.</span></p>
     				<p class="ListParagraph"
@@ -154,7 +154,7 @@
     					style="margin-left:56.7pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerLetter;-aw-list-number-values:'4';-aw-list-padding-sml:15.9pt">
     					<span style="-aw-import:ignore"><span><span>(d)</span></span><span
     							style="width:15.9pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>The
-    						Services are made available under various brands owned by or otherwise licensed to otg and
+    						Services are made available under various brands owned by or otherwise licensed to OTG and
     						its
     						affiliates.</span></p>
     				<p class="ListParagraph" style="text-align:justify;line-height:115%;font-size:11pt"><span
@@ -163,16 +163,16 @@
     					style="margin-left:56.7pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerLetter;-aw-list-number-values:'5';-aw-list-padding-sml:16.21pt">
     					<span style="-aw-import:ignore"><span><span>(e)</span></span><span
     							style="width:16.21pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>A
-    						key part of the Services is otg’s ability to send you text messages, electronic mails, or
+    						key part of the Services is OTG’s ability to send you text messages, electronic mails, or
     						WhatsApp messages,
     						including in connection with your bookings, your utilisation of the Services, or as a part
     						of its
     						promotional and marketing strategies. While you may opt out of receiving these text messages
     						by contacting
-    						otg at</span><a href="mailto:support@otgcares.com" style="text-decoration:none"><span
+    						OTG at</span><a href="mailto:support@otgcares.com" style="text-decoration:none"><span
     							class="Hyperlink">&nbsp;support@otgcares.com&nbsp;</span></a><span>or through the
     						in-Platform
-    						settings , you agree and acknowledge that this may impact otg’s ability to provide the
+    						settings , you agree and acknowledge that this may impact OTG’s ability to provide the
     						Services (or a part of
     						the Services) to you.</span></p>
     				<p class="ListParagraph" style="text-align:justify;line-height:115%;font-size:11pt"><span
@@ -192,7 +192,7 @@
     					style="margin-left:56.7pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerLetter;-aw-list-number-values:'7';-aw-list-padding-sml:16.5pt">
     					<span style="-aw-import:ignore"><span><span>(g)</span></span><span
     							style="width:16.5pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span
-    						style="text-decoration:underline">Otg Credits</span><span>:</span></p>
+    						style="text-decoration:underline">OTG Credits</span><span>:</span></p>
     				<p class="ListParagraph" style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
     				<p class="ListParagraph"
@@ -203,7 +203,7 @@
     						features or
     						benefits related to the Services, and/or Pro Services, subject to any additional terms that
     						may apply on a
-    						promotional code (“</span><span style="font-weight:700">Otg Credits</span><span>”).</span>
+    						promotional code (“</span><span style="font-weight:700">OTG Credits</span><span>”).</span>
     				</p>
     				<p class="ListParagraph"
     					style="margin-left:85.05pt;text-align:justify;line-height:115%;font-size:11pt"><span
@@ -212,22 +212,22 @@
     					style="margin-left:85.05pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerRoman;-aw-list-number-values:'2';-aw-list-padding-sml:16.63pt">
     					<span style="-aw-import:ignore"><span><span>(ii)</span></span><span
     							style="width:16.63pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>You
-    						agree that (i) you shall use otg Credits in a lawful manner, and only for the purposes
-    						specified by such otg
-    						Credits, (ii) you shall not duplicate, sell, or transfer the otg Credits in any manner
+    						agree that (i) you shall use OTG Credits in a lawful manner, and only for the purposes
+    						specified by such OTG
+    						Credits, (ii) you shall not duplicate, sell, or transfer the OTG Credits in any manner
     						(including by posting
-    						such codes on a public forum) unless you have otg’s express prior consent to do so, (iii)
-    						otg Credits may be
-    						disabled by otg at any time for any reason without any liability to you, (iv) otg Credits
+    						such codes on a public forum) unless you have OTG’s express prior consent to do so, (iii)
+    						OTG Credits may be
+    						disabled by OTG at any time for any reason without any liability to you, (iv) OTG Credits
     						are not valid for
-    						cash, and (v) otg Credits may expire prior to your use.</span></p>
+    						cash, and (v) OTG Credits may expire prior to your use.</span></p>
     				<p class="ListParagraph" style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
     				<p class="ListParagraph"
     					style="margin-left:85.05pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerRoman;-aw-list-number-values:'3';-aw-list-padding-sml:14.11pt">
     					<span style="-aw-import:ignore"><span><span>(iii)</span></span><span
-    							style="width:14.11pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>otg
-    						may, at its sole discretion, provide only certain users with otg Credits that may result in
+    							style="width:14.11pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>OTG
+    						may, at its sole discretion, provide only certain users with OTG Credits that may result in
     						different amounts
     						charged for the same or similar services obtained by other users.</span></p>
     				<p class="ListParagraph" style="text-align:justify;line-height:115%;font-size:11pt"><span
@@ -236,11 +236,11 @@
     					style="margin-left:85.05pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerRoman;-aw-list-number-values:'4';-aw-list-padding-sml:14.19pt">
     					<span style="-aw-import:ignore"><span><span>(iv)</span></span><span
     							style="width:14.19pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>OTG
-    						reserves the right to withhold or dedotgt credits or other features or benefits obtained
+    						reserves the right to with hold or deduct credits or other features or benefits obtained
     						through the use of
-    						otg Credits, by you or any other user, if otg reasonably determines or believes that the use
+    						OTG Credits, by you or any other user, if OTG reasonably determines or believes that the use
     						or redemption of
-    						the otg Credits was in error, fraudulent, illegal, or in violation of the applicable otg
+    						the OTG Credits was in error, fraudulent, illegal, or in violation of the applicable OTG
     						Credit terms or these
     						Terms.</span></p>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
@@ -248,7 +248,7 @@
     				<ol start="2" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:13.51pt;text-align:justify;line-height:115%;padding-left:14.84pt;font-size:11pt;font-weight:700">
-    						<span>2. ACCOUNT CREATION</span></li>
+    						<span> ACCOUNT CREATION</span></li>
     				</ol>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="font-weight:700;-aw-import:ignore">&nbsp;</span></p>
@@ -314,7 +314,7 @@
     				<ol start="3" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:13.51pt;text-align:justify;line-height:115%;padding-left:14.84pt;font-size:11pt;font-weight:700">
-    						<span>3. USER CONTENT</span></li>
+    						<span> USER CONTENT</span></li>
     				</ol>
     				<p class="ListParagraph"
     					style="margin-left:28.35pt;text-align:justify;line-height:115%;font-size:11pt"><span
@@ -382,7 +382,7 @@
     					style="margin-left:56.7pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerLetter;-aw-list-number-values:'5';-aw-list-padding-sml:16.21pt">
     					<span style="-aw-import:ignore"><span><span>(e)</span></span><span
     							style="width:16.21pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>You
-    						agree and acknowledge that otg may, without notice to you, remove, or otherwise restrict
+    						agree and acknowledge that OTG may, without notice to you, remove, or otherwise restrict
     						access to User
     						Content that, in its sole discretion, violates these Terms.</span></p>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
@@ -390,7 +390,7 @@
     				<ol start="4" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:13.51pt;text-align:justify;line-height:115%;padding-left:14.84pt;font-size:11pt;font-weight:700">
-    						<span>4. CONSENT TO USE DATA</span></li>
+    						<span> CONSENT TO USE DATA</span></li>
     				</ol>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
@@ -410,10 +410,10 @@
     					style="margin-right:.2pt;margin-left:56.7pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:1;-aw-list-number-format:'(%1)';-aw-list-number-styles:lowerLetter;-aw-list-number-values:'2';-aw-list-padding-sml:15.9pt">
     					<span style="-aw-import:ignore"><span><span>(b)</span></span><span
     							style="width:15.9pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span
-    						style="background-color:#fff">In addition to any consent you may provide pursuant to the
+    						>In addition to any consent you may provide pursuant to the
     						Privacy Policy, you
     						hereby consent to us sharing your information with our</span><span>affiliates</span><span
-    						style="background-color:#fff">or other third party service providers.</span><span>We may use
+    						>or other third party service providers.</span><span>We may use
     						information and
     						data pertaining to your use of the Services for provision of the Services, analytics, trend
     						identification,
@@ -439,7 +439,7 @@
     				<ol start="5" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:13.51pt;text-align:justify;line-height:115%;padding-left:14.84pt;font-size:11pt;font-weight:700">
-    						<span>5. BOOKINGS</span></li>
+    						<span> BOOKINGS</span></li>
     				</ol>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="font-weight:700;-aw-import:ignore">&nbsp;</span></p>
@@ -483,7 +483,7 @@
     							style="width:17.03pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span
     						style="text-decoration:underline">Cancellations</span><span>: Bookings that are cancelled
     						before
-    						confirmation on the Platform will not be charged. otg’s cancellation policy sets out
+    						confirmation on the Platform will not be charged. OTG’s cancellation policy sets out
     						applicable cancellation
     						fees.</span></p>
     				<p class="ListParagraph"
@@ -503,7 +503,7 @@
     				<ol start="6" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:13.51pt;text-align:justify;line-height:115%;padding-left:14.84pt;font-size:11pt;font-weight:700">
-    						<span>6. PRICING, FEES, AND PAYMENT TERMS</span></li>
+    						<span> PRICING, FEES, AND PAYMENT TERMS</span></li>
     				</ol>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="font-weight:700;-aw-import:ignore">&nbsp;</span></p>
@@ -539,7 +539,7 @@
     						Service
     						(“</span><span style="font-weight:700">Charges</span><span>”). In addition to the Charges
     						payable to Service
-    						Professionals, otg reserves the right to charge you a convenience fee for facilitating the
+    						Professionals, OTG reserves the right to charge you a convenience fee for facilitating the
     						booking and
     						transferring payments to the Service Professional (this fee is referred to as “</span><span
     						style="font-weight:700">Fees</span><span>”). You acknowledge that the final bill you receive
@@ -576,7 +576,7 @@
     							style="width:14.11pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>The
     						Charges and Fees may be payable at the time of making a booking, or upon the completion of
     						the Pro Service,
-    						as specified by otg.</span></p>
+    						as specified by OTG.</span></p>
     				<p class="ListParagraph" style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
     				<p class="ListParagraph"
@@ -584,7 +584,7 @@
     					<span style="-aw-import:ignore"><span><span>(iv)</span></span><span
     							style="width:14.19pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>For
     						the avoidance of doubt, please note that the Charges are payable to Service Professionals,
-    						and otg acts as a
+    						and OTG acts as a
     						limited collection agent on behalf of such Service Professionals to collect and transfer
     						amounts due to
     						them.</span></p>
@@ -615,7 +615,7 @@
     					style="margin-left:85.05pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerRoman;-aw-list-number-values:'7';-aw-list-padding-sml:11.66pt">
     					<span style="-aw-import:ignore"><span><span>(vii)</span></span><span
     							style="width:11.66pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>Charges
-    						and Fees that you pay are final and non-refundable, unless otherwise determined by otg or
+    						and Fees that you pay are final and non-refundable, unless otherwise determined by OTG or
     						required by the
     						applicable laws. Under certain laws, you may be entitled to a refund or other remedies for a
     						failure in the
@@ -629,7 +629,7 @@
     							style="width:9.14pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>You
     						acknowledge and agree that Charges and Fees applicable in certain geographical areas may
     						increase
-    						substantially during times of high demand. otg will use reasonable efforts to inform you of
+    						substantially during times of high demand. OTG will use reasonable efforts to inform you of
     						the Charges and
     						Fees that may apply. However, by using the Pro Services or Services, you will be responsible
     						for the Charges
@@ -663,17 +663,17 @@
     						request for
     						services from a Service Professional at any time prior to such Service Professional’s
     						arrival, in which case
-    						you may be charged a cancellation fee in accordance with otg’s cancellation policy. otg
+    						you may be charged a cancellation fee in accordance with OTG’s cancellation policy. OTG
     						reserves the right to
     						charge you, or otherwise deduct applicable taxes in respect of such cancellation fee.</span>
     				</p>
-    				<p style="text-align:justify;line-height:115%;font-size:11pt;background-color:#fff"><span
+    				<p style="text-align:justify;line-height:115%;font-size:11pt;"><span
     						style="font-family:'Helvetica Neue';-aw-import:ignore">&nbsp;</span></p>
     				<p class="ListParagraph"
     					style="margin-left:56.7pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerLetter;-aw-list-number-values:'5';-aw-list-padding-sml:16.21pt">
     					<span style="-aw-import:ignore"><span><span>(e)</span></span><span
     							style="width:16.21pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span
-    						style="text-decoration:underline">Subscriptions</span><span>: otg may from time to time
+    						style="text-decoration:underline">Subscriptions</span><span>: OTG may from time to time
     						offer subscription
     						packages (howsoever named) for monetary consideration. The packages shall provide Customers
     						with additional
@@ -692,9 +692,9 @@
     							style="width:18.32pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>OTG
     						does not designate any portion of your payment as a tip or gratuity to the Service
     						Professional. Any
-    						representation by otg to the effect that tipping is “voluntary”, “not required”, and/or
+    						representation by OTG to the effect that tipping is “voluntary”, “not required”, and/or
     						“included” in the
-    						payments you make for Pro Services is not intended to suggest that otg provides any
+    						payments you make for Pro Services is not intended to suggest that OTG provides any
     						additional payments to
     						Service Professionals. You understand and agree that while you are free to provide
     						additional payment as a
@@ -706,7 +706,7 @@
     				<ol start="7" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:13.51pt;text-align:justify;line-height:115%;padding-left:14.84pt;font-size:11pt;font-weight:700">
-    						<span>7. CUSTOMER CONDUCT</span></li>
+    						<span> CUSTOMER CONDUCT</span></li>
     				</ol>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
@@ -756,7 +756,7 @@
     						information that may have
     						a bearing on the ability of the Service Professional to perform the Pro Services or impact
     						the Services
-    						Professional’s health, safety, or well-being, to otg and the Service Professional.</span>
+    						Professional’s health, safety, or well-being, to OTG and the Service Professional.</span>
     				</p>
     				<p class="ListParagraph" style="font-size:11pt"><span style="-aw-import:ignore">&nbsp;</span></p>
     				<p class="ListParagraph"
@@ -767,9 +767,9 @@
     						behaves in a
     						manner that is discourteous, disrespectful, abusive, inappropriate, or in violation of the
     						law, you shall be
-    						required to report such incident to</span><a href="mailto:grievanceofficer@otgcares.com"
+    						required to report such incident to</span><a href="mailto:support@otgcares.com"
     						style="text-decoration:none"><span class="Hyperlink"
-    							style="line-height:115%;font-size:11pt">&nbsp;grievanceofficer@otgcares.com&nbsp;</span></a><span
+    							style="line-height:115%;font-size:11pt">&nbsp;support@otgcares.com&nbsp;</span></a><span
     						style="line-height:115%;font-size:11pt">at the earliest but in any event within 48 (forty
     						eight) hours of
     						such incident.</span></p>
@@ -778,7 +778,7 @@
     				<ol start="8" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:13.51pt;text-align:justify;line-height:115%;padding-left:14.84pt;font-size:11pt;font-weight:700">
-    						<span>8. THIRD PARTY SERVICES</span></li>
+    						<span> THIRD PARTY SERVICES</span></li>
     				</ol>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="font-weight:700;-aw-import:ignore">&nbsp;</span></p>
@@ -816,7 +816,7 @@
     				<ol start="9" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:13.51pt;text-align:justify;line-height:115%;padding-left:14.84pt;font-size:11pt;font-weight:700">
-    						<a name="_Ref87966606"><span>9. YOUR RESPONSIBILITIES</span></a></li>
+    						<a name="_Ref87966606"><span> YOUR RESPONSIBILITIES</span></a></li>
     				</ol>
     				<p class="ListParagraph"
     					style="margin-left:28.35pt;text-align:justify;line-height:115%;font-size:11pt"><span
@@ -1067,7 +1067,7 @@
     				<ol start="10" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:19.09pt;text-align:justify;line-height:115%;padding-left:9.26pt;font-size:11pt;font-weight:700">
-    						<span>10. OUR INTELLECTUAL PROPERTY</span></li>
+    						<span> OUR INTELLECTUAL PROPERTY</span></li>
     				</ol>
     				<p class="ListParagraph"
     					style="margin-left:28.35pt;text-align:justify;line-height:115%;font-size:11pt"><span
@@ -1084,7 +1084,7 @@
     						use the
     						Services in accordance with these Terms and our written instructions issued from time to
     						time. Any rights
-    						not expressly granted herein are reserved by otg or otg’s licensors.</span></p>
+    						not expressly granted herein are reserved by OTG or OTG’s licensors.</span></p>
     				<p style="margin-right:.2pt;margin-left:56.7pt;text-align:justify;line-height:115%;font-size:11pt">
     					<span style="-aw-import:ignore">&nbsp;</span></p>
     				<p
@@ -1114,7 +1114,7 @@
     				<ol start="11" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:19.09pt;text-align:justify;line-height:115%;padding-left:9.26pt;font-size:11pt;font-weight:700">
-    						<a name="_Ref87966368"><span>11. TERM AND TERMINATION</span></a></li>
+    						<a name="_Ref87966368"><span> TERM AND TERMINATION</span></a></li>
     				</ol>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="font-weight:700;-aw-import:ignore">&nbsp;</span></p>
@@ -1138,7 +1138,7 @@
     						responsibilities, or covenants under these Terms, (B) when you cease to become a user of our
     						Services, (C)
     						you do not, or are likely not to qualify under applicable law, or the standards and policies
-    						of otg or its
+    						of OTG or its
     						affiliates, to access and use the Services, or (D) violate or breach the Community
     						Guidelines, (ii) upon 30
     						(Thirty) days’ prior written notice to you, or (iii) immediately for any legitimate
@@ -1149,7 +1149,7 @@
     					style="margin-left:56.7pt;text-indent:-28.35pt;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerLetter;-aw-list-number-values:'3';-aw-list-padding-sml:17.03pt">
     					<span style="-aw-import:ignore"><span><span>(c)</span></span><span
     							style="width:17.03pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>You
-    						may terminate these Terms, at any time, for any reason by sending a notice to otg at
+    						may terminate these Terms, at any time, for any reason by sending a notice to OTG at
     						support@otgcares.com</span></p>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
@@ -1189,7 +1189,7 @@
     				<ol start="12" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:19.09pt;text-align:justify;line-height:115%;padding-left:9.26pt;font-size:11pt;font-weight:700">
-    						<span>12. DISCLAIMERS AND WARRANTIES</span></li>
+    						<span> DISCLAIMERS AND WARRANTIES</span></li>
     				</ol>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="font-weight:700;-aw-import:ignore">&nbsp;</span></p>
@@ -1219,7 +1219,7 @@
     					style="margin-left:56.7pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerLetter;-aw-list-number-values:'3';-aw-list-padding-sml:17.03pt">
     					<span style="-aw-import:ignore"><span><span>(c)</span></span><span
     							style="width:17.03pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span>While
-    						otg strives to provide accurate information about Pro Services and Charges, pricing errors
+    						OTG strives to provide accurate information about Pro Services and Charges, pricing errors
     						may occur from
     						time to time.</span></p>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
@@ -1338,7 +1338,7 @@
     					style="margin-left:56.7pt;text-indent:-28.35pt;text-align:justify;line-height:115%;font-size:11pt;-aw-import:list-item;-aw-list-level-number:0;-aw-list-number-format:'(%0)';-aw-list-number-styles:lowerLetter;-aw-list-number-values:'10';-aw-list-padding-sml:19.05pt">
     					<span style="-aw-import:ignore"><span><span>(j)</span></span><span
     							style="width:19.05pt;font:7pt 'Times New Roman';display:inline-block;-aw-import:spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span
-    						style="background-color:#fff">In no event shall otg, its officers, directors, and employees,
+    						style="background-color:#fff">In no event shall OTG, its officers, directors, and employees,
     						or its
     						contractors, agents, licensors, partners, or</span><span>suppliers,</span><span
     						style="background-color:#fff">be liable to you for any direct, special, indirect,
@@ -1347,7 +1347,7 @@
     						opportunities, lost
     						revenues, or loss of anticipated profits or any other pecuniary or non-pecuniary loss or
     						damage of any
-    						nature whatsoever, including but not limited to any abuse or breach of data), even if otg or
+    						nature whatsoever, including but not limited to any abuse or breach of data), even if OTG or
     						an authorised
     						representative had been advised of the possibility of such damages, arising out of, or
     						relating to (A) these
@@ -1380,7 +1380,7 @@
     				<ol start="13" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:19.09pt;text-align:justify;line-height:115%;padding-left:9.26pt;font-size:11pt;font-weight:700">
-    						<span>13. INDEMNITY</span></li>
+    						<span> INDEMNITY</span></li>
     				</ol>
     				<p class="ListParagraph"
     					style="margin-left:28.35pt;text-align:justify;line-height:115%;font-size:11pt"><span
@@ -1403,7 +1403,7 @@
     				<ol start="14" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:19.09pt;text-align:justify;line-height:115%;padding-left:9.26pt;font-size:11pt;font-weight:700">
-    						<span>14. JURISDICTION, GOVERNING LAWS, AND DISPUTE RESOLUTION</span></li>
+    						<span> JURISDICTION, GOVERNING LAWS, AND DISPUTE RESOLUTION</span></li>
     				</ol>
     				<p style="margin-right:.2pt;text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
@@ -1428,7 +1428,7 @@
     						the time being in
     						force, which is deemed to be incorporated by reference in this clause. The tribunal shall
     						consist of 1 (One)
-    						arbitrator appointed by otg. The language of the arbitration shall be English. The parties
+    						arbitrator appointed by OTG. The language of the arbitration shall be English. The parties
     						to the arbitration
     						shall keep the arbitration confidential, and not disclose to any person, other than on a
     						need to know basis,
@@ -1442,7 +1442,7 @@
     				<ol start="15" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:19.09pt;text-align:justify;line-height:115%;padding-left:9.26pt;font-size:11pt;font-weight:700">
-    						<span>15. GRIEVANCE REDRESSAL</span></li>
+    						<span> GRIEVANCE REDRESSAL</span></li>
     				</ol>
     				<p class="ListParagraph"
     					style="margin-left:28.35pt;text-align:justify;line-height:115%;font-size:11pt"><span
@@ -1459,15 +1459,10 @@
     				<p class="ListParagraph"
     					style="margin-left:56.7pt;text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
-    				<p class="ListParagraph"
-    					style="margin-left:56.7pt;text-align:justify;line-height:115%;font-size:11pt"><span>Name:
-    						Nikhil Shanker</span></p>
-    				<p class="ListParagraph"
-    					style="margin-left:56.7pt;text-align:justify;line-height:115%;font-size:11pt">
-    					<span>Designation:</span></p>
+
     				<p class="ListParagraph"
     					style="margin-left:56.7pt;text-align:justify;line-height:115%;font-size:11pt"><span>Email
-    						Address: nikhilshanker@otgcares.com</span></p>
+    						Address: support@otgcares.com</span></p>
     				<p class="ListParagraph"
     					style="margin-left:56.7pt;text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
@@ -1483,7 +1478,7 @@
     				<ol start="16" type="1" style="margin:0;padding-left:0">
     					<li class="ListParagraph"
     						style="margin-left:19.09pt;text-align:justify;line-height:115%;padding-left:9.26pt;font-size:11pt;font-weight:700">
-    						<span>16. MISCELLANEOUS PROVISIONS</span></li>
+    						<span> MISCELLANEOUS PROVISIONS</span></li>
     				</ol>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
@@ -1558,7 +1553,7 @@
     						style="text-decoration:underline">Notices</span><span>: All notices, requests, demands, and
     						determinations
     						for us under these Terms (other than routine operational communications) shall be sent to
-    						legal@otgcares.com.</span></p>
+    						support@otgcares.com.</span></p>
     				<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     						style="-aw-import:ignore">&nbsp;</span></p>
     				<p class="ListParagraph"
