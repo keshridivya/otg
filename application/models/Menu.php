@@ -159,6 +159,19 @@ class Menu extends CI_model {
         }
     }
 
+    // public function booking_id($id){
+    //     $this->db->select('bookings');
+    //     $this->db->where(array('cust_id'=>$id,'created_on'=>,'status'=>$data['status']));
+    //     $this->db->order_by("cust_id desc");
+    //     $this->db->get();
+    //     if($query->num_rows()!=0){
+    //         return $query->result_array();
+    //     }
+    //     else{
+    //         return false;
+    //     }
+    // }
+
     public function createData($data) {
         $query = $this->db->insert('booking_items', $data);
         return $query;

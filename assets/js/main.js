@@ -1449,50 +1449,6 @@ $(document).ready(function(){
         }
     }
 
-    //password
-    $('#c_password').keyup(function(){
-        validatepass(); 
-    });
-    function validatepass(){
-        let pass=$('#c_password').val();
-        let passcheck=0;
-			 for(let a1=0;a1<=pass.length;a1++){
-			   if(pass.charCodeAt(a1)>=65 && pass.charCodeAt(a1)<=90){
-			      passcheck=1;
-			   }
-			 }
-
-             let pass_check=0;
-			 for(let a1=0;a1<=pass.length;a1++){
-			   if(pass.charCodeAt(a1)>=33 && pass.charCodeAt(a1)<=42 || pass.charCodeAt(a1)==64){
-			      pass_check=1;
-			   }
-			 }
-        if(pass.length==''){
-            $('#spanPassword').show().css('color','red');
-            pass_error = false;
-            return false;
-        }
-        else if(pass.length < 6 || pass.length > 8){
-            $('#spanPassword').show().css('color','red').html('** length of your password must be between 6 and 8 and one special character and one upper case');
-            pass_error = false;
-            return false;
-        }
-        else if(passcheck==0){
-            $('#spanPassword').show().css('color','red').html('** You must contain atleast one Upper character in password');
-            pass_error = false;
-            return false;
-        }
-        else if(pass_check==0){
-            $('#spanPassword').show().css('color','red').html('** You must contain atleast one special character in password');
-            pass_error = false;
-            return false;
-        }
-        else{
-            $('#spanPassword').hide()
-        }
-    }
-
     //checkbox
     $('#terms_services').click(function(){
         validatecheck();
@@ -1526,9 +1482,8 @@ $(document).ready(function(){
          validatebookcity();
          validatebookaddress();
          validatebookpin();
-         validatepass();
          validatecheck();
-          if (name_error == true  && contact_error == true && email_error == true && city_error == true && address_error == true && pin_error==true && pass_error==true && check_error == true) {
+          if (name_error == true  && contact_error == true && email_error == true && city_error == true && address_error == true && pin_error==true && check_error == true) {
             return true;
               
           } else {
@@ -1536,3 +1491,47 @@ $(document).ready(function(){
           }
       });
 });
+
+ //password
+//  $('#c_password').keyup(function(){
+//     validatepass(); 
+// });
+// function validatepass(){
+//     let pass=$('#c_password').val();
+//     let passcheck=0;
+//          for(let a1=0;a1<=pass.length;a1++){
+//            if(pass.charCodeAt(a1)>=65 && pass.charCodeAt(a1)<=90){
+//               passcheck=1;
+//            }
+//          }
+
+//          let pass_check=0;
+//          for(let a1=0;a1<=pass.length;a1++){
+//            if(pass.charCodeAt(a1)>=33 && pass.charCodeAt(a1)<=42 || pass.charCodeAt(a1)==64){
+//               pass_check=1;
+//            }
+//          }
+//     if(pass.length==''){
+//         $('#spanPassword').show().css('color','red');
+//         pass_error = false;
+//         return false;
+//     }
+//     else if(pass.length < 6 || pass.length > 8){
+//         $('#spanPassword').show().css('color','red').html('** length of your password must be between 6 and 8 and one special character and one upper case');
+//         pass_error = false;
+//         return false;
+//     }
+//     else if(passcheck==0){
+//         $('#spanPassword').show().css('color','red').html('** You must contain atleast one Upper character in password');
+//         pass_error = false;
+//         return false;
+//     }
+//     else if(pass_check==0){
+//         $('#spanPassword').show().css('color','red').html('** You must contain atleast one special character in password');
+//         pass_error = false;
+//         return false;
+//     }
+//     else{
+//         $('#spanPassword').hide()
+//     }
+// }

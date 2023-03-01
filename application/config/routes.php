@@ -73,6 +73,10 @@ $route['removeItem/(:any)']='welcome/removeItem/$1';
 $route['privacy-policy']='welcome/privacy';
 $route['terms']='welcome/terms';
 $route['tracker']='welcome/tracker';
+$route['pay']='welcome/pay';
+$route['verify']='welcome/verify';
+$route['success']='welcome/success';
+$route['paymentFailed']='welcome/paymentFailed';
 
 // $route['update_cart']='welcome/update_cart';
 

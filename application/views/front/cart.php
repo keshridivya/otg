@@ -122,14 +122,14 @@
                                                     if($this->cart->total_items()>0){
                                                     ?>
 									<div class="theme-btn offer-btn">
-                                    <?php
-					if(!@$this->session->userdata['cid']){
-					?>
-					<a href="<?php echo base_url('sign-up');?>" class="">Checkout</a>
-					<?php }else{ ?>
-						<a href="<?php echo base_url('checkout');?>" class="">Checkout</a>
-						<?php } ?>
-										
+										<?php
+									if(!@$this->session->userdata['cid']){
+									?>
+										<a href="<?php echo base_url('sign-up');?>" class="">Checkout</a>
+										<?php }else{ ?>
+										<a href="<?php echo base_url('checkout');?>" class="">Checkout</a>
+										<?php } ?>
+
 									</div>
 									<?php
                                                       }
@@ -169,12 +169,11 @@
 			var id = $(el).find('#rowid').val();
 			var qty = $(this).val();
 			var csrfName = $('.txt_csrfname').attr(
-			'name'); // Value specified in $config['csrf_token_name']
+				'name'); // Value specified in $config['csrf_token_name']
 			var csrfHash = $('.txt_csrfname').val();
 
 			$.ajax({
-				'url': '<?php echo base_url('
-				update_cart / ')?>',
+				'url': '<?php echo base_url('update_cart/')?>',
 				'type': 'POST',
 				'data': {
 					'id': id,
