@@ -255,7 +255,6 @@ class Welcome extends CI_Controller {
         
     }
     
-
     public function maintenance($action)
     {
     
@@ -385,7 +384,9 @@ class Welcome extends CI_Controller {
             
             $ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
                 if($this->input->post()){
-                redirect(base_url('summery'));
+                    $payment_method=$this->input->post('payment_method');
+                    $this->load->view('summery',array('payment_method'=>$payment_method));
+                // redirect(base_url('summery'));
             }
 
         }//user added to cart without logging in
@@ -393,16 +394,16 @@ class Welcome extends CI_Controller {
             $page_data['cartItems']=$this->cart->contents();
             if($this->input->post()){
                 $data=array(
-                    "cust_name"=>$this->input->post('c_name'),
-                    "contact"=>$this->input->post('c_contact'),
-                    "email_id"=>$this->input->post('c_email'),
-                    "password"=>sha1($this->input->post('c_password')),
-                    "city"=>$this->input->post('c_city'),
-                    "address"=>$this->input->post('c_address'),
-                    "pincode"=>$this->input->post('c_pincode'),
-                    "created_on"=>date('Y-m-d h:i:s'),
-                    "modified_on"=>date('Y-m-d h:i:s')
-
+                    "cust_name"   =>    $this->input->post('c_name'),
+                    "contact"     =>    $this->input->post('c_contact'),
+                    "email_id"    =>    $this->input->post('c_email'),
+                    "password"    =>    sha1($this->input->post('c_password')),
+                    "city"        =>    $this->input->post('c_city'),
+                    "address"     =>    $this->input->post('c_address'),
+                    "pincode"     =>    $this->input->post('c_pincode'),
+                    "created_on"  =>    date('Y-m-d h:i:s'),
+                    "modified_on" =>    date('Y-m-d h:i:s')
+                      
                 );
                     if($this->db->insert('customer',$data)){
                         $page_data['message']="Successfully created.";
@@ -509,10 +510,6 @@ class Welcome extends CI_Controller {
             }
         }
         if ($success === true) {
-            /**
-             * Call this function from where ever you want
-             * to save save data before of after the payment
-             */
             $this->setRegistrationData();
             $page_data['dropdown']=$this->menu->menu_all();
 
@@ -641,14 +638,13 @@ class Welcome extends CI_Controller {
         if($this->session->userdata('reqid')){
 
             $reqid=$this->session->userdata('reqid');
-            $new_booking=$this->db->get_where("bookings",array('request_id'=>$reqid))->result_array();
+            $new_booking=$this->db->get_where("bookings",array('request_id_value'=>$reqid))->result_array();
             $cust_mail=$this->db->get_where("customer",array('cust_id'=>$new_booking[0]['cust_id']))->result_array();
-                            
                         $this->load->library('email');
-                        $this->email->from('mywebsiteauth1@gmail.com','OTG Cares');
+                        $this->email->from('info@hosinger.com','OTG Cares');
                         $this->email->to($cust_mail[0]['email_id']);
                         $this->email->subject("New Service Booked");
-                        $this->email->message("Thank you for your order"." ".$new_booking[0]["cust_name"]."\r\n"."Request Id"." ".$new_booking[0]["new_request_id"]."\r\n"."Order Details"."\r\n"."Order Id".$new_booking[0]['request_id']."\r\n"."Your name: ".$new_booking[0]['cust_name']."\r\n"."Service: ".$new_booking[0]['service_plan']." for ".$new_booking[0]['service_device']."\r\n"."Charges: &#8377;".$new_booking[0]['total_amount']);
+                        $this->email->message("Thank you for your order"." ".$new_booking[0]["cust_name"]."\r\n"."Request Id"." ".$new_booking[0]["request_id_value"]."\r\n"."Order Details"."\r\n"."Order Id".$new_booking[0]['request_id']."\r\n"."Your name: ".$new_booking[0]['cust_name']."\r\n"."Service: ".$new_booking[0]['service_plan']." for ".$new_booking[0]['service_device']."\r\n"."Charges: &#8377;".$new_booking[0]['total_amount']);
                         $this->email->set_newline("\r\n");
                         $this->email->send();
                         if($this->email->send()){
@@ -657,15 +653,21 @@ class Welcome extends CI_Controller {
                         else{
                             $page_data['message']="Problem occured while email notification";
                         }
+                        
+
+                        $page_data['new_booking']=$new_booking;
+                        $page_data['message']="New Service Booked";
+                        $page_data['dropdown']=$this->menu->menu_all();
+                        $page_data['page_title']="Order Receipt";
+                        $page_data['page']="receipt";
+                        $this->load->view('index',$page_data);
+                        $this->session->unset_userdata('reqid');
+                        $this->cart->destroy();
         }
-        $page_data['new_booking']=$new_booking;
-        $page_data['message']="New Service Booked";
-        $page_data['dropdown']=$this->menu->menu_all();
-        $page_data['page_title']="Order Receipt";
-        $page_data['page']="receipt";
-        $this->load->view('index',$page_data);
-        $this->session->unset_userdata('reqid');
-        $this->cart->destroy();
+        else{
+            redirect(base_url('/'));
+        }
+        
 
     }
 

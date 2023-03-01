@@ -36,7 +36,7 @@
                                                                      </td>
                                                                   </tr>
                                                                   <tr>
-                                                                     <td>Request Id: <?php echo $new_booking[0]['new_request_id'] ?></td>
+                                                                     <td>Request Id: <?php echo $new_booking[0]['request_id_value'] ?></td>
                                                                      <td class="alignright">Date: <?php echo $new_booking[0]['created_on'] ?></td>
                                                                   </tr>
                                                                   <td colspan="2">

@@ -142,8 +142,7 @@
 
 												<div class="form-check col-lg-8 text-left mb-3">
 													<label class="form-check-label float-left">
-														<input type="radio" class="form-check-input" value="cod"
-															name="payment_method" checked="checked">Cash On Booking
+														<input type="radio" class="form-check-input" value="cob" name="payment_method" checked="checked">Cash On Booking
 													</label>
 												</div>
 												<div class="form-check col-lg-8 text-left mb-3">
@@ -171,22 +170,25 @@
 									</div>
 
                                     <div class="form-group row text-left">
-										<div class="col-lg-12 mt-3 text-justify">
-                                        <i class="fa fa-check-circle" aria-hidden="true"></i> Rs. 455 will be payable on service charge towards the services selected via an online payment link sent to you post the successful completion of services.
+										<div class="col-lg-12 mt-3 text-justify d-flex">
+                                        <i class="fa fa-check-circle" style='font-size:20px;color:var(--var-brown);'></i> 
+                                        <p class='ml-2'>Rs. <?php print_r($this->cart->total()); ?> will be payable on service charge towards the services selected via an online payment link sent to you post the successful completion of services.</p>
 										</div>
 
-										<div class="col-lg-12">
-                                        <i class="fa fa-check-circle" aria-hidden="true"></i> In case you decide not to go ahead with the repairs recommended by the engineer. Rs.199 will be payable as visit charges.
+										<div class="col-lg-12  mt-3 text-justify d-flex">
+                                        <i class="fa fa-check-circle" style='font-size:20px;color:var(--var-brown);'></i> 
+                                        <p class='ml-2'>In case you decide not to go ahead with the repairs recommended by the engineer. Rs.199 will be payable as visit charges.</p>
 										</div>
 
-                                        <div class="col-lg-12">
-                                        <i class="fa fa-check-circle" aria-hidden="true"></i> For detailed Term of services <a href='https://otgcares.com/terms'>click here</a>.
+                                        <div class="col-lg-12  mt-3 text-justify d-flex">
+                                        <i class="fa fa-check-circle" style='font-size:20px;color:var(--var-brown);'></i>
+                                        <p class='ml-2'> For detailed Term of services <a href='https://otgcares.com/terms'>click here</a>.</p>
 										</div>
 									</div>
 
 									<div class="col-lg-12">
-										<input type="submit" name="submit" value="Continue" class="theme-btn offer-btn "
-											id='btn_fill'>
+										<input type="submit" name="submit" value="I AGREE" class="theme-btn offer-btn " id='btn_fill'>
+                                        <a href="<?php echo base_url('/'); ?>" class="theme-btn offer-btn1">I DISAGREE</a>
 									</div>
 								</form>
 							</div>

@@ -4014,6 +4014,12 @@ h1.product-single__title,
 .discount-badge .product-single__save-amount {
     color: #e95144;
 }
+.offer-btn1{
+    padding: 9px 15px !important;
+}
+.offer-btn1:hover{
+background-color: var(--var-yellow);
+}
 
 .product-single__price {
     display: inline-block;
