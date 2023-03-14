@@ -19,16 +19,7 @@ class Menu extends CI_model {
         $this->db->from('product_features');
         $this->db->join('category_product' ,'product_features.cproduct_id = category_product.cproduct_id');
         $query = $this->db->get(); 
-        // print_r($this->db->last_query());   
-        if($query->num_rows() != 0)
-        {
-            return $query->result_array();
-            
-        }
-        else
-        {
-            return false;
-        }
+        return $query->result_array();
     }
 
     public function product_feature_edit($id){
@@ -37,16 +28,7 @@ class Menu extends CI_model {
         $this->db->join('category_product' ,'product_features.cproduct_id = category_product.cproduct_id');
         $this->db->where('product_features.id',$id);
         $query = $this->db->get(); 
-        // print_r($this->db->last_query());   
-        if($query->num_rows() != 0)
-        {
-            return $query->result_array();
-            
-        }
-        else
-        {
-            return false;
-        }
+        return $query->result_array();
     }
 
     public function product_benefit(){
@@ -54,16 +36,7 @@ class Menu extends CI_model {
         $this->db->from('product_benefits');
         $this->db->join('category_product' ,'product_benefits.cproduct_id = category_product.cproduct_id');
         $query = $this->db->get(); 
-        // print_r($this->db->last_query());   
-        if($query->num_rows() != 0)
-        {
-            return $query->result_array();
-            
-        }
-        else
-        {
-            return false;
-        }
+        return $query->result_array();
     }
 
     public function product_benefit_edit($id){
@@ -72,16 +45,7 @@ class Menu extends CI_model {
         $this->db->join('category_product' ,'product_benefits.cproduct_id = category_product.cproduct_id');
         $this->db->where('product_benefits.id',$id);
         $query = $this->db->get()->result_array(); 
-        // print_r($this->db->last_query());   
-        if($query->num_rows() != 0)
-        {
-            return $query;
-            
-        }
-        else
-        {
-            return false;
-        }
+        return $query;
     }
 
     public function ongoing_assign($id){
@@ -90,13 +54,7 @@ class Menu extends CI_model {
         $this->db->join('bookings','bookings.cust_id=customer.cust_id ');
         $this->db->where(array('bookings.eng_name '=>$id,'bookings.status'=>'new'));
         $query = $this->db->get();
-        // print_r($this->db->last_query());
-        if($query->num_rows()!=0){
-            return $query->result_array();
-        }
-        else{
-            return false;
-        }
+        return $query->result_array();
     }
 
     public function ongoing_assign_client($id,$eid){
@@ -105,12 +63,8 @@ class Menu extends CI_model {
         $this->db->join('bookings','bookings.eng_name=engineer.eng_id ');
         $this->db->where(array('bookings.eng_name '=>$eid,'bookings.request_id'=>$id));
         $query = $this->db->get();
-        if($query->num_rows()!=0){
-            return $query->result_array();
-        }
-        else{
-            return false;
-        }
+        return $query->result_array();
+        
     }
 
     public function ongoing_assign_client_detail($id,$eid){
@@ -120,12 +74,7 @@ class Menu extends CI_model {
         $this->db->join('customer','bookings.cust_id=customer.cust_id ');
         $this->db->where(array('bookings.eng_name '=>$eid,'bookings.request_id'=>$id));
         $query = $this->db->get();
-        if($query->num_rows()!=0){
-            return $query->result_array();
-        }
-        else{
-            return false;
-        }
+        return $query->result_array();
     }
 
     public function check_upload($id,$eid){
@@ -134,14 +83,8 @@ class Menu extends CI_model {
         $this->db->join('bookings','bookings.request_id_value=engineer_client.booking_request_id ');
         $this->db->where(array('bookings.eng_name '=>$eid,'bookings.request_id'=>$id));
         $query = $this->db->get();
-                // print_r($this->db->last_query());
-
-        if($query->num_rows()!=0){
-            return $query->result_array();
-        }
-        else{
-            return false;
-        }
+        return $query->result_array();
+        
     }
 
     public function reschedule($id){
@@ -151,12 +94,7 @@ class Menu extends CI_model {
         $this->db->join('customer','bookings.cust_id=customer.cust_id ');
         $this->db->where(array('bookings.eng_name '=>$id,'bookings.status'=>'pending','booking_items.button'=>'Reschedule'));
         $query = $this->db->get();
-        if($query->num_rows()!=0){
-            return $query->result_array();
-        }
-        else{
-            return false;
-        }
+        return $query->result_array();
     }
 
     public function invoice($id){
@@ -167,13 +105,7 @@ class Menu extends CI_model {
         // $this->db->join('checklist','bookings.request_id_value=checklist.request_id ');
         $this->db->where(array('bookings.request_id_value '=>$id,'customer.cust_id '=>$cid));
         $query = $this->db->get();
-        // print_r($this->db->last_query());
-        if($query->num_rows()>0){
             return $query->result_array();
-        }
-        else{
-            return false;
-        }
     }
 
     // function checklogin($email,$password)

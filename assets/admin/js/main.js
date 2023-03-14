@@ -5,7 +5,7 @@ $(document).ready(function(){
         let total_amount=$('.total_amount').val();
         let add=parseInt(additional)+parseInt(total_amount);
         $('.expenes').val(add);
-    })
+    });
     $('.reschedule').click(function(){
         let device_modal=$('.device_modal').val();
         let booking_status=$('.booking_status').val();
@@ -51,6 +51,17 @@ $(document).ready(function(){
             $('#total_amount').val(total_amount);
             let value_btn=$(this).data('name');
             $('.btn_name').val(value_btn);
+            if(value_btn == 'Generate'){
+                $('.additional').keyup(function(){
+                    let additional=$('.additional').val();
+                    let total_amount=$('.total_amount').val();
+                    let add=parseInt(additional)+parseInt(total_amount);
+                    $('.paymentradio').val(add);
+                });
+            }
+            else{
+                $('.paymentradio').val('199');
+            }
         }
     });
 

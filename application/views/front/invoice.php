@@ -178,36 +178,7 @@
 		position: relative;
 	}
 
-	.effect2:before,
-	.effect2:after {
-		z-index: -1;
-		position: absolute;
-		content: "";
-		bottom: 15px;
-		left: 10px;
-		width: 50%;
-		top: 80%;
-		max-width: 300px;
-		background: #777;
-		-webkit-box-shadow: 0 15px 10px #777;
-		-moz-box-shadow: 0 15px 10px #777;
-		box-shadow: 0 15px 10px #777;
-		-webkit-transform: rotate(-3deg);
-		-moz-transform: rotate(-3deg);
-		-o-transform: rotate(-3deg);
-		-ms-transform: rotate(-3deg);
-		transform: rotate(-3deg);
-	}
 
-	.effect2:after {
-		-webkit-transform: rotate(3deg);
-		-moz-transform: rotate(3deg);
-		-o-transform: rotate(3deg);
-		-ms-transform: rotate(3deg);
-		transform: rotate(3deg);
-		right: 10px;
-		left: auto;
-	}
 
 	/* @media screen and (max-width: 767px) {
 		h1 {
@@ -492,19 +463,10 @@
 			</div>
 			<!--End Table-->
 			<div class="cta-group">
-				<button  class="btn-primary invoice">Download Invoice</button>
+				<button  class="btn-primary invoice" >Download Invoice</button>
 			</div>
 
 		</div>
-		<!--End InvoiceBot-->
-		<!-- <footer>
-			<div id="legalcopy" class="clearfix">
-				<p class="col-right">Our mailing address is:
-					<span class="email"><a
-							href="mailto:supplier.portal@almonature.com">supplier.portal@almonature.com</a></span>
-				</p>
-			</div>
-		</footer> -->
 	</div>
 	<!--End Invoice-->
 </div><!-- End Invoice Holder-->
@@ -524,23 +486,33 @@ let th = ['','thousand','million', 'billion','trillion'];
 
 let dg = ['zero','one','two','three','four', 'five','six','seven','eight','nine']; var tn = ['ten','eleven','twelve','thirteen', 'fourteen','fifteen','sixteen', 'seventeen','eighteen','nineteen']; var tw = ['twenty','thirty','forty','fifty', 'sixty','seventy','eighty','ninety']; function toWords(s){s = s.toString(); s = s.replace(/[\, ]/g,''); if (s != parseFloat(s)) return 'not a number'; var x = s.indexOf('.'); if (x == -1) x = s.length; if (x > 15) return 'too big'; var n = s.split(''); var str = ''; var sk = 0; for (var i=0; i < x; i++) {if ((x-i)%3==2) {if (n[i] == '1') {str += tn[Number(n[i+1])] + ' '; i++; sk=1;} else if (n[i]!=0) {str += tw[n[i]-2] + ' ';sk=1;}} else if (n[i]!=0) {str += dg[n[i]] +' '; if ((x-i)%3==0) str += 'hundred ';sk=1;} if ((x-i)%3==1) {if (sk) str += th[(x-i-1)/3] + ' ';sk=0;}} if (x != s.length) {var y = s.length; str += 'rupees and '; for (var i=x+1; i<y; i++) str += dg[n[i]] +' ';} return str.replace(/\s+/g,' ');}
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js" ></script>
 <script type="text/javascript">
-        $(document).on("load", ".invoice", function () {
+        $(document).on("click", ".invoice", function () {
             $(this).css('display','none');
-            html2canvas($('#invoiceholder')[0], {
-                onrendered: function (canvas) {
-                    var data = canvas.toDataURL();
-                    var docDefinition = {
-                        content: [{
-                            image: data,
-                            width: 500
-                        }]
-                    };
-                    pdfMake.createPdf(docDefinition).download("invoice.pdf");
-                }
-            });
+			Convert_HTML_To_PDF();
+			
         });
     </script>
+<script>
+function Convert_HTML_To_PDF() {
+	window.jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF();
+    var elementHTML = document.querySelector("#invoiceholder");
+    doc.html(elementHTML, {
+    callback: function(doc) {
+        // Save the PDF
+        doc.save('sample-document.pdf');
+    },
+    x: 15,
+    y: 15,
+    width: 170, //target width in the PDF document
+    windowWidth: 850 //window width in CSS pixels
+});
+}
+</script>
+
      <script>
         $(window).on("load", function() {
             var main = $('#cBalance').text();

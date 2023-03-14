@@ -10,17 +10,14 @@ class Admin extends CI_Controller {
 	 }
 	public function index()
 	{
-		
 		if(@$this->input->post()){
 			$email=$this->input->post('email');
 			$password=sha1($this->input->post('password'));
 			$result=$this->db->get_where('admin',array('email_id'=>$email,'password'=>$password,'status'=>'active'))->result_array();
-			// print_r($result);
-			$aid=$result[0]['admin_id'];
-			$aemail=$result[0]['email_id'];
+			$aid=$result[0]['admin_id'] ?? '';
+			$aemail=$result[0]['email_id'] ?? '';
 			$this->session->set_userdata('a_id',$aid);
 			$this->session->set_userdata('e_id',$aemail);
-		
 		}
 		if(@$this->session->userdata['a_id']){
 			//redirect to dashboard
@@ -45,7 +42,6 @@ class Admin extends CI_Controller {
 	public function customer($action,$id=false){
 		switch ($action) {
 			case 'view':
-				// echo "View";
 				$customer_data=$this->db->get("customer")->result_array();
 				$page_data['page_title']="Our Customers";
 				$page_data['customers']=$customer_data;
@@ -1416,6 +1412,24 @@ class Admin extends CI_Controller {
 				break;
 		}
 	}
+
+	//generate invoice
+	public function generateinvoice($action,$id=false){
+		switch($action){
+			case 'view':
+				$page_data['page_title'] = 'Generate Invoice';
+				$page_data['page']="generateinvoice/view";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'add':
+				$page_data['page_title'] = 'Add Invoice';
+				$page_data['page']="generateinvoice/add";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'edit':
+				break;
+		}
+	}
 	
 		// public function plans_features($action,$id=false){
 		// 	switch ($action){
@@ -1528,7 +1542,7 @@ class Admin extends CI_Controller {
 				// print_r($data);
 					$config['upload_path']          = $data['upload_path'];
 					$config['allowed_types']        = 'gif|jpg|png';
-					$config['max_size']             = 400;
+					$config['max_size']             = 500;
 					$config['max_width']            = 1074;
 					$config['max_height']           = 768;
 	
@@ -1549,7 +1563,7 @@ class Admin extends CI_Controller {
 				// print_r($data);
 					$config['upload_path']          = $data['upload_path'];
 					$config['allowed_types']        = 'gif|jpg|png';
-					$config['max_size']             = 400;
+					$config['max_size']             = 500;
 					$config['max_width']            = 1074;
 					$config['max_height']           = 768;
 	
@@ -1570,7 +1584,7 @@ class Admin extends CI_Controller {
 				// print_r($data);
 					$config['upload_path']          = $data['upload_path'];
 					$config['allowed_types']        = 'gif|jpg|png';
-					$config['max_size']             = 400;
+					$config['max_size']             = 500;
 					$config['max_width']            = 1074;
 					$config['max_height']           = 768;
 	

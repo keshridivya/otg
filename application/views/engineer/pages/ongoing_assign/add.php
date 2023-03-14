@@ -75,8 +75,11 @@
 											placeholder='Booking Status' required> -->
 									</div>
 									<div class="col-md-4 mt-3">
-										<input type='text' name='payment_method' class='form-control payment_method'
-											placeholder='Payment Method'>
+										
+											<select name="payment_method" class='form-control payment_method'>
+											<option value="Cash">Cash</option>
+											<option value="Online">Online</option>
+										</select>
 									</div>
 
 									<div class="col-md-8 mt-3">
@@ -113,8 +116,7 @@
 											placeholder='Expenses' required readonly>
 									</div>
 									<div class="col-md-4 mt-3">
-										<input type='number' name='advance_payment' class='form-control advance_payment'
-											placeholder='Advance Payment' required>
+										<input type='number' name='advance_payment' class='form-control advance_payment' placeholder='Advance Payment' required>
 									</div>
 
 									<div class='datetimerow row mt-4'>
@@ -195,7 +197,7 @@
 						<input type="hidden" name="service_device" id='service_device'>
 						<input type="hidden" name="request_id" id='request_id'>
 						<input type="hidden" name="total_amount" id='total_amount'>
-						<input type="hidden" name="btn_name" id='btn_name'>
+						<input type="hidden" name="btn_name" id='btn_name' class='btn_name'>
 						<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 							value="<?php echo $this->security->get_csrf_hash();?>">
 						<input type="hidden" name="eng_name" id='eng_name'>
@@ -205,9 +207,9 @@
 									placeholder='Visiting Charges' value='Visiting Charges: 199 rs' readonly>
 							</div>
 						</div>
-						<input type="radio" id="age1" name="case_payment" value="cash-199">
+						<input type="radio" id="age1" name="case_payment" value="cash-199" class='paymentradio'>
 						<label for="age1">Cash Payment</label><br>
-						<input type="radio" id="age2" name="case_payment" value="online-199">
+						<input type="radio" id="age2" name="case_payment" value="online-199" class='paymentradio'>
 						<label for="age2">Online Payment</label><br>
 					</div>
 					<div class="modal-footer">

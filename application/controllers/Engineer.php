@@ -90,7 +90,7 @@ class Engineer extends CI_Controller {
             case 'view':
                 $id=$this->session->userdata['eng_id'];
                 $page_data['booking_data']=$this->menu->ongoing_assign($id);
-                $page_data['page']='ongoing_assign/view';
+                $page_data['page'] = 'ongoing_assign/view';
                 $this->load->view('engineer/index',$page_data);
                 break;
             case 'edit':

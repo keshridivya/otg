@@ -205,6 +205,11 @@ $route['admin/contact/delete/any(:any)']='admin/contact/delete/$1';
 $route['admin/offer']='admin/offer/view';
 $route['admin/offer/edit/(:any)']='admin/offer/edit/$1';
 
+//admin generate invoice
+$route['admin/generateinvoice']='admin/generateinvoice/view';
+$route['admin/generateinvoice/edit/(:any)']='admin/generateinvoice/edit/$1';
+$route['admin/generateinvoice/add']='admin/generateinvoice/add';
+
 
 
 //enginner login
