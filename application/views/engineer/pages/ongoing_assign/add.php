@@ -150,9 +150,12 @@
 											data-name='Generate'>Generate Estimate
 										</button></div>
 										<?php } ?>
-									<div class="col-md-4"><input type="button" name="close"
-											class="btn btn-primary btn-user btn-block btn_image_submit"
-											value='Close Assignment'></div>
+									<div class="col-md-4">
+									<button type="button" name="reschedule"
+											class="btn btn-primary btn-user btn-block btn_image_submit reschedule"
+											data-name='Close'>Close Assignment
+										</button>	
+									</div>
 								</div>
 							</form>
 							<hr>
@@ -192,11 +195,12 @@
 						<input type="hidden" name="service_device" id='service_device'>
 						<input type="hidden" name="request_id" id='request_id'>
 						<input type="hidden" name="total_amount" id='total_amount'>
+						<input type="hidden" name="btn_name" id='btn_name'>
 						<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 							value="<?php echo $this->security->get_csrf_hash();?>">
 						<input type="hidden" name="eng_name" id='eng_name'>
 						<div class="row mb-4">
-							<div class="col-md-4 mt-3 viding_btn_name">
+							<div class="col-md-6 mt-3 viding_btn_name">
 								<input type='text' name='visiting_card' class='form-control visiting_card'
 									placeholder='Visiting Charges' value='Visiting Charges: 199 rs' readonly>
 							</div>

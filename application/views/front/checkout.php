@@ -26,21 +26,36 @@
 									<tr>
 										<td>
 											<?php
-                             if($this->cart->total_items()>0){
-                                foreach($cartItems as $item){
-                             ?>
+                                            if($this->cart->total_items()>0){
+                                                foreach($cartItems as $item){
+                                            ?>
 											<?php echo $item['product_name']?>
 											-
 											<?php echo $item['name']?><br>
 											<?php
-                                }
-                            }
-                             ?>
+                                                }
+                                            }
+                                            ?>
 										</td>
-										<td> <i class="fa-solid fa-indian-rupee-sign"></i>
-											<?php print_r($this->cart->total()); ?> </td>
+										<td> 
+                                        <?php
+                                            if($this->cart->total_items()>0){
+                                                foreach($cartItems as $item){
+                                            ?>
+											<i class="fa-solid fa-indian-rupee-sign"></i> <?php echo $item['price']?>
+											<br>
+											<?php
+                                                }
+                                            }
+                                            ?>
+											</td>
 									</tr>
 									<tr></tr>
+                                    <tfoot  style='border-top:1px solid #e7e0e0; margin-top:20px'>
+                                        <tr><td></td><td >
+                                        <i class="fa-solid fa-indian-rupee-sign"></i> <?php print_r($this->cart->total()); ?> 
+                                        </td></tr>
+                                    </tfoot>
 								</tbody>
 							</table>
 						</div>
@@ -66,7 +81,6 @@
 												required>
 											<span id='spanName' class='float-left mt-2'>** Please enter name</span>
 										</div>
-
 
 										<div class="col-lg-6  mt-3">
 											<!-- <label for="c_contact">Customer Contact</label> -->
@@ -145,11 +159,11 @@
 														<input type="radio" class="form-check-input" value="cob" name="payment_method" checked="checked">Cash On Booking
 													</label>
 												</div>
-												<div class="form-check col-lg-8 text-left mb-3">
+												<!-- <div class="form-check col-lg-8 text-left mb-3">
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input" value="razorpay" name="payment_method">Pay Now
                                                 </label>
-                                                </div>
+                                                </div> -->
 											</div>
 										</div>
 

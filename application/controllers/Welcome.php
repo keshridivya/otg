@@ -44,6 +44,7 @@ class Welcome extends CI_Controller {
         $page_data['client']=$client;
         $page_data['banner']=$banner;
         $this->load->view('index',$page_data);
+
     }
     // public function head(){
     //     $this->load->view('')
@@ -58,58 +59,60 @@ class Welcome extends CI_Controller {
 
     public function sign_up()
     {
-        
         $this->load->library('form_validation');
-        
-        
-        if ($this->input->post('submit') == 'login' || $this->session->userdata('cid')){
-            // echo "login page";
-            $this->form_validation->set_rules('userid','User Id','required');
+        // if ($this->input->post('submit') == 'login'){
+        //     // echo "login page";
+        //     $this->form_validation->set_rules('userid','User Id','required');
 
-            $this->form_validation->set_rules('pwd','Password','required');
-            $this->form_validation->set_error_delimiters('<div class="error-div text-danger">','</div>');
-            if($this->form_validation->run()){
+        //     $this->form_validation->set_rules('pwd','Password','required');
+        //     $this->form_validation->set_error_delimiters('<div class="error-div text-danger">','</div>');
+        //     if($this->form_validation->run()){
             
-                $userid=$this->input->post('userid');
-                $pwd=sha1($this->input->post('pwd'));
-                $result=$this->db->get_where('customer',array('email_id'=>$userid,'password'=>$pwd))->result_array();
-                if(count($result)>0){
-                    $cid=$result[0]['cust_id'];
-                    $cemail=$result[0]['email_id'];
-                    $cname=$result[0]['cust_name'];
-                    $this->session->set_userdata('cid',$cid);
-                    $this->session->set_userdata('cemail',$cemail);
-                    $this->session->set_userdata('cname',$cname);
-                }else{
-                    $page_data['message']="User not found";
+        //         $userid=$this->input->post('userid');
+        //         $pwd=sha1($this->input->post('pwd'));
+        //         $result=$this->menu->checklogin($userid,$pwd);
+        //         // $result=$this->db->get_where('customer',array('email_id'=>$userid,'password'=>$pwd))->result_array();
+        //         if($result > 0){
+        //             $this->session->set_userdata('cid', $result->cust_id);
+        //             $this->session->set_userdata('cemail', $result->email_id);
+        //             $this->session->set_userdata('cname', $result->cust_name);
 
-                }
+        //             // $cid=$result[0]['cust_id'];
+        //             // $cemail=$result[0]['email_id'];
+        //             // $cname=$result[0]['cust_name'];
+        //             // $this->session->set_userdata('cid',$cid);
+        //             // $this->session->set_userdata('cemail',$cemail);
+        //             // $this->session->set_userdata('cname',$cname);
+        //         }else{
+        //             $page_data['message']="User not found";
+        //         }
                 
-            }else{
-                // echo validation_errors();
-            }
+        //     }else{
+        //         // echo validation_errors();
+        //     }
             
-            if($this->session->userdata['cid']){
+        //     if(@$this->session->userdata['cid']){
 
-                $testimonial=$this->db->get_where('testimonials',array('status'=>'active'))->result_array();
-                $client=$this->db->get_where('our_client',array('status'=>'active'))->result_array();
-                $banner=$this->db->get_where('banner',array('status'=>'active'))->result_array();
-                $page_data['dropdown']=$this->menu->menu_all();
-                $page_data['testimonial']=$testimonial;
-                $page_data['client']=$client;
-                $page_data['banner']=$banner;
-                $page_data['page']="home";
-                $this->load->view('index',$page_data);
-            }else{
-                $page_data['dropdown']=$this->menu->menu_all();
-                $page_data['page']="sign_up";
-                $page_data['message']="";
-                $this->load->view('index',$page_data);
+        //         $testimonial=$this->db->get_where('testimonials',array('status'=>'active'))->result_array();
+        //         $client=$this->db->get_where('our_client',array('status'=>'active'))->result_array();
+        //         $banner=$this->db->get_where('banner',array('status'=>'active'))->result_array();
+        //         $page_data['dropdown']=$this->menu->menu_all();
+        //         $page_data['testimonial']=$testimonial;
+        //         $page_data['client']=$client;
+        //         $page_data['banner']=$banner;
+        //         $page_data['page']="home";
+        //         $this->load->view('index',$page_data);
+        //     }else{
+        //         $page_data['dropdown']=$this->menu->menu_all();
+        //         $page_data['page']="sign_up";
+        //         $this->load->view('index',$page_data);
 
-            }
+        //     }
             
-        }
-        elseif ($this->input->post('submit') == 'register' || $this->session->userdata('custid') ){
+        // }
+        // else
+        if ($this->input->post('submit') == 'register' || $this->session->userdata('custid') ){
+            print_r($this->input->post());
             $all_customers=$this->db->get("customer")->result_array();
                                 $config=array(
                                         array(
@@ -122,18 +125,6 @@ class Welcome extends CI_Controller {
                                             'label' => 'Mobile No.',
                                             'rules' => 'required|min_length[10]|max_length[10]'
                                         ),
-                                        array(
-                                                'field' => 'password',
-                                                'label' => 'Password',
-                                                'rules' => 'required',
-                                                
-                                        ),
-                                        array(
-                                                'field' => 'email_id',
-                                                'label' => 'Email',
-                                                'rules' => 'required|valid_email|is_unique[customer.email_id]'
-                                        ),
-                                        
                                         array(
                                             'field' => 'city',
                                             'label' => 'City',
@@ -170,8 +161,20 @@ class Welcome extends CI_Controller {
                         "created_on"=>date('Y-m-d h:i:s'),
                         "modified_on"=>date('Y-m-d h:i:s')
                     );
+                    $mob_num = $this->input->post('mobile');
                     
                     if($this->db->insert('customer',$data)){
+
+                        $result = $this->db->get_where('customer',array('contact' => $mob_num))->row();
+                        print_r($this->db->last_query());
+                        if(!empty($result)){
+                            $this->session->set_userdata('cid', $result->cust_id);
+                            $this->session->set_userdata('cemail', $result->email_id);
+                            $this->session->set_userdata('cname', $result->cust_name);
+                        }else{
+                            $page_data['message']="User not found";
+                        }
+
                         $page_data['message']="Successfully Registered.";
                         $this->load->library('email');
                         $this->email->from('mywebsiteauth1@gmail.com','OTG Cares');
@@ -187,7 +190,6 @@ class Welcome extends CI_Controller {
                             $page_data['message']="Problem occured while email notification";
                         }
                         $customers_login=$this->db->get_where("customer",array('email_id'=>$data['email_id'],'password'=>$data['password']))->result_array();
-                        // print_r($customers_login);
                         $custid=$customers_login[0]['cust_id'];
                         $custemail=$customers_login[0]['email_id'];
                         
@@ -196,19 +198,13 @@ class Welcome extends CI_Controller {
                         
                     }else{
                         $page_data['message']="Problem occured while creating account.";
-        
                     }
-                    
-                    
-                    
+                    redirect($_SERVER['HTTP_REFERER'] ?? base_url());
                 }else{
                     // echo validation_errors();
                     
                 }
-                
-                
-    
-                if($this->session->userdata['custid']){
+                if(@$this->session->userdata['custid']){
                     $session_cust=$this->session->userdata['custid'];
                     //redirect to dashboard
                     $new_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
@@ -244,17 +240,164 @@ class Welcome extends CI_Controller {
                     $this->load->view('index',$page_data);
                 }
         }
-        
+        elseif(@$this->session->userdata['cid']){
+            $testimonial=$this->db->get_where('testimonials',array('status'=>'active'))->result_array();
+            $client=$this->db->get_where('our_client',array('status'=>'active'))->result_array();
+            $banner=$this->db->get_where('banner',array('status'=>'active'))->result_array();
+            $page_data['dropdown']=$this->menu->menu_all();
+            $page_data['testimonial']=$testimonial;
+            $page_data['client']=$client;
+            $page_data['banner']=$banner;
+            $page_data['page']="home";
+            $this->load->view('index',$page_data);
+        }
         else{
             $page_data['dropdown']=$this->menu->menu_all();
                 $page_data['page_title']="Sign Up";
-                $page_data['message']="";
                 $page_data['page']="sign_up";
                 $this->load->view('index',$page_data);
+                
+        }
+        
+    }
+
+
+
+    public function reset_password()
+    {
+        if ($this->input->post()){
+            $contact=$this->input->post('mobile');
+            $data=array(
+                "password"=>sha1($this->input->post('password')),
+            );
+            $this->db->where('contact',$contact);
+            if($this->db->update('customer',$data)){
+                redirect('sign-up');
+            }else{
+                
+                $page_data['message']='something went wrong';
+            }
+        }
+       
+        else{
+            $page_data['dropdown']=$this->menu->menu_all();
+                $page_data['page_title']="Sign Up";
+                $page_data['page']="reset_password";
+                $this->load->view('index',$page_data);
+                
         }
         
     }
     
+    //otp
+    public function otp(){
+
+        if($this->input->post('number')){
+            $this->load->helper('msg');
+            $number = $this->input->post('number');
+            $result=$this->db->get_where('customer',array('contact'=>$number))->result_array();
+            if (count($result) == 0)
+        {
+            $otp = rand(10000, 99999);
+              $msg = 'Dear Sir/Madam,Your OTP for Registration of OTGCares is '.$otp.'. Please do not share this OTP with anyone';
+              if (sendsms($number,$dltId='1207167757998006000',$header="OTGCRS", $msg)) {
+                  $page_data['status'] = true;
+                  $page_data['message'] = "success";
+                 
+                  } else {
+                  $page_data['status'] = false;
+                  $page_data['message'] = "Something went wrong, please try again later.";
+                  }
+        }
+        else
+        {
+            $otp = 'error';
+        }
+
+        }
+        $data['otp'] = $otp;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
+    public function resend_otp(){
+        if($this->input->post('number')){
+            $this->load->helper('msg');
+            $number = $this->input->post('number');
+            $otp = rand(10000, 100000);
+              $msg = 'Dear Sir/Madam,Your OTP for Registration of OTGCares is '.$otp.'. Please do not share this OTP with anyone';
+              if (sendsms($number,$dltId='1207167757998006000',$header="OTGCRS", $msg)) {
+                  $page_data['status'] = true;
+                  $page_data['message'] = "success";
+                 
+                  } else {
+                  $page_data['status'] = false;
+                  $page_data['message'] = "Something went wrong, please try again later.";
+                  }
+        }
+        $data['otp'] = $otp;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
+    // public function forgetotp(){
+    public function loginotp(){
+
+        if($this->input->post('number')){
+            $this->load->helper('msg');
+            $number = $this->input->post('number');
+            $result=$this->db->get_where('customer',array('contact'=>$number))->result_array();
+            if (count($result) > 0)
+            {
+                $otp = rand(10000, 99999);
+                  $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                  Do not share it with anyone';
+                  if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                      $page_data['status'] = true;
+                      $page_data['message'] = "success";
+                    
+                      } else {
+                      $page_data['status'] = false;
+                      $page_data['message'] = "Something went wrong, please try again later.";
+                      }
+            }
+            else
+            {
+                $otp = 'error';
+            }
+            
+        }
+        $this->session->set_userdata('login_otp',$otp);
+        $data['otp'] = $otp;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
+    public function login_otp_verify(){
+        if($this->input->post('loginotp')){
+            $loginotp=$this->input->post('loginotp');
+            $number = $this->input->post('number');
+            if($this->session->userdata['login_otp'] == $loginotp){
+                $otp = 'success';
+                    $result=$this->menu->checklogin($number);
+                    if(!empty($result)){
+                        $this->session->set_userdata('cid', $result->cust_id);
+                        $this->session->set_userdata('cemail', $result->email_id);
+                        $this->session->set_userdata('cname', $result->cust_name);
+                    }else{
+                        $page_data['message']="User not found";
+                    }
+            }
+            else{
+                $otp='error';
+            }
+           
+        }
+        $data['otp'] = $otp;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
     public function maintenance($action)
     {
     
@@ -321,6 +464,7 @@ class Welcome extends CI_Controller {
                 $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
                 $page_data['customers']=$customers_table;
                 $bookings_table=$this->db->get_where('bookings',array('cust_id'=>$session_cust))->result_array();
+                $checklist=$this->db->get_where('checklist',array('cust_id'=>$session_cust))->result_array();
                 if($this->input->post('submit') == 'edit'){
                 
                     $data=array(
@@ -335,11 +479,11 @@ class Welcome extends CI_Controller {
                     $this->db->where('cust_id',$session_cust);
                     $this->db->update('customer',$data);
                 }
-            $page_data['dropdown']=$this->menu->menu_all();
-            $page_data['page_title']="My Account";
-                            $page_data['bookings_table']=$bookings_table;
-
-            $page_data['page']="account";
+            $page_data['dropdown']         =  $this->menu->menu_all();
+            $page_data['page_title']       =  "My Account";
+            $page_data['bookings_table']   =  $bookings_table;
+            $page_data['checklist']        =  $checklist;
+            $page_data['page']             =  "account";
             $this->load->view('index',$page_data);
             
         }
@@ -354,10 +498,11 @@ class Welcome extends CI_Controller {
         //     $this->load->view('index',$page_data);
         // }
         else{
-            $page_data['dropdown']=$this->menu->menu_all();
-            $page_data['page']="sign_up";
-                $page_data['message']="";
-                $this->load->view('index',$page_data);
+            // $page_data['dropdown']=$this->menu->menu_all();
+            // $page_data['page']="sign_up";
+            //     $page_data['message']="";
+            //     $this->load->view('index',$page_data);
+                redirect(base_url('sign-up'));
         }
     }
     public function checkout(){
@@ -368,25 +513,21 @@ class Welcome extends CI_Controller {
         //if user logged in
         if($this->session->userdata['cid']){
             $page_data['cartItems']=$this->cart->contents();
-
             $session_cust=$this->session->userdata['cid'];
-                    
             $ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
             if($this->input->post()){
-                redirect(base_url('summery'));
+                $payment_method=$this->input->post('payment_method');
+                redirect(base_url("summery?payment_option=$payment_method"));
             }
 
         }//if user registered
         elseif($this->session->userdata('custid')){
             $page_data['cartItems']=$this->cart->contents();
-
             $session_cust=$this->session->userdata['custid'];
-            
             $ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
                 if($this->input->post()){
                     $payment_method=$this->input->post('payment_method');
-                    $this->load->view('summery',array('payment_method'=>$payment_method));
-                // redirect(base_url('summery'));
+                redirect(base_url("summery?payment_option=$payment_method"));
             }
 
         }//user added to cart without logging in
@@ -464,7 +605,7 @@ class Welcome extends CI_Controller {
          * You can calculate payment amount as per your logic
          * Always set the amount from backend for security reasons
          */
-        $_SESSION['payable_amount'] = $this->input->post('sub_total');
+        $_SESSION['payable_amount'] = $this->input->post('t_amnt');
 
         $razorpayOrder = $api->order->create(array(
             'receipt'         => rand(),
@@ -478,7 +619,7 @@ class Welcome extends CI_Controller {
         $_SESSION['razorpay_order_id'] = $razorpayOrderId;
         $data = $this->prepareData($amount,$razorpayOrderId);
         $session_cust=$this->session->userdata('cid');
-            $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+        $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
         $data=array(
             'data'=>$data,
             'customers' =>$customers_table,
@@ -563,24 +704,32 @@ class Welcome extends CI_Controller {
      */
     public function setRegistrationData()
     {
-            $data=array(
-                "cust_id"=>$this->input->post('customer_id'),
-                "cust_name"=>$this->input->post('c_name'),
-                "service_plan"=>$this->input->post('s_plan'),
-                "service_device"=>$this->input->post('s_device'),
-                "quantity"=>$this->input->post('quantity'),
-                "total_amount"=>$this->input->post('t_amnt'),
+
+        $main_arr=array();
+        $data=$this->input->post();
+        // print_r($data);
+        for($i=0;$i<count($data['s_plan']);$i++){
+            $arr=array(
+                "cust_id"           =>  $data['customer_id'],
+                "cust_name"         =>  $data['c_name'],
+                "service_plan"      =>  $data['s_plan'][$i],
+                "service_device"    =>  $data['s_device'][$i],
+                "quantity"          =>  $data['quantity'][$i],
+                "total_amount"      =>  $data['sub_total'][$i],
+                "order_id"          =>  $data['order_id'],
                 "status"=>'new',
                 "created_on"=>date('Y-m-d h:i:s')
-            
-
             );
+            $main_arr[]=$arr;
+        }
+        $cust_id = $this->session->userdata('cid');	
+				$sql = $this->db->insert_batch('bookings',$main_arr);
 
-            $customer_email=$this->db->get_where("customer",array('cust_id'=>$data['cust_id']))->result_array();
-            if($this->db->insert('bookings',$data)){
+            // $customer_email=$this->db->get_where("customer",array('cust_id'=>$data['cust_id']))->result_array();
+            if($sql == true){
                 $page_data['message']="Successfully created.";
                     
-                $booking_data=$this->db->get_where("bookings",array('cust_id'=>$data['cust_id'],'created_on'=>date('y-m-d h:i:s'),'status'=>$data['status']))->result_array();
+                $booking_data=$this->db->get_where("bookings",array('cust_id'=>$cust_id,'created_on'=>date('Y-m-d h:i:s'),'status'=>'new'))->result_array();
                 
                 $order_data                 =   array(
                     "cust_id"               =>  $this->input->post('customer_id'),
@@ -591,11 +740,11 @@ class Welcome extends CI_Controller {
                     'request_id'            =>  $booking_data[0]['request_id_value'],
                     "created_on"            =>  date('y-m-d')
                 );
-                    $reqid=$booking_data[0]['request_id_value'];    
+                    $reqid=$booking_data[0]['order_id'];    
                     $this->db->insert('checklist',$order_data);
                     $this->session->set_userdata('reqid',$reqid);
                 
-                    // redirect(base_url('receipt'));
+                    redirect(base_url('receipt'));
             }else{
                 $page_data['message']="Problem occured while adding bookings.";
 
@@ -633,18 +782,75 @@ class Welcome extends CI_Controller {
     {
         $this->load->view('error');
     }
+
+    public function summerydetail(){
+		// if($this->session->userdata('cid')){
+		// 	$session_cust=$this->session->userdata('cid');
+		// 	$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+		// 	$page_data['customers']=$customers_table;
+		// }elseif($this->session->userdata('custid')){
+		// 	$session_cust=$this->session->userdata('custid');
+		// 	$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+		// 	$page_data['customers']=$customers_table;
+		// }
+		// else{
+		// 	$session_cust=$this->session->userdata('newid');
+		// 	$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+		// 	$page_data['customers']=$customers_table;	
+		// }
+		$page_data['cartItems']=$this->cart->contents();
+		if($this->input->post()){
+            $main_arr=array();
+            $data=$this->input->post();
+            for($i=0;$i<count($data['s_plan']);$i++){
+				$arr=array(
+					"cust_id"           =>  $data['customer_id'],
+					"cust_name"         =>  $data['c_name'][$i],
+					"service_plan"      =>  $data['s_plan'][$i],
+					"service_device"    =>  $data['s_device'][$i],
+					"quantity"          =>  $data['quantity'][$i],
+					"total_amount"      =>  $data['sub_total'][$i],
+                    "order_id"          =>  $data['order_id'],
+					"status"=>'new',
+					"created_on"=>date('Y-m-d h:i:s')
+				);
+                $main_arr[]=$arr;
+            }
+				$cust_id = $this->session->userdata('cid');	
+				$sql = $this->db->insert_batch('bookings',$main_arr);
+                if($sql == true){
+					$page_data['message']="Successfully created.";
+					$booking_data=$this->db->get_where("bookings",array('cust_id'=>$cust_id,'created_on'=>date('Y-m-d h:i:s'),'status'=>'new'))->result_array();
+						$reqid=$booking_data[0]['order_id'];
+						$this->session->set_userdata('reqid',$reqid);
+						redirect(base_url('receipt'));
+				}else{
+					$page_data['message']="Problem occured while adding bookings.";
+				}
+		}
+		$page_data['dropdown']=$this->menu->menu_all();
+		$page_data['page_title']="Order Summery";
+			$page_data['page']="summery";
+			$this->load->view('index',$page_data);
+		
+	}
     public function receipt(){
+        
         $page_data['cartItems']=$this->cart->contents();
         if($this->session->userdata('reqid')){
-
             $reqid=$this->session->userdata('reqid');
-            $new_booking=$this->db->get_where("bookings",array('request_id_value'=>$reqid))->result_array();
+            $new_booking=$this->db->get_where("bookings",array('order_id'=>$reqid))->result_array();
             $cust_mail=$this->db->get_where("customer",array('cust_id'=>$new_booking[0]['cust_id']))->result_array();
                         $this->load->library('email');
-                        $this->email->from('info@hosinger.com','OTG Cares');
+                        $this->email->from('hr@otgcares.com','OTG Cares');
                         $this->email->to($cust_mail[0]['email_id']);
                         $this->email->subject("New Service Booked");
-                        $this->email->message("Thank you for your order"." ".$new_booking[0]["cust_name"]."\r\n"."Request Id"." ".$new_booking[0]["request_id_value"]."\r\n"."Order Details"."\r\n"."Order Id".$new_booking[0]['request_id']."\r\n"."Your name: ".$new_booking[0]['cust_name']."\r\n"."Service: ".$new_booking[0]['service_plan']." for ".$new_booking[0]['service_device']."\r\n"."Charges: &#8377;".$new_booking[0]['total_amount']);
+                        $message="Thank you for your order"." ".$new_booking[0]["cust_name"];
+                        foreach($new_booking as $nb){
+                            $message.="\r\n"."Request Id"." ".$nb["request_id_value"]."\r\n"."Order Details"."\r\n"."Order Id".$nb['request_id']."\r\n"."Your name: ".$nb['cust_name']."\r\n"."Service: ".$nb['service_plan']." for ".$nb['service_device']."\r\n"."Charges: &#8377;".$nb['total_amount'];
+                        }
+                        
+                        $this->email->message($message);
                         $this->email->set_newline("\r\n");
                         $this->email->send();
                         if($this->email->send()){
@@ -664,9 +870,9 @@ class Welcome extends CI_Controller {
                         $this->session->unset_userdata('reqid');
                         $this->cart->destroy();
         }
-        else{
-            redirect(base_url('/'));
-        }
+        // else{
+        //     redirect(base_url('/'));
+        // }
         
 
     }
@@ -786,6 +992,69 @@ public function tracker(){
     $page_data['dropdown']=$this->menu->menu_all();
     $page_data['page_title']="Track Service Request";
     $page_data['page']="tracker";
+    $this->load->view('index',$page_data);
+}
+public function upi(){
+
+    $page_data['cartItems']=$this->cart->contents();
+    if($this->input->post()){
+        $main_arr=array();
+        $data=$this->input->post();
+        for($i=0;$i<count($data['s_plan']);$i++){
+            $arr=array(
+                "cust_id"           =>  $data['customer_id'],
+                "cust_name"         =>  $data['c_name'][$i],
+                "service_plan"      =>  $data['s_plan'][$i],
+                "service_device"    =>  $data['s_device'][$i],
+                "quantity"          =>  $data['quantity'][$i],
+                "total_amount"      =>  $data['sub_total'][$i],
+                "order_id"          =>  $data['order_id'],
+                "status"=>'new',
+                "created_on"=>date('Y-m-d h:i:s')
+            );
+            $main_arr[]=$arr;
+        }
+            $cust_id = $this->session->userdata('cid');	
+            $sql = $this->db->insert_batch('bookings',$main_arr);
+            if($sql == true){
+                $page_data['message']="Successfully created.";
+                $booking_data=$this->db->get_where("bookings",array('cust_id'=>$cust_id,'created_on'=>date('Y-m-d h:i:s'),'status'=>'new'))->result_array();
+                    $reqid=$booking_data[0]['order_id'];
+                    $this->session->set_userdata('reqid',$reqid);
+                    redirect(base_url('receipt'));
+            }else{
+                $page_data['message']="Problem occured while adding bookings.";
+            }
+    }
+    // $page_data['dropdown']=$this->menu->menu_all();
+    // $page_data['page_title']="Order Summery";
+    //     $page_data['page']="summery";
+    //     $this->load->view('index',$page_data);
+    
+
+    $page_data['dropdown']=$this->menu->menu_all();
+    $page_data['page_title']="Payment";
+    $page_data['page']="upi";
+    $this->load->view('index',$page_data);
+}
+public function forget(){
+    $page_data['dropdown']=$this->menu->menu_all();
+    $page_data['page_title']="Forget Password";
+    $page_data['page']="forget";
+    $this->load->view('index',$page_data);
+}
+public function invoice($id){
+    $page_data['dropdown']=$this->menu->menu_all();
+    $page_data['invoice_create']=$this->menu->invoice($id);
+    // $data = [
+    //     'order_no' => $invoice_create[0]['request_id_value'],
+    //     'cust_name' => $invoice_create[0]['name'],
+    //     'cust_contact' => $invoice_create[0]['contact'],
+    //     'created_on' => date('d-m-y'),
+    // ];
+    // $this->db->insert('invoice',$data);
+    $page_data['page_title']="Invoice";
+    $page_data['page']="invoice";
     $this->load->view('index',$page_data);
 }
 

@@ -373,9 +373,9 @@
 <script src="<?php echo base_url();?>assets/js/vendor/jquery.cookie.js"></script>
 <script src="<?php echo base_url();?>assets/js/vendor/wow.min.js"></script>
 <!-- Including Javascript -->
+<script src="<?php echo base_url();?>assets/js/popper.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/plugins.js"></script>
-<script src="<?php echo base_url();?>assets/js/popper.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/lazysizes.js"></script>
 <script src="<?php echo base_url();?>assets/js/main.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>

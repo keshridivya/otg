@@ -19,32 +19,32 @@ class Engineer extends CI_Controller {
     public function index(){
         $ch = $this->input->post('ch');
         echo $ch;
-        // if(@$this->input->post()){
-        //     $this->form_validation->set_rules('email', 'Email', 'required');
-        //     $this->form_validation->set_rules('password', 'Password', 'required');
-        //     $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-        //     $this->form_validation->set_message('required', 'Enter %s');
-        //     if (@$this->form_validation->run() === false)
-        //     {  
-        //         $this->load->view('engineer/login');
-        //     }
-        //     else
-        //     {
-        //     $email=$this->input->post('email');
-        //     $password=sha1($this->input->post('password'));
-        //     $query=$this->db->get_where('engineer',array('email_id'=>$email,'password'=>$password,'status'=>'active'))->result_array();
-        //     if(!$query){
-        //         $page_data['message']='Username and Password is not correct';
-        //     }else{
-        //         $eid=$query[0]['eng_id'];
-        //         $ename=$query[0]['eng_name'];
-        //         $email=$query[0]['email_id'];
-        //         $this->session->set_userdata('eng_id',$eid);
-        //         $this->session->set_userdata('e_name',$ename);
-        //         $this->session->set_userdata('e_mail',$email);
-        //     }
-        //     }
-        // }
+        if(@$this->input->post()){
+            $this->form_validation->set_rules('email', 'Email', 'required');
+            $this->form_validation->set_rules('password', 'Password', 'required');
+            $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+            $this->form_validation->set_message('required', 'Enter %s');
+            if (@$this->form_validation->run() === false)
+            {  
+                $this->load->view('engineer/login');
+            }
+            else
+            {
+            $email=$this->input->post('email');
+            $password=sha1($this->input->post('password'));
+            $query=$this->db->get_where('engineer',array('email_id'=>$email,'password'=>$password,'status'=>'active'))->result_array();
+            if(!$query){
+                $page_data['message']='Username and Password is not correct';
+            }else{
+                $eid=$query[0]['eng_id'];
+                $ename=$query[0]['eng_name'];
+                $email=$query[0]['email_id'];
+                $this->session->set_userdata('eng_id',$eid);
+                $this->session->set_userdata('e_name',$ename);
+                $this->session->set_userdata('e_mail',$email);
+            }
+            }
+        }
         if($this->session->userdata['eng_id']){
             $bookings_table=$this->db->get("bookings")->result_array();
 			$page_data['bookings']=$bookings_table;
@@ -185,6 +185,7 @@ class Engineer extends CI_Controller {
                         'created_on' => date('y-m-d'),
                         'reschedule_date'=>$this->input->post('reschedule_ddate'),
                     );
+                    $case_payment=$this->input->post('case_payment');
                     $insert = $this->menu->createData($data);
                     $req_id=$this->input->post('request_id');
                     $btn_name=$this->input->post('btn_name');
@@ -202,15 +203,28 @@ class Engineer extends CI_Controller {
                         $this->db->where('request_id_value',$req_id);
                         $this->db->update('bookings',$data1);
                     }
-                    else{
+                    else if($btn_name=='close'){
                         $data1=array(
-                            'status'=>'complete',
+                            'status'=>'close',
                         );
                         $this->db->where('request_id_value',$req_id);
                         $this->db->update('bookings',$data1);
                     }
+                    else{
+                        $data1=array(
+                            'status'=>'close',
+                        );
+                        $this->db->where('request_id_value',$req_id);
+                        $this->db->update('bookings',$data1);
+                       
+                    }
                     if($insert){
                         $page_data['message']='Successfully Submitted';
+                        if($case_payment == 'online-199'){
+                            redirect('engineer/engineerupi');
+                        }
+                        else{
+                        }
                     }
                     else{
                         $page_data['message']='Something Went Wrong';
@@ -262,6 +276,18 @@ class Engineer extends CI_Controller {
 			
 			default:
 				# code...
+				break;
+		}
+	}
+
+    public function engineerupi($action,$id=false){
+		switch ($action) {
+			case 'view':
+			
+				$id=$this->session->userdata['eng_id'];
+                $page_data['page']='ongoing_assign/upi';
+                $this->load->view('engineer/index',$page_data);
+
 				break;
 		}
 	}

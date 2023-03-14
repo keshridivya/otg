@@ -54,6 +54,9 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['about-us']='welcome/about_us';
 $route['sign-up']='welcome/sign_up';
+$route['otp']='welcome/otp';
+$route['resend_otp']='welcome/resend_otp';
+$route['login-otp-verify']='welcome/login_otp_verify';
 $route['account']='welcome/account';
 $route['maintenance']='welcome/maintenance';   
 $route['maintenance/(:any)']='welcome/maintenance/$1';
@@ -76,7 +79,13 @@ $route['tracker']='welcome/tracker';
 $route['pay']='welcome/pay';
 $route['verify']='welcome/verify';
 $route['success']='welcome/success';
+$route['upi']='welcome/upi';
+$route['loginotp']='welcome/loginotp';
+$route['forgetotp']='welcome/forgetotp';
+$route['reset-password']='welcome/reset_password';
 $route['paymentFailed']='welcome/paymentFailed';
+$route['summerydetail']='welcome/summerydetail';
+$route['invoice/(:any)']='welcome/invoice/$1';
 
 // $route['update_cart']='welcome/update_cart';
 
@@ -218,6 +227,8 @@ $route['engineer/reschedule']='engineer/reschedule/view';
 $route['engineer/complete_assignment']='engineer/complete_assignment/view';
 
 $route['engineer/create']='engineer/create';
+$route['engineer/engineerupi']='engineer/engineerupi/view';
+
 
 
 

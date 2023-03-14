@@ -159,21 +159,50 @@ class Menu extends CI_model {
         }
     }
 
-    // public function booking_id($id){
-    //     $this->db->select('bookings');
-    //     $this->db->where(array('cust_id'=>$id,'created_on'=>,'status'=>$data['status']));
-    //     $this->db->order_by("cust_id desc");
-    //     $this->db->get();
-    //     if($query->num_rows()!=0){
-    //         return $query->result_array();
-    //     }
-    //     else{
-    //         return false;
-    //     }
+    public function invoice($id){
+        $cid=$this->session->userdata['cid'];
+        $this->db->select('*,bookings.created_on as created_date,bookings.total_amount as amt,customer.cust_name as name');
+        $this->db->from('bookings');
+        $this->db->join('customer','bookings.cust_id=customer.cust_id ');
+        // $this->db->join('checklist','bookings.request_id_value=checklist.request_id ');
+        $this->db->where(array('bookings.request_id_value '=>$id,'customer.cust_id '=>$cid));
+        $query = $this->db->get();
+        // print_r($this->db->last_query());
+        if($query->num_rows()>0){
+            return $query->result_array();
+        }
+        else{
+            return false;
+        }
+    }
+
+    // function checklogin($email,$password)
+    // {
+    //     $this->db->select('*');
+    //     $this->db->from('customer');
+    //     $this->db->group_start();
+    //     $this->db->where('email_id', $email)->or_where('contact', $email);
+    //     $this->db->group_end();
+    //     $this->db->where('password', $password);
+    //     $query = $this->db->get();
+    //     return $query->row();
+
     // }
+
+    function checklogin($email)
+    {
+        $this->db->select('*');
+        $this->db->from('customer');
+        $this->db->where('contact', $email);
+        $query = $this->db->get();
+        return $query->row();
+
+    }
 
     public function createData($data) {
         $query = $this->db->insert('booking_items', $data);
+                //  print_r($this->db->last_query()); 
+
         return $query;
     }
     

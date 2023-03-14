@@ -21,8 +21,11 @@
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-</head>
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">-->
+<!--<script src="https://code.jquery.com/jquery-3.3.1.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js|https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
 
+</head>
 <body class="template-index home13-auto-parts">
 	<div id="pre-loader">
 		<img src="<?php echo base_url();?>assets/images/loader.gif" alt="Loading..." />
@@ -55,12 +58,57 @@
 
 					<!--End Desktop Logo-->
 					<div class="col-2 col-sm-3 col-md-3 col-lg-8 order2">
-						<div class="d-block d-lg-none">
+					    <style>
+					        @media(max-width:466px){
+					            .drop_menu_id{
+				                transform: translate3d(-180px, 56px, 0px) !important;
+					            }
+					        }
+					    </style>
+						<div class="d-flex d-lg-none">
 							<button type="button"
 								class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
 								<i class="icon anm anm-times-l"></i>
 								<i class="anm anm-bars-r"></i>
 							</button>
+							<?php
+            					if($this->session->userdata['cid']){
+            					?>
+							<ul class='navbar-nav'>
+                                <li class='nav-item dropdown'>
+                                    <div style='margin-left:10px'>
+                                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
+                                            data-toggle="dropdown" aria-expanded="false">
+                                            <?php
+                                             $name  = strtoupper($this->session->userdata['cname']); 
+                                                $remove = ['.', 'MRS', 'MISS', 'MS', 'MASTER', 'DR', 'MR'];
+                                                $nameWithoutPrefix=str_replace($remove," ",$name);
+                                            
+                                            $words = explode(" ", $nameWithoutPrefix);
+                                            $firtsName = reset($words); 
+                                             $lastName  = end($words);
+                                            
+                                            
+                                            ?>
+                                            <div class="rounded-circle"
+                                                style="background:var(--var-brown);color:white;font-weight:bold;padding:3px;"><?php echo substr($firtsName,0,1);
+                                             echo substr($lastName ,0,1); ?>
+                                            </div>
+
+                                        </a>
+                                        <div class="dropdown-menu drop_menu_id"
+                                            aria-labelledby="navbarDropdownMenuLink">
+                                            <p class='dropdown-item'><span style="color:#096459;font-weight:700;border-bottom: 1px solid #f1ecec;">Hey, <?= $this->session->userdata['cname'] ?></span></p>
+                                            <a class="dropdown-item" href="<?php echo base_url();?>account?show=myaccount"><i class="fa fa-user" style='color:#096459;'></i> &nbsp; &nbsp;My Account</a>
+                                            <a class="dropdown-item" href="<?php echo base_url();?>account?show=booking"><i class="fa fa-info-circle" style='color:#096459;'></i> &nbsp; &nbsp;Booking Detail</a>
+                                            <a class="dropdown-item" href="<?php echo base_url();?>account?show=extended"><i class="fa fa-expand" style='color:#096459;'></i> &nbsp; &nbsp;Extended Warrenty</a>
+                                            <a class="dropdown-item" href="<?php echo base_url('logout')?>"><i class="fa fa-sign-out" style='color:#096459;'></i> &nbsp; &nbsp;Log Out</a>
+                                        </div>
+                                        <!--Profile Image-->
+                                    </div>
+                                </li>
+                            </ul>
+                            <?php } ?>
 						</div>
 						<!--Desktop Menu-->
 						<nav class="grid__item" id="AccessibleNav">
@@ -170,8 +218,24 @@
 					<li class="lvl1 sign-in"><a href="<?php echo base_url();?>sign-up"><b>Sign In</b> <i
 								class="anm anm-angle-down-l"></i></a></li>
 					<?php }else{ ?>
-						<li class="lvl1 sign-in"><a href="<?php echo base_url();?>account"><b><?php echo "Hello"." ".$this->session->userdata['cname']?></b> <i
-								class="anm anm-angle-down-l"></i></a></li>
+				<li class="lvl1 parent dropdown" style='height:40px'>
+                                    <p><a class="site-nav"><small>Hello &nbsp;&nbsp; <i
+                                            class="fa fa-caret-down"></i> </small> 
+                                        <br><span style="color:var(--var-green);"><?php echo $this->session->userdata['cname']?></span></a>
+                                    <ul class="dropdown">
+                                        
+                                        <li><a href="<?php echo base_url();?>account?show=myaccount" class="site-nav">My Account</a></li>
+                                        <li><a href="<?php echo base_url();?>account?show=booking" class="site-nav">Booking Detail</a></li>
+                                        <li><a href="<?php echo base_url();?>account?show=extended" class="site-nav">Extended Warrenty</a></li>
+                                        <li><a href="<?php echo base_url('logout')?>" class="site-nav">Logout</a></li>
+                                    </ul>
+                                </p>
+                                    <!-- <a
+                                        href="<?php echo base_url();?>account"><b><?php echo "Hello"." ".$this->session->userdata['cid']?></b>
+                                        <i class="anm anm-angle-down-l"></i></a> -->
+                                </li>
+						<!--<li class="lvl1 sign-in"><a href="<?php echo base_url();?>account"><b><?php echo "Hello"." ".$this->session->userdata['cname']?></b> <i-->
+						<!--		class="anm anm-angle-down-l"></i></a></li>-->
 						<?php } ?>
 					</ul>
 					</nav>
@@ -180,7 +244,7 @@
 				<!--Mobile Logo-->
 				<div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
 					<div class="logo">
-						<a href="index.php">
+						<a href="<?php echo base_url();?>">
 							<img src="<?php echo base_url();?>assets/images/logo/OTG_Final_LOGO.png" alt="OTG Cares"
 								title="OTG Cares" class='mobileotglogo' />
 						</a>
@@ -221,7 +285,7 @@
 			</div>
 		</div>
 
-		<ul id="MobileNav" class="mobile-nav p-2">
+		<ul id="MobileNav" class="mobile-nav p-2" style='overflow:scroll'>
 			<!-- <li class="lvl1 megamenu"><a href="<?php echo base_url();?>">Home</a>
 
 				</li> -->
@@ -267,18 +331,26 @@
 					<li class=''><a href="" class="site-nav dropdownmenubar">Quick Repair <i
 								class="anm anm-plus-l"></i></a>
 						<ul class="dropdown sub-header pl-2">
-							<li><a href="" class="site-nav">Air Conditioner</a></li>
-							<li><a href="" class="site-nav">Water Purifier</a></li>
-							<li><a href="" class="site-nav">Washing Machine</a></li>
-							<li><a href="" class="site-nav">Laptop</a></li>
-							<li><a href="" class="site-nav">Microwave</a></li>
-							<li><a href="" class="site-nav">Mobile Phone</a></li>
-							<li><a href="" class="site-nav">Geyser</a></li>
-							<li><a href="" class="site-nav">Printer</a></li>
-							<li><a href="" class="site-nav">Refridgerator</a></li>
-							<li><a href="" class="site-nav">Chimney</a></li>
-							<li><a href="" class="site-nav">Tablet</a></li>
-							<li><a href="" class="site-nav">Television</a></li>
+						    <?php foreach($dropdown as $drop){  ?>
+												
+															<li><a
+																	href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>"
+																	class="site-nav" style='font-weight:500'><?= $drop['cproduct_name']; ?></a>
+															</li>
+														
+													<?php } ?>
+							<!--<li><a href="" class="site-nav">Air Conditioner</a></li>-->
+							<!--<li><a href="" class="site-nav">Water Purifier</a></li>-->
+							<!--<li><a href="" class="site-nav">Washing Machine</a></li>-->
+							<!--<li><a href="" class="site-nav">Laptop</a></li>-->
+							<!--<li><a href="" class="site-nav">Microwave</a></li>-->
+							<!--<li><a href="" class="site-nav">Mobile Phone</a></li>-->
+							<!--<li><a href="" class="site-nav">Geyser</a></li>-->
+							<!--<li><a href="" class="site-nav">Printer</a></li>-->
+							<!--<li><a href="" class="site-nav">Refridgerator</a></li>-->
+							<!--<li><a href="" class="site-nav">Chimney</a></li>-->
+							<!--<li><a href="" class="site-nav">Tablet</a></li>-->
+							<!--<li><a href="" class="site-nav">Television</a></li>-->
 
 
 						</ul>
@@ -306,9 +378,9 @@
 			<li><a href="<?php echo base_url();?>blog" class="site-nav">Blog</a></li>
 			<li><a href="<?php echo base_url();?>contact" class="site-nav">Contact Us</a></li>
 			<?php
-if(!$this->session->userdata['cid']){
-?>
-			<li class="lvl1 signinbtn"><a href="<?php echo base_url();?>sign-up"> <i class='fas fa-user-circle'></i>
+                if(!$this->session->userdata['cid']){
+                ?>
+			<li class="lvl1 signinbtn" style='margin-bottom: 100px;'><a href="<?php echo base_url();?>sign-up"> <i class='fas fa-user-circle'></i>
 					<b>Sign In</b></a>
 			</li>
 			<?php } ?>

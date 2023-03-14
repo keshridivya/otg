@@ -11,152 +11,154 @@
 								<hr>
 							</div>
 
-                            <?php if(@$payment_method == 'cob'){ ?> 
-                                <form class="new-booking hrrlo" method="post" action="<?php echo base_url('receipt') ?>">
-								<input type="hidden" class="form-control form-control-user" name="customer_id"
-									value="<?php echo $customers[0]['cust_id'];?>" >
+							<?php 
+                            $payment_method=$this->input->get('payment_option');
+                            if(@$payment_method == 'cob'){ 
+                                ?>
+							
+							<form class="new-booking hrrlo" method="post"
+								action="<?php echo base_url('summerydetail') ?>">
+								
+                                <?php  if($this->cart->total_items()>0){
+                                    foreach($cartItems as $item){ ?>
+								<input type="hidden" class="form-control form-control-user" name="customer_id" value="<?php echo $customers[0]['cust_id'];?>">
 
-                                    <input type="hidden" class="form-control form-control-user" 
+								<input type="hidden" class="form-control form-control-user"
 									value="<?php echo $customers[0]['email_id'];?>" name="c_email">
 
-                                    <input type="hidden" class="form-control form-control-user" 
+								<input type="hidden" class="form-control form-control-user"
 									value="<?php echo $customers[0]['contact'];?>" name="c_contact">
+                                
+                                <input type="hidden" value='OTG-<?= time().rand(100, 999) ?>' name='order_id'>
 
 								<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 									value="<?php echo $this->security->get_csrf_hash();?>">
 								<div class="form-group row">
-									<div class="col-sm-4 mb-3 mb-sm-0">
-										<label for="c_name">Customer Name</label>
-										<input type="text" name="c_name"
+									<!--<div class="col-sm-4 col-6 mb-3 mb-sm-0">-->
+									<!--	<label for="c_name">Customer Name</label>-->
+										<input type="hidden" name="c_name[]"
 											value="<?php echo $customers[0]['cust_name'];?>" id="c_name"
 											class="form-control form-control-user" placeholder="Customer Name" readonly>
-									</div>
-
-									<div class="col-sm-4 mb-3 mb-sm-0">
+									<!--</div>-->
+									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
 										<label for="s_plan">Service Plan</label>
-										<input type="text" name="s_plan" value="<?php if($this->cart->total_items()>0){
-                                                foreach($cartItems as $item){
-                                                     echo $item['name']." "; 
-                                                     
-                                                    }
-                                                    }?>" id="s_plan" class="form-control form-control-user"
+										<input type="text" name="s_plan[]" value="<?php echo $item['name']; ?>"
+											id="s_plan" class="form-control form-control-user"
 											placeholder="Service Plan" readonly>
 									</div>
-
-									<div class="col-sm-4">
+									<div class="col-sm-4 col-6">
 										<label for="s_device">Service Device</label>
-										<input type="text" name="s_device" value="<?php if($this->cart->total_items()>0){
-                                                foreach($cartItems as $item){
-                                                     echo $item['product_name']." ";
-                                                    
-                                                    }
-                                                    }?>" id="s_device" class="form-control form-control-user"
-											placeholder="Service Device" readonly>
+										<input type="text" name="s_device[]" value="<?php 
+                                                     echo $item['product_name']; ?>" id="s_device"
+											class="form-control form-control-user" placeholder="Service Device"
+											readonly>
 									</div>
-
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
 										<label for="quantity">Total Devices</label>
-										<input type="text" name="quantity" id="quantity" value="<?= $item['qty'] ?>"
+										<input type="text" name="quantity[]" id="quantity" value="<?= $item['qty'] ?>"
 											class="form-control form-control-user" placeholder="Total Amount" readonly>
 									</div>
-									<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
 										<label for="sub_total">Subtotal</label>
-										<input type="text" name="sub_total" id="sub_total"
-											value="<?= $item['subtotal'] ?>" class="form-control form-control-user"
-											placeholder="Total Amount" readonly>
-									</div>
-									<div class="col-sm-4 mb-3 mb-sm-0">
-										<label for="t_amnt">Total Amount</label>
-										<input type="text" name="t_amnt" id="t_amnt"
-											value="<?= $this->cart->format_number($this->cart->total()) ?>"
+										<input type="text" name="sub_total[]" id="sub_total" value="<?= $item['price'] ?>"
 											class="form-control form-control-user" placeholder="Total Amount" readonly>
 									</div>
-
 								</div>
-
+								<hr>
+								<?php  } } ?>
+								<div class="col-sm-12 mb-3 mb-sm-0">
+									<div class="row">
+										<div class="col-sm-6">
+											<label for="t_amnt">Total Amount</label>
+										</div>
+										<div class="col-sm-6">
+											<input type="text" name="t_amnt" id="t_amnt"
+												value="<?= $this->cart->format_number($this->cart->total()) ?>"
+												class="form-control form-control-user" placeholder="Total Amount"
+												readonly>
+										</div>
+									</div>
+								</div>
 								<div class="col-lg-12 text-center">
-
-									<input type="submit" name="submitsummery" value="Checkout" class="theme-btn offer-btn">
+									<input type="submit" name="submitsummery" value="Checkout"
+										class="theme-btn offer-btn">
 								</div>
-
-
-
 							</form>
-                            <?php } ?>
-							<form class="new-booking" method="post" action="<?php echo base_url('pay') ?>">
-								<input type="hidden" class="form-control form-control-user" name="customer_id"
-									value="<?php echo $customers[0]['cust_id'];?>" >
+							<?php }else{ ?>
+							<!-- <form class="new-booking" method="post" action="<?php echo base_url('pay') ?>"> -->
+							<form class="new-booking hrrlo" method="post"
+								action="<?php echo base_url('upi') ?>">
+                            <?php  if($this->cart->total_items()>0){
+                                    foreach($cartItems as $item){ ?>
+								<input type="hidden" class="form-control form-control-user" name="customer_id" value="<?php echo $customers[0]['cust_id'];?>">
 
-                                    <input type="hidden" class="form-control form-control-user" 
+								<input type="hidden" class="form-control form-control-user"
 									value="<?php echo $customers[0]['email_id'];?>" name="c_email">
 
-                                    <input type="hidden" class="form-control form-control-user" 
+								<input type="hidden" class="form-control form-control-user"
 									value="<?php echo $customers[0]['contact'];?>" name="c_contact">
+                                
+                                <input type="hidden" value='OTG-<?= time().rand(100, 999) ?>' name='order_id'>
 
 								<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 									value="<?php echo $this->security->get_csrf_hash();?>">
 								<div class="form-group row">
-									<div class="col-sm-4 mb-3 mb-sm-0">
-										<label for="c_name">Customer Name</label>
-										<input type="text" name="c_name"
+									<!--<div class="col-sm-4 col-6 mb-3 mb-sm-0">-->
+									<!--	<label for="c_name">Customer Name</label>-->
+										<input type="hidden" name="c_name"
 											value="<?php echo $customers[0]['cust_name'];?>" id="c_name"
 											class="form-control form-control-user" placeholder="Customer Name" readonly>
-									</div>
-
-									<div class="col-sm-4 mb-3 mb-sm-0">
+									<!--</div>-->
+									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
 										<label for="s_plan">Service Plan</label>
-										<input type="text" name="s_plan" value="<?php if($this->cart->total_items()>0){
-                                                foreach($cartItems as $item){
-                                                     echo $item['name']." "; 
-                                                     
-                                                    }
-                                                    }?>" id="s_plan" class="form-control form-control-user"
+										<input type="text" name="s_plan[]" value="<?php echo $item['name']; ?>"
+											id="s_plan" class="form-control form-control-user"
 											placeholder="Service Plan" readonly>
 									</div>
-
-									<div class="col-sm-4">
+									<div class="col-sm-4 col-6">
 										<label for="s_device">Service Device</label>
-										<input type="text" name="s_device" value="<?php if($this->cart->total_items()>0){
-                                                foreach($cartItems as $item){
-                                                     echo $item['product_name']." ";
-                                                    
-                                                    }
-                                                    }?>" id="s_device" class="form-control form-control-user"
-											placeholder="Service Device" readonly>
+										<input type="text" name="s_device[]" value="<?php 
+                                                     echo $item['product_name']; ?>" id="s_device"
+											class="form-control form-control-user" placeholder="Service Device"
+											readonly>
 									</div>
-
 								</div>
 								<div class="form-group row">
-									<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
 										<label for="quantity">Total Devices</label>
-										<input type="text" name="quantity" id="quantity" value="<?= $item['qty'] ?>"
+										<input type="text" name="quantity[]" id="quantity" value="<?= $item['qty'] ?>"
 											class="form-control form-control-user" placeholder="Total Amount" readonly>
 									</div>
-									<div class="col-sm-4 mb-3 mb-sm-0">
+									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
 										<label for="sub_total">Subtotal</label>
-										<input type="text" name="sub_total" id="sub_total"
-											value="<?= $item['subtotal'] ?>" class="form-control form-control-user"
-											placeholder="Total Amount" readonly>
-									</div>
-									<div class="col-sm-4 mb-3 mb-sm-0">
-										<label for="t_amnt">Total Amount</label>
-										<input type="text" name="t_amnt" id="t_amnt"
-											value="<?= $this->cart->format_number($this->cart->total()) ?>"
+										<input type="text" name="sub_total[]" id="sub_total" value="<?= $item['price'] ?>"
 											class="form-control form-control-user" placeholder="Total Amount" readonly>
 									</div>
-
 								</div>
-
+								<hr>
+								<?php  } } ?>
+								<div class="col-sm-12 mb-3 mb-sm-0">
+									<div class="row">
+										<div class="col-sm-6">
+											<label for="t_amnt">Total Amount</label>
+										</div>
+										<div class="col-sm-6">
+											<input type="text" name="t_amnt" id="t_amnt"
+												value="<?= $this->cart->format_number($this->cart->total()) ?>"
+												class="form-control form-control-user" placeholder="Total Amount"
+												readonly>
+										</div>
+									</div>
+								</div>
 								<div class="col-lg-12 text-center">
-
-									<input type="submit" name="submitsummery" value="Checkout" class="theme-btn offer-btn">
+									<input type="submit" name="submitsummery" value="Checkout"
+										class="theme-btn offer-btn">
 								</div>
-
-
 
 							</form>
+							<?php } ?>
 						</div>
 
 					</div>

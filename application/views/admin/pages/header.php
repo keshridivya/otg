@@ -10,6 +10,8 @@
 
     <title><?php echo $page_title; ?></title>
 
+    <!-- datatable -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.3/css/dataTables.bootstrap4.min.css">
     <!-- Custom fonts for this template-->
     <link href="<?php echo base_url();?>assets/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link

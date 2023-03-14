@@ -27,38 +27,45 @@
                                                       </tr>
                                                       <tr>
                                                          <td class="content-block">
+                                                            <?php
+                                                            foreach($new_booking as $new_booking){
+                                                            ?>
                                                             <table class="invoice">
                                                                <tbody>
                                                                   <tr>
                                                                      <td>
                                                                         <h4>
-                                                                        <?php echo $new_booking[0]['cust_name']?></>
+                                                                        <?php echo $new_booking['cust_name']?></h4>
                                                                      </td>
                                                                   </tr>
                                                                   <tr>
-                                                                     <td>Request Id: <?php echo $new_booking[0]['request_id_value'] ?></td>
-                                                                     <td class="alignright">Date: <?php echo $new_booking[0]['created_on'] ?></td>
+                                                                     <td>Request Id: <?php echo $new_booking['request_id_value'] ?></td>
+                                                                     <td class="alignright">Date: <?php echo $new_booking['created_on'] ?></td>
                                                                   </tr>
                                                                   <td colspan="2">
                                                                      <table class="invoice-items" >
                                                                         <tbody>
                                                                            <tr>
                                                                               <td>Service Device</td>
-                                                                              <td class="alignright"><?php echo $new_booking[0]['service_device'] ?></td>
+                                                                              <td class="alignright"><?php echo $new_booking['service_device'] ?></td>
                                                                            </tr>
                                                                            <tr>
                                                                               <td>Service Plan</td>
-                                                                              <td class="alignright"><?php echo $new_booking[0]['service_plan'] ?></td>
+                                                                              <td class="alignright"><?php echo $new_booking['service_plan'] ?></td>
                                                                            </tr>
-                                                                           <tr class="total">
-                                                                              <td class="alignright" width="80%">Total</td>
-                                                                              <td class="alignright"> <i class="fa-solid fa-indian-rupee-sign"></i><?= $this->cart->format_number($this->cart->total()) ?></td>
-                                                                           </tr>
+                                                                           
                                                                         </tbody>
                                                                      </table>
                                                                   </td>
                                                                   </tr>
                                                                </tbody>
+                                                            </table>
+                                                            <?php } ?>
+                                                            <table>
+                                                            <tr class="total">
+                                                                              <td class="alignright" width="80%">Total</td>
+                                                                              <td class="alignright"> <i class="fa-solid fa-indian-rupee-sign"></i><?= $this->cart->format_number($this->cart->total()) ?></td>
+                                                                           </tr>
                                                             </table>
                                                          </td>
                                                       </tr>
