@@ -11,7 +11,7 @@
 					<div class="col-lg-12">
 						<div class="p-5">
 							<?php
-                          if($message){
+                          if($message ?? FALSE){
                             echo "<div class='alert alert-info'>".$message."</div>";
                           }
                           ?>

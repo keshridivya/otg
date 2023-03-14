@@ -17,6 +17,7 @@ class Engineer extends CI_Controller {
     }
 
     public function index(){
+        $page_data=[];
         $ch = $this->input->post('ch');
         echo $ch;
         if(@$this->input->post()){
@@ -45,18 +46,19 @@ class Engineer extends CI_Controller {
             }
             }
         }
-        if($this->session->userdata['eng_id']){
+        if($this->session->userdata('eng_id')){
             $bookings_table=$this->db->get("bookings")->result_array();
 			$page_data['bookings']=$bookings_table;
             $page_data['page']="dashboard";
             $this->load->view('engineer/index',$page_data);
         }else{
-        $this->load->view('engineer/login',$page_data);
+            $this->load->view('engineer/login',$page_data);
         }
     }
 
     public function myaccount(){
-        $id=$this->session->userdata['eng_id'];
+        if($this->session->userdata('eng_id')){
+        $id=$this->session->userdata('eng_id');
         if(@$this->input->post()){
             if($_FILES['file']['name']!= ""){
                 $absolute_path=base_url('uploads/engineer/');
@@ -77,6 +79,9 @@ class Engineer extends CI_Controller {
         $page_data['info']=$this->db->get_where('engineer',array('eng_id'=>$id))->result_array();
         $page_data['page']='myaccount';
         $this->load->view('engineer/index',$page_data);
+    }else{
+        redirect(base_url('engineer'));
+        }
     }
 
     public function ongoing($action,$id= false){
@@ -92,6 +97,8 @@ class Engineer extends CI_Controller {
                 
                 if($this->input->post()){
                    
+                    $dataInfo = array();
+                    $files = $_FILES;
                     $rid=$this->input->post('r_id');
                     if($_FILES['image1']['name']!= ""){
                         $absolute_path=base_url('uploads/eng_client/');
@@ -113,10 +120,11 @@ class Engineer extends CI_Controller {
                         $absolute_path=base_url('uploads/eng_client/');
                         $uploaded_data5=$this->uploadimg5(array('upload_path'=>'./uploads/eng_client/','name'=>'image5'));
                     }
+                    
                     $data=array(
                         'customer_id'=>$this->input->post('c_id'),
                         'customer_name'=>$this->input->post('c_name'),
-                        'engineer_id'=>$this->input->post('eng_id'),
+                        'engineer_id'=>$this->input->post('e_id'),
                         'engineer_name'=>$this->input->post('e_name'),
                         'booking_request_id'=>$this->input->post('request_id'),
                         'additional_text_1'=>$this->input->post('additional_text_1'),
@@ -129,21 +137,48 @@ class Engineer extends CI_Controller {
                     );
 
                     if(is_countable($uploaded_data1) && count($uploaded_data1)>=1){
-                        $data['image1']='uploads/engineer/'.$uploaded_data1['file_name'];
+                        $data['image1']='uploads/eng_client/'.$uploaded_data1['file_name'];
                     }
                     if(is_countable($uploaded_data2) && count($uploaded_data2)>=1){
-                        $data['image2']='uploads/engineer/'.$uploaded_data2['file_name'];
+                        $data['image2']='uploads/eng_client/'.$uploaded_data2['file_name'];
                     }
                     if(is_countable($uploaded_data3) && count($uploaded_data3)>=1){
-                        $data['image3']='uploads/engineer/'.$uploaded_data3['file_name'];
+                        $data['image3']='uploads/eng_client/'.$uploaded_data3['file_name'];
                     }
                     if(is_countable($uploaded_data4) && count($uploaded_data4)>=1){
-                        $data['image4']='uploads/engineer/'.$uploaded_data4['file_name'];
+                        $data['image4']='uploads/eng_client/'.$uploaded_data4['file_name'];
                     }
                     if(is_countable($uploaded_data5) && count($uploaded_data5)>=1){
-                        $data['image5']='uploads/engineer/'.$uploaded_data5['file_name'];
+                        $data['image5']='uploads/eng_client/'.$uploaded_data5['file_name'];
+                    }
+                    if(!empty($_FILES['image6']['name'])){
+                        
+                        $number_of_file = sizeof($_FILES['image6']['tmp_name']);
+                        $file = $_FILES['image6'];
+
+                        $files = array();
+
+                        // Faking upload calls to $_FILE
+                        for ($i = 0; $i < $number_of_file; $i++) {
+
+                            $_FILES['image6']['name']     = $file ['name'][$i];
+                            $_FILES['image6']['type']     = $file ['type'][$i];
+                            $_FILES['image6']['tmp_name'] = $file ['tmp_name'][$i];
+                            $_FILES['image6']['error']    = $file ['error'][$i];
+                            $_FILES['image6']['size']     = $file ['size'][$i];
+
+                            $config['upload_path'] = './uploads/eng_client/'; 
+                            $config['allowed_types'] = 'gif|jpg|png';
+                            $this->upload->initialize($config);
+                            $this->upload->do_upload('image6');
+                            $files[] = $this->upload->data('file_name');
+
+                            $data['imageloop']= implode(",",$files);
+                        print_r($data);
+                    }
                     }
                     if($this->db->insert('engineer_client',$data)){
+                        print_r($this->db->last_query());
                         $page_data['message'] = 'Submitted Succesfully';
                         $data1['procees']='proceed';
                         redirect('engineer/ongoing/add/'.$rid);
@@ -384,5 +419,18 @@ class Engineer extends CI_Controller {
                     return $this->upload->data();
                 }
             }
+            // public function uploadimgloop($data){
+            //     $config['upload_path'] =$data['upload_path'];
+            //     $config['allowed_types']='gif|jpg|png|jpeg';
+            //     $this->load->library('upload',$config);
+            //     if(!$this->upload->do_upload($data['name']))
+            //     {
+            //         print_r($this->upload->display_errors());
+            //     }
+            //     else
+            //     {
+            //         return $this->upload->data();
+            //     }
+            // }
            
 }

@@ -216,6 +216,7 @@
     }
     .order2 {
         order: 2;
+        margin-left: -12px;
     }
     .site-cart {
         margin-left: auto;

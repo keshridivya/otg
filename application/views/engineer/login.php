@@ -72,7 +72,7 @@
 									</div>
                                     
 									<?Php
-                                    if($message){
+                                    if($message ?? FALSE){
                                         echo '<div class="error">'.$message.'</div>';
                                     }
                                     ?>

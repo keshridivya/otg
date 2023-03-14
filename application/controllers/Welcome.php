@@ -46,9 +46,7 @@ class Welcome extends CI_Controller {
         $this->load->view('index',$page_data);
 
     }
-    // public function head(){
-    //     $this->load->view('')
-    // }
+
     public function about_us()
     {
         $page_data['page_title']="About Us";
@@ -263,31 +261,31 @@ class Welcome extends CI_Controller {
 
 
 
-    public function reset_password()
-    {
-        if ($this->input->post()){
-            $contact=$this->input->post('mobile');
-            $data=array(
-                "password"=>sha1($this->input->post('password')),
-            );
-            $this->db->where('contact',$contact);
-            if($this->db->update('customer',$data)){
-                redirect('sign-up');
-            }else{
+    // public function reset_password()
+    // {
+    //     if ($this->input->post()){
+    //         $contact=$this->input->post('mobile');
+    //         $data=array(
+    //             "password"=>sha1($this->input->post('password')),
+    //         );
+    //         $this->db->where('contact',$contact);
+    //         if($this->db->update('customer',$data)){
+    //             redirect('sign-up');
+    //         }else{
                 
-                $page_data['message']='something went wrong';
-            }
-        }
+    //             $page_data['message']='something went wrong';
+    //         }
+    //     }
        
-        else{
-            $page_data['dropdown']=$this->menu->menu_all();
-                $page_data['page_title']="Sign Up";
-                $page_data['page']="reset_password";
-                $this->load->view('index',$page_data);
+    //     else{
+    //         $page_data['dropdown']=$this->menu->menu_all();
+    //             $page_data['page_title']="Sign Up";
+    //             $page_data['page']="reset_password";
+    //             $this->load->view('index',$page_data);
                 
-        }
+    //     }
         
-    }
+    // }
     
     //otp
     public function otp(){
@@ -350,16 +348,16 @@ class Welcome extends CI_Controller {
             if (count($result) > 0)
             {
                 $otp = rand(10000, 99999);
-                  $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
-                  Do not share it with anyone';
-                  if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
-                      $page_data['status'] = true;
-                      $page_data['message'] = "success";
+                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                //   Do not share it with anyone';
+                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                //       $page_data['status'] = true;
+                //       $page_data['message'] = "success";
                     
-                      } else {
-                      $page_data['status'] = false;
-                      $page_data['message'] = "Something went wrong, please try again later.";
-                      }
+                //       } else {
+                //       $page_data['status'] = false;
+                //       $page_data['message'] = "Something went wrong, please try again later.";
+                //       }
             }
             else
             {

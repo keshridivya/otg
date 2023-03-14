@@ -83,6 +83,6 @@ $(document).ready(function(){
             $('.btn_name').val(value_btn);
         }
     });
+});
 
-   
-})
+ 

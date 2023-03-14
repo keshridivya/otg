@@ -60,26 +60,6 @@
 										value="<?php echo $this->security->get_csrf_hash();?>">
 										<input type="hidden" id='login_vrf_otp'>
 
-									<!-- <div class="row justify-content-center">
-										<div class="col-lg-6">
-											<div class="form-group">
-												<input type="text" class="form-control" id="userid" name="userid"
-													placeholder="Mobile Number/Email Address"
-													value="<?php set_value('userid');?>">
-											</div>
-											<?php echo form_error('userid');?>
-										</div>
-									</div>
-									<div class="row justify-content-center">
-										<div class="col-lg-6">
-											<div class="form-group">
-												<input type="password" class="form-control" id="pwd" name="pwd"
-													placeholder="Password" value="<?php set_value('pwd');?>">
-
-											</div>
-											<?php echo form_error('pwd');?>
-										</div>
-									</div> -->
 									<div class="row justify-content-center">
 											<div class="col-lg-6">
 												<div class="form-group">
