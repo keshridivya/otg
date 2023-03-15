@@ -2,7 +2,11 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-lg-12">
+
+			</div>
+			<div class="col-lg-12">
 				<div class="tab-content mt-4" id="v-pills-tabContent">
+
 					<div class="tab-pane fade <?=(isset($_GET['show']) && $_GET['show'] =='booking') ? "show active" : ""; ?>"
 						id="booking" role="tabpanel" aria-labelledby="v-pills-profile-tab">
 						<div class="container">
@@ -48,7 +52,10 @@
 														&nbsp; &nbsp; <span>booking Date : </span>
 														<?php echo $book_table['created_on']; ?></p>
 														<br>
-
+														<?php
+                                                                            $req_id=$book_table['request_id_value'];
+                                                                            
+                                                                            ?>
 														<div class="accnt-order">
 															<h6><a href="<?= base_url("invoice/$req_id") ?>">Download
 																	Invoice</a></h6>

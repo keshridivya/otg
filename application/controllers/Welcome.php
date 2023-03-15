@@ -6,22 +6,6 @@ use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
 class Welcome extends CI_Controller {
 
-    /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     *         http://example.com/index.php/welcome
-     *    - or -
-     *         http://example.com/index.php/welcome/index
-     *    - or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /index.php/welcome/<method_name>
-     * @see https://codeigniter.com/userguide3/general/urls.html
-     */
-
      function __construct()
      {
         parent::__construct();
@@ -348,16 +332,16 @@ class Welcome extends CI_Controller {
             if (count($result) > 0)
             {
                 $otp = rand(10000, 99999);
-                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
-                //   Do not share it with anyone';
-                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
-                //       $page_data['status'] = true;
-                //       $page_data['message'] = "success";
+                  $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                  Do not share it with anyone';
+                  if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                      $page_data['status'] = true;
+                      $page_data['message'] = "success";
                     
-                //       } else {
-                //       $page_data['status'] = false;
-                //       $page_data['message'] = "Something went wrong, please try again later.";
-                //       }
+                      } else {
+                      $page_data['status'] = false;
+                      $page_data['message'] = "Something went wrong, please try again later.";
+                      }
             }
             else
             {
@@ -868,11 +852,6 @@ class Welcome extends CI_Controller {
                         $this->session->unset_userdata('reqid');
                         $this->cart->destroy();
         }
-        // else{
-        //     redirect(base_url('/'));
-        // }
-        
-
     }
 
     public function logout()
@@ -1042,6 +1021,7 @@ public function forget(){
     $this->load->view('index',$page_data);
 }
 public function invoice($id){
+    if($this->session->userdata('cid')){
     $page_data['dropdown']=$this->menu->menu_all();
     $page_data['invoice_create']=$this->menu->invoice($id);
     // $data = [
@@ -1054,6 +1034,10 @@ public function invoice($id){
     $page_data['page_title']="Invoice";
     $page_data['page']="invoice";
     $this->load->view('index',$page_data);
+    }
+    else{
+        redirect(base_url());
+    }
 }
 
 }

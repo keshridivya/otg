@@ -209,6 +209,7 @@ $route['admin/offer/edit/(:any)']='admin/offer/edit/$1';
 $route['admin/generateinvoice']='admin/generateinvoice/view';
 $route['admin/generateinvoice/edit/(:any)']='admin/generateinvoice/edit/$1';
 $route['admin/generateinvoice/add']='admin/generateinvoice/add';
+$route['admin/checkcontact']='admin/checkcontact';
 
 
 

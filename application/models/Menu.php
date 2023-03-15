@@ -98,7 +98,7 @@ class Menu extends CI_model {
     }
 
     public function invoice($id){
-        $cid=$this->session->userdata['cid'];
+        $cid=$this->session->userdata('cid');
         $this->db->select('*,bookings.created_on as created_date,bookings.total_amount as amt,customer.cust_name as name');
         $this->db->from('bookings');
         $this->db->join('customer','bookings.cust_id=customer.cust_id ');

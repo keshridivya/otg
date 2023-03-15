@@ -128,4 +128,122 @@ $(document).ready(function () {
 });
 
 
+//generate invoice
+$(document).ready(function () {
+
+	var current_fs, next_fs, previous_fs; //fieldsets
+	var opacity;
+	var current = 1;
+	var steps = $(".fieldset").length;
+
+	setProgressBar(current);
+
+	$(".next").click(function () {
+
+		current_fs = $(this).parent();
+		next_fs = $(this).parent().next();
+
+		//Add Class Active
+		$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+		//show the next fieldset
+		next_fs.show();
+		//hide the current fieldset with style
+		current_fs.animate({
+			opacity: 0
+		}, {
+			step: function (now) {
+				// for making fielset appear animation
+				opacity = 1 - now;
+
+				current_fs.css({
+					'display': 'none',
+					'position': 'relative'
+				});
+				next_fs.css({
+					'opacity': opacity
+				});
+			},
+			duration: 500
+		});
+		setProgressBar(++current);
+	});
+
+	$(".previous").click(function () {
+
+		current_fs = $(this).parent();
+		previous_fs = $(this).parent().prev();
+
+		//Remove class active
+		$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+		//show the previous fieldset
+		previous_fs.show();
+
+		//hide the current fieldset with style
+		current_fs.animate({
+			opacity: 0
+		}, {
+			step: function (now) {
+				// for making fielset appear animation
+				opacity = 1 - now;
+
+				current_fs.css({
+					'display': 'none',
+					'position': 'relative'
+				});
+				previous_fs.css({
+					'opacity': opacity
+				});
+			},
+			duration: 500
+		});
+		setProgressBar(--current);
+	});
+
+	function setProgressBar(curStep) {
+		var percent = parseFloat(100 / steps) * curStep;
+		percent = percent.toFixed();
+		$(".progress-bar")
+			.css("width", percent + "%")
+	}
+
+	// $(".submit").click(function () {
+	// 	return false;
+	// })
+
+});
+
+
+//add input field
+$(document).ready(function(){
+	$('.addbutton').click(function(){
+		let field = '<hr><div class="form-card" id="row">\
+		<div class="row">\
+			<div class="col-7">\
+				<h2 class="fs-title">Product : </h2>\
+			</div>\
+		</div>\
+		<label class="fieldlabels">Product: </label>\
+		<input type="text" name="Product[]" id="product"\
+			placeholder="Product" />\
+		<label class="fieldlabels">Quantity: </label>\
+		<input type="text" name="qua[]" id="qua" placeholder="Quantity" />\
+		<label class="fieldlabels">MRP : </label>\
+		<input type="text" name="mrp[]" id="mrp" placeholder="MRp" />\
+		<label class="fieldlabels">Rate : </label>\
+		<input type="text" name="rate[]" id="rate" placeholder="Rate" />\
+		<label class="fieldlabels">Discount : </label>\
+		<input type="text" name="dis[]" id="dis" placeholder="Discount" />\
+		<button class="btn btn-danger" id="removefield" type="button"><i class="fa fa-trash"></i> Remove</button>\
+	</div>';
+	$('.addinput').append(field);
+	$("body").on("click", "#removefield", function () {
+		$(this).parents("#row").remove();
+	})
+
+	})
+})
+
+
 

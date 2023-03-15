@@ -1422,6 +1422,34 @@ class Admin extends CI_Controller {
 				$this->load->view('admin/index',$page_data);
 				break;
 			case 'add':
+				if($this->input->post()){
+					print_r($this->input->post());
+					if(empty($this->input->post('id'))){
+						$data = [
+							'cust_name' =>$this->input->post('name'),
+							'email_id' => $this->input->post('email'),
+							'contact' =>$this->input->post('contact_login'),
+							'created_on' => date('y-m-d'),
+
+						];
+						$this->db->insert('customer',$data);
+					}
+					
+					$post = $this->input->post();
+				for ($i = 0; $i < count($post['Product']); $i++) 
+				{
+					$datainvoice = [
+						'contact' =>$this->input->post('contact_login'),
+						'order_id' => $this->input->post('order_id'),
+						'product' => $this->input->post('Product')[$i],
+						'qua' => $this->input->post('qua')[$i],
+						'mrp' =>$this->input->post('mrp')[$i],
+						'rate' => $this->input->post('rate')[$i],
+						'discount' => $this->input->post('dis')[$i],
+					];
+					$this->db->insert('invoice',$datainvoice);
+				}
+				}
 				$page_data['page_title'] = 'Add Invoice';
 				$page_data['page']="generateinvoice/add";
 				$this->load->view('admin/index',$page_data);
@@ -1430,20 +1458,24 @@ class Admin extends CI_Controller {
 				break;
 		}
 	}
-	
-		// public function plans_features($action,$id=false){
-		// 	switch ($action){
-		// 		case 'view':
-		// 			// echo "View";
-		// 			$cfeatures_data=$this->db->get("plan_features")->result_array();
-		// 			$page_data['page_title']="Plan Features";
-		// 			$page_data['cfeatures']=$cfeatures_data;
-		// 			$page_data['page']="plans_features/view";
-		// 			$this->load->view('admin/index',$page_data);
-		// 			break;
-		// 	}
-		// }
-	//file upload
+
+	public function checkcontact(){
+            $number = $this->input->post('contact');
+                    $result=$this->menu->checklogin($number);
+                    if(!empty($result)){
+						$email=$result->email_id;
+						$cid=$result->cust_id;
+						$cname=$result->cust_name;
+                    }else{
+                        $page_data['message']="User not found";
+						
+                    }
+           
+        $data['email'] = $email ?? '';
+		$data['cid'] = $cid ?? '';
+		$data['cname'] = $cname ?? '';
+        echo json_encode($data);
+    }
 	
 	//Logout session
 	public function logout()

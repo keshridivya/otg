@@ -72,7 +72,7 @@
 								<i class="anm anm-bars-r"></i>
 							</button>
 							<?php
-            					if($this->session->userdata['cid']){
+            					if($this->session->userdata('cid')){
             					?>
 							<ul class='navbar-nav'>
                                 <li class='nav-item dropdown'>

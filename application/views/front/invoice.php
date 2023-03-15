@@ -109,7 +109,10 @@
 		font-weight: 600;
 		color: #444;
 	}
-
+.cta-group{
+	width:100%;
+	text-align:center;
+}
 	.cta-group .btn-primary {
 		background: var(--var-green);
 		;
@@ -119,6 +122,7 @@
 		background: rgb(196, 57, 10);
 		margin-right: 10px;
 		min-width: 100px;
+		width: 200px;
 		text-align: center;
 		color: #fff;
 		font-size: 0.75rem;
@@ -295,6 +299,7 @@
 	} */
 
 </style>
+
 <div id="invoiceholder">
 	<div id="invoice" class="effect2">
 
@@ -353,40 +358,6 @@
 				<p><?= $invoice_create[0]['name'] ?> <span id="supplier_name"></span><br>+91
 					<?= $invoice_create[0]['contact'] ?></p>
 			</div>
-			<!-- <div class="cta-group mobile-btn-group">
-				<a href="javascript:void(0);" class="btn-primary">Approve</a>
-				<a href="javascript:void(0);" class="btn-default">Reject</a>
-			</div>
-			<div class="clearfix">
-				<div class="col-left">
-					<div class="clientlogo"><img
-							src="https://cdn3.iconfinder.com/data/icons/daily-sales/512/Sale-card-address-512.png"
-							alt="Sup" /></div>
-					<div class="clientinfo">
-						<h2 id="supplier">TESI S.P.A.</h2>
-						<p><span id="address">VIA SAVIGLIANO, 48</span><br><span id="city">RORETO DI
-								CHERASCO</span><br><span id="country">IT</span> - <span id="zip">12062</span><br><span
-								id="tax_num">555-555-5555</span><br></p>
-					</div>
-				</div>
-				<div class="col-right">
-					<table class="table">
-						<tbody>
-							<tr>
-								<td><span>Invoice Total</span><label id="invoice_total">OTG-</label></td>
-								<td><span>Currency</span><label id="currency">EUR</label></td>
-							</tr>
-							<tr>
-								<td><span>Payment Term</span><label id="payment_term">60 gg DFFM</label></td>
-								<td><span>Invoice Type</span><label id="invoice_type">EXP REP INV</label></td>
-							</tr>
-							<tr>
-								<td colspan="2"><span>Note</span>#<label id="note">None</label></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div> -->
 		</div>
 		<!--End Invoice Mid-->
 
@@ -399,7 +370,7 @@
 							<th>S.No</th>
 							<th>Product/Services</th>
 							<th>Qty</th>
-							<th>MRP</th>
+							<!-- <th>MRP</th> -->
 							<th>Rate</th>
 							<th>Disc</th>
 							<th>Tax</th>
@@ -411,42 +382,31 @@
 						<td data-label="Description" class="tableitem"><?= $invoice_create[0]['service_device'] ?>
 						</td>
 						<td data-label="Quantity" class="tableitem"><?= $invoice_create[0]['quantity'] ?></td>
-						<td data-label="Unit Price" class="tableitem"><?= $invoice_create[0]['total_amount'] ?></td>
+						<!-- <td data-label="Unit Price" class="tableitem"><?= $invoice_create[0]['total_amount'] ?></td> -->
 						<td data-label="Taxable Amount" class="tableitem" id="cBalance">
 							<?= $invoice_create[0]['total_amount'] ?></td>
 						<td data-label="Tax Code" class="tableitem" id='chDiscount'>20</td>
 						<td data-label="%" class="tableitem"><?= '0.00' ?></td>
-						<td data-label="Tax Amount" class="tableitem" id='result'></td>
+						<td data-label="Tax Amount" class="tableitem result" id='result'></td>
 					</tr>
-					<!-- <tr class="list-item">
-						<td data-label="Type" class="tableitem">ITEM</td>
-						<td data-label="Description" class="tableitem">Traffico mese di novembre 2017 FRESSNAPF
-							TIERNAHRUNGS GMBH riadd. Almo DE</td>
-						<td data-label="Quantity" class="tableitem">4.4</td>
-						<td data-label="Unit Price" class="tableitem">1</td>
-						<td data-label="Taxable Amount" class="tableitem">46.6</td>
-						<td data-label="Tax Code" class="tableitem">DP20</td>
-						<td data-label="%" class="tableitem">20</td>
-						<td data-label="Tax Amount" class="tableitem">9.32</td>
-					</tr> -->
 					<tr class="list-item">
-						<td colspan="6" style="border-left:2px solid #dee2e6;text-transform:capitalize"
+						<td colspan="5" style="border-left:2px solid #dee2e6;text-transform:capitalize"
 							class='words text-left'></td>
 						<td data-label="Grand Total" class="tableitem">Subtotal</td>
-						<td data-label="Grand Total" class="tableitem numberword" id='result'>
-							<?= $invoice_create[0]['total_amount'] ?></td>
+						<td data-label="Grand Total" class="tableitem numberword result" id='result'>
+							</td>
 					</tr>
 					<tr class="list-item">
-						<td colspan="6" style="border-left:2px solid #dee2e6" class=' text-left'> Total Quantity: 9</td>
+						<td colspan="5" style="border-left:2px solid #dee2e6" class=' text-left'> Total Quantity: 9</td>
 						<td data-label="Grand Total" class="tableitem">Total Payable</td>
-						<td data-label="Grand Total" class="tableitem" id='result'>
-							<?= $invoice_create[0]['total_amount'] ?></td>
+						<td data-label="Grand Total" class="tableitem result" id='result'>
+							</td>
 					</tr>
 					<tr class="list-item">
-						<td colspan="6" style="border-bottom: 2px solid #dee2e6;border-left:2px solid #dee2e6"></td>
+						<td colspan="5" style="border-bottom: 2px solid #dee2e6;border-left:2px solid #dee2e6"></td>
 						<td data-label="Grand Total" class="tableitem">Received</td>
-						<td data-label="Grand Total" class="tableitem" id='result'>
-							<?= $invoice_create[0]['total_amount'] ?></td>
+						<td data-label="Grand Total" class="tableitem result" id='result'>
+							</td>
 					</tr>
 				</table>
 			</div>
@@ -478,13 +438,16 @@
 				</table>
 			</div>
 			<!--End Table-->
-			<div class="cta-group">
-				<button class="btn-primary invoice">Download Invoice</button>
-			</div>
+			
 
 		</div>
 	</div>
 	<!--End Invoice-->
+	<div class="container">
+	<div class="cta-group" >
+				<button class="btn btn-primary invoice">Download Invoice</button>
+			</div>
+</div>
 </div><!-- End Invoice Holder-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
@@ -498,9 +461,6 @@
 
 	// American Numbering System
 	let th = ['', 'thousand', 'million', 'billion', 'trillion'];
-	// uncomment this line for English Number System
-	// var th = ['','thousand','million', 'milliard','billion'];
-
 	let dg = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 	var tn = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen',
 	'nineteen'];
@@ -563,7 +523,7 @@
 		doc.html(elementHTML, {
 			callback: function (doc) {
 				// Save the PDF
-				doc.save('sample-document.pdf');
+				doc.save('invoice.pdf');
 			},
 			x: 15,
 			y: 15,
@@ -581,8 +541,8 @@
 		var dec = (disc / 100).toFixed(2); //its convert 10 into 0.10
 		var mult = main * dec; // gives the value for subtract from main value
 		var discont = main - mult;
-		$('#result').text(discont);
-		// alert(discont);
+		let doc = Math.round(discont);
+		$('.result').text(doc);
 	});
 
 </script>
