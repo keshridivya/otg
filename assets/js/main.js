@@ -1692,4 +1692,14 @@ $(document).ready(function(){
 
         }
     }
-})
+
+$('#summarycheck').hide();
+	$('.checlout').click(function(){
+		$('#staticBackdrop').modal('show');
+	});
+    $('.pay').click(function(){
+        $('#summarycheck').show();
+        $('.checlout').css('display','none');
+
+    })
+});

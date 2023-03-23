@@ -569,8 +569,7 @@
     							<li
     								style="margin-left:14.14pt;text-align:justify;line-height:115%;padding-left:14.21pt;font-size:11pt;margin-bottom:15px">
     								Where you have chosen a password that enables you to access certain parts of the
-    								[3:19 pm, 11/02/2023] +91 95880
-    								11384: Services or Professional Services, you are responsible for keeping this
+    								 Services, you are responsible for keeping this
     								password secret and confidential. We will
     								not be responsible for any unauthorised use of your information, or for any lost,
     								stolen, or compromised passwords, or
@@ -578,7 +577,8 @@
     								password. In the event your password
     								has been compromised in any manner whatsoever, you should promptly notify us to
     								enable us to initiate a change of
-    								password.</li>
+    								password.
+								</li>
     						</ol>
     						<p style="text-align:justify;line-height:115%;font-size:11pt"><span
     								style="-aw-import:ignore">&nbsp;</span></p>

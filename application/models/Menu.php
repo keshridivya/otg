@@ -99,13 +99,31 @@ class Menu extends CI_model {
 
     public function invoice($id){
         $cid=$this->session->userdata('cid');
-        $this->db->select('*,bookings.created_on as created_date,bookings.total_amount as amt,customer.cust_name as name');
+        $this->db->select('*,bookings.created_on as created_date,bookings.total_amount as amt,customer.cust_name as name,,total_amount-(total_amount*20/100) as rate,(total_amount-(total_amount*20/100))*quantity as tamt');
         $this->db->from('bookings');
         $this->db->join('customer','bookings.cust_id=customer.cust_id ');
-        // $this->db->join('checklist','bookings.request_id_value=checklist.request_id ');
         $this->db->where(array('bookings.request_id_value '=>$id,'customer.cust_id '=>$cid));
         $query = $this->db->get();
+        // print_r($this->db->last_query());
             return $query->result_array();
+    }
+
+    public function admininvoice($id){
+        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
+        $this->db->from('invoice');
+        $this->db->join('customer','invoice.contact=customer.contact');
+        $this->db->where(array('invoice.order_id '=>$id));
+        $query = $this->db->get();
+            return $query->result_array();
+    }
+    public function admininvoiceview($id){
+        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
+        $this->db->from('invoice');
+        $this->db->join('customer','invoice.contact=customer.contact');
+        $this->db->group_by('order_id');
+        $this->db->where(array('invoice.order_id '=>$id));
+        $query = $this->db->get();
+        return $query->result_array();
     }
 
     // function checklogin($email,$password)

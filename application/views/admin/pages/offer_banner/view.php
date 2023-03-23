@@ -47,7 +47,7 @@
 						<td><?php echo $banner['created_date']; ?></td>
 						<td><?php echo $banner['modified_date']?></td>
 						<td>
-							<a href="<?php echo base_url('admin/offer/edit/'.$banner['id']); ?>"><i
+							<a href="<?php echo base_url('admin/offer/edit/'.$banner['id']); ?>" class="btn btn-primary"><i
 									class="fas fa-pencil-alt" aria-hidden="true"></i></a>
 
 						</td>

@@ -145,7 +145,6 @@
 									<div class="col-xs-6"><input type="submit" name="submit"
 											class="btn btn-primary btn-user btn-block btn_image_submit"></div>
 								</div>
-
 							</form>
 							<hr>
 							<div id='message_upload' class='alert alert-danger'></div>

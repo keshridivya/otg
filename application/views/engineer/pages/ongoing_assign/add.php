@@ -145,7 +145,7 @@
 											data-name='Reschedule'>Reschedule Assignment
 										</button></div>
 									<?php 
-									if($submit_data[0]['booking_request_id']){
+									if($submit_data[0]['booking_request_id'] ?? ''){
 									?>
 									<div class="col-md-4 mb-3"><button type="button" name="reschedule"
 											class="btn btn-primary btn-user btn-block btn_image_submit reschedule"
@@ -207,9 +207,9 @@
 									placeholder='Visiting Charges' value='Visiting Charges: 199 rs' readonly>
 							</div>
 						</div>
-						<input type="radio" id="age1" name="case_payment" value="cash-199" class='paymentradio'>
+						<input type="radio" id="age1" name="case_payment" value="" class='paymentradio'>
 						<label for="age1">Cash Payment</label><br>
-						<input type="radio" id="age2" name="case_payment" value="online-199" class='paymentradio'>
+						<input type="radio" id="age2" name="case_payment" value="" class='paymentradio'>
 						<label for="age2">Online Payment</label><br>
 					</div>
 					<div class="modal-footer">

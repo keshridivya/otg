@@ -50,10 +50,10 @@
 						<td><?php echo $eng['created_on']; ?></td>
 						<td><?php echo $eng['modified_on']?></td>
 						<td>
-							<a href="<?php echo base_url('admin/engineer/edit/'.$eng['eng_id']); ?>"><i class="fas fa-pencil-alt"
+							<a href="<?php echo base_url('admin/engineer/edit/'.$eng['eng_id']); ?>" class="btn btn-primary"><i class="fas fa-pencil-alt"
 									aria-hidden="true"></i></a>
 							<a href="<?php echo base_url('admin/engineer/delete/'.$eng['eng_id']); ?>" type="button"
-								class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');"><i
+								class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i
 									class="fas fa-trash" aria-hidden="true"></i></a>
 						</td>
 					</tr>

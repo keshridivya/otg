@@ -10,15 +10,15 @@ class Admin extends CI_Controller {
 	 }
 	public function index()
 	{
-		if(@$this->input->post()){
-			$email=$this->input->post('email');
-			$password=sha1($this->input->post('password'));
-			$result=$this->db->get_where('admin',array('email_id'=>$email,'password'=>$password,'status'=>'active'))->result_array();
-			$aid=$result[0]['admin_id'] ?? '';
-			$aemail=$result[0]['email_id'] ?? '';
-			$this->session->set_userdata('a_id',$aid);
-			$this->session->set_userdata('e_id',$aemail);
-		}
+		// if(@$this->input->post()){
+		// 	$email=$this->input->post('email');
+		// 	$password=sha1($this->input->post('password'));
+		// 	$result=$this->db->get_where('admin',array('email_id'=>$email,'password'=>$password,'status'=>'active'))->result_array();
+		// 	$aid=$result[0]['admin_id'] ?? '';
+		// 	$aemail=$result[0]['email_id'] ?? '';
+		// 	$this->session->set_userdata('a_id',$aid);
+		// 	$this->session->set_userdata('e_id',$aemail);
+		// }
 		if(@$this->session->userdata['a_id']){
 			//redirect to dashboard
 			$customers_table=$this->db->get("customer")->result_array();
@@ -37,6 +37,65 @@ class Admin extends CI_Controller {
 
 		}
 	}
+
+	public function loginotp(){
+
+        if($this->input->post('number')){
+            $this->load->helper('msg');
+            $number = $this->input->post('number');
+            $result=$this->db->get_where('admin',array('contact'=>$number))->result_array();
+            if (count($result) > 0)
+            {
+                $otp = rand(10000, 99999);
+				$otp_resu = 'success';
+                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                //   Do not share it with anyone';
+                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                //       $page_data['status'] = true;
+                //       $page_data['message'] = "success";
+                    
+                //       } else {
+                //       $page_data['status'] = false;
+                //       $page_data['message'] = "Something went wrong, please try again later.";
+                //       }
+            }
+            else
+            {
+                $otp_resu = 'error';
+            }
+            
+        }
+        $this->session->set_userdata('admin_login_otp',$otp);
+        $data['otp'] = $otp_resu;
+		$data['otp1'] = $otp;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
+    public function login_otp_verify(){
+        if($this->input->post('loginotp')){
+            $loginotp=$this->input->post('loginotp');
+            $number = $this->input->post('number');
+            if($this->session->userdata['admin_login_otp'] == $loginotp){
+                $otp = 'success';
+                    $result=$this->menu->checklogin($number);
+                    if(!empty($result)){
+                        $this->session->set_userdata('a_id', $result->admin_id);
+                        $this->session->set_userdata('e_id', $result->email_id);
+                        $this->session->unset_userdata('login_otp');
+                    }else{
+                        $page_data['message']="User not found";
+                    }
+            }
+            else{
+                $otp='error';
+            }
+           
+        }
+        $data['otp'] = $otp;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
 
 	//Customer page in admin
 	public function customer($action,$id=false){
@@ -1417,44 +1476,55 @@ class Admin extends CI_Controller {
 	public function generateinvoice($action,$id=false){
 		switch($action){
 			case 'view':
+				$page_data['invoice'] = $this->menu->admininvoiceview($id);
 				$page_data['page_title'] = 'Generate Invoice';
 				$page_data['page']="generateinvoice/view";
 				$this->load->view('admin/index',$page_data);
 				break;
 			case 'add':
 				if($this->input->post()){
-					print_r($this->input->post());
+					$order_id = $this->input->post('order_id');
 					if(empty($this->input->post('id'))){
 						$data = [
 							'cust_name' =>$this->input->post('name'),
 							'email_id' => $this->input->post('email'),
 							'contact' =>$this->input->post('contact_login'),
 							'created_on' => date('y-m-d'),
-
 						];
 						$this->db->insert('customer',$data);
 					}
 					
 					$post = $this->input->post();
-				for ($i = 0; $i < count($post['Product']); $i++) 
-				{
-					$datainvoice = [
-						'contact' =>$this->input->post('contact_login'),
-						'order_id' => $this->input->post('order_id'),
-						'product' => $this->input->post('Product')[$i],
-						'qua' => $this->input->post('qua')[$i],
-						'mrp' =>$this->input->post('mrp')[$i],
-						'rate' => $this->input->post('rate')[$i],
-						'discount' => $this->input->post('dis')[$i],
-					];
-					$this->db->insert('invoice',$datainvoice);
-				}
+					for ($i = 0; $i < count($post['Product']); $i++) 
+					{
+						$datainvoice = [
+							'contact' =>$this->input->post('contact_login'),
+							'order_id' => $this->input->post('order_id'),
+							'product' => $this->input->post('Product')[$i],
+							'qua' => $this->input->post('qua')[$i],
+							'mrp' =>$this->input->post('mrp')[$i],
+							'discount' => $this->input->post('dis')[$i],
+							'created_date' => date('y-m-d')
+						];
+						if($this->db->insert('invoice',$datainvoice)){
+							redirect('admin/generateinvoice/invoice/'.$order_id);
+							$page_data['message'] = 'Invoice Submit Successfully';
+						}
+						else{
+							$page_data['message'] = 'Something went wrong. Please try again';
+						}
+					}
 				}
 				$page_data['page_title'] = 'Add Invoice';
 				$page_data['page']="generateinvoice/add";
 				$this->load->view('admin/index',$page_data);
 				break;
-			case 'edit':
+			case 'invoice':
+				$page_data['invoice'] = $this->menu->admininvoice($id);
+				$page_data['page']="generateinvoice/invoice";
+				$this->load->view('admin/index',$page_data);
+				break;
+			   case 'edit':
 				break;
 		}
 	}

@@ -80,6 +80,7 @@ $route['pay']='welcome/pay';
 $route['verify']='welcome/verify';
 $route['success']='welcome/success';
 $route['upi']='welcome/upi';
+$route['return']='welcome/return';
 $route['loginotp']='welcome/loginotp';
 $route['forgetotp']='welcome/forgetotp';
 $route['reset-password']='welcome/reset_password';
@@ -93,6 +94,8 @@ $route['invoice/(:any)']='welcome/invoice/$1';
 
 //admin routes
 $route['admin']="admin/index";
+$route['loginotp'] = "admin/loginotp";
+$route['login_otp_verify'] = 'admin/login_otp_verify';
 $route['admin/logout']="admin/logout";
 
 //admin AMC routes
@@ -210,6 +213,7 @@ $route['admin/generateinvoice']='admin/generateinvoice/view';
 $route['admin/generateinvoice/edit/(:any)']='admin/generateinvoice/edit/$1';
 $route['admin/generateinvoice/add']='admin/generateinvoice/add';
 $route['admin/checkcontact']='admin/checkcontact';
+$route['admin/generateinvoice/invoice/(:any)']='admin/generateinvoice/invoice/$1';
 
 
 

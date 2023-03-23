@@ -159,11 +159,11 @@
 														<input type="radio" class="form-check-input" value="cob" name="payment_method" checked="checked">Cash On Booking
 													</label>
 												</div>
-												<!-- <div class="form-check col-lg-8 text-left mb-3">
+												<div class="form-check col-lg-8 text-left mb-3">
                                                 <label class="form-check-label">
                                                     <input type="radio" class="form-check-input" value="razorpay" name="payment_method">Pay Now
                                                 </label>
-                                                </div> -->
+                                                </div>
 											</div>
 										</div>
 

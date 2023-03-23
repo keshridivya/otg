@@ -54,10 +54,10 @@
 
 
 						<td>
-							<a href="<?php echo base_url('admin/category_products/edit/'.$cpro['cproduct_id']); ?>"><i
+							<a href="<?php echo base_url('admin/category_products/edit/'.$cpro['cproduct_id']); ?>" class="btn btn-primary"><i
 									class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-							<a href="<?php echo base_url('admin/category_products/delete/'.$cpro['cproduct_id']); ?>" type="button" class="btn btn-primary"
-								onclick="return confirm('Are you sure you want to delete this item?');"><i
+							<a href="<?php echo base_url('admin/category_products/delete/'.$cpro['cproduct_id']); ?>" type="button" class="btn btn-danger"
+								onclick="return confirm('Are you sure you want to delete this item?');" ><i
 									class="fas fa-trash" aria-hidden="true"></i></a>
 						</td>
 					</tr>

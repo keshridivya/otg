@@ -218,15 +218,15 @@
 									<tbody>
 										<tr>
 											<td><span>Invoice Number</span><label id="invoice_no"
-													class='float-right'>INV-<?= $invoice_create[0]['id'] ?></label>
+													class='float-right'>INV-<?= $invoice[0]['id'] ?></label>
 											</td>
 										</tr>
 										<tr>
 											<td><span>Order Number</span><label id="order-number"
-													class='float-right'><?= $invoice_create[0]['order_id'] ?></label></td>
+													class='float-right'><?= $invoice[0]['order_id'] ?></label></td>
 										</tr>
 										<tr>
-											<td><span>Invoice Date</span><label id="invoice_date" class='float-right'><?php  $input=$invoice_create[0]['created_date']; 
+											<td><span>Invoice Date</span><label id="invoice_date" class='float-right'><?php  $input=$invoice[0]['created_date']; 
 										$date=strtotime($input);
 										echo date('d  M  Y',$date) ?></label></td>
 										</tr>
@@ -241,8 +241,8 @@
 					<div id="invoice-mid">
 						<div id="message">
 							<h2>Bill To,</h2>
-							<p><?= $invoice_create[0]['cust_name'] ?> <span id="supplier_name"></span><br>+91
-								<?= $invoice_create[0]['contact'] ?></p>
+							<p><?= $invoice[0]['cust_name'] ?> <span id="supplier_name"></span><br>+91
+								<?= $invoice[0]['contact'] ?></p>
 						</div>
 					</div>
 					<!--End Invoice Mid-->
@@ -265,7 +265,7 @@
 								</thead>
 								<?php
                             $count = 1;
-                    foreach($invoice_create as $invoice){
+                    foreach($invoice as $invoice){
                     ?>
 								<tr class="list-item">
 									<td data-label="Type" class="tableitem"><?= $count; ?></td>
@@ -281,6 +281,7 @@
 									<td data-label="%" class="tableitem"><?= '0.00' ?></td>
 									<td data-label="Tax Amount" class="tableitem amt" id='result'><?= $invoice['amt'] ?></td>
 								</tr>
+								total
 								<?php $count++; } ?>
 								<tr class="list-item">
 									<td colspan="6" style="border-left:2px solid #dee2e6;text-transform:capitalize"

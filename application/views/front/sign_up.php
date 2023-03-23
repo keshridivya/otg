@@ -6,6 +6,7 @@
 		margin-left: 20px;
 		padding-bottom: 15px;
 	}
+
 	span {
 		text-align: left;
 		margin-left: 20px;
@@ -54,37 +55,40 @@
 						<div class="tab-pane fade show active" id="pills-home" role="tabpanel"
 							aria-labelledby="pills-home-tab">
 							<div class="signup-forms">
-								
-							<form method="post" action="">
+
+								<form method="post" action="">
 									<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 										value="<?php echo $this->security->get_csrf_hash();?>">
-										<input type="hidden" id='login_vrf_otp'>
+									<!-- <input type="hidden" id='login_vrf_otp'> -->
 
 									<div class="row justify-content-center">
-											<div class="col-lg-6">
-												<div class="form-group">
-													<input type="text" value="" class='form-control number' id='usernumber'
-														Placeholder='Mobile no' name='number'>
-												</div>
-												<span id='spanotpnumber'>Mobile Number is required</span>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input type="text" value="" class='form-control number' id='usernumber'
+													Placeholder='Mobile no' name='number'>
 											</div>
+											<span id='spanotpnumber'>Mobile Number is required</span>
 										</div>
-										<div class="row justify-content-center">
-											<div class="col-lg-6">
-												<div class="form-group loginotpbox">
-													<input type="text" class="form-control " id="loginotp" name="loginotp"
-														placeholder="OTP">
-												</div>
-												<div style='color:red;font-size:15px' class='otp_hide'>OTP expires within 5 minutes: <span id="timer"></span></div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-lg-6">
+											<div class="form-group loginotpbox">
+												<input type="text" class="form-control " id="loginotp" name="loginotp"
+													placeholder="OTP">
 											</div>
+											<div style='color:red;font-size:15px' class='otp_hide'>OTP expires within 5
+												minutes: <span id="timer"></span></div>
 										</div>
-										<div class="row justify-content-center">
-											<div class="col-lg-6 login_err">
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-lg-6 login_err">
 
-											</div>
 										</div>
-										<button type="button" name="submit" value="login" class="btn login_send_otp" id='login_btn' disabled>Send OTP</button>
-									<button type="button" name="submit" value="login" class="btn login_verify_otp" id='login_otp_verify'>Verify OTP</button>
+									</div>
+									<button type="button" name="submit" value="login" class="btn login_send_otp"
+										id='login_btn' disabled>Send OTP</button>
+									<button type="button" name="submit" value="login" class="btn login_verify_otp"
+										id='login_otp_verify'>Verify OTP</button>
 								</form>
 								<!-- <a href="<?= base_url('forget') ?>">Forgot password?</a> -->
 							</div>
@@ -97,7 +101,8 @@
 									<form action="" method='post'>
 										<input type="hidden"
 											name="<?php echo $this->security->get_csrf_token_name(); ?>"
-											value="<?php echo $this->security->get_csrf_hash();?>" class='csrf' id='csrf2'>
+											value="<?php echo $this->security->get_csrf_hash();?>" class='csrf'
+											id='csrf2'>
 										<input type='hidden' id='set_otp' value='123'>
 
 										<div class="row justify-content-center">
@@ -115,11 +120,10 @@
 													<input type="text" class="form-control " id="get_otp" name="otp"
 														placeholder="OTP">
 												</div>
-												<div style='color:red;font-size:15px' id='timer3' class='otp_hide'
-													>OTP expires within 5 minutes: <span
-														id="timer"></span>
-													</div>
-													
+												<div style='color:red;font-size:15px' id='timer3' class='otp_hide'>OTP
+													expires within 5 minutes: <span id="timer"></span>
+												</div>
+
 											</div>
 										</div>
 										<div class="row justify-content-center">
@@ -166,7 +170,7 @@
 													placeholder="Email Address">
 											</div>
 											<span id='spanemail'>Please enter correct email address</span>
-											
+
 										</div>
 										<!-- <div class="col-lg-6">
 											<div class="form-group">
@@ -277,11 +281,11 @@
 						$('.otp_hide').css('display', 'block');
 						$('.err_msg').html(
 							'<div class="alert alert-success">OTP is send on your mobile</div>'
-							);
+						);
 					} else {
 						$('.err_msg').html(
 							'<div class="alert alert-danger">Number already Registered</div>'
-							);
+						);
 					}
 
 				},
@@ -306,7 +310,7 @@
 				success: function (response) {
 					$('#csrf2').val(response.token);
 					$('#set_otp').val(response.otp);
-					$('#timer3').css('display','none')
+					$('#timer3').css('display', 'none')
 
 				},
 				error: function () {
@@ -331,7 +335,7 @@
 
 		});
 
-		$('#login_btn').click(function(){
+		$('#login_btn').click(function () {
 			let number = $('#usernumber').val();
 			var csrfName = $('.csrf').attr('name');
 			var csrfHash = $('.csrf').val();
@@ -345,18 +349,18 @@
 				dataType: 'json',
 				success: function (response) {
 					$('.csrf').val(response.token);
-					$('#login_vrf_otp').val(response.otp);
+					// $('#login_vrf_otp').val(response.otp);
 					if (response.otp != 'error') {
 						$('.login_err').html(
 							'<div class="alert alert-success">OTP is send on your mobile</div>'
-							);
-							$('.loginotpbox').show();
-							$('.login_send_otp').hide();
-							$('.login_verify_otp').show();
+						);
+						$('.loginotpbox').show();
+						$('.login_send_otp').hide();
+						$('.login_verify_otp').show();
 					} else {
 						$('.login_err').html(
 							'<div class="alert alert-danger">This Number is incorrect</div>'
-							);
+						);
 					}
 				},
 				error: function () {
@@ -375,7 +379,7 @@
 				method: "post",
 				data: {
 					loginotp: loginotp,
-					number:number,
+					number: number,
 					[csrfName]: csrfHash
 				},
 				dataType: 'json',
@@ -385,15 +389,15 @@
 						history.back();
 					} else {
 						$('.login_err').html(
-							'<div class="alert alert-danger">This Number is registered</div>'
-							);
+							'<div class="alert alert-danger">OTP is Incorrect</div>'
+						);
 					}
 				},
 				error: function () {
 					alert('OTP not send .Please try again');
 				}
 			})
-						
+
 		});
 	});
 

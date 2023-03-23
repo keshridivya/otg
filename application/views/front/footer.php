@@ -166,7 +166,7 @@
 						<ul>
 							<li><a href="<?= base_url('terms'); ?>">Terms & Condition</a></li>
 							<li><a href="<?= base_url('privacy-policy'); ?>">Privacy Policy</a></li>
-							<li><a href="#">Return & refund</a></li>
+							<li><a href="<?= base_url('return'); ?>">Return & refund</a></li>
 
 						</ul>
 					</div>

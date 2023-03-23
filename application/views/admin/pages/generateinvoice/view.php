@@ -18,20 +18,35 @@
 
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>Invoice Id</th>
+							<th>S.no</th>
 							<th>Name</th>
 							<th>Contact</th>
-							<th>Product</th>
-							<th>price</th>
-							<th>Additional</th>
+							<th>Order Id</th>
 							<th>Created On</th>
-							<th>Modified On</th>
 							<th>Action</th>
 						</tr>
 					</thead>
+					<?php
+						$count = 1;
+						foreach($invoice as $invoice){ ?>
+						<tr>
+							<td><?= $count; ?></td>
+							<td><?= $invoice['cust_name'] ?></td>
+							<td><?= $invoice['cont'] ?></td>
+							<td><?= $invoice['order_id'] ?></td>
+							<td><?= $invoice['created_date'] ?></td>
+							<td>
+								<a href="<?= base_url('admin/generateinvoice/invoice/'.$invoice['order_id']) ?>" class="btn btn-primary"><i
+										class="fa fa-download"></i></a>
+								<a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+							</td>
+						</tr>
+
+						<?php $count++; }
+						?>
 				</table>
 			</div>
 		</div>
@@ -39,4 +54,3 @@
 
 </div>
 <!-- /.container-fluid -->
-

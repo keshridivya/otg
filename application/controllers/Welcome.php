@@ -332,6 +332,7 @@ class Welcome extends CI_Controller {
             if (count($result) > 0)
             {
                 $otp = rand(10000, 99999);
+                $otp_resu = 'success';
                   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
                   Do not share it with anyone';
                   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
@@ -345,12 +346,12 @@ class Welcome extends CI_Controller {
             }
             else
             {
-                $otp = 'error';
+                $otp_resu = 'error';
             }
             
         }
         $this->session->set_userdata('login_otp',$otp);
-        $data['otp'] = $otp;
+        $data['otp'] = $otp_resu;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }
@@ -366,6 +367,7 @@ class Welcome extends CI_Controller {
                         $this->session->set_userdata('cid', $result->cust_id);
                         $this->session->set_userdata('cemail', $result->email_id);
                         $this->session->set_userdata('cname', $result->cust_name);
+                        $this->session->unset_userdata('login_otp');
                     }else{
                         $page_data['message']="User not found";
                     }
@@ -649,10 +651,6 @@ class Welcome extends CI_Controller {
         }
     }
 
-    /**
-     * This function preprares payment parameters
-
-     */
     public function prepareData($amount,$razorpayOrderId)
     {
         $data = array(
@@ -680,10 +678,6 @@ class Welcome extends CI_Controller {
         // die;
     }
 
-    /**
-     * This function saves your form data to session,
-     * After successfull payment you can save it to database
-     */
     public function setRegistrationData()
     {
 
@@ -873,171 +867,181 @@ class Welcome extends CI_Controller {
     public function removeItem($rowid){
         $this->cart->remove($rowid);
         redirect(base_url('cart'));
-            }
+    }
 
-public function blog(){
-    $page_data['dropdown']=$this->menu->menu_all();
-    $page_data['blog']=$this->db->get_where('blog',array('status'=>'active'))->result_array();
-    $page_data['page_title']="Blog";
-    $page_data['page']="blog";
-    $this->load->view('index',$page_data);
-}
-    
-public function blogdetail($id){
-    $page_data['dropdown']=$this->menu->menu_all();
-    $page_data['blog']=$this->db->get_where('blog',array('id'=>$id))->result_array();
-    $page_data['page_title']="Blog Detail";
-    $page_data['page']="blogdetail";
-    $this->load->view('index',$page_data);
-}
-
-public function contact(){
-    $this->load->library('phpmailer_lib');
-    if($this->input->post()){
-        $data=array(
-            'name'=>$this->input->post('name'),
-            'email'=>$this->input->post('email'),
-            'contact'=>$this->input->post('contact'),
-            'message'=>$this->input->post('message'),
-            'created_date'=>date('y-m-d')
-        );
-        if($this->db->insert('contact-form',$data)){
-        // PHPMailer object
-        $mail = $this->phpmailer_lib->load();
-                
-        //Server settings
-        $mail->SMTPDebug = 0; 
-        $mail->isSMTP();                             
-        $mail->Host       = 'smtp.hostinger.com';    
-        $mail->SMTPAuth   = true;                           
-        $mail->Username   = 'hr@otgcares.com';           
-        $mail->Password   = 'Admin@123';                          
-        $mail->SMTPSecure = 'ssl';          
-        $mail->Port       = 465;                            
-
-        //Recipients
-        $mail->setFrom('hr@otgcares.com', 'Enquiry from website');
-        $mail->addAddress('hr@otgcares.com');    
+    public function blog(){
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['blog']=$this->db->get_where('blog',array('status'=>'active'))->result_array();
+        $page_data['page_title']="Blog";
+        $page_data['page']="blog";
+        $this->load->view('index',$page_data);
+    }
         
-        //Content
-        $mail->isHTML(true);                               
-        $mail->Subject = 'Request for enquiry by ';
-        $mail->Body    = '<html>
-        <body>
-        <h3>You have a new response in your Contact Form</h3>
-        <p>Name : '.$data['name'].'</p>
-        <p>Email : '.$data['email'].'</p>
-        <p>Contact : '.$data['contact'].'</p>
-        <p>Message : '.$data['message'].'</p>
-        </body>
-        </html>';
+    public function blogdetail($id){
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['blog']=$this->db->get_where('blog',array('id'=>$id))->result_array();
+        $page_data['page_title']="Blog Detail";
+        $page_data['page']="blogdetail";
+        $this->load->view('index',$page_data);
+    }
 
-        if ($mail->send())
-            {
-                $page_data['message']="Thank you, We'll get in touch with you soon";
+    public function contact(){
+        $this->load->library('phpmailer_lib');
+        if($this->input->post()){
+            $data=array(
+                'name'=>$this->input->post('name'),
+                'email'=>$this->input->post('email'),
+                'contact'=>$this->input->post('contact'),
+                'message'=>$this->input->post('message'),
+                'created_date'=>date('y-m-d')
+            );
+            if($this->db->insert('contact-form',$data)){
+            // PHPMailer object
+            $mail = $this->phpmailer_lib->load();
+                    
+            //Server settings
+            $mail->SMTPDebug = 0; 
+            $mail->isSMTP();                             
+            $mail->Host       = 'smtp.hostinger.com';    
+            $mail->SMTPAuth   = true;                           
+            $mail->Username   = 'hr@otgcares.com';           
+            $mail->Password   = 'Admin@123';                          
+            $mail->SMTPSecure = 'ssl';          
+            $mail->Port       = 465;                            
+
+            //Recipients
+            $mail->setFrom('hr@otgcares.com', 'Enquiry from website');
+            $mail->addAddress('hr@otgcares.com');    
+            
+            //Content
+            $mail->isHTML(true);                               
+            $mail->Subject = 'Request for enquiry by ';
+            $mail->Body    = '<html>
+            <body>
+            <h3>You have a new response in your Contact Form</h3>
+            <p>Name : '.$data['name'].'</p>
+            <p>Email : '.$data['email'].'</p>
+            <p>Contact : '.$data['contact'].'</p>
+            <p>Message : '.$data['message'].'</p>
+            </body>
+            </html>';
+
+            if ($mail->send())
+                {
+                    $page_data['message']="Thank you, We'll get in touch with you soon";
+                }
+                else
+                {
+                    $page_data['message']='Something Went Wrong';
+                }
             }
-            else
-            {
-                $page_data['message']='Something Went Wrong';
+            else{
+                $page_data['message']='Server Error Please try again ';
             }
+        }
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Contact Us";
+        $page_data['page']="contact";
+        $this->load->view('index',$page_data);
+    }
+
+    public function privacy(){
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Pivacy Policy";
+        $page_data['page']="privacy&policy";
+        $this->load->view('index',$page_data);
+    }
+
+    public function terms(){
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Terms & Condition";
+        $page_data['page']="terms";
+        $this->load->view('index',$page_data);
+    }
+
+    public function tracker(){
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Track Service Request";
+        $page_data['page']="tracker";
+        $this->load->view('index',$page_data);
+    }
+    public function upi(){
+        $page_data['cartItems']=$this->cart->contents();
+        if($this->input->post()){
+            $main_arr=array();
+            $data=$this->input->post();
+            for($i=0;$i<count($data['s_plan']);$i++){
+                $arr=array(
+                    "cust_id"           =>  $data['customer_id'],
+                    "cust_name"         =>  $data['c_name'][$i],
+                    "service_plan"      =>  $data['s_plan'][$i],
+                    "service_device"    =>  $data['s_device'][$i],
+                    "quantity"          =>  $data['quantity'][$i],
+                    "total_amount"      =>  $data['sub_total'][$i],
+                    "order_id"          =>  $data['order_id'],
+                    "status"=>'new',
+                    "created_on"=>date('Y-m-d h:i:s')
+                );
+                $main_arr[]=$arr;
+            }
+                $cust_id = $this->session->userdata('cid');	
+                $sql = $this->db->insert_batch('bookings',$main_arr);
+                if($sql == true){
+                    $page_data['message']="Successfully created.";
+                    $booking_data=$this->db->get_where("bookings",array('cust_id'=>$cust_id,'created_on'=>date('Y-m-d h:i:s'),'status'=>'new'))->result_array();
+                        $reqid=$booking_data[0]['order_id'];
+                        $this->session->set_userdata('reqid',$reqid);
+                        // redirect(base_url('receipt'));
+                        $this->session->unset_userdata('reqid');
+                        $this->cart->destroy();
+                }else{
+                    $page_data['message']="Problem occured while adding bookings.";
+                }
+        }
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Payment";
+        $page_data['page']="upi";
+        $this->load->view('index',$page_data);
+    }
+    public function forget(){
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Forget Password";
+        $page_data['page']="forget";
+        $this->load->view('index',$page_data);
+    }
+    public function return(){
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Return Policy";
+        $page_data['page']="Return";
+        $this->load->view('index',$page_data);
+    }
+    public function invoice($id){
+        if($this->session->userdata('cid')){
+        $page_data['dropdown'] = $this->menu->menu_all();
+        $invoice_generate = $this->menu->invoice($id);
+        $order_id = $invoice_generate[0]['request_id_value'];
+        $data = [
+            'order_id' => $invoice_generate[0]['request_id_value'],
+            'contact' => $invoice_generate[0]['contact'],
+            'created_date' => date('y-m-d'),
+            'product' =>  $invoice_generate[0]['service_device'],
+            'qua' =>  $invoice_generate[0]['quantity'],
+            'mrp' => $invoice_generate[0]['amt'],
+            'discount' => '20',
+        ];
+        $checkdata = $this->db->get_where('invoice',array('order_id'=>$order_id))->result_array();
+        if(count($checkdata) == 0){
+            $this->db->insert('invoice',$data);
+        }
+        $page_data['invoice_create'] = $this->menu->admininvoice($order_id);
+        // print_r($this->db->last_query());
+        $page_data['page_title']="Invoice";
+        $page_data['page']="invoice";
+        $this->load->view('index',$page_data);
         }
         else{
-            $page_data['message']='Server Error Please try again ';
+            redirect(base_url());
         }
     }
-    $page_data['dropdown']=$this->menu->menu_all();
-    $page_data['page_title']="Contact Us";
-    $page_data['page']="contact";
-    $this->load->view('index',$page_data);
-}
-
-public function privacy(){
-    $page_data['dropdown']=$this->menu->menu_all();
-    $page_data['page_title']="Pivacy Policy";
-    $page_data['page']="privacy&policy";
-    $this->load->view('index',$page_data);
-}
-
-public function terms(){
-    $page_data['dropdown']=$this->menu->menu_all();
-    $page_data['page_title']="Terms & Condition";
-    $page_data['page']="terms";
-    $this->load->view('index',$page_data);
-}
-
-public function tracker(){
-    $page_data['dropdown']=$this->menu->menu_all();
-    $page_data['page_title']="Track Service Request";
-    $page_data['page']="tracker";
-    $this->load->view('index',$page_data);
-}
-public function upi(){
-
-    $page_data['cartItems']=$this->cart->contents();
-    if($this->input->post()){
-        $main_arr=array();
-        $data=$this->input->post();
-        for($i=0;$i<count($data['s_plan']);$i++){
-            $arr=array(
-                "cust_id"           =>  $data['customer_id'],
-                "cust_name"         =>  $data['c_name'][$i],
-                "service_plan"      =>  $data['s_plan'][$i],
-                "service_device"    =>  $data['s_device'][$i],
-                "quantity"          =>  $data['quantity'][$i],
-                "total_amount"      =>  $data['sub_total'][$i],
-                "order_id"          =>  $data['order_id'],
-                "status"=>'new',
-                "created_on"=>date('Y-m-d h:i:s')
-            );
-            $main_arr[]=$arr;
-        }
-            $cust_id = $this->session->userdata('cid');	
-            $sql = $this->db->insert_batch('bookings',$main_arr);
-            if($sql == true){
-                $page_data['message']="Successfully created.";
-                $booking_data=$this->db->get_where("bookings",array('cust_id'=>$cust_id,'created_on'=>date('Y-m-d h:i:s'),'status'=>'new'))->result_array();
-                    $reqid=$booking_data[0]['order_id'];
-                    $this->session->set_userdata('reqid',$reqid);
-                    redirect(base_url('receipt'));
-            }else{
-                $page_data['message']="Problem occured while adding bookings.";
-            }
-    }
-    // $page_data['dropdown']=$this->menu->menu_all();
-    // $page_data['page_title']="Order Summery";
-    //     $page_data['page']="summery";
-    //     $this->load->view('index',$page_data);
-    
-
-    $page_data['dropdown']=$this->menu->menu_all();
-    $page_data['page_title']="Payment";
-    $page_data['page']="upi";
-    $this->load->view('index',$page_data);
-}
-public function forget(){
-    $page_data['dropdown']=$this->menu->menu_all();
-    $page_data['page_title']="Forget Password";
-    $page_data['page']="forget";
-    $this->load->view('index',$page_data);
-}
-public function invoice($id){
-    if($this->session->userdata('cid')){
-    $page_data['dropdown']=$this->menu->menu_all();
-    $page_data['invoice_create']=$this->menu->invoice($id);
-    // $data = [
-    //     'order_no' => $invoice_create[0]['request_id_value'],
-    //     'cust_name' => $invoice_create[0]['name'],
-    //     'cust_contact' => $invoice_create[0]['contact'],
-    //     'created_on' => date('d-m-y'),
-    // ];
-    // $this->db->insert('invoice',$data);
-    $page_data['page_title']="Invoice";
-    $page_data['page']="invoice";
-    $this->load->view('index',$page_data);
-    }
-    else{
-        redirect(base_url());
-    }
-}
 
 }

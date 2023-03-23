@@ -965,6 +965,7 @@
 
 .sign-up-forms .nav-pills .nav-link.active {
     background-color: transparent;
+    border-bottom: 3px double var(--var-yellow);
 }
 
 .sign-up-forms .nav-pills .nav-item {
