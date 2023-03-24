@@ -52,7 +52,7 @@
 											minutes: <span id="timer"></span></div>
 
 										<div class="row justify-content-center">
-											<div class="col-lg-6 login_err">
+											<div class="col-lg-12 login_err">
 
 											</div>
 										</div>
@@ -62,8 +62,6 @@
 										<button type="button" name="submit" value="login"
 											class="btn btn-primary btn-user btn-block login_verify_otp"
 											id='login_otp_verify'>Verify OTP</button>
-
-
 									</form>
 								</div>
 							</div>
@@ -83,7 +81,7 @@
 
 	<!-- Custom scripts for all pages-->
 	<script src="<?php echo base_url();?>assets/admin/js/sb-admin-2.min.js"></script>
-    <script src="<?php echo base_url();?>assets/admin/admin_login.js"></script>
+  <?php include('assets/admin/admin_login.php') ?>
 
 
 </body>

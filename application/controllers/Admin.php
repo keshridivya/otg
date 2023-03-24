@@ -39,35 +39,32 @@ class Admin extends CI_Controller {
 	}
 
 	public function loginotp(){
-
         if($this->input->post('number')){
             $this->load->helper('msg');
             $number = $this->input->post('number');
             $result=$this->db->get_where('admin',array('contact'=>$number))->result_array();
+			$name = $result[0]['name'];
             if (count($result) > 0)
             {
                 $otp = rand(10000, 99999);
 				$otp_resu = 'success';
-                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
-                //   Do not share it with anyone';
-                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
-                //       $page_data['status'] = true;
-                //       $page_data['message'] = "success";
-                    
-                //       } else {
-                //       $page_data['status'] = false;
-                //       $page_data['message'] = "Something went wrong, please try again later.";
-                //       }
+				$timestamp =  $_SERVER["REQUEST_TIME"];  
+                $_SESSION['time'] = $timestamp;
+                  $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
+                  if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
+                      $data['message'] = "success";
+                      } else {
+                      $data['message'] = "Something went wrong, please try again later.";
+                      }
             }
             else
             {
                 $otp_resu = 'error';
             }
-            
         }
         $this->session->set_userdata('admin_login_otp',$otp);
         $data['otp'] = $otp_resu;
-		$data['otp1'] = $otp;
+		// $data['otp1'] = $otp;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }
@@ -76,20 +73,27 @@ class Admin extends CI_Controller {
         if($this->input->post('loginotp')){
             $loginotp=$this->input->post('loginotp');
             $number = $this->input->post('number');
-            if($this->session->userdata['admin_login_otp'] == $loginotp){
-                $otp = 'success';
-                    $result=$this->menu->checklogin($number);
-                    if(!empty($result)){
-                        $this->session->set_userdata('a_id', $result->admin_id);
-                        $this->session->set_userdata('e_id', $result->email_id);
-                        $this->session->unset_userdata('login_otp');
-                    }else{
-                        $page_data['message']="User not found";
-                    }
-            }
-            else{
-                $otp='error';
-            }
+			$timestamp = $_SERVER['REQUEST_TIME'];
+			if(($timestamp - $_SESSION['time']) > 300) //5min
+			{
+				$otp = "expired";
+				// echo json_encode(array("type"=>"error", "message"=>"OTP expired. Pls. try again."));
+			}else{
+				if($this->session->userdata['admin_login_otp'] == $loginotp){
+					$otp = 'success';
+						$result=$this->menu->adminlogin($number);
+						if(!empty($result)){
+							$this->session->set_userdata('a_id', $result->admin_id);
+							$this->session->set_userdata('e_id', $result->email_id);
+							$this->session->unset_userdata('login_otp');
+						}else{
+							$page_data['message']="User not found";
+						}
+				}
+				else{
+					$otp='error';
+				}
+		}
            
         }
         $data['otp'] = $otp;

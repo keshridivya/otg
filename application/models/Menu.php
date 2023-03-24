@@ -146,7 +146,14 @@ class Menu extends CI_model {
         $this->db->where('contact', $email);
         $query = $this->db->get();
         return $query->row();
+    }
 
+    function adminlogin($number){
+        $this->db->select('*');
+        $this->db->from('admin');
+        $this->db->where('contact',$number);
+        $query = $this->db->get();
+        return $query->row();
     }
 
     public function createData($data) {
