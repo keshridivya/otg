@@ -252,6 +252,7 @@
 						<div id="table">
 							<table class="table-main ">
 								<thead>
+									
 									<tr class="tabletitle">
 										<th>S.No</th>
 										<th>Product/Services</th>
@@ -265,21 +266,21 @@
 								</thead>
 								<?php
                             $count = 1;
-                    foreach($invoice as $invoice){
-                    ?>
+								foreach($invoice as $invoice1){
+								?>
 								<tr class="list-item">
 									<td data-label="Type" class="tableitem"><?= $count; ?></td>
-									<td data-label="Description" class="tableitem"><?= $invoice['product'] ?>
+									<td data-label="Description" class="tableitem"><?= $invoice1['product'] ?>
 									</td>
-									<td data-label="Quantity" class="tableitem qua" id=""><?= $invoice['qua'] ?></td>
-									<td data-label="Unit Price" class="tableitem cBalance" id=""><?= $invoice['mrp'] ?>
+									<td data-label="Quantity" class="tableitem qua" id=""><?= $invoice1['qua'] ?></td>
+									<td data-label="Unit Price" class="tableitem cBalance" id=""><?= $invoice1['mrp'] ?>
 									</td>
-									<td data-label="Taxable Amount" class="tableitem rate"><?= $invoice['rate'] ?></td>
+									<td data-label="Taxable Amount" class="tableitem rate"><?= $invoice1['rate'] ?></td>
 									<td data-label="Tax Code" class="tableitem chDiscount" id=''>
-										<?= $invoice['discount'] ?> %
+										<?= $invoice1['discount'] ?> %
 									</td>
 									<td data-label="%" class="tableitem"><?= '0.00' ?></td>
-									<td data-label="Tax Amount" class="tableitem amt" id='result'><?= $invoice['amt'] ?></td>
+									<td data-label="Tax Amount" class="tableitem amt" id='result'><?= $invoice1['amt'] ?></td>
 								</tr>
 								total
 								<?php $count++; } ?>
@@ -290,8 +291,7 @@
 									<td data-label="Grand Total" class="tableitem numberword result" id='result'></td>
 								</tr>
 								<tr class="list-item">
-									<td colspan="6" style="border-left:2px solid #dee2e6" class=' text-left'> Total
-										Quantity: 9</td>
+									<td colspan="6" style="border-left:2px solid #dee2e6" class=' text-left'> Total Quantity: <?= $count; ?></td>
 									<td data-label="Grand Total" class="tableitem">Total Payable</td>
 									<td data-label="Grand Total" class="tableitem result" id='result'>
 									</td>
@@ -321,9 +321,15 @@
 								<tr class="">
 									<td colspan='2'>
 										<h2>Terms And Conditions</h2>
-										<p> A.M.C Upto 1.5 Ton - 3 Jet Service + 1 Time Gas Recharge + Unlimited Repair
+										<p> 
+										<?php
+										foreach($invoice as $invoices){
+											echo $invoices['qua'].' '.$invoices['product'];
+										}
+										?>,	
+										<!-- A.M.C Upto 1.5 Ton - 3 Jet Service + 1 Time Gas Recharge + Unlimited Repair
 											Total 3
-											Basic AMC And 2 Service AMC Is Included In Your Contract.</p>
+											Basic AMC And 2 Service AMC Is Included In Your Contract.</p> -->
 									</td>
 									<td class="">
 										heelo

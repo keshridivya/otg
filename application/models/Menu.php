@@ -117,12 +117,13 @@ class Menu extends CI_model {
             return $query->result_array();
     }
     public function admininvoiceview($id){
-        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
+        $this->db->select('*, count(*) as tcount,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
         $this->db->from('invoice');
         $this->db->join('customer','invoice.contact=customer.contact');
         $this->db->group_by('order_id');
         $this->db->where(array('invoice.order_id '=>$id));
         $query = $this->db->get();
+        print_r($this->db->last_query());
         return $query->result_array();
     }
 
@@ -156,12 +157,22 @@ class Menu extends CI_model {
         return $query->row();
     }
 
-    function coupon($number){
+    function coupon(){
         $this->db->select('*');
         $this->db->from('coupons');
-        $this->db->join('category_product','category_product.cproduct_name = coupons.cproduct');
-        $this->db->join('category_plans','coupons.cplan = category_plans.cplan_name');
+        $this->db->join('category_product','category_product.cproduct_id = coupons.cproduct');
+        $this->db->join('category_plans','coupons.cplan = category_plans.cplan_id ');
         $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    function coupondata($id){
+        $this->db->select('*,coupons.status as sta');
+        $this->db->from('coupons');
+        $this->db->join('category_product','category_product.cproduct_id = coupons.cproduct');
+        $this->db->join('category_plans','coupons.cplan = category_plans.cplan_id ');
+        $query = $this->db->get();
+        				// print_r($this->db->last_query());
         return $query->result_array();
     }
 

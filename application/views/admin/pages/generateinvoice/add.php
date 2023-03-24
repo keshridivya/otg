@@ -230,7 +230,7 @@
 											<input type="hidden" name='order_id' id='order_id'
 												value='OTG-<?= time().rand(100, 999) ?>'>
 											<input type='hidden' id='id' name='id'>
-											<input type="hidden"
+											<input type="hidden" class='csrf'
 												name="<?php echo $this->security->get_csrf_token_name(); ?>"
 												value="<?php echo $this->security->get_csrf_hash();?>">
 											<!-- progressbar -->
@@ -322,28 +322,6 @@
 <!-- /.container-fluid -->
 <script src="<?php echo base_url();?>assets/js/vendor/jquery-3.3.1.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script>
-	//check customer already registered
-	$(document).ready(function () {
-		$('#contct_check').click(function () {
-			let contact = $('#contact_login').val();
-			$.ajax({
-				url: "<?= base_url('admin/checkcontact') ?>",
-				method: 'post',
-				data: {
-					contact: contact,
-				},
-				dataType: 'json',
-				success: function (response) {
-					if (response.cid != "") {
-						$('#email').val(response.email).attr('readonly', true);
-						$('#name').val(response.cname).attr('readonly', true);
-						$('#id').val(response.cid);
-					}
-				},
-				error: function () {}
-			});
-		});
-	});
-
-</script>
+<?php
+include('assets/admin/admin_login.php');
+?>

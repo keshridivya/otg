@@ -245,7 +245,23 @@ $(document).ready(function(){
 	})
 });
 
-
+$(document).ready(function(){
+	$('#coupon_add').click(function(){
+		let code = $('#code').val();
+		let pname = $('#pname').val();
+		let plan = $('#plan').val();
+		let percent = $('#percent').val();
+		let expiry = $('#expiry').val();
+		let ct_status = $('#ct_status').val();
+		if(code == '' || pname == '' || plan == '' || percent == '' || expiry == '' || ct_status == '' ){
+			alert('Please fill all the field');
+			return false;
+		}
+		else{
+			return true;
+		}
+	})
+})
 
 
 

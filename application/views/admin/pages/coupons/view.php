@@ -20,8 +20,8 @@
 						<tr>
 							<th>s.no</th>
 							<th>Coupon Code</th>
-							<th>Product Type</th>
-							<th>Service Type</th>
+							<th>Product</th>
+							<th>Service Plan </th>
 							<th>Percentage</th>
 							<th>Created date</th>
 							<th>Expired date</th>
@@ -32,17 +32,22 @@
 					<?php  
                     $count = 1;
                     foreach($coupon as $coupon){  ?>
-                        <!-- <tr>
+                        <tr>
                             <td><?= $count ?></td>
-                            <td><?= $coupon[0][''] ?></td>
-                            <td><?= $coupon[0][''] ?></td>
-                            <td><?= $coupon[0][''] ?></td>
-                            <td><?= $coupon[0][''] ?></td>
-                            <td><?= $coupon[0][''] ?></td>
-                            <td><?= $coupon[0][''] ?></td>
-                            <td><?= $coupon[0][''] ?></td>
-                            <td><?= $coupon[0][''] ?></td>
-                        </tr> -->
+                            <td><?= $coupon['code'] ?></td>
+                            <td><?= $coupon['cproduct'] ?></td>
+                            <td><?= $coupon['cplan'] ?></td>
+                            <td><?= $coupon['percentage'] ?></td>
+                            <td><?= $coupon['created_on'] ?></td>
+                            <td><?= $coupon['expiry_date'] ?></td>
+                            <td><?= $coupon['status'] ?></td>
+                            <td>
+							<a href="<?php echo base_url('admin/coupon/edit/'.$coupon['coupon_id']); ?>" class="btn btn-primary"><i
+										class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+								<a href="<?php echo base_url('admin/coupon/delete/'.$coupon['coupon_id']); ?>" type="button" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash" aria-hidden="true"></i></a>
+
+							</td>
+                        </tr>
 					<?php $count++;  }    ?>
 				</table>
 			</div>

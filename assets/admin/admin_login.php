@@ -93,7 +93,8 @@
                     $('.resend_otp_hide').show();
                 } else if (response.otp != 'error') {
 					// alert(response.otp);
-					window.open("<?= base_url('admin') ?>");
+                    window.location.href="<?= base_url('admin') ?>";
+					// window.open("<?= base_url('admin') ?>");
 				} else {
 					$('.login_err').html(
 						'<div class="alert alert-danger">OTP is Incorrect</div>'
@@ -181,3 +182,34 @@
 	}, 300000);
 
 </script>
+
+<script>
+	//check customer already registered
+	$(document).ready(function () {
+		$('#contct_check').click(function () {
+			let contact = $('#contact_login').val();
+            let csrfName = $('.csrf').attr('name');
+            let csrfHash = $('.csrf').val();
+			$.ajax({
+				url: "<?= base_url('admin/checkcontact') ?>",
+				method: 'post',
+				data: {
+					contact: contact,
+                    [csrfName] : csrfHash
+				},
+				dataType: 'json',
+				success: function (response) {
+                    $('.csrf').val(response.token);
+					if (response.cid != "") {
+						$('#email').val(response.email).attr('readonly', true);
+						$('#name').val(response.cname).attr('readonly', true);
+						$('#id').val(response.cid);
+					}
+				},
+				error: function () {}
+			});
+		});
+	});
+
+</script>
+

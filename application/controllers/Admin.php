@@ -50,12 +50,12 @@ class Admin extends CI_Controller {
 				$otp_resu = 'success';
 				$timestamp =  $_SERVER["REQUEST_TIME"];  
                 $_SESSION['time'] = $timestamp;
-                  $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
-                  if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
-                      $data['message'] = "success";
-                      } else {
-                      $data['message'] = "Something went wrong, please try again later.";
-                      }
+                //   $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
+                //   if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
+                //       $data['message'] = "success";
+                //       } else {
+                //       $data['message'] = "Something went wrong, please try again later.";
+                //       }
             }
             else
             {
@@ -1157,7 +1157,7 @@ class Admin extends CI_Controller {
 						if($this->db->insert('blog',$data)){
 							$page_data['message']="Successfully created.";
 						}else{
-							$page_data['message']="Problem occured while adding customer.";
+							$page_data['message']="Problem occured while adding blog.";
 	
 						}
 					}
@@ -1218,10 +1218,63 @@ class Admin extends CI_Controller {
 				// $page_data['coupon'] = $this->db->get_where('coupons')->result_array();
 				$page_data['coupon'] = $this->menu->coupon();
 				$this->load->view('admin/index',$page_data);
-				// print_r($this->db->last_query());
 				break;
 			case 'add':
+				if($this->input->post()){
+					$data = [
+						'code' => $this->input->post('code'),
+						'cproduct' => $this->input->post('pname'),
+						'cplan' => $this->input->post('plan'),
+						'percentage' => $this->input->post('percent'),
+						'status' => $this->input->post('ct_status'),
+						'expiry_date' => $this->input->post('expiry'),
+						'created_on' => date('y-m-d'),
+					];
+					if($this->db->insert('coupons',$data)){
+						$page_data['message'] = 'Successfully created';
+					}
+					else{
+						$page_data['message'] = 'something went wrong';
+					}
+				}
+				$page_data['product'] = $this->db->get('category_product')->result_array();
+					$page_data['plan'] = $this->db->get('category_plans')->result_array();
+				$page_data['page_title'] = 'Add Coupon';
+				$page_data['page'] = 'coupons/add';
+				$this->load->view('admin/index',$page_data);
 				break;
+			case 'edit':
+				if($this->input->post()){
+					$data = [
+						'code' => $this->input->post('code'),
+						'cproduct' => $this->input->post('pname'),
+						'cplan' => $this->input->post('plan'),
+						'percentage' => $this->input->post('percent'),
+						'status' => $this->input->post('ct_status'),
+						'expiry_date' => $this->input->post('expiry'),
+						'created_on' => date('y-m-d'),
+					];
+					$this->db->where('coupon_id',$id);
+					if($this->db->update('coupons',$data)){
+						$page_data['message'] = 'Successfully updated';
+					}
+					else{
+						$page_data['message'] = 'something went wrong';
+					}
+				}
+				$page_data['coupon'] = $this->menu->coupondata($id);
+				$page_data['product'] = $this->db->get('category_product')->result_array();
+					$page_data['plan'] = $this->db->get('category_plans')->result_array();
+				$page_data['page_title'] = 'Edit Coupon';
+				$page_data['page'] = 'coupons/add';
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'delete':
+				$this->db->where('coupon_id',$id);
+				$this->db->delete('coupons');
+				redirect('admin/coupon');
+				break;
+
 		}
 	}
 
@@ -1562,6 +1615,7 @@ class Admin extends CI_Controller {
         $data['email'] = $email ?? '';
 		$data['cid'] = $cid ?? '';
 		$data['cname'] = $cname ?? '';
+		$data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }
 	

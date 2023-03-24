@@ -312,7 +312,6 @@
 		});
 
 		$('#otp_verify').click(function () {
-			alert('1');
 			let get_otp = $('#get_otp').val();
 			let mob_number = $('.reg_number').val();
 			var csrfName = $('.csrf').attr('name');

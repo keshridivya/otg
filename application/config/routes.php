@@ -204,7 +204,7 @@ $route['admin/product_benefit/delete/(:any)']='admin/product_benefit/delete/$1';
 
 //admin contact
 $route['admin/contact']='admin/contact/view';
-$route['admin/contact/delete/any(:any)']='admin/contact/delete/$1';
+$route['admin/contact/delete/(:any)']='admin/contact/delete/$1';
 
 //admin offer banner
 $route['admin/offer']='admin/offer/view';
@@ -220,6 +220,9 @@ $route['admin/generateinvoice/invoice/(:any)']='admin/generateinvoice/invoice/$1
 //admin coupons
 $route['admin/coupon'] = 'admin/coupon/view';
 $route['admin/coupon/add'] = 'admin/coupon/add';
+$route['admin/coupon/edit/(:any)'] = 'admin/coupon/edit/$1';
+$route['admin/coupon/delete/(:any)'] = 'admin/coupon/delete/$1';
+
 
 
 

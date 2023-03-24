@@ -42,57 +42,6 @@ class Welcome extends CI_Controller {
     public function sign_up()
     {
         $this->load->library('form_validation');
-        // if ($this->input->post('submit') == 'login'){
-        //     // echo "login page";
-        //     $this->form_validation->set_rules('userid','User Id','required');
-
-        //     $this->form_validation->set_rules('pwd','Password','required');
-        //     $this->form_validation->set_error_delimiters('<div class="error-div text-danger">','</div>');
-        //     if($this->form_validation->run()){
-            
-        //         $userid=$this->input->post('userid');
-        //         $pwd=sha1($this->input->post('pwd'));
-        //         $result=$this->menu->checklogin($userid,$pwd);
-        //         // $result=$this->db->get_where('customer',array('email_id'=>$userid,'password'=>$pwd))->result_array();
-        //         if($result > 0){
-        //             $this->session->set_userdata('cid', $result->cust_id);
-        //             $this->session->set_userdata('cemail', $result->email_id);
-        //             $this->session->set_userdata('cname', $result->cust_name);
-
-        //             // $cid=$result[0]['cust_id'];
-        //             // $cemail=$result[0]['email_id'];
-        //             // $cname=$result[0]['cust_name'];
-        //             // $this->session->set_userdata('cid',$cid);
-        //             // $this->session->set_userdata('cemail',$cemail);
-        //             // $this->session->set_userdata('cname',$cname);
-        //         }else{
-        //             $page_data['message']="User not found";
-        //         }
-                
-        //     }else{
-        //         // echo validation_errors();
-        //     }
-            
-        //     if(@$this->session->userdata['cid']){
-
-        //         $testimonial=$this->db->get_where('testimonials',array('status'=>'active'))->result_array();
-        //         $client=$this->db->get_where('our_client',array('status'=>'active'))->result_array();
-        //         $banner=$this->db->get_where('banner',array('status'=>'active'))->result_array();
-        //         $page_data['dropdown']=$this->menu->menu_all();
-        //         $page_data['testimonial']=$testimonial;
-        //         $page_data['client']=$client;
-        //         $page_data['banner']=$banner;
-        //         $page_data['page']="home";
-        //         $this->load->view('index',$page_data);
-        //     }else{
-        //         $page_data['dropdown']=$this->menu->menu_all();
-        //         $page_data['page']="sign_up";
-        //         $this->load->view('index',$page_data);
-
-        //     }
-            
-        // }
-        // else
         if ($this->input->post('submit') == 'register' || $this->session->userdata('custid') ){
             print_r($this->input->post());
             $all_customers=$this->db->get("customer")->result_array();
@@ -283,7 +232,7 @@ class Welcome extends CI_Controller {
         if($this->input->post('get_otp')){
             $loginotp=$this->input->post('get_otp');
 			$timestamp = $_SERVER['REQUEST_TIME'];
-			if(($timestamp - $_SESSION['time_check']) > 10) //5min
+			if(($timestamp - $_SESSION['time_check']) > 300) //5min
 			{
 				$otp = "expired";
 			}else{
