@@ -35,6 +35,7 @@
 
 	$('#login_otp_verify').hide();
 	$('.otp_hide').hide();
+    $('.resend_otp_hide').hide();
 	$('#login_btn').click(function () {
 		let number = $('#usernumber').val();
 		var csrfName = $('.csrf').attr('name');
@@ -88,8 +89,10 @@
 				$('.csrf').val(response.token);
 				if (response.otp == 'expired') {
                     $('.login_err').html( '<div class="alert alert-danger">OTP expired. Pls. try again.</div>');
+                    $('.otp_hide').hide();
+                    $('.resend_otp_hide').show();
                 } else if (response.otp != 'error') {
-					alert(response.otp);
+					// alert(response.otp);
 					window.open("<?= base_url('admin') ?>");
 				} else {
 					$('.login_err').html(
@@ -98,9 +101,43 @@
 				}
 
 			},
-			error: function (response) {
-				alert(response.message);
+			error: function () {
+				// alert(response.message);
 				alert('OTP is incorrect .Please try again');
+			}
+		})
+	});
+
+    $('#resend_otp').click(function () {
+		let number = $('#usernumber').val();
+		var csrfName = $('.csrf').attr('name');
+		var csrfHash = $('.csrf').val();
+		$.ajax({
+			url: "<?= base_url('admin/loginotp'); ?>",
+			method: "post",
+			data: {
+				number: number,
+				[csrfName]: csrfHash
+			},
+			dataType: 'json',
+			success: function (response) {
+				$('.csrf').val(response.token);
+				// $('#login_vrf_otp').val(response.otp);
+				if (response.otp != 'error') {
+					$('.login_err').html(
+						'<div class="alert alert-success">OTP is send on your mobile</div>'
+					);
+					$('.loginotpbox').show();
+					$('.login_send_otp').hide();
+					$('.login_verify_otp').show();
+				} else {
+					$('.login_err').html(
+						'<div class="alert alert-danger">This Number is incorrect</div>'
+					);
+				}
+			},
+			error: function () {
+				alert('OTP not send .Please try again');
 			}
 		})
 	});
@@ -108,7 +145,6 @@
 	document.getElementById('timer').innerHTML =
 		05 + ":" + 00;
 	startTimer();
-
 
 	function startTimer() {
 		var presentTime = document.getElementById('timer').innerHTML;

@@ -35,7 +35,7 @@
 										<h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
 									</div>
 									<form class="user" method="post" action="">
-										<input type="hidden"
+										<input type="hidden" class="csrf"
 											name="<?php echo $this->security->get_csrf_token_name(); ?>"
 											value="<?php echo $this->security->get_csrf_hash();?>">
 
@@ -51,11 +51,15 @@
 										<div style='color:red;font-size:15px' class='otp_hide'>OTP expires within 5
 											minutes: <span id="timer"></span></div>
 
+
 										<div class="row justify-content-center">
 											<div class="col-lg-12 login_err">
 
 											</div>
 										</div>
+										<button type="button" name="submit" value="resend"
+											class="btn btn-primary btn-user btn-block resend_otp_hide" id="resend_otp"
+											>resend OTP</button>
 										<button type="button" name="submit" value="login"
 											class="btn btn-primary btn-user btn-block login_send_otp" id='login_btn'
 											disabled>Send OTP</button>

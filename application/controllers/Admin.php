@@ -64,7 +64,7 @@ class Admin extends CI_Controller {
         }
         $this->session->set_userdata('admin_login_otp',$otp);
         $data['otp'] = $otp_resu;
-		// $data['otp1'] = $otp;
+		$data['otp1'] = $otp;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }
@@ -186,6 +186,7 @@ class Admin extends CI_Controller {
 				break;
 		}
 	}
+
 	public function amc($action,$id=false){
 		switch ($action) {
 			case 'view':
@@ -489,7 +490,6 @@ class Admin extends CI_Controller {
 		}
 	}
 
-
 	//Engineer page in admin
 	public function engineer($action,$id=false){
 		switch ($action) {
@@ -569,8 +569,6 @@ class Admin extends CI_Controller {
 				break;
 		}
 	}
-
-
 
 	//Category page in admin
 	public function category($action,$id=false){
@@ -1211,6 +1209,22 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	//coupon in admin
+	public function coupon($action,$id=false){
+		switch($action){
+			case 'view':
+				$page_data['page_title'] = 'Coupons';
+				$page_data['page'] = 'coupons/view';
+				// $page_data['coupon'] = $this->db->get_where('coupons')->result_array();
+				$page_data['coupon'] = $this->menu->coupon();
+				$this->load->view('admin/index',$page_data);
+				// print_r($this->db->last_query());
+				break;
+			case 'add':
+				break;
+		}
+	}
+
 	//offer banner
 	public function offer($action,$id=false){
 		switch($action){
@@ -1558,7 +1572,6 @@ class Admin extends CI_Controller {
 		redirect('admin');
 	}
 	
-			
 			public function uploadimg($data)
 			{
 				// print_r($data);

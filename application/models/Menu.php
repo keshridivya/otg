@@ -156,6 +156,15 @@ class Menu extends CI_model {
         return $query->row();
     }
 
+    function coupon($number){
+        $this->db->select('*');
+        $this->db->from('coupons');
+        $this->db->join('category_product','category_product.cproduct_name = coupons.cproduct');
+        $this->db->join('category_plans','coupons.cplan = category_plans.cplan_name');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
     public function createData($data) {
         $query = $this->db->insert('booking_items', $data);
                 //  print_r($this->db->last_query()); 

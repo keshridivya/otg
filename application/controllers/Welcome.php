@@ -148,11 +148,11 @@ class Welcome extends CI_Controller {
                     if($this->db->insert('customer',$data)){
 
                         $result = $this->db->get_where('customer',array('contact' => $mob_num))->row();
-                        print_r($this->db->last_query());
                         if(!empty($result)){
                             $this->session->set_userdata('cid', $result->cust_id);
                             $this->session->set_userdata('cemail', $result->email_id);
                             $this->session->set_userdata('cname', $result->cust_name);
+
                         }else{
                             $page_data['message']="User not found";
                         }
@@ -242,34 +242,6 @@ class Welcome extends CI_Controller {
         }
         
     }
-
-
-
-    // public function reset_password()
-    // {
-    //     if ($this->input->post()){
-    //         $contact=$this->input->post('mobile');
-    //         $data=array(
-    //             "password"=>sha1($this->input->post('password')),
-    //         );
-    //         $this->db->where('contact',$contact);
-    //         if($this->db->update('customer',$data)){
-    //             redirect('sign-up');
-    //         }else{
-                
-    //             $page_data['message']='something went wrong';
-    //         }
-    //     }
-       
-    //     else{
-    //         $page_data['dropdown']=$this->menu->menu_all();
-    //             $page_data['page_title']="Sign Up";
-    //             $page_data['page']="reset_password";
-    //             $this->load->view('index',$page_data);
-                
-    //     }
-        
-    // }
     
     //otp
     public function otp(){
@@ -281,6 +253,9 @@ class Welcome extends CI_Controller {
             if (count($result) == 0)
         {
             $otp = rand(10000, 99999);
+            $otp_res = 'success';
+            $timestamp =  $_SERVER["REQUEST_TIME"];  
+                $_SESSION['time_check'] = $timestamp;
               $msg = 'Dear Sir/Madam,Your OTP for Registration of OTGCares is '.$otp.'. Please do not share this OTP with anyone';
               if (sendsms($number,$dltId='1207167757998006000',$header="OTGCRS", $msg)) {
                   $page_data['status'] = true;
@@ -293,9 +268,33 @@ class Welcome extends CI_Controller {
         }
         else
         {
-            $otp = 'error';
+            $otp_res = 'error';
         }
 
+        }
+        $this->session->set_userdata('reg_login_otp',$otp);
+        // $data['otp1'] = $otp;
+        $data['otp'] = $otp_res;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
+    public function resg_otp_verify(){
+        if($this->input->post('get_otp')){
+            $loginotp=$this->input->post('get_otp');
+			$timestamp = $_SERVER['REQUEST_TIME'];
+			if(($timestamp - $_SESSION['time_check']) > 10) //5min
+			{
+				$otp = "expired";
+			}else{
+				if($this->session->userdata['reg_login_otp'] == $loginotp){
+					$otp = 'success';
+				}
+				else{
+					$otp='error';
+				}
+		}
+           
         }
         $data['otp'] = $otp;
         $data['token'] = $this->security->get_csrf_hash();
@@ -307,6 +306,8 @@ class Welcome extends CI_Controller {
             $this->load->helper('msg');
             $number = $this->input->post('number');
             $otp = rand(10000, 100000);
+            $timestamp =  $_SERVER["REQUEST_TIME"];  
+                $_SESSION['time_check'] = $timestamp;
               $msg = 'Dear Sir/Madam,Your OTP for Registration of OTGCares is '.$otp.'. Please do not share this OTP with anyone';
               if (sendsms($number,$dltId='1207167757998006000',$header="OTGCRS", $msg)) {
                   $page_data['status'] = true;
@@ -317,13 +318,14 @@ class Welcome extends CI_Controller {
                   $page_data['message'] = "Something went wrong, please try again later.";
                   }
         }
-        $data['otp'] = $otp;
+        $this->session->set_userdata('reg_login_otp',$otp);
+        // $data['otp'] = $otp;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }
 
     // public function forgetotp(){
-    public function loginotp(){
+    public function regloginotp(){
 
         if($this->input->post('number')){
             $this->load->helper('msg');
@@ -352,6 +354,7 @@ class Welcome extends CI_Controller {
         }
         $this->session->set_userdata('login_otp',$otp);
         $data['otp'] = $otp_resu;
+        // $data['otp1'] = $otp;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }

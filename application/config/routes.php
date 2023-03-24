@@ -81,12 +81,13 @@ $route['verify']='welcome/verify';
 $route['success']='welcome/success';
 $route['upi']='welcome/upi';
 $route['return']='welcome/return';
-$route['loginotp']='welcome/loginotp';
+$route['regloginotp']='welcome/regloginotp';
 $route['forgetotp']='welcome/forgetotp';
 $route['reset-password']='welcome/reset_password';
 $route['paymentFailed']='welcome/paymentFailed';
 $route['summerydetail']='welcome/summerydetail';
 $route['invoice/(:any)']='welcome/invoice/$1';
+$route['resg_otp_verify'] = 'welcome/resg_otp_verify';
 
 // $route['update_cart']='welcome/update_cart';
 
@@ -108,6 +109,7 @@ $route['admin/amc/edit/(:any)']="admin/amc/edit/$1";
 $route['admin/one_time_service']="admin/one_time_service/view";
 $route['admin/one_time_service/add']="admin/one_time_service/add";
 $route['admin/one_time_service/edit/(:any)']="admin/one_time_service/edit/$1";
+
 //admin customer
 $route['admin/customer']="admin/customer/view";
 $route['admin/customer/add']="admin/customer/add";
@@ -214,6 +216,11 @@ $route['admin/generateinvoice/edit/(:any)']='admin/generateinvoice/edit/$1';
 $route['admin/generateinvoice/add']='admin/generateinvoice/add';
 $route['admin/checkcontact']='admin/checkcontact';
 $route['admin/generateinvoice/invoice/(:any)']='admin/generateinvoice/invoice/$1';
+
+//admin coupons
+$route['admin/coupon'] = 'admin/coupon/view';
+$route['admin/coupon/add'] = 'admin/coupon/add';
+
 
 
 

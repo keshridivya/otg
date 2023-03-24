@@ -58,7 +58,7 @@
 
 								<form method="post" action="">
 									<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
-										value="<?php echo $this->security->get_csrf_hash();?>">
+										class="csrf" value="<?php echo $this->security->get_csrf_hash();?>">
 									<!-- <input type="hidden" id='login_vrf_otp'> -->
 
 									<div class="row justify-content-center">
@@ -76,8 +76,8 @@
 												<input type="text" class="form-control " id="loginotp" name="loginotp"
 													placeholder="OTP">
 											</div>
-											<div style='color:red;font-size:15px' class='otp_hide'>OTP expires within 5
-												minutes: <span id="timer"></span></div>
+											<!-- <div style='color:red;font-size:15px' class='otp_hide'>OTP expires within 5
+												minutes: <span id="timer"></span></div> -->
 										</div>
 									</div>
 									<div class="row justify-content-center">
@@ -101,8 +101,7 @@
 									<form action="" method='post'>
 										<input type="hidden"
 											name="<?php echo $this->security->get_csrf_token_name(); ?>"
-											value="<?php echo $this->security->get_csrf_hash();?>" class='csrf'
-											id='csrf2'>
+											value="<?php echo $this->security->get_csrf_hash();?>" class='csrf'>
 										<input type='hidden' id='set_otp' value='123'>
 
 										<div class="row justify-content-center">
@@ -133,7 +132,7 @@
 										</div>
 										<button type="button" name="submit" value="otp" class="btn" id='otp_btn'
 											disabled>send otp</button>
-										<a class='otp_hide' id='resend_otp' style='margin:auto'>Resend OTP</a>
+										<a class='' id='resend_otp' style='margin:auto'>Resend OTP</a>
 										<button type="button" name="submit" value="otp" class="btn otp_hide"
 											id='otp_verify' style='margin:auto'>Verify
 											otp</button>
@@ -143,7 +142,7 @@
 							<div class="signup-forms form_hide">
 								<form method="post" action="" class='signup'>
 									<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
-										value="<?php echo $this->security->get_csrf_hash();?>">
+										class="csrf" value="<?php echo $this->security->get_csrf_hash();?>">
 
 									<div class="row justify-content-center">
 										<div class="col-lg-6">
@@ -189,29 +188,18 @@
 											<?php echo form_error('city');?>
 										</div>
 										<div class="col-lg-6">
-
 											<div class="form-group">
-
 												<input type="text" class="form-control" id="state" name="state"
 													placeholder="State">
-
 											</div>
-
 											<span id='spanstate'>Please enter correct state</span>
-
 											<?php echo form_error('state');?>
-
 										</div>
-
 										<div class="col-lg-6">
-
 											<div class="form-group">
-
 												<input type="text" class="form-control" id="address" name="address"
 													placeholder="Service Address">
-
 											</div>
-
 											<span id='spanAddress'>Please enter correct address</span>
 											<?php echo form_error('address');?>
 										</div>
@@ -260,10 +248,11 @@
 	$(document).ready(function () {
 		$('.loginotpbox').hide();
 		$('.login_verify_otp').hide();
+		$('#resend_otp').hide();
 		$('#otp_btn').click(function () {
 			let number = $('.reg_number').val();
-			var csrfName = $('#csrf2').attr('name');
-			var csrfHash = $('#csrf2').val();
+			var csrfName = $('.csrf').attr('name');
+			var csrfHash = $('.csrf').val();
 			$.ajax({
 				url: "<?= base_url('otp'); ?>",
 				method: "post",
@@ -273,8 +262,8 @@
 				},
 				dataType: 'json',
 				success: function (response) {
-					$('#csrf2').val(response.token);
-					$('#set_otp').val(response.otp);
+					$('.csrf').val(response.token);
+					// $('#set_otp').val(response.otp);
 
 					if (response.otp != 'error') {
 						$('#otp_btn').css('display', 'none');
@@ -287,7 +276,6 @@
 							'<div class="alert alert-danger">Number already Registered</div>'
 						);
 					}
-
 				},
 				error: function () {
 					alert('OTP not send .Please try again');
@@ -297,8 +285,8 @@
 
 		$('#resend_otp').click(function () {
 			let number = $('.reg_number').val();
-			var csrfName = $('#csrf2').attr('name');
-			var csrfHash = $('#csrf2').val();
+			var csrfName = $('.csrf').attr('name');
+			var csrfHash = $('.csrf').val();
 			$.ajax({
 				url: "<?= base_url('resend_otp'); ?>",
 				method: "post",
@@ -308,8 +296,12 @@
 				},
 				dataType: 'json',
 				success: function (response) {
-					$('#csrf2').val(response.token);
-					$('#set_otp').val(response.otp);
+					$('.csrf').val(response.token);
+					$('.err_msg').html(
+						'<div class="alert alert-success">OTP is resend on your mobile</div>'
+					);
+					$('#otp_verify').show();
+					$('.otp_hide').css('display', 'block');
 					$('#timer3').css('display', 'none')
 
 				},
@@ -320,19 +312,41 @@
 		});
 
 		$('#otp_verify').click(function () {
-			let set_otp = $('#set_otp').val();
+			alert('1');
 			let get_otp = $('#get_otp').val();
 			let mob_number = $('.reg_number').val();
-
-			if (set_otp != get_otp) {
-				$('.err_msg').html('<div class="alert alert-danger">OTP is incorrect</div>');
-			} else {
-				$('.err_msg').html('<div class="alert alert-success">Success</div>');
-				$('.form_hide').css('display', 'block');
-				$('.form_otp').css('display', 'none');
-				$('#mobile').val(mob_number);
-			}
-
+			var csrfName = $('.csrf').attr('name');
+			var csrfHash = $('.csrf').val();
+			$.ajax({
+				url: "<?= base_url('resg_otp_verify'); ?>",
+				method: "post",
+				data: {
+					get_otp: get_otp,
+					[csrfName]: csrfHash
+				},
+				dataType: 'json',
+				success: function (response) {
+					$('.csrf').val(response.token);
+					if (response.otp == 'expired') {
+						$('.err_msg').html(
+							'<div class="alert alert-danger">OTP expired. Pls. try again.</div>'
+						);
+						$('.otp_hide').hide();
+						$('#resend_otp').show();
+					} else if (response.otp != 'error') {
+						$('.form_hide').css('display', 'block');
+						$('.form_otp').css('display', 'none');
+						$('#mobile').val(mob_number);
+					} else {
+						$('.err_msg').html(
+							'<div class="alert alert-danger">OTP is Incorrect</div>'
+						);
+					}
+				},
+				error: function () {
+					alert('OTP is incorrect .Please try again');
+				}
+			})
 		});
 
 		$('#login_btn').click(function () {
@@ -340,7 +354,7 @@
 			var csrfName = $('.csrf').attr('name');
 			var csrfHash = $('.csrf').val();
 			$.ajax({
-				url: "<?= base_url('loginotp'); ?>",
+				url: "<?= base_url('regloginotp'); ?>",
 				method: "post",
 				data: {
 					number: number,

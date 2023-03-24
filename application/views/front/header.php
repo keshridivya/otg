@@ -378,7 +378,7 @@
 			<li><a href="<?php echo base_url();?>blog" class="site-nav">Blog</a></li>
 			<li><a href="<?php echo base_url();?>contact" class="site-nav">Contact Us</a></li>
 			<?php
-                if(!$this->session->userdata['cid']){
+                if(!$this->session->userdata('cid')){
                 ?>
 			<li class="lvl1 signinbtn" style='margin-bottom: 100px;'><a href="<?php echo base_url();?>sign-up"> <i class='fas fa-user-circle'></i>
 					<b>Sign In</b></a>
