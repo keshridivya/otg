@@ -84,7 +84,6 @@ class Menu extends CI_model {
         $this->db->where(array('bookings.eng_name '=>$eid,'bookings.request_id'=>$id));
         $query = $this->db->get();
         return $query->result_array();
-        
     }
 
     public function reschedule($id){
@@ -109,7 +108,7 @@ class Menu extends CI_model {
     }
 
     public function admininvoice($id){
-        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
+        $this->db->select('*,count(*) as total,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
         $this->db->from('invoice');
         $this->db->join('customer','invoice.contact=customer.contact');
         $this->db->where(array('invoice.order_id '=>$id));
@@ -117,13 +116,12 @@ class Menu extends CI_model {
             return $query->result_array();
     }
     public function admininvoiceview($id){
-        $this->db->select('*, count(*) as tcount,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
+        $this->db->select('*,count(*) as total,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
         $this->db->from('invoice');
         $this->db->join('customer','invoice.contact=customer.contact');
         $this->db->group_by('order_id');
         $this->db->where(array('invoice.order_id '=>$id));
         $query = $this->db->get();
-        print_r($this->db->last_query());
         return $query->result_array();
     }
 
@@ -137,7 +135,6 @@ class Menu extends CI_model {
     //     $this->db->where('password', $password);
     //     $query = $this->db->get();
     //     return $query->row();
-
     // }
 
     function checklogin($email)
@@ -157,6 +154,7 @@ class Menu extends CI_model {
         return $query->row();
     }
 
+    //admin coupon
     function coupon(){
         $this->db->select('*');
         $this->db->from('coupons');
@@ -166,20 +164,29 @@ class Menu extends CI_model {
         return $query->result_array();
     }
 
+    //admin coupon
     function coupondata($id){
         $this->db->select('*,coupons.status as sta');
         $this->db->from('coupons');
         $this->db->join('category_product','category_product.cproduct_id = coupons.cproduct');
         $this->db->join('category_plans','coupons.cplan = category_plans.cplan_id ');
         $query = $this->db->get();
-        				// print_r($this->db->last_query());
         return $query->result_array();
     }
 
+    //front coupon
+    function couponcheck($cartItems,$inputcoupon){
+        $this->db->select('*');
+        $this->db->from('coupons');
+        $this->db->join('category_product','category_product.cproduct_id = coupons.cproduct');
+        $this->db->where(['category_product.cproduct_name'=>$cartItems,'coupons.code'=>$inputcoupon]);
+        $query = $this->db->get();
+        return $query->row();
+    }
+    // $query = $this->db->get_where('coupons',['cproduct'=>$cartItems,'code'=>$inputcoupon])->row();
+
     public function createData($data) {
         $query = $this->db->insert('booking_items', $data);
-                //  print_r($this->db->last_query()); 
-
         return $query;
     }
     

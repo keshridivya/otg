@@ -282,7 +282,7 @@
 									<td data-label="%" class="tableitem"><?= '0.00' ?></td>
 									<td data-label="Tax Amount" class="tableitem amt" id='result'><?= $invoice1['amt'] ?></td>
 								</tr>
-								total
+								
 								<?php $count++; } ?>
 								<tr class="list-item">
 									<td colspan="6" style="border-left:2px solid #dee2e6;text-transform:capitalize"
@@ -291,7 +291,7 @@
 									<td data-label="Grand Total" class="tableitem numberword result" id='result'></td>
 								</tr>
 								<tr class="list-item">
-									<td colspan="6" style="border-left:2px solid #dee2e6" class=' text-left'> Total Quantity: <?= $count; ?></td>
+									<td colspan="6" style="border-left:2px solid #dee2e6" class=' text-left'> Total Quantity: <?= $invoice[0]['total']; ?></td>
 									<td data-label="Grand Total" class="tableitem">Total Payable</td>
 									<td data-label="Grand Total" class="tableitem result" id='result'>
 									</td>

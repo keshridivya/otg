@@ -187,14 +187,14 @@
 											<span id='spancity'>Please enter correct city</span>
 											<?php echo form_error('city');?>
 										</div>
-										<div class="col-lg-6">
+										<!-- <div class="col-lg-6">
 											<div class="form-group">
 												<input type="text" class="form-control" id="state" name="state"
 													placeholder="State">
 											</div>
 											<span id='spanstate'>Please enter correct state</span>
 											<?php echo form_error('state');?>
-										</div>
+										</div> -->
 										<div class="col-lg-6">
 											<div class="form-group">
 												<input type="text" class="form-control" id="address" name="address"

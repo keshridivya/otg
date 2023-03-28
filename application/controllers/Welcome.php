@@ -218,6 +218,7 @@ class Welcome extends CI_Controller {
         else
         {
             $otp_res = 'error';
+            $otp = '';
         }
 
         }
@@ -284,26 +285,27 @@ class Welcome extends CI_Controller {
             {
                 $otp = rand(10000, 99999);
                 $otp_resu = 'success';
-                  $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
-                  Do not share it with anyone';
-                  if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
-                      $page_data['status'] = true;
-                      $page_data['message'] = "success";
+                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                //   Do not share it with anyone';
+                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                //       $page_data['status'] = true;
+                //       $page_data['message'] = "success";
                     
-                      } else {
-                      $page_data['status'] = false;
-                      $page_data['message'] = "Something went wrong, please try again later.";
-                      }
+                //       } else {
+                //       $page_data['status'] = false;
+                //       $page_data['message'] = "Something went wrong, please try again later.";
+                //       }
             }
             else
             {
                 $otp_resu = 'error';
+                $otp = '';
             }
             
         }
         $this->session->set_userdata('login_otp',$otp);
         $data['otp'] = $otp_resu;
-        // $data['otp1'] = $otp;
+        $data['otp1'] = $otp;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }
@@ -360,7 +362,8 @@ class Welcome extends CI_Controller {
 
         
     }
-     function addtocart($proid){
+
+    function addtocart($proid){
         $plans=$this->db->get_where('category_plans',array('cplan_id'=>$proid))->result_array();
         $products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
         $data=array(
@@ -371,7 +374,6 @@ class Welcome extends CI_Controller {
             'image'=>$products[0]['cproduct_img'],
             'product_name'=>$products[0]['cproduct_name'],
             'product_category'=>$products[0]['category_name'],
-
         );
         $this->cart->insert($data);
         redirect(base_url('cart'));
@@ -384,6 +386,7 @@ class Welcome extends CI_Controller {
         $page_data['page']="cart";
         $this->load->view('index',$page_data);
     }
+
     public function services()
     {
         $page_data['page_title']="Our Services";
@@ -393,54 +396,150 @@ class Welcome extends CI_Controller {
         $page_data['page']="services";
         $this->load->view('index',$page_data);
     }
+
     public function account()
     {
         if($this->session->userdata('cid') || $this->session->userdata('custid')){
-            $session_cust=$this->session->userdata['cid'];
+            $session_cust=$this->session->userdata('cid');
+              
+                if($this->input->post('submit') == 'Edit'){
+                    $btn = $this->input->post('customer_btn');
+                    if($btn == 'shipping'){
+                        $id = $this->input->post('customer_id');
+                        $data=array(
+                            "name"=>$this->input->post('customer_name'),
+                            "contact"=>$this->input->post('customer_contact'),
+                            "email"=>$this->input->post('customer_email'),
+                            "city"=>$this->input->post('customer_city'),
+                            "address"=>$this->input->post('customer_address'),
+                            "pincode"=>$this->input->post('customer_pincode'),
+                            "modified_on"=>date('Y-m-d h:i:s')
+                        );
+                        $this->db->where('id',$id);
+                        if($this->db->update('shipping_address',$data)){
+                            $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                            min-height: 50px;
+                            z-index: 9;padding:10px;background:#fff">
+                            <div class="toast-header">
+                            <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                            <strong class="mr-auto">OTG</strong>
+                            
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="toast-body">
+                            Update Succesfully. Once refresh web page.
+                            </div>
+                        </div>
+                            ';
+                        }
+            }
+            else{
+                $data=array(
+                    "cust_name"=>$this->input->post('customer_name'),
+                    "contact"=>$this->input->post('customer_contact'),
+                    "email_id"=>$this->input->post('customer_email'),
+                    "city"=>$this->input->post('customer_city'),
+                    "address"=>$this->input->post('customer_address'),
+                    "pincode"=>$this->input->post('customer_pincode'),
+                    "modified_on"=>date('Y-m-d h:i:s')
+                );
+                $this->db->where('cust_id',$session_cust);
+                if($this->db->update('customer',$data)){
+                    $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                    min-height: 50px;
+                    z-index: 9;padding:10px;background:#fff">
+                    <div class="toast-header">
+                      <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                      <strong class="mr-auto">OTG</strong>
+                      
+                      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="toast-body">
+                    Update Succesfully. Once refresh web page.
+                    </div>
+                  </div>
+                    ';
+                }
+            }
+                }
+                else if($this->input->post('submit') == 'add'){
+                    $data=array(
+                        "name"=>$this->input->post('username'),
+                        "contact"=>$this->input->post('mobile'),
+                        "email"=>$this->input->post('email_id'),
+                        "city"=>$this->input->post('city'),
+                        "address"=>$this->input->post('address'),
+                        "pincode"=>$this->input->post('pincode'),
+                        "customer_id"=>$session_cust,
+                        "created_on"=>date('Y-m-d h:i:s'),
+                    );
+                    if($this->db->insert('shipping_address',$data)){
+                        $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                        min-height: 50px;
+                        z-index: 9;padding:10px;background:#fff">
+                        <div class="toast-header">
+                          <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                          <strong class="mr-auto">OTG</strong>
+                          
+                          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="toast-body">
+                        Successfully Add
+                        </div>
+                      </div>
+                        ';
+                    }
+                    else{
+                        $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                        min-height: 50px;
+                        z-index: 9;padding:10px;background:#fff">
+                        <div class="toast-header">
+                          <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                          <strong class="mr-auto">OTG</strong>
+                          
+                          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="toast-body">
+                        Something Went Wrong. Please try again.
+                        </div>
+                      </div>
+                        ';
+                    }
+                }
+                
                 $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
                 $page_data['customers']=$customers_table;
                 $bookings_table=$this->db->get_where('bookings',array('cust_id'=>$session_cust))->result_array();
                 $checklist=$this->db->get_where('checklist',array('cust_id'=>$session_cust))->result_array();
-                if($this->input->post('submit') == 'edit'){
-                
-                    $data=array(
-                        "cust_name"=>$this->input->post('customer_name'),
-                        "contact"=>$this->input->post('customer_contact'),
-                        "email_id"=>$this->input->post('customer_email'),
-                        "city"=>$this->input->post('customer_city'),
-                        "address"=>$this->input->post('customer_address'),
-                        "pincode"=>$this->input->post('customer_pincode'),
-                        "modified_on"=>date('Y-m-d h:i:s')
-                    );
-                    $this->db->where('cust_id',$session_cust);
-                    $this->db->update('customer',$data);
-                }
             $page_data['dropdown']         =  $this->menu->menu_all();
             $page_data['page_title']       =  "My Account";
             $page_data['bookings_table']   =  $bookings_table;
+            $page_data['shipping_address'] =  $this->db->get_where('shipping_address',['customer_id'=>$session_cust])->result_array();
             $page_data['checklist']        =  $checklist;
             $page_data['page']             =  "account";
             $this->load->view('index',$page_data);
             
         }
-        //if user register while checking out
-        // elseif($this->session->userdata('newid')){
-        //     $session_cust=$this->session->userdata('newid');
-        //     $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
-        //     $page_data['dropdown']=$this->menu->menu_all();
-        //     $page_data['customers']=$customers_table;
-        //     $page_data['page_title']="My Account";
-        //     $page_data['page']="account";
-        //     $this->load->view('index',$page_data);
-        // }
         else{
-            // $page_data['dropdown']=$this->menu->menu_all();
-            // $page_data['page']="sign_up";
-            //     $page_data['message']="";
-            //     $this->load->view('index',$page_data);
                 redirect(base_url('sign-up'));
         }
     }
+
+    public function service_address_delete(){
+        $id=$_GET['id'];
+        $this->db->where('id',$id);
+        $this->db->delete('shipping_address');
+        redirect(base_url('account?show=myaccount'));
+    }
+
     public function checkout(){
         $this->load->library('cart');
         if($this->cart->total_items()<=0){
@@ -448,6 +547,15 @@ class Welcome extends CI_Controller {
         }
         //if user logged in
         if($this->session->userdata['cid']){
+            if($this->input->post()){
+                $_SESSION['id'] = $this->input->post('id');
+                $_SESSION['c_name'] = $this->input->post('c_name');
+                $_SESSION['c_contact'] = $this->input->post('c_contact');
+                $_SESSION['c_email'] = $this->input->post('c_email');
+                $_SESSION['c_city'] = $this->input->post('c_city');
+                $_SESSION['c_address'] = $this->input->post('c_address');
+                $_SESSION['c_pincode'] = $this->input->post('c_pincode');
+            }
             $page_data['cartItems']=$this->cart->contents();
             $session_cust=$this->session->userdata['cid'];
             $ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
@@ -457,50 +565,22 @@ class Welcome extends CI_Controller {
             }
 
         }//if user registered
-        elseif($this->session->userdata('custid')){
-            $page_data['cartItems']=$this->cart->contents();
-            $session_cust=$this->session->userdata['custid'];
-            $ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
-                if($this->input->post()){
-                    $payment_method=$this->input->post('payment_method');
-                redirect(base_url("summery?payment_option=$payment_method"));
-            }
+        // elseif($this->session->userdata('custid')){
+        //     $page_data['cartItems']=$this->cart->contents();
+        //     $session_cust=$this->session->userdata['custid'];
+        //     $ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
+        //         if($this->input->post()){
+        //             $payment_method=$this->input->post('payment_method');
+        //         redirect(base_url("summery?payment_option=$payment_method"));
+        //     }
 
-        }//user added to cart without logging in
+        // }
+        //user added to cart without logging in
         else{
             $page_data['cartItems']=$this->cart->contents();
-            if($this->input->post()){
-                $data=array(
-                    "cust_name"   =>    $this->input->post('c_name'),
-                    "contact"     =>    $this->input->post('c_contact'),
-                    "email_id"    =>    $this->input->post('c_email'),
-                    "password"    =>    sha1($this->input->post('c_password')),
-                    "city"        =>    $this->input->post('c_city'),
-                    "address"     =>    $this->input->post('c_address'),
-                    "pincode"     =>    $this->input->post('c_pincode'),
-                    "created_on"  =>    date('Y-m-d h:i:s'),
-                    "modified_on" =>    date('Y-m-d h:i:s')
-                      
-                );
-                    if($this->db->insert('customer',$data)){
-                        $page_data['message']="Successfully created.";
-                        $customers_login=$this->db->get_where("customer",array('email_id'=>$data['email_id'],'password'=>$data['password']))->result_array();
-                        // print_r($customers_login);
-                        $newid=$customers_login[0]['cust_id'];
-                        $newemail=$customers_login[0]['email_id'];
-                        $this->session->set_userdata('newid',$newid);
-                        $this->session->set_userdata('newemail',$newemail);
-                        if($this->session->userdata('newid')){
-                        redirect(base_url('summery'));
-                        }
-                        
-                    }else{
-                        $page_data['message']="Problem occured while adding customer.";
-        
-                    }
-            }
-        
         }
+       
+        $page_data['shipping_address'] =  $this->db->get_where('shipping_address',['customer_id'=>$session_cust])->result_array();
         $page_data['dropdown']=$this->menu->menu_all();        
         $page_data['ex_cust']=$ex_cust;
         $page_data['cartItems']=$this->cart->contents();
@@ -508,6 +588,91 @@ class Welcome extends CI_Controller {
         $this->load->view('index',$page_data);
     }
     
+    public function checkout_form(){
+        $session_cust=$this->session->userdata('cid');
+        if($this->input->post('submit') == 'Edit'){
+            $btn = $this->input->post('customer_btn');
+            if($btn == 'shipping'){
+                $id = $this->input->post('customer_id');
+                $data=array(
+                    "name"=>$this->input->post('customer_name'),
+                    "contact"=>$this->input->post('customer_contact'),
+                    "email"=>$this->input->post('customer_email'),
+                    "city"=>$this->input->post('customer_city'),
+                    "address"=>$this->input->post('customer_address'),
+                    "pincode"=>$this->input->post('customer_pincode'),
+                    "modified_on"=>date('Y-m-d h:i:s')
+                );
+                $this->db->where('id',$id);
+                if($this->db->update('shipping_address',$data)){
+                    $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                    min-height: 50px;
+                    z-index: 9;padding:10px;background:#fff">
+                    <div class="toast-header">
+                      <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                      <strong class="mr-auto">OTG</strong>
+                      
+                      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="toast-body">
+                    Update Succesfully. Once refresh web page.
+                    </div>
+                  </div>
+                    ';
+                }
+            }
+            else{
+                $data=array(
+                    "cust_name"=>$this->input->post('customer_name'),
+                    "contact"=>$this->input->post('customer_contact'),
+                    "email_id"=>$this->input->post('customer_email'),
+                    "city"=>$this->input->post('customer_city'),
+                    "address"=>$this->input->post('customer_address'),
+                    "pincode"=>$this->input->post('customer_pincode'),
+                    "modified_on"=>date('Y-m-d h:i:s')
+                );
+                $this->db->where('cust_id',$session_cust);
+                if($this->db->update('customer',$data)){
+                    $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                    min-height: 50px;
+                    z-index: 9;padding:10px;background:#fff">
+                    <div class="toast-header">
+                      <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                      <strong class="mr-auto">OTG</strong>
+                      
+                      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="toast-body">
+                    Update Succesfully. Once refresh web page.
+                    </div>
+                  </div>
+                    ';
+                }
+            }
+            redirect(base_url('checkout'));
+        }
+    }
+
+    public function coupon_check(){
+        $inputcoupon = $_POST['inputcoupon'];
+        $cartItems = $_POST['cartItems'];
+         $query = $this->menu->couponcheck($cartItems,$inputcoupon);
+
+        if($query){
+            $data['coupon'] = 'success';
+            $data['percentage'] = $query->percentage;
+        }
+        else{
+            $data['coupon'] = 'failed';
+            $data['percentage'] = 0;
+        }
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
     
     public function summery(){
         if($this->session->userdata('cid')){
@@ -777,7 +942,6 @@ class Welcome extends CI_Controller {
                         foreach($new_booking as $nb){
                             $message.="\r\n"."Request Id"." ".$nb["request_id_value"]."\r\n"."Order Details"."\r\n"."Order Id".$nb['request_id']."\r\n"."Your name: ".$nb['cust_name']."\r\n"."Service: ".$nb['service_plan']." for ".$nb['service_device']."\r\n"."Charges: &#8377;".$nb['total_amount'];
                         }
-                        
                         $this->email->message($message);
                         $this->email->set_newline("\r\n");
                         $this->email->send();
@@ -788,7 +952,6 @@ class Welcome extends CI_Controller {
                             $page_data['message']="Problem occured while email notification";
                         }
                         
-
                         $page_data['new_booking']=$new_booking;
                         $page_data['message']="New Service Booked";
                         $page_data['dropdown']=$this->menu->menu_all();

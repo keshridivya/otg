@@ -122,7 +122,6 @@
 									<div class='datetimerow row mt-4'>
 										<div class="col-md-2 mt-3">
 											<p>Reschdule Date & Time <i class='fa fa-arrow-right'></i></p>
-
 										</div>
 										<div class="col-md-3 mt-3">
 											<input type='datetime-local' name='reschedule_ddate'
@@ -140,6 +139,7 @@
 
 								</div>
 								<div class="row justify-content-center mt-5">
+									
 									<div class="col-md-4 mb-3"><button type="button" name="reschedule"
 											class="btn btn-primary btn-user btn-block btn_image_submit reschedule_btn"
 											data-name='Reschedule'>Reschedule Assignment

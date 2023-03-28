@@ -368,16 +368,16 @@
 <!--End Quick View popup-->
 <span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>
 <!-- Including Jquery -->
-<script src="<?php echo base_url();?>assets/js/vendor/jquery-3.3.1.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/vendor/modernizr-3.6.0.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/vendor/jquery.cookie.js"></script>
-<script src="<?php echo base_url();?>assets/js/vendor/wow.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/vendor/jquery-3.3.1.min.js<?= config_item("code_version"); ?>"></script>
+<script src="<?php echo base_url();?>assets/js/vendor/modernizr-3.6.0.min.js<?= config_item("code_version"); ?>"></script>
+<script src="<?php echo base_url();?>assets/js/vendor/jquery.cookie.js<?= config_item("code_version"); ?>"></script>
+<script src="<?php echo base_url();?>assets/js/vendor/wow.min.js<?= config_item("code_version"); ?>"></script>
 <!-- Including Javascript -->
-<script src="<?php echo base_url();?>assets/js/popper.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url();?>assets/js/plugins.js"></script>
-<script src="<?php echo base_url();?>assets/js/lazysizes.js"></script>
-<script src="<?php echo base_url();?>assets/js/main.js"></script>
+<script src="<?php echo base_url();?>assets/js/popper.min.js<?= config_item("code_version"); ?>"></script>
+<script src="<?php echo base_url();?>assets/js/bootstrap.min.js<?= config_item("code_version"); ?>"></script>
+<script src="<?php echo base_url();?>assets/js/plugins.js<?= config_item("code_version"); ?>"></script>
+<script src="<?php echo base_url();?>assets/js/lazysizes.js<?= config_item("code_version"); ?>"></script>
+<script src="<?php echo base_url();?>assets/js/main.js<?= config_item("code_version"); ?>"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script>
@@ -667,9 +667,6 @@
 		]
 
 	});
-
-</script>
-<script>
 
 </script>
 </div>

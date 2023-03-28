@@ -28,7 +28,6 @@
     		<div class="container">
     			<div class="section-header text-center">
     				<h2 class="heading">Contact Us</h2>
-
     			</div>
     		</div>
     	</div>

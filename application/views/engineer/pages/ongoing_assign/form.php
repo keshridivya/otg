@@ -128,7 +128,7 @@
 									<div class="col-sm-12 mt-3 newinput">
 									<div class="row">
 											<div class="col-xs-12 col-md-4">
-												<label for="sc_name">Upload Extra Image</label>
+												<label for="sc_name">Upload Multiple Extra Image</label>
 											</div>
 											<div class="col-xs-12 col-md-4">
 												<input type='text' name='additional_text_5' class='form-control'

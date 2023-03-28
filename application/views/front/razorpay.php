@@ -5,15 +5,14 @@
 <?php  if($this->cart->total_items()>0){
                                     foreach($cartItems as $item){ ?>
 	<input type="hidden" class="form-control form-control-user" name="customer_id"
-		value="<?php echo $customers[0]['cust_id'];?>">
+		value="<?php echo $_SESSION['id'];?>">
         <input type="hidden" value='<?= rand(10000,100000) ?>' name='order_id'>
-	<input type="hidden" class="form-control form-control-user" value="<?php echo $customers[0]['email_id'];?>"
+	<input type="hidden" class="form-control form-control-user" value="<?php echo $_SESSION['c_email'];?>"
 		name="c_email">
 
-	<input type="hidden" class="form-control form-control-user" value="<?php echo $customers[0]['contact'];?>"
+	<input type="hidden" class="form-control form-control-user" value="<?php echo $_SESSION['c_contact'];?>"
 		name="c_contact">
-	<input type="hidden" name="c_name" value="<?php echo $customers[0]['cust_name'];?>" id="c_name"
-		class="form-control form-control-user" placeholder="Customer Name" readonly>
+	<input type="hidden" name="c_name" value="<?php echo $_SESSION['c_name'];?>" id="c_name" class="form-control form-control-user" placeholder="Customer Name" readonly>
 	<input type="hidden" name="s_plan[]" value="<?php echo $item['name']; ?>" id="s_plan" class="form-control form-control-user"
 		placeholder="Service Plan" readonly>
 	<input type="hidden" name="s_device[]" value="<?php 

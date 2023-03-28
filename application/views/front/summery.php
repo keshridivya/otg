@@ -10,7 +10,6 @@
 								<h4 class="user-titles">Booking Details</h4>
 								<hr>
 							</div>
-
 							<?php 
                             $payment_method=$this->input->get('payment_option');
                             if(@$payment_method == 'cob'){ 
@@ -21,23 +20,21 @@
 								<?php  if($this->cart->total_items()>0){
                                     foreach($cartItems as $item){ ?>
 								<input type="hidden" class="form-control form-control-user" name="customer_id"
-									value="<?php echo $customers[0]['cust_id'];?>">
+									value="<?php echo $_SESSION['id'];?>">
+
+								<input type="hidden" class="form-control form-control-user" id="c_email"
+									value="<?php echo $_SESSION['c_email'];?>" name="c_email">
 
 								<input type="hidden" class="form-control form-control-user"
-									value="<?php echo $customers[0]['email_id'];?>" name="c_email">
-
-								<input type="hidden" class="form-control form-control-user"
-									value="<?php echo $customers[0]['contact'];?>" name="c_contact">
+									value="<?php echo $_SESSION['c_contact'];?>" name="c_contact">
 
 								<input type="hidden" value='OTG-<?= time().rand(100, 999) ?>' name='order_id'>
 
 								<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 									value="<?php echo $this->security->get_csrf_hash();?>">
 								<div class="form-group row">
-									<!--<div class="col-sm-4 col-6 mb-3 mb-sm-0">-->
-									<!--	<label for="c_name">Customer Name</label>-->
 									<input type="hidden" name="c_name[]"
-										value="<?php echo $customers[0]['cust_name'];?>" id="c_name"
+										value="<?php echo $_SESSION['c_name'];?>" id="c_name"
 										class="form-control form-control-user" placeholder="Customer Name" readonly>
 									<!--</div>-->
 									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
@@ -48,8 +45,7 @@
 									</div>
 									<div class="col-sm-4 col-6">
 										<label for="s_device">Service Device</label>
-										<input type="text" name="s_device[]" value="<?php 
-                                                     echo $item['product_name']; ?>" id="s_device"
+										<input type="text" name="s_device[]" value="<?php  echo $item['product_name']; ?>" id="s_device"
 											class="form-control form-control-user" placeholder="Service Device"
 											readonly>
 									</div>
@@ -94,22 +90,20 @@
 								<?php  if($this->cart->total_items()>0){
                                     foreach($cartItems as $item){ ?>
 								<input type="hidden" class="form-control form-control-user" name="customer_id"
-									value="<?php echo $customers[0]['cust_id'];?>">
+									value="<?php echo $_SESSION['id'];?>">
+
+								<input type="hidden" class="form-control form-control-user" id="c_email"
+									value="<?php echo $_SESSION['c_email'];?>" name="c_email">
 
 								<input type="hidden" class="form-control form-control-user"
-									value="<?php echo $customers[0]['email_id'];?>" name="c_email">
-
-								<input type="hidden" class="form-control form-control-user"
-									value="<?php echo $customers[0]['contact'];?>" name="c_contact">
+									value="<?php echo $_SESSION['c_contact'];?>" name="c_contact">
 
 								<input type="hidden" value='OTG-<?= time().rand(100, 999) ?>' name='order_id'>
 
 								<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 									value="<?php echo $this->security->get_csrf_hash();?>">
 								<div class="form-group row">
-									<!--<div class="col-sm-4 col-6 mb-3 mb-sm-0">-->
-									<!--	<label for="c_name">Customer Name</label>-->
-									<input type="hidden" name="c_name" value="<?php echo $customers[0]['cust_name'];?>"
+									<input type="hidden" name="c_name" value="<?php echo $_SESSION['c_name'];?>"
 										id="c_name" class="form-control form-control-user" placeholder="Customer Name"
 										readonly>
 									<!--</div>-->
@@ -170,7 +164,6 @@
 					<div class="card shadow">
 						<div class="card-body">
 							<table>
-
 								<tbody>
 									<div class="section-header text-center">
 										<h4 class="user-titles">Booking Details</h4>
@@ -180,39 +173,37 @@
 										<td>
 											<h6>Customer Name</h6>
 										</td>
-										<td><?php echo $customers[0]['cust_name'];?></td>
+										<td><?php echo $_SESSION['c_name']; ?></td>
 									</tr>
 									<tr>
 										<td>
 											<h6>Contact</h6>
 										</td>
-										<td><?php echo $customers[0]['contact'];?></td>
+										<td><?php echo $_SESSION['c_contact'];?></td>
 									</tr>
 									<tr>
 										<td>
 											<h6>Email Id</h6>
 										</td>
-										<td><?php echo $customers[0]['email_id'];?></td>
+										<td><?php echo $_SESSION['c_email'];?></td>
 									</tr>
 									<tr>
 										<td>
 											<h6>City</h6>
 										</td>
-										<td><?php echo $customers[0]['city'];?></td>
+										<td><?php echo $_SESSION['c_city'];?></td>
 									</tr>
 									<tr>
-
 										<td>
 											<h6>Address</h6>
 										</td>
-										<td><?php echo $customers[0]['address'];?></td>
+										<td><?php echo $_SESSION['c_address'];?></td>
 									</tr>
 									<tr>
-
 										<td>
 											<h6>Pincode</h6>
 										</td>
-										<td><?php echo $customers[0]['pincode'];?></td>
+										<td><?php echo $_SESSION['c_pincode'];?></td>
 									</tr>
 								</tbody>
 							</table>

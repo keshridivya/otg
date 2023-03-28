@@ -57,7 +57,7 @@ $(document).ready(function(){
                     let advance_payment = $('.advance_payment').val();
                     let add=parseInt(expenes)-parseInt(advance_payment);
                     $('.paymentradio').val(add);
-                    alert('gg');
+                    // alert('gg');
             }
             else{
                 $('.paymentradio').val('199');
@@ -95,5 +95,7 @@ $(document).ready(function(){
         }
     });
 });
+
+
 
  

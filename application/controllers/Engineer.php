@@ -58,34 +58,34 @@ class Engineer extends CI_Controller {
 
     public function myaccount(){
         if($this->session->userdata('eng_id')){
-        $id=$this->session->userdata('eng_id');
-        if(@$this->input->post()){
-            if($_FILES['file']['name']!= ""){
-                $absolute_path=base_url('uploads/engineer/');
-        $uploaded_data=$this->uploadimg(array('upload_path'=>'./uploads/engineer/','name'=>'file'));
-        }
-            $data=array(
-                'address'=>$this->input->post('address'),
-            'postcode'=>$this->input->post('pincode'),
-            'city'=>$this->input->post('city'),
-            );
-            if(is_countable($uploaded_data) && count($uploaded_data)>=1){
-                $data['eng_img']='uploads/engineer/'.$uploaded_data['file_name'];
+            $id=$this->session->userdata('eng_id');
+            if(@$this->input->post()){
+                if($_FILES['file']['name']!= ""){
+                    $absolute_path=base_url('uploads/engineer/');
+            $uploaded_data=$this->uploadimg(array('upload_path'=>'./uploads/engineer/','name'=>'file'));
             }
+                $data=array(
+                    'address'=>$this->input->post('address'),
+                'postcode'=>$this->input->post('pincode'),
+                'city'=>$this->input->post('city'),
+                );
+                if(is_countable($uploaded_data) && count($uploaded_data)>=1){
+                    $data['eng_img']='uploads/engineer/'.$uploaded_data['file_name'];
+                }
 
-            $this->db->where('eng_id',$id);
-            $this->db->update('engineer',$data);
-        }
-        $page_data['info']=$this->db->get_where('engineer',array('eng_id'=>$id))->result_array();
-        $page_data['page']='myaccount';
-        $this->load->view('engineer/index',$page_data);
-    }else{
-        redirect(base_url('engineer'));
-        }
+                $this->db->where('eng_id',$id);
+                $this->db->update('engineer',$data);
+            }
+            $page_data['info']=$this->db->get_where('engineer',array('eng_id'=>$id))->result_array();
+            $page_data['page']='myaccount';
+            $this->load->view('engineer/index',$page_data);
+        }else{
+            redirect(base_url('engineer'));
+            }
     }
 
     public function ongoing($action,$id= false){
-
+        if($this->session->userdata('eng_id')){
         switch($action){
             case 'view':
                 $id=$this->session->userdata['eng_id'];
@@ -233,7 +233,7 @@ class Engineer extends CI_Controller {
                     }
                     else if($btn_name=='Generate'){
                         $data1=array(
-                            'status'=>'complete',
+                            'status'=>'completed',
                         );
                         $this->db->where('request_id_value',$req_id);
                         $this->db->update('bookings',$data1);
@@ -271,6 +271,9 @@ class Engineer extends CI_Controller {
                 $page_data['page']='ongoing_assign/add';
                 $this->load->view('engineer/index',$page_data);
         }
+    }else{
+        redirect(base_url('engineer'));
+        }
 
     }
 
@@ -293,6 +296,7 @@ class Engineer extends CI_Controller {
     }
 
     public function reschedule($action,$id=false){
+        if($this->session->userdata('eng_id')){
 		switch ($action) {
 			case 'view':
 			
@@ -313,9 +317,13 @@ class Engineer extends CI_Controller {
 				# code...
 				break;
 		}
+        }else{
+            redirect(base_url('engineer'));
+            }
 	}
 
     public function engineerupi($action,$id=false){
+        if($this->session->userdata('eng_id')){
 		switch ($action) {
 			case 'view':
 			
@@ -325,6 +333,9 @@ class Engineer extends CI_Controller {
 
 				break;
 		}
+        }else{
+            redirect(base_url('engineer'));
+            }
 	}
 
     public function logout(){

@@ -60,6 +60,7 @@ class Admin extends CI_Controller {
             else
             {
                 $otp_resu = 'error';
+				$otp = '';
             }
         }
         $this->session->set_userdata('admin_login_otp',$otp);

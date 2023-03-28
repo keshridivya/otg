@@ -8,20 +8,20 @@
 	<meta name="description" content="description">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="<?php echo base_url();?>assets/images/logo/favicon.png" />
+	<link rel="shortcut icon" href="<?php echo base_url();?>assets/images/logo/favicon.png<?= config_item("code_version"); ?>" />
 	<!-- Plugins CSS -->
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/plugins.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/plugins.css<?= config_item("code_version"); ?>">
 	<!-- Bootstap CSS -->
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/bootstrap.min.css<?= config_item("code_version"); ?>">
 	<!-- Main Style CSS -->
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css">
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/responsive.css">
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom.css">
-	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom_responsive.css">
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css<?= config_item("code_version"); ?>">
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/responsive.css<?= config_item("code_version"); ?>">
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom.css<?= config_item("code_version"); ?>">
+	<link rel="stylesheet" href="<?php echo base_url();?>assets/css/custom_responsive.css<?= config_item("code_version"); ?>">
 	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
-<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">-->
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css<?= config_item("code_version"); ?>">-->
 <!--<script src="https://code.jquery.com/jquery-3.3.1.js"></script>-->
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js|https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
 

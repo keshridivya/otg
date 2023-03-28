@@ -23,6 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+$config['code_version'] = '?v=1.000001';
 $config['base_url'] = 'http://localhost/otg/';
 // $config['base_url'] = 'http://otg.omsaifoodservices.com/';
 

@@ -43,7 +43,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url();?>engineer">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url();?>shop">
                 <!-- <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div> -->
@@ -55,36 +55,20 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url();?>engineer">
+                <a class="nav-link" href="<?php echo base_url();?>shop">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url();?>engineer/ongoing">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Ongoing Assignment</span></a>
             </li>
-            <hr class="sidebar-divider">
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url();?>engineer/complete_assignment">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Complete Assignment</span></a>
-            </li>
-             <hr class="sidebar-divider"> -->
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url();?>engineer/reschedule">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Reschedule Assignment</span></a>
-            </li>
-           
-
-            <!-- Heading -->
-            <hr class="sidebar-divider">
-          
-            <li class="nav-item"><a class="nav-link" href="<?= base_url('engineer/myaccount') ?>" >
+            <hr class="sidebar-divider"> -->
+            <li class="nav-item"><a class="nav-link" href="<?= base_url('shop/account') ?>" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     My Account
                                 </a></li>
@@ -120,13 +104,12 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="" id="userDropdown1" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hello <?php echo $this->session->userdata['e_name'];?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hello <?php echo ($this->session->userdata('sname') ?? '');?></span>
                                 <i class="fa-solid fa-bars"></i>
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown1">
-                                
                                 <a class="dropdown-item" href="" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout

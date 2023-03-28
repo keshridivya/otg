@@ -88,6 +88,7 @@ $route['paymentFailed']='welcome/paymentFailed';
 $route['summerydetail']='welcome/summerydetail';
 $route['invoice/(:any)']='welcome/invoice/$1';
 $route['resg_otp_verify'] = 'welcome/resg_otp_verify';
+// $route['coupon_check'] = 'welcome/coupon_check';
 
 // $route['update_cart']='welcome/update_cart';
 
@@ -245,9 +246,16 @@ $route['engineer/reschedule']='engineer/reschedule/view';
 
 //engineer complete assignment
 $route['engineer/complete_assignment']='engineer/complete_assignment/view';
-
 $route['engineer/create']='engineer/create';
 $route['engineer/engineerupi']='engineer/engineerupi/view';
+
+
+
+//shop login
+$route['shop'] = 'shop/index';
+
+//shop account
+$route['shop/account'] = 'shop/account/view';
 
 
 
