@@ -1,14 +1,10 @@
 <!--Body Content-->
 <div id="page-content">
 	<!-- <?php print_r($ex_cust);?> -->
-
-
-
 	<div class="section summery">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-lg-8">
-
+				<div class="col-lg-9">
 					<div class="card shadow">
 						<div class="card-body">
 							<div class="section-header text-center">
@@ -18,9 +14,7 @@
 							<table>
 								<thead>
 									<th>Product Details</th>
-
 									<th style="text-align:end">Total Amount</th>
-
 								</thead>
 								<tbody>
 									<tr>
@@ -38,7 +32,7 @@
                                             }
                                             ?>
 										</td>
-										<td style="text-align:end" id="total_amt">
+										<td style="text-align:end">
 											<?php
                                             if($this->cart->total_items()>0){
                                                 foreach($cartItems as $item){
@@ -55,7 +49,7 @@
 								<tfoot style='border-top:1px solid #e7e0e0; margin-top:20px'>
 								<tr>
 									<td></td>
-									<td><div class="col-lg-12 mt-3">
+									<td>
 											<div class="form-group text-left"> <label>Have coupon?</label>
 												<div class="input-group"> <input type="text"
 														class="form-control inputcoupon" name=""
@@ -64,12 +58,12 @@
 													</span> </div>
 													<span id="spancoupon"></span>
 											</div>
-										</div></td>
+										</td>
 								</tr>
 									<tr>
 										<td></td>
-										<td style="text-align:end"><i class="fa-solid fa-indian-rupee-sign"></i>
-											<?php print_r($this->cart->total()); ?>
+										<td style="text-align:end" ><i class="fa-solid fa-indian-rupee-sign"></i>
+											<span id="total_amt"><?php print_r($this->cart->total()); ?></span>
 										</td>
 									</tr>
 								</tfoot>
@@ -99,7 +93,7 @@
 											<p class="cpincode"><?php echo $ex_cust[0]['pincode'];?></p>
 										</div>
 										<div><a class="cust_edit">Edit</a>
-											<button class="btn-booking">Booking to this address</button></div></div>
+											<button class="btn-booking btn-active">Selected address</button></div></div>
 									</div>
 
 									<?php
@@ -128,7 +122,9 @@
 									<input type="hidden" class="form-control form-control-user" id="custid"
 										value="<?php echo $ex_cust[0]['cust_id'];?>" name="id">
 										<input type="hidden" class="form-control form-control-user" id="codeper"
-										value="" name="codeper">
+										value="<?php print_r($this->cart->total()); ?>" name="codeper">
+										<input type="hidden" class="form-control form-control-user" id="perge"
+										value="0" name="percentage">
 									<input type="hidden" class="csrf" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 										value="<?php echo $this->security->get_csrf_hash();?>">
 									<div class="form-group row">
@@ -198,23 +194,24 @@
 											</div>
 										</div>
 										<div class="col-sm-6 col-12 mt-3">
+											<h3 class="">Time Slot</h3>
 											<div class="row justify-content-center" style="    margin-left: 20px;">
 												<div class="form-check col-sm-3 col-12 text-left mb-3">
 													<label class="form-check-label float-left">
 														<input type="radio" class="form-check-input" value="9 am to 1pm"
-															name="time_slot" checked="checked">9 am to 1pm
+															name="time_slot" >9 am to 1pm
 													</label>
 												</div>
 												<div class="form-check col-sm-3 col-12 text-left mb-3">
 													<label class="form-check-label">
 													<input type="radio" class="form-check-input" value="1 pm to 5pm"
-															name="time_slot" checked="checked">1 pm to 5pm
+															name="time_slot" >1 pm to 5pm
 													</label>
 												</div>
 												<div class="form-check col-sm-3 col-12 text-left mb-3">
 													<label class="form-check-label">
 													<input type="radio" class="form-check-input" value="5 pm to 9pm"
-															name="time_slot" checked="checked">5 pm to 9pm
+															name="time_slot" >5 pm to 9pm
 													</label>
 												</div>
 											</div>
@@ -226,23 +223,7 @@
 										
 									</div> -->
 
-									<div class="form-group row">
-										
-										<div class="col-lg-6">
-											<div class="form-checkboxes">
-												<div class="col-lg-12  float-left">
-													<div class="form-group form-check text-left">
-														<input type="checkbox" class="form-check-input"
-															id="terms_services" name="terms_services" required>
-														<label class="form-check-label" for="terms_services">By
-															Proceeding you agree to the Terms of Service</label>
-													</div>
-													<span id='spanterm' class='float-left'>** Please check our Terms of
-														Service</span>
-												</div>
-											</div>
-										</div>
-									</div>
+									
 
 									<div class="form-group row text-left">
 										<div class="col-lg-12 mt-3 text-justify d-flex">
@@ -268,7 +249,23 @@
 													href='https://otgcares.com/terms'>click here</a>.</p>
 										</div>
 									</div>
-
+									<div class="form-group row">
+										
+										<div class="col-lg-6">
+											<div class="form-checkboxes">
+												<div class="col-lg-12  float-left">
+													<div class="form-group form-check text-left">
+														<input type="checkbox" class="form-check-input"
+															id="terms_services" name="terms_services" required>
+														<label class="form-check-label" for="terms_services">By
+															Proceeding you agree to the Terms of Service</label>
+													</div>
+													<span id='spanterm' class='float-left'>** Please check our Terms of
+														Service</span>
+												</div>
+											</div>
+										</div>
+									</div>
 									<div class="col-lg-12">
 										<input type="submit" name="submit" value="I AGREE" class="theme-btn offer-btn " id='btn_fill'>
 										<a href="<?php echo base_url('/'); ?>" class="theme-btn offer-btn1">I
@@ -382,13 +379,15 @@
 				).css('color','green');
 				$('#codeper').val(amt);
 				$('#total_amt').text(amt);
-				$('#btn_fill').attr('disabled',false);
+				$('#perge').val(response.percentage);
+				// alert(total_amt);
+				// $('#btn_fill').attr('disabled',false);
 			}else{
 				$('#spancoupon').text(
 					'Sorry. The offer you are trying to avail does not exist or has expired!'
 				).css('color','red');
 				$('#codeper').val(total_amt);
-				$('#btn_fill').attr('disabled',true);
+				// $('#btn_fill').attr('disabled',true);
 			}
 			},
 			error: function () {

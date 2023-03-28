@@ -285,16 +285,16 @@ class Welcome extends CI_Controller {
             {
                 $otp = rand(10000, 99999);
                 $otp_resu = 'success';
-                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
-                //   Do not share it with anyone';
-                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
-                //       $page_data['status'] = true;
-                //       $page_data['message'] = "success";
+                  $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                  Do not share it with anyone';
+                  if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                      $page_data['status'] = true;
+                      $page_data['message'] = "success";
                     
-                //       } else {
-                //       $page_data['status'] = false;
-                //       $page_data['message'] = "Something went wrong, please try again later.";
-                //       }
+                      } else {
+                      $page_data['status'] = false;
+                      $page_data['message'] = "Something went wrong, please try again later.";
+                      }
             }
             else
             {
@@ -555,6 +555,9 @@ class Welcome extends CI_Controller {
                 $_SESSION['c_city'] = $this->input->post('c_city');
                 $_SESSION['c_address'] = $this->input->post('c_address');
                 $_SESSION['c_pincode'] = $this->input->post('c_pincode');
+                $_SESSION['codeper'] = $this->input->post('codeper');
+                $_SESSION['percentage'] = $this->input->post('percentage');
+                $_SESSION['time_slot'] = $this->input->post('time_slot');
             }
             $page_data['cartItems']=$this->cart->contents();
             $session_cust=$this->session->userdata['cid'];
@@ -804,12 +807,17 @@ class Welcome extends CI_Controller {
         for($i=0;$i<count($data['s_plan']);$i++){
             $arr=array(
                 "cust_id"           =>  $data['customer_id'],
-                "cust_name"         =>  $data['c_name'],
-                "service_plan"      =>  $data['s_plan'][$i],
-                "service_device"    =>  $data['s_device'][$i],
-                "quantity"          =>  $data['quantity'][$i],
-                "total_amount"      =>  $data['sub_total'][$i],
-                "order_id"          =>  $data['order_id'],
+					"cust_name"         =>  $data['c_name'][$i],
+                    "cust_contact"      =>  $data['c_contact'][$i],
+                    "cust_email"        =>  $data['c_email'][$i],
+                    "cust_address"      =>  $data['c_address'][$i],
+                    "cust_percentage"   =>  $data['percentage'][$i],
+                    "cust_timeslot"     =>  $data['time_slot'][$i],
+					"service_plan"      =>  $data['s_plan'][$i],
+					"service_device"    =>  $data['s_device'][$i],
+					"quantity"          =>  $data['quantity'][$i],
+					"total_amount"      =>  $data['sub_total'][$i],
+                    "order_id"          =>  $data['order_id'],
                 "status"=>'new',
                 "created_on"=>date('Y-m-d h:i:s')
             );
@@ -899,6 +907,11 @@ class Welcome extends CI_Controller {
 				$arr=array(
 					"cust_id"           =>  $data['customer_id'],
 					"cust_name"         =>  $data['c_name'][$i],
+                    "cust_contact"      =>  $data['c_contact'][$i],
+                    "cust_email"        =>  $data['c_email'][$i],
+                    "cust_address"      =>  $data['c_address'][$i],
+                    "cust_percentage"   =>  $data['percentage'][$i],
+                    "cust_timeslot"     =>  $data['time_slot'][$i],
 					"service_plan"      =>  $data['s_plan'][$i],
 					"service_device"    =>  $data['s_device'][$i],
 					"quantity"          =>  $data['quantity'][$i],
@@ -927,6 +940,7 @@ class Welcome extends CI_Controller {
 			$this->load->view('index',$page_data);
 		
 	}
+    
     public function receipt(){
         
         $page_data['cartItems']=$this->cart->contents();

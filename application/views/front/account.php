@@ -85,15 +85,10 @@ if($message ?? ''){
                                                     }
                                                    ?>
 									</div>
-
-
-
-
 									<!-- </table> -->
 								</div>
 							</div>
 						</div>
-
 					</div>
 					<div class="tab-pane fade <?=(isset($_GET['show']) && $_GET['show'] =='extended') ? "show active" : ""; ?>"
 						id="extended" role="tabpanel" aria-labelledby="v-pills-messages-tab">

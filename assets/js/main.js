@@ -1997,15 +1997,16 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     $('.btn-booking').click(function(){
-        // alert('h');
         // $('#customer_btn').val($(this).parents('.col-lg-6').children('.section-header').children('.cbtn').val());
-        $('#custid').val($(this).parents('.col-lg-6').children('.section-header').children('.cid').val());
-        $('#c_name').val($(this).parents('.col-lg-6').children('.section-header').children('.cname').text());
-        $('#c_contact').val($(this).parents('.col-lg-6').children('.section-header').children('.ccont').text());
-        $('#c_city').val($(this).parents('.col-lg-6').children('.section-header').children('.ccity').val());
-        $('#c_email').val($(this).parents('.col-lg-6').children('.section-header').children('.cemail').text());
-        $('#c_address').val($(this).parents('.col-lg-6').children('.section-header').children('.caddress').text());
-        $('#c_pincode').val($(this).parents('.col-lg-6').children('.section-header').children('.cpincode').text());
+        // $('#custid').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cid').val());
+        $('#c_name').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cname').text());
+        $('#c_contact').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.ccont').text());
+        $('#c_city').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.ccity').val());
+        $('#c_email').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cemail').text());
+        $('#c_address').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.caddress').text());
+        $('#c_pincode').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cpincode').text());
+        $(this).addClass('btn-active').text('Selected address');
+        $(this).parents('.col-lg-6').siblings().find('button').removeClass('btn-active').text('Booking to this address');
     })
 });
 

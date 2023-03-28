@@ -8288,6 +8288,9 @@ font-size: .975rem;
     border-radius: 15px;
     margin-left: 10px;
 }
+.btn-booking:hover{
+    background-color: var(--var-yellow);
+}
 .btn-primary{
     background-color: var(--var-green);
 }
@@ -8297,4 +8300,18 @@ font-size: .975rem;
     padding: 10px;
     border-radius:10px;
     margin: 10px;
+}
+.btn-active{
+    background-color: var(--var-yellow);
+}
+@media(max-width:768px){
+    .btn-primary{
+        background-color: var(--var-green);
+        font-size: 8px;
+        padding: 4px;
+    }
+    .inputcoupon{
+        font-size: 10px;
+        padding: 0.375rem 0.35rem;
+    }
 }

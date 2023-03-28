@@ -18,63 +18,95 @@
 								action="<?php echo base_url('summerydetail') ?>">
 
 								<?php  if($this->cart->total_items()>0){
-                                    foreach($cartItems as $item){ ?>
+                                    foreach($cartItems as $item){ 
+										
+										?>
+
 								<input type="hidden" class="form-control form-control-user" name="customer_id"
 									value="<?php echo $_SESSION['id'];?>">
 
 								<input type="hidden" class="form-control form-control-user" id="c_email"
-									value="<?php echo $_SESSION['c_email'];?>" name="c_email">
+									value="<?php echo $_SESSION['c_email'];?>" name="c_email[]">
 
 								<input type="hidden" class="form-control form-control-user"
-									value="<?php echo $_SESSION['c_contact'];?>" name="c_contact">
+									value="<?php echo $_SESSION['c_contact'];?>" name="c_contact[]">
+
+								<input type="hidden" class="form-control form-control-user"
+									value="<?php echo $_SESSION['codeper'];?>" name="codeper[]">
+
+								<input type="hidden" class="form-control form-control-user"
+									value="<?php echo $_SESSION['c_address'] .' '. $_SESSION['c_city'] .' '. $_SESSION['c_pincode'];?>"
+									name="c_address[]">
+
+								<input type="hidden" class="form-control form-control-user" id="perge"
+									value="<?php echo $_SESSION['percentage'];?>" name="percentage[]">
+
+								<input type="hidden" class="form-control form-control-user"
+									value="<?php echo $_SESSION['time_slot'];?>" name="time_slot[]">
 
 								<input type="hidden" value='OTG-<?= time().rand(100, 999) ?>' name='order_id'>
 
 								<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 									value="<?php echo $this->security->get_csrf_hash();?>">
 								<div class="form-group row">
-									<input type="hidden" name="c_name[]"
-										value="<?php echo $_SESSION['c_name'];?>" id="c_name"
-										class="form-control form-control-user" placeholder="Customer Name" readonly>
-									<!--</div>-->
-									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
-										<label for="s_plan">Service Plan</label>
-										<input type="text" name="s_plan[]" value="<?php echo $item['name']; ?>"
-											id="s_plan" class="form-control form-control-user"
-											placeholder="Service Plan" readonly>
+									<input type="hidden" name="c_name[]" value="<?php echo $_SESSION['c_name'];?>"
+										id="c_name" class="form-control form-control-user" placeholder="Customer Name"
+										readonly>
+
+									<div class="">
+										<img src='<?= base_url($item['image']) ?>' width='40'>
 									</div>
-									<div class="col-sm-4 col-6">
-										<label for="s_device">Service Device</label>
-										<input type="text" name="s_device[]" value="<?php  echo $item['product_name']; ?>" id="s_device"
+									<div class="col-sm-4 col-8">
+										<!-- <label for="s_device">Service Device</label> -->
+										<input type="text" name="s_device[]"
+											value="<?php  echo $item['product_name']; ?>" id="s_device"
 											class="form-control form-control-user" placeholder="Service Device"
 											readonly>
 									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
-										<label for="quantity">Total Devices</label>
-										<input type="text" name="quantity[]" id="quantity" value="<?= $item['qty'] ?>"
-											class="form-control form-control-user" placeholder="Total Amount" readonly>
+									<div class="col-sm-4 col-7 mb-3 mb-sm-0">
+										<!-- <label for="s_plan">Service Plan</label> -->
+										<input type="text" name="s_plan[]" value="<?php echo $item['name']; ?>"
+											id="s_plan" class="form-control form-control-user text-center"
+											placeholder="Service Plan" readonly>
+										<span class="d-flex" style="margin-left: 53px;">
+											Qty: <input type="text" name="quantity[]" id="quantity"
+												value="<?= $item['qty'] ?>" class="form-control-user"
+												style="height:20px" placeholder="Total Amount" readonly>
+										</span>
+
 									</div>
-									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
+									<div class="col-sm-3 col-3 mb-3 mb-sm-0 text-right">
 										<label for="sub_total">Subtotal</label>
 										<input type="text" name="sub_total[]" id="sub_total"
-											value="<?= $item['price'] ?>" class="form-control form-control-user"
-											placeholder="Total Amount" readonly>
+											value="<?= $item['price'] ?>"
+											class="form-control form-control-user text-right" placeholder="Total Amount"
+											readonly>
 									</div>
+
 								</div>
+								<!-- <div class="form-group row">
+									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
+										<label for="quantity">Total Devices</label>
+										
+									</div>
+									
+								</div> -->
 								<hr>
 								<?php  } } ?>
 								<div class="col-sm-12 mb-3 mb-sm-0">
 									<div class="row">
-										<div class="col-sm-6">
+										<div class="col-sm-6 col-6">
 											<label for="t_amnt">Total Amount</label>
 										</div>
-										<div class="col-sm-6">
+										<div class="col-sm-6 col-6">
 											<input type="text" name="t_amnt" id="t_amnt"
+												value="<?= $_SESSION['codeper']; ?>"
+												class="form-control form-control-user text-right" placeholder="Total Amount"
+												readonly>
+											<!-- <input type="text" name="t_amnt" id="t_amnt"
 												value="<?= $this->cart->format_number($this->cart->total()) ?>"
 												class="form-control form-control-user" placeholder="Total Amount"
-												readonly>
+												readonly> -->
 										</div>
 									</div>
 								</div>
@@ -92,12 +124,24 @@
 								<input type="hidden" class="form-control form-control-user" name="customer_id"
 									value="<?php echo $_SESSION['id'];?>">
 
-								<input type="hidden" class="form-control form-control-user" id="c_email"
+								<input type="hidden" class="form-control form-control-user" id="c_email[]"
 									value="<?php echo $_SESSION['c_email'];?>" name="c_email">
 
 								<input type="hidden" class="form-control form-control-user"
-									value="<?php echo $_SESSION['c_contact'];?>" name="c_contact">
+									value="<?php echo $_SESSION['c_address'] .' '. $_SESSION['c_city'] .' '. $_SESSION['c_pincode'];?>"
+									name="c_address[]">
 
+								<input type="hidden" class="form-control form-control-user" id="perge"
+									value="<?php echo $_SESSION['percentage'];?>" name="percentage[]">
+
+								<input type="hidden" class="form-control form-control-user"
+									value="<?php echo $_SESSION['c_contact'];?>" name="c_contact[]">
+
+								<input type="hidden" class="form-control form-control-user"
+									value="<?php echo $_SESSION['codeper'];?>" name="codeper[]">
+
+								<input type="hidden" class="form-control form-control-user"
+									value="<?php echo $_SESSION['time_slot'];?>" name="time_slot[]">
 								<input type="hidden" value='OTG-<?= time().rand(100, 999) ?>' name='order_id'>
 
 								<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
@@ -143,7 +187,7 @@
 										</div>
 										<div class="col-sm-6">
 											<input type="text" name="t_amnt" id="t_amnt"
-												value="<?= $this->cart->format_number($this->cart->total()) ?>"
+												value="<?= $_SESSION['codeper']; ?>"
 												class="form-control form-control-user" placeholder="Total Amount"
 												readonly>
 										</div>
@@ -152,8 +196,7 @@
 								<div class="col-lg-12 text-center">
 									<input type="submit" id='summarycheck' name="submitsummery" value="Checkout"
 										class="theme-btn offer-btn">
-										<input type="button" value="checkout"
-										class="theme-btn offer-btn checlout">
+									<input type="button" value="checkout" class="theme-btn offer-btn checlout">
 								</div>
 							</form>
 							<?php } ?>
@@ -221,30 +264,30 @@
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-			<h1 style='margin:auto; color:green;padding:10px'>Please Scan and pay</h1>
+				<h1 style='margin:auto; color:green;padding:10px'>Please Scan and pay</h1>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body" style="height:67vh">
-			<div class="row justify-content-center">
-				<div class="col-lg-8">
-					<div class="card">
-						<div class="card-body" style='margin:auto;width:300px;height:500px'>
-							<img src="<?= base_url('assets/images/upi.jpeg') ?>" alt="" style='height:100%;width:100%'>
+				<div class="row justify-content-center">
+					<div class="col-lg-8">
+						<div class="card">
+							<div class="card-body" style='margin:auto;width:300px;height:500px'>
+								<img src="<?= base_url('assets/images/upi.jpeg') ?>" alt=""
+									style='height:100%;width:100%'>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			</div>
 			<div class="modal-footer">
-			<button type="button" name='send' data-dismiss="modal" class="theme-btn  offer-btn pay" style="font-size:20px">pay</button>
+				<button type="button" name='send' data-dismiss="modal" class="theme-btn  offer-btn pay"
+					style="font-size:20px">pay</button>
 				<button type="button" class="theme-btn" data-dismiss="modal" style="font-size:20px">Close</button>
-				
+
 			</div>
 
 		</div>
 	</div>
 </div>
-
-
