@@ -63,10 +63,10 @@
 
 
 						<td>
-							<a href="<?php echo base_url('admin/plans/edit/'.$cplan['cplan_id']); ?>"><i
+							<a href="<?php echo base_url('admin/plans/edit/'.$cplan['cplan_id']); ?>" class="btn btn-primary"><i
 									class="fas fa-pencil-alt" aria-hidden="true"></i></a>
 							<a href="<?php echo base_url('admin/plans/delete/'.$cplan['cplan_id']); ?>" type="button"
-								class="btn btn-primary"
+								class="btn btn-danger"
 								onclick="return confirm('Are you sure you want to delete this item?');"><i
 									class="fas fa-trash" aria-hidden="true"></i></a>
 						</td>

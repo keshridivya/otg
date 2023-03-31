@@ -72,12 +72,12 @@
 									</div>
                                     
 									<?Php
-                                    if($message){
+                                    if($message ?? FALSE){
                                         echo '<div class="error">'.$message.'</div>';
                                     }
                                     ?>
 									
-									<form class="user" method="post" action="">
+									<!-- <form class="user" method="post" action="">
 										<input type="hidden"
 											name="<?php echo $this->security->get_csrf_token_name(); ?>"
 											value="<?php echo $this->security->get_csrf_hash();?>">
@@ -99,7 +99,23 @@
                                         <div class="form-group  mt-4 mb-4">
                                         <div class="otp_msg"></div>
                                         </div>
-									</form>
+									</form> -->
+
+                                    <form class="user" method="post" action="">
+                                                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash();?>">
+                                        <div class="form-group">
+                                            <input type="email" name="email" class="form-control form-control-user"
+                                                id="exampleInputEmail"  aria-describedby="emailHelp"
+                                                placeholder="Enter Email Address..." required>
+                                                <?php echo form_error('email'); ?> 
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" name="password" class="form-control form-control-user"
+                                                id="exampleInputPassword" placeholder="Password" required>
+                                                <?php echo form_error('password'); ?> 
+                                        </div>
+                                        <input type="submit" value="Login" class="btn btn-primary btn-user btn-block">
+                                    </form>
                                     
 								</div>
 							</div>

@@ -1,3 +1,98 @@
+<style>
+	.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+.deletebtn1{
+	color: var(--var-green) !important;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+}
+.button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+
+.button:hover {
+  opacity:1;
+}
+.cont1{
+  padding: 40px 16px;
+  text-align: center;
+}
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+.deletebtn {
+  background-color: #f44336;
+}
+
+/* The Modal (background) */
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 999; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content1 {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    border: 1px solid #888;
+    width: 80%;
+    transform: translate(-50% ,-50%);
+    top: 50%;
+    position: absolute;
+    left: 50%;
+}
+
+ 
+/* The Modal Close Button (x) */
+.close1 {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close1:hover,
+.close1:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .deletebtn {
+     width: 100%;
+  }
+}
+</style>
 <?php
 if($message ?? ''){
 	echo $message;
@@ -45,16 +140,18 @@ if($message ?? ''){
 															<p> &nbsp;
 																<?php echo $book_table['request_id_value']; ?>
 														</div><br>
-														<?php echo $book_table['service_plan']; ?>,
-														<?php echo $book_table['service_device']; ?>,
+														<h3 style="text-transform: capitalize;"><?php echo $book_table['cust_name']; ?></h3>
+														<span class="device"><?php echo $book_table['service_device']; ?></span>
+														(<?php echo $book_table['service_plan']; ?>,)
 														<span> rs. </span>
 														<?php echo $book_table['total_amount']; ?><br>
 														<span>Status:</span><?php echo $book_table['status']; ?>
 														&nbsp; &nbsp; &nbsp;
 														<span>Alloted Engineer : </span>
-														<?php echo $book_table['eng_name']; ?> &nbsp;
+														<?php echo $book_table['e_name'] ?? 'Pending'?>
+														 &nbsp;
 														&nbsp; &nbsp; <span>booking Date : </span>
-														<?php echo $book_table['created_on']; ?></p>
+														<span class="date"><?php echo $book_table['created_date']; ?></span></p>
 														<br>
 														<?php
 														if($book_table['status'] == 'completed'){
@@ -148,7 +245,7 @@ if($message ?? ''){
 								<?php
 								foreach($shipping_address as $add){
 								?>
-								<div class="col-lg-6">
+								<div class="col-sm-6">
 									<div class="b0x-shadow"><div class="section-header account_heading">
 									<input type="hidden" class="cbtn" value="shipping">
 										<input type="hidden" class="ccity" value="<?php echo $add['city'];?>">
@@ -159,13 +256,13 @@ if($message ?? ''){
 										<p class="caddress"><?php echo $add['address'];?>,</p>
 										<p class="cpincode"><?php echo $add['pincode'];?></p>
 									</div>
-									<div><a class="cust_edit"> Edit</a> | <a class="cust_edit"
-											href="<?= base_url('welcome/service_address_delete?id='.$add['id']) ?>">
+									<div><a class="cust_edit"> Edit</a> | <a class="deletebtn1 id1" data-id="<?= $add['id']; ?>"
+										onclick="document.getElementById('id01').style.display='block'">
 											Delete</a></div></div>
 								</div>
 								<?php } ?>
 							</div>
-
+							<!-- href="<?= base_url('welcome/service_address_delete?id='.$add['id']) ?>"  -->
 						</div>
 						<!-- <form class="customer cust_form_field pt-4" method="post" action="">
 							<input type="hidden" id="customer_id" value="" name="id">
@@ -223,31 +320,49 @@ if($message ?? ''){
 </div>
 
 <!-- modal -->
+
+
+<div id="id01" class="modal1">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close1" title="Close Modal">×</span>
+  <form class="modal-content1" action="/action_page.php">
+	<input type="hidden" name="id" id="deleteid">
+    <div class="container cont1">
+      <h1>Delete Account</h1>
+      <p>Are you sure you want to delete your account?</p>
+    
+      <div class="clearfix">
+        <button type="button" class="cancelbtn button">Cancel</button>
+        <button type="button" class="deletebtn button">Delete</button>
+      </div>
+    </div>
+  </form>
+</div>
+
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
 	aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 style='margin:auto; color:green;padding:10px'>Service Address</h1>
+				<h1 style='color:green;padding:10px'>Service Address</h1>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<form class="customer pt-4 p-4" method="post" action="">
-				<div class="modal-body" style="height:67vh;overflow-x:hidden">
+				<div class="modal-body" >
 					<div class="row justify-content-center">
 
 						<input type="hidden" id="customer_id" value="" name="id">
 						<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 							value="<?php echo $this->security->get_csrf_hash();?>">
 						<div class="form-group row">
-							<div class="col-sm-6 mb-3 mb-sm-0">
+							<div class="col-sm-6 mb-3 ">
 								<label for="c_name">Customer Name</label>
 								<input type="text" name="username" value="" id="username"
 									class="form-control form-control-user" placeholder="Customer Name">
 								<span id='spanusername'>Enter your name</span>
 							</div>
-							<div class="col-sm-6 mb-3 mb-sm-0">
+							<div class="col-sm-6 mb-3 ">
 								<label for="c_contact">Customer Contact</label>
 								<input type="text" name="mobile" id="mobile" class="form-control form-control-user"
 									placeholder="Contact">
@@ -300,13 +415,13 @@ if($message ?? ''){
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 style='color:green;padding:10px'>Service Address</h1>
+					<h1 style='color:green;padding:10px'>Edit Address</h1>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<form class="customer pt-4 p-4" method="post" action="">
-					<div class="modal-body" style="height:67vh;overflow-x:hidden">
+					<div class="modal-body">
 						<div class="row justify-content-center">
 							<input type="hidden" id="customer_btn" name="customer_btn">
 							<input type="hidden" id="customer_id" class="cusid" name="customer_id">
@@ -314,7 +429,7 @@ if($message ?? ''){
 								name="<?php echo $this->security->get_csrf_token_name(); ?>"
 								value="<?php echo $this->security->get_csrf_hash();?>">
 							<div class="form-group row">
-								<div class="col-sm-6 mb-3 mb-sm-0">
+								<div class="col-sm-6 mb-3 ">
 									<label for="c_name">Customer Name</label>
 									<input type="text" name="customer_name" value="" id="customer_name"	class="form-control form-control-user" placeholder="Customer Name">
 									<span id='spancustomer_name'>Enter your name</span>
@@ -360,4 +475,36 @@ if($message ?? ''){
 				</form>
 			</div>
 		</div>
-	</div>
+</div>
+<script src="<?php echo base_url();?>assets/js/vendor/jquery-3.3.1.min.js"></script>
+
+<script>
+
+
+$(document).ready(function(){
+	$('.id1').click(function(){
+		$('#id1').css('display','block');
+		$('#deleteid').val($(this).data('id'));
+	});
+});
+
+$(document).on('click','.deletebtn',function(){
+	let id =$('#deleteid').val();
+	var csrfName = "<?= $this->security->get_csrf_token_name(); ?>";
+			var csrfHash =  "<?= $this->security->get_csrf_hash(); ?>";
+	$.ajax({
+url: "<?= base_url('welcome/service_address_delete') ?>",
+method:"post",
+data : {id:id,[csrfName]:csrfHash},
+success : function(response){
+	console.log('success');
+	$('#id01').css('display','none');
+	location.reload();
+},
+error: function(){
+	console.log('error');
+}
+	})
+})
+</script>
+

@@ -57,11 +57,24 @@
     <script src="<?php echo base_url();?>assets/admin/js/demo/chart-area-demo.js"></script>
     <script src="<?php echo base_url();?>assets/admin/js/demo/chart-pie-demo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    <script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script  src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<script  src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+<script  src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+    
+<script>
         $(document).ready(function() {
   $('#summernote').summernote();
 });
     </script>
+    <script type="text/javascript">
+$('#dataTable').dataTable( {
+
+"responsive" : true
+} );
+</script>
 
 </body>
 

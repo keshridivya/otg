@@ -5,7 +5,8 @@ $(document).ready(function(){
         let total_amount=$('.total_amount').val();
         let add=parseInt(additional)+parseInt(total_amount);
         $('.expenes').val(add);
-    })
+    });
+
     $('.reschedule').click(function(){
         let device_modal=$('.device_modal').val();
         let booking_status=$('.booking_status').val();
@@ -24,6 +25,7 @@ $(document).ready(function(){
         let service_device=$('.service_device').val();
         let request_id=$('.request_id').val();
         let eng_name=$('.eng_name').val();
+
         
         if(device_modal == '' || booking_status== '' ||  payment_method=='' || additional_expens == '' || additional=='' || addon=='' || comment == '' || expenes == '' || advance_payment == '' || visiting_card == '' ){
             $('#message_upload_error').html('Please fill all field').addClass('alert alert-danger');
@@ -50,6 +52,16 @@ $(document).ready(function(){
             $('#total_amount').val(total_amount);
             let value_btn=$(this).data('name');
             $('.btn_name').val(value_btn);
+            if(value_btn == 'Generate'){
+                    let expenes = $('.expenes').val();
+                    let advance_payment = $('.advance_payment').val();
+                    let add=parseInt(expenes)-parseInt(advance_payment);
+                    $('.paymentradio').val(add);
+                    // alert('gg');
+            }
+            else{
+                $('.paymentradio').val('199');
+            }
         }
     });
 
@@ -72,7 +84,6 @@ $(document).ready(function(){
         let request_id=$('.request_id').val();
         let eng_name=$('.eng_name').val();
        
-        
         if(device_modal == '' || booking_status== '' || additional_expens == '' || additional=='' || addon=='' || comment == '' || expenes == '' || advance_payment == '' || visiting_card == '' ){
             $('#message_upload_error').html('Please fill all field').addClass('alert alert-danger');
         }
@@ -83,6 +94,8 @@ $(document).ready(function(){
             $('.btn_name').val(value_btn);
         }
     });
+});
 
-   
-})
+
+
+ 

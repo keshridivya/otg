@@ -11,7 +11,7 @@
 					<div class="col-lg-12">
 						<div class="p-5">
 							<?php
-                          if($message){
+                          if($message ?? FALSE){
                             echo "<div class='alert alert-info'>".$message."</div>";
                           }
                           ?>
@@ -75,8 +75,11 @@
 											placeholder='Booking Status' required> -->
 									</div>
 									<div class="col-md-4 mt-3">
-										<input type='text' name='payment_method' class='form-control payment_method'
-											placeholder='Payment Method'>
+										
+											<select name="payment_method" class='form-control payment_method'>
+											<option value="Cash">Cash</option>
+											<option value="Online">Online</option>
+										</select>
 									</div>
 
 									<div class="col-md-8 mt-3">
@@ -113,14 +116,12 @@
 											placeholder='Expenses' required readonly>
 									</div>
 									<div class="col-md-4 mt-3">
-										<input type='number' name='advance_payment' class='form-control advance_payment'
-											placeholder='Advance Payment' required>
+										<input type='number' name='advance_payment' class='form-control advance_payment' placeholder='Advance Payment' required>
 									</div>
 
 									<div class='datetimerow row mt-4'>
 										<div class="col-md-2 mt-3">
 											<p>Reschdule Date & Time <i class='fa fa-arrow-right'></i></p>
-
 										</div>
 										<div class="col-md-3 mt-3">
 											<input type='datetime-local' name='reschedule_ddate'
@@ -138,21 +139,25 @@
 
 								</div>
 								<div class="row justify-content-center mt-5">
+									
 									<div class="col-md-4 mb-3"><button type="button" name="reschedule"
 											class="btn btn-primary btn-user btn-block btn_image_submit reschedule_btn"
 											data-name='Reschedule'>Reschedule Assignment
 										</button></div>
 									<?php 
-									if($submit_data[0]['booking_request_id']){
+									if($submit_data[0]['booking_request_id'] ?? ''){
 									?>
 									<div class="col-md-4 mb-3"><button type="button" name="reschedule"
 											class="btn btn-primary btn-user btn-block btn_image_submit reschedule"
 											data-name='Generate'>Generate Estimate
 										</button></div>
 										<?php } ?>
-									<div class="col-md-4"><input type="button" name="close"
-											class="btn btn-primary btn-user btn-block btn_image_submit"
-											value='Close Assignment'></div>
+									<div class="col-md-4">
+									<button type="button" name="reschedule"
+											class="btn btn-primary btn-user btn-block btn_image_submit reschedule"
+											data-name='Close'>Close Assignment
+										</button>	
+									</div>
 								</div>
 							</form>
 							<hr>
@@ -192,18 +197,19 @@
 						<input type="hidden" name="service_device" id='service_device'>
 						<input type="hidden" name="request_id" id='request_id'>
 						<input type="hidden" name="total_amount" id='total_amount'>
+						<input type="hidden" name="btn_name" id='btn_name' class='btn_name'>
 						<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 							value="<?php echo $this->security->get_csrf_hash();?>">
 						<input type="hidden" name="eng_name" id='eng_name'>
 						<div class="row mb-4">
-							<div class="col-md-4 mt-3 viding_btn_name">
+							<div class="col-md-6 mt-3 viding_btn_name">
 								<input type='text' name='visiting_card' class='form-control visiting_card'
 									placeholder='Visiting Charges' value='Visiting Charges: 199 rs' readonly>
 							</div>
 						</div>
-						<input type="radio" id="age1" name="case_payment" value="cash-199">
+						<input type="radio" id="age1" name="case_payment" value="" class='paymentradio'>
 						<label for="age1">Cash Payment</label><br>
-						<input type="radio" id="age2" name="case_payment" value="online-199">
+						<input type="radio" id="age2" name="case_payment" value="" class='paymentradio'>
 						<label for="age2">Online Payment</label><br>
 					</div>
 					<div class="modal-footer">

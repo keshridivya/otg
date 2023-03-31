@@ -231,8 +231,6 @@ $(document).ready(function(){
 		<input type="text" name="qua[]" id="qua" placeholder="Quantity" />\
 		<label class="fieldlabels">MRP : </label>\
 		<input type="text" name="mrp[]" id="mrp" placeholder="MRp" />\
-		<label class="fieldlabels">Rate : </label>\
-		<input type="text" name="rate[]" id="rate" placeholder="Rate" />\
 		<label class="fieldlabels">Discount : </label>\
 		<input type="text" name="dis[]" id="dis" placeholder="Discount" />\
 		<button class="btn btn-danger" id="removefield" type="button"><i class="fa fa-trash"></i> Remove</button>\

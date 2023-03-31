@@ -828,7 +828,7 @@
 
 							</div>
 							<div class="item">
-								<a href="">
+								<a href="<?php echo base_url('maintenance/Mobile')?>">
 									<div class="popular-img">
 										<img src="<?php echo base_url();?>assets/images/product-images/mobile.png"
 											alt="">
@@ -840,6 +840,7 @@
 
 							</div>
 							<div class="item">
+							<a href="<?php echo base_url('maintenance/Washing Machine')?>">
 								<div class="popular-img">
 									<img src="<?php echo base_url();?>assets/images/product-images/Washing-machine.png"
 										alt="">
@@ -847,8 +848,10 @@
 								<div class="popular-title">
 									<p>Washing Machine</p>
 								</div>
+						</a>
 							</div>
 							<div class="item">
+							<a href="<?php echo base_url('maintenance/Water Purifier')?>">
 								<div class="popular-img">
 									<img src="<?php echo base_url();?>assets/images/product-images/Water-purifier.png"
 										alt="">
@@ -856,6 +859,7 @@
 								<div class="popular-title">
 									<p>Water Purifier</p>
 								</div>
+						</a>
 							</div>
 						</div>
 					</div>

@@ -1,56 +1,4 @@
-/*********************************************************************************
 
-	Template Name: Belle - Multipurpose eCommerce Bootstrap4 HTML Template
-	Description: A perfect template to build beautiful and unique Glasses websites. It comes with nice and clean design.
-	Version: 1.0
-
-**********************************************************************************/
-
-/*************************************************
-  1. Preloader Loading
-  2. Promotional Bar Header
-  3. Currency Show/Hide dropdown  
-  4. Language Show/Hide dropdown
-  5. Top Links Show/Hide dropdown
-  6. Minicart Dropdown
-  7. Sticky Header
-  8. Search Trigger
-  9. Mobile Menu
-  10 Slick Slider
-	 10.1 Homepage Slideshow 
-	 10.2 Product Slider Slick
-	 10.3 Product Slider Slick Style2
-	 10.4 Product Slider Slick Style3
-	 10.5 Product Slider Slick Fullwidth
-	 10.6 Product Slider Slick Product Page
-	 10.7 Collection Slider Slick
-	 10.8 Collection Slider Slick 4 items
-	 10.9 Logo Slider Slick
-	 10.10 Testimonial Slider Slick
-  11. Tabs With Accordian Responsive
-  12. Sidebar Categories Level links
-  13. Price Range Slider
-  14. Color Swacthes
-  15. Footer links for mobiles
-  16. Site Animation
-  17. SHOW HIDE PRODUCT TAG
-  18. SHOW HIDE PRODUCT Filters
-  19. Timer Count Down
-  20. Scroll Top
-  21. Height Product Grid Image
-  22. Product details slider 2
-  23. Product details slider 1
-  24. Product Zoom
-  25. Product Page Popup
-  26. Quantity Plus Minus
-  27. Visitor Fake Message
-  28. Product Tabs
-  29. Promotion / Notification Cookie Bar 
-  30. Image to background js
-  31. COLOR SWATCH ON COLLECTION PAGE
-  32. Related Product Slider
-  33. Infinite Scroll js
-*************************************************/
 // var a = 0;
 // $(window).scroll(function() {
 
@@ -1095,99 +1043,6 @@ $('.counter-number').each(function() {
 })(jQuery);
 
 
-$(document).on('keyup','#username',function(){
-    fun_username();    
-})
-function fun_username(){
-    let username=$('#username').val();
-    let text=/^[A-Za-z ]+$/;
-
-    if(!text.test(username)){
-        $("#spanusername").show().html("Enter Alphabets only").css("color","red").focus();
-        $('.signupbtn').prop('disabled',true);
-        return false;
-    }
-    else{
-        $("#spanusername").hide();
-        $('.signupbtn').prop('disabled',false);
-    }
-}
-
-$(document).on('keyup','#mobile',function(){
-    fun_mobile();    
-})
-function fun_mobile(){
-    let mobile=$('#mobile').val();
-
-    if(mobile.length!=10){
-        $("#spanmobile").show().html("Please Enter Valid Mobile Number").css("color","red").focus();
-        $('.signupbtn').prop('disabled',true);
-        return false;
-    }
-    else{
-        $("#spanmobile").hide();
-        $('.signupbtn').prop('disabled',false);
-    }
-}
-
-$(document).on('keyup','#city',function(){
-    fun_city();    
-})
-function fun_city(){
-    let city=$('#city').val();
-    let text=/^[A-Za-z ]+$/;
-
-    if(!text.test(city)){
-        $("#spancity").show().html("Enter Alphabets only").css("color","red").focus();
-        $('.signupbtn').prop('disabled',true);
-        return false;
-    }
-    else{
-        $("#spancity").hide();
-        $('.signupbtn').prop('disabled',false);
-    }
-}
-
-$(document).on('keyup','#state',function(){
-    fun_state();    
-})
-function fun_state(){
-    let state=$('#state').val();
-    let text=/^[A-Za-z ]+$/;
-
-    if(!text.test(state)){
-        $("#spanstate").show().html("Enter Alphabets only").css("color","red").focus();
-        $('.signupbtn').prop('disabled',true);
-        return false;
-    }
-    else{
-        $("#spanstate").hide();
-        $('.signupbtn').prop('disabled',false);
-    }
-}
-
-// $('.signupbtn').prop('disabled',true);
-// $(document).on('submit','.signup',function(){
-//     let username = $("#username").val();
-//     let mobile = $("#mobile").val();
-//     let email_id = $("#email_id").val();
-//     let password = $("#password").val();
-//     let city = $("#city").val();
-//     let state = $("#state").val();
-//     let address = $("#address").val();
-//     let pincode = $("#pincode").val();
-
-//     if(username==''|| mobile==''|| email_id==''|| password=='' || city=='' || state=='' ||address=='' || pincode=='' ) {
-//         $("#errorsubmit").show().html("Please Fill All the Field").css("color","red").focus();
-//         return false;
-//     }
-//     else{
-//         $("#errorsubmit").hide()
-//         $('.signupbtn').prop('disabled',false);
-//         return true;
-
-//     }
-// });
 
 // Document is ready
 $(document).ready(function () {
@@ -1433,7 +1288,7 @@ $(document).ready(function(){
     });
     function validatebookpin(){
         let bookpin=$('#c_pincode').val();
-        let zipRegex = /^\d{5}$/;
+        let zipRegex = /^\d{6}$/;
         if(bookpin.length==''){
             $('#spanPin').show().css('color','red');
             pin_error = false;
@@ -1492,46 +1347,671 @@ $(document).ready(function(){
       });
 });
 
- //password
-//  $('#c_password').keyup(function(){
-//     validatepass(); 
-// });
-// function validatepass(){
-//     let pass=$('#c_password').val();
-//     let passcheck=0;
-//          for(let a1=0;a1<=pass.length;a1++){
-//            if(pass.charCodeAt(a1)>=65 && pass.charCodeAt(a1)<=90){
-//               passcheck=1;
-//            }
-//          }
+$(document).ready(function(){
+    $('#spanusername').hide();
+    $('#spanmobile').hide();
+    $('#spanemail').hide();
+    $('#spancity').hide();
+    $('#spanAddress').hide();
+    $('#spanPin').hide();
+    $('#spanpassword').hide();
+    $('#spanstate').hide();
+    let name_error1 = true;
+    let contact_error1 = true;
+    let email_error1 = true;
+    let city_error1 = true;
+    let address_error1 = true;
+    let pin_error1 = true;
+    let pass_error1 = true;
+    let state_error1 = true;
 
-//          let pass_check=0;
-//          for(let a1=0;a1<=pass.length;a1++){
-//            if(pass.charCodeAt(a1)>=33 && pass.charCodeAt(a1)<=42 || pass.charCodeAt(a1)==64){
-//               pass_check=1;
-//            }
-//          }
-//     if(pass.length==''){
-//         $('#spanPassword').show().css('color','red');
-//         pass_error = false;
-//         return false;
-//     }
-//     else if(pass.length < 6 || pass.length > 8){
-//         $('#spanPassword').show().css('color','red').html('** length of your password must be between 6 and 8 and one special character and one upper case');
-//         pass_error = false;
-//         return false;
-//     }
-//     else if(passcheck==0){
-//         $('#spanPassword').show().css('color','red').html('** You must contain atleast one Upper character in password');
-//         pass_error = false;
-//         return false;
-//     }
-//     else if(pass_check==0){
-//         $('#spanPassword').show().css('color','red').html('** You must contain atleast one special character in password');
-//         pass_error = false;
-//         return false;
-//     }
-//     else{
-//         $('#spanPassword').hide()
-//     }
-// }
+    $('#username').keyup(function(){
+        validatebookname1();
+    });
+    function validatebookname1(){
+        let bookname=$('#username').val();
+        let booktext=/^[A-Za-z ]+$/;
+        if(bookname.length == ''){
+            $('#spanusername').show().css('color','red');
+            name_error1 = false;
+            return false;
+        }else if(!booktext.test(bookname)){
+                $('#spanusername').show().html('** Enter Alphabets only').css('color','red');
+                name_error1 = false;
+                return false;
+        }else{
+            $('#spanusername').hide();
+        }
+    }
+
+    //contact
+    $('#mobile').keyup(function(){
+        validatebookcontact1();
+    });
+    function validatebookcontact1(){
+        let bookcontact=$('#mobile').val();
+        let booknumber=/^[0-9-+]+$/;
+
+        if(bookcontact.length==''){
+            $('#spanmobile').show().css('color','red');
+            contact_error1 = false;
+            return false;
+        }else if(!booknumber.test(bookcontact)){
+            $('#spanmobile').show().css('color','red').html('** Enter Only number');
+            contact_error1 = false;
+            return false;
+        }else if(bookcontact.length != '10'){
+            $('#spanmobile').show().css('color','red').html('** Enter Only 10 digit number');
+            contact_error1 = false;
+            return false;
+        } else{
+            $('#spanmobile').hide();
+        }
+    }
+
+    //email
+    $('#email_id').keyup(function(){
+        validatebookemail1();
+    });
+    function validatebookemail1(){
+        let bookemail=$('#email_id').val();
+        let bookregex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+        if(bookemail.length==''){
+            $('#spanemail').show().css('color','red');
+            email_error1 = false;
+            return false;
+        }else if(!bookregex.test(bookemail)){
+            $('#spanemail').show().css('color','red');
+            email_error1 = false;
+            return false;
+        }
+        else{
+            $('#spanemail').hide();
+        }
+    }
+    
+    //city
+    $('#city').keyup(function(){
+        validatebookcity1();
+    });
+    function validatebookcity1(){
+        let bookcity =$('#city').val();
+        let cityregrex=/^[A-za-z ]+$/;
+        if(bookcity.length==''){
+            $('#spancity').show().css('color','red');
+            city_error1 = false;
+            return false;
+        }
+        else if(!cityregrex.test(bookcity)){
+            $('#spancity').show().css('color','red').html('** Please enter correct city');
+            city_error1 = false;
+            return false;
+        }
+        else{
+            $('#spancity').hide();
+        }
+    }
+        
+     $('#state').keyup(function(){
+        validatebookstate1();
+    });
+    function validatebookstate1(){
+        let bookcity =$('#state').val();
+        let cityregrex=/^[A-za-z ]+$/;
+        if(bookcity.length==''){
+            $('#spanstate').show().css('color','red');
+            state_error1 = false;
+            return false;
+        }
+        else if(!cityregrex.test(bookcity)){
+            $('#spanstate').show().css('color','red').html('** Please enter correct city');
+            state_error1 = false;
+            return false;
+        }
+        else{
+            $('#spanstate').hide();
+        }
+    }
+
+    //address
+    $('#address').keyup(function(){
+        validatebookaddress1();
+    });
+    function validatebookaddress1(){
+        let bookaddress=$('#address').val();
+        if(bookaddress.length==''){
+            $('#spanAddress').show().css('color','red');
+            address_error1 = false;
+            return false;
+        }
+        else{
+            $('#spanAddress').hide();
+        }
+    }
+
+    //pincode
+    $('#pincode').keyup(function(){
+        validatebookpin1();
+    });
+    function validatebookpin1(){
+        let bookpin=$('#pincode').val();
+        let zipRegex = /^\d{6}$/;
+        if(bookpin.length==''){
+            $('#spanPin').show().css('color','red');
+            pin_error1 = false;
+            return false;
+        }
+        else if(!zipRegex.test(bookpin)){
+            $('#spanPin').show().css('color','red').html('** zipcode should only be 6 digits');
+            pin_error1 = false;
+            return false;
+        }
+        else{
+            $('#spanPin').hide();
+        }
+    }
+
+
+    // Submit button
+    $("#signupbtn").click(function () {
+        name_error1 = true;
+        contact_error1 = true;
+         email_error1 = true;
+        city_error1 = true;
+         address_error1 = true;
+         pin_error1= true;
+         state_error1 = true;
+         validatebookname1();
+         validatebookcontact1();
+         validatebookemail1();
+         validatebookcity1();
+         validatebookaddress1();
+         validatebookpin1();
+          if (name_error1 == true && contact_error1 == true && email_error1 == true && city_error1 == true && address_error1 == true && pin_error1==true ) {
+            return true;
+              
+          } else {
+                      return false;
+          }
+      });
+});
+
+//myaccount
+$(document).ready(function(){
+    $('#spancustomer_name').hide();
+    $('#spancustomer_contact').hide();
+    $('#spancustomer_email').hide();
+    $('#spancustomer_city').hide();
+    $('#spancustomer_address').hide();
+    $('#spancustomer_pincode').hide();
+    let name_error2 = true;
+    let contact_error2 = true;
+    let email_error2 = true;
+    let city_error2 = true;
+    let address_error2 = true;
+    let pin_error2 = true;
+
+    $('#customer_name').keyup(function(){
+        validatebookname2();
+    });
+    function validatebookname2(){
+        let bookname=$('#customer_name').val();
+        let booktext=/^[A-Za-z ]+$/;
+        if(bookname.length == ''){
+            $('#spancustomer_name').show().css('color','red');
+            name_error2 = false;
+            return false;
+        }else if(!booktext.test(bookname)){
+                $('#spancustomer_name').show().html('** Enter Alphabets only').css('color','red');
+                name_error2 = false;
+                return false;
+        }else{
+            $('#spancustomer_name').hide();
+        }
+    }
+
+    //contact
+    $('#customer_contact').keyup(function(){
+        validatebookcontact2();
+    });
+    function validatebookcontact2(){
+        let bookcontact=$('#customer_contact').val();
+        let booknumber=/^[0-9-+]+$/;
+
+        if(bookcontact.length==''){
+            $('#spancustomer_contact').show().css('color','red');
+            contact_error2 = false;
+            return false;
+        }else if(!booknumber.test(bookcontact)){
+            $('#spancustomer_contact').show().css('color','red').html('** Enter Only number');
+            contact_error2 = false;
+            return false;
+        }else if(bookcontact.length != '10'){
+            $('#spancustomer_contact').show().css('color','red').html('** Enter Only 10 digit number');
+            contact_error2 = false;
+            return false;
+        } else{
+            $('#spancustomer_contact').hide();
+        }
+    }
+
+    //email
+    $('#customer_email').keyup(function(){
+        validatebookemail2();
+    });
+    function validatebookemail2(){
+        let bookemail=$('#customer_email').val();
+        let bookregex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+        if(bookemail.length==''){
+            $('#spancustomer_email').show().css('color','red');
+            email_error2 = false;
+            return false;
+        }else if(!bookregex.test(bookemail)){
+            $('#spancustomer_email').show().css('color','red');
+            email_error2 = false;
+            return false;
+        }
+        else{
+            $('#spancustomer_email').hide();
+        }
+    }
+    
+    //city
+    $('#customer_city').keyup(function(){
+        validatebookcity2();
+    });
+    function validatebookcity2(){
+        let bookcity =$('#customer_city').val();
+        let cityregrex=/^[A-za-z ]+$/;
+        if(bookcity.length==''){
+            $('#spancustomer_city').show().css('color','red');
+            city_error2 = false;
+            return false;
+        }
+        else if(!cityregrex.test(bookcity)){
+            $('#spancustomer_city').show().css('color','red').html('** Please enter correct city');
+            city_error2 = false;
+            return false;
+        }
+        else{
+            $('#spancustomer_city').hide();
+        }
+    }
+        
+    //address
+    $('#customer_address').keyup(function(){
+        validatebookaddress2();
+    });
+    function validatebookaddress2(){
+        let bookaddress=$('#customer_address').val();
+        if(bookaddress.length==''){
+            $('#spancustomer_address').show().css('color','red');
+            address_error2 = false;
+            return false;
+        }
+        else{
+            $('#spancustomer_address').hide();
+        }
+    }
+
+    //pincode
+    $('#customer_pincode').keyup(function(){
+        validatebookpin2();
+    });
+    function validatebookpin2(){
+        let bookpin=$('#customer_pincode').val();
+        let zipRegex = /^\d{6}$/;
+        if(bookpin.length==''){
+            $('#spancustomer_pincode').show().css('color','red');
+            pin_error2 = false;
+            return false;
+        }
+        else if(!zipRegex.test(bookpin)){
+            $('#spancustomer_pincode').show().css('color','red').html('** zipcode should only be 6 digits');
+            pin_error2 = false;
+            return false;
+        }
+        else{
+            $('#spancustomer_pincode').hide();
+        }
+    }
+
+
+    // Submit button
+    $("#submit-btn").click(function () {
+        name_error2 = true;
+        contact_error2 = true;
+         email_error2 = true;
+        city_error2 = true;
+         address_error2 = true;
+         pin_error2= true;
+         state_error2 = true;
+         validatebookname2();
+         validatebookcontact2();
+         validatebookemail2();
+         validatebookcity2();
+         validatebookaddress2();
+         validatebookpin2();
+          if (name_error2 == true && contact_error2 == true && email_error2 == true && city_error2 == true && address_error2 == true && pin_error2==true ) {
+            return true;
+              
+          } else {
+                      return false;
+          }
+      });
+});
+
+//myaccount modal
+$(document).ready(function(){
+    $('#spancustomer_name').hide();
+    $('#spancustomer_contact').hide();
+    $('#spancustomer_email').hide();
+    $('#spancustomer_city').hide();
+    $('#spancustomer_address').hide();
+    $('#spancustomer_pincode').hide();
+    let name_error2 = true;
+    let contact_error2 = true;
+    let email_error2 = true;
+    let city_error2 = true;
+    let address_error2 = true;
+    let pin_error2 = true;
+
+    $('#customer_name').keyup(function(){
+        validatebookname2();
+    });
+    function validatebookname2(){
+        let bookname=$('#customer_name').val();
+        let booktext=/^[A-Za-z ]+$/;
+        if(bookname.length == ''){
+            $('#spancustomer_name').show().css('color','red');
+            name_error2 = false;
+            return false;
+        }else if(!booktext.test(bookname)){
+                $('#spancustomer_name').show().html('** Enter Alphabets only').css('color','red');
+                name_error2 = false;
+                return false;
+        }else{
+            $('#spancustomer_name').hide();
+        }
+    }
+
+    //contact
+    $('#customer_contact').keyup(function(){
+        validatebookcontact2();
+    });
+    function validatebookcontact2(){
+        let bookcontact=$('#customer_contact').val();
+        let booknumber=/^[0-9-+]+$/;
+
+        if(bookcontact.length==''){
+            $('#spancustomer_contact').show().css('color','red');
+            contact_error2 = false;
+            return false;
+        }else if(!booknumber.test(bookcontact)){
+            $('#spancustomer_contact').show().css('color','red').html('** Enter Only number');
+            contact_error2 = false;
+            return false;
+        }else if(bookcontact.length != '10'){
+            $('#spancustomer_contact').show().css('color','red').html('** Enter Only 10 digit number');
+            contact_error2 = false;
+            return false;
+        } else{
+            $('#spancustomer_contact').hide();
+        }
+    }
+
+    //email
+    $('#customer_email').keyup(function(){
+        validatebookemail2();
+    });
+    function validatebookemail2(){
+        let bookemail=$('#customer_email').val();
+        let bookregex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+        if(bookemail.length==''){
+            $('#spancustomer_email').show().css('color','red');
+            email_error2 = false;
+            return false;
+        }else if(!bookregex.test(bookemail)){
+            $('#spancustomer_email').show().css('color','red');
+            email_error2 = false;
+            return false;
+        }
+        else{
+            $('#spancustomer_email').hide();
+        }
+    }
+    
+    //city
+    $('#customer_city').keyup(function(){
+        validatebookcity2();
+    });
+    function validatebookcity2(){
+        let bookcity =$('#customer_city').val();
+        let cityregrex=/^[A-za-z ]+$/;
+        if(bookcity.length==''){
+            $('#spancustomer_city').show().css('color','red');
+            city_error2 = false;
+            return false;
+        }
+        else if(!cityregrex.test(bookcity)){
+            $('#spancustomer_city').show().css('color','red').html('** Please enter correct city');
+            city_error2 = false;
+            return false;
+        }
+        else{
+            $('#spancustomer_city').hide();
+        }
+    }
+        
+    //address
+    $('#customer_address').keyup(function(){
+        validatebookaddress2();
+    });
+    function validatebookaddress2(){
+        let bookaddress=$('#customer_address').val();
+        if(bookaddress.length==''){
+            $('#spancustomer_address').show().css('color','red');
+            address_error2 = false;
+            return false;
+        }
+        else{
+            $('#spancustomer_address').hide();
+        }
+    }
+
+    //pincode
+    $('#customer_pincode').keyup(function(){
+        validatebookpin3();
+    });
+    function validatebookpin3(){
+        let bookpin=$('#customer_pincode').val();
+        let zipRegex = /^\d{6}$/;
+        if(bookpin.length==''){
+            $('#spancustomer_pincode').show().css('color','red');
+            pin_error3 = false;
+            return false;
+        }
+        else if(!zipRegex.test(bookpin)){
+            $('#spancustomer_pincode').show().css('color','red').html('** zipcode should only be 6 digits');
+            pin_error3 = false;
+            return false;
+        }
+        else{
+            $('#spancustomer_pincode').hide();
+        }
+    }
+
+
+    // Submit button
+    $("#submit-btn").click(function () {
+        name_error3 = true;
+        contact_error3 = true;
+         email_error3 = true;
+        city_error3 = true;
+         address_error3 = true;
+         pin_error3= true;
+         state_error3 = true;
+         validatebookname3();
+         validatebookcontact3();
+         validatebookemail3();
+         validatebookcity3();
+         validatebookaddress3();
+         validatebookpin3();
+          if (name_error3 == true && contact_error3 == true && email_error3 == true && city_error3 == true && address_error3 == true && pin_error3==true ) {
+            return true;
+          } else {
+                      return false;
+          }
+      });
+});
+
+$(document).ready(function(){
+    $('#spanotpnumber2').hide();
+    $('#spanverifyotpnumber').hide();
+    $('#otp_number').keyup(function(){
+        validatebookcontact1();
+    });
+    function validatebookcontact1(){
+        let bookcontact=$('#otp_number').val();
+        let booknumber=/^[0-9-+]+$/;
+
+        if(bookcontact.length==''){
+            $('#spanotpnumber2').show().css('color','red');
+            contact_error1 = false;
+            return false;
+        }else if(!booknumber.test(bookcontact)){
+            $('#spanotpnumber2').show().css('color','red').html('** Enter Only number');
+            contact_error1 = false;
+            return false;
+        }else if(bookcontact.length != '10'){
+            $('#spanotpnumber2').show().css('color','red').html('** Enter Only 10 digit number');
+            contact_error1 = false;
+            return false;
+        } else{
+            $('#spanotpnumber2').hide();
+            $('#otp_btn').attr('disabled',false);
+
+        }
+    }
+});
+
+$(document).ready(function(){
+    $('#spanotpnumber').hide();
+    $('#spanverifyotpnumber').hide();
+    $('#usernumber').keyup(function(){
+        validatebookcontact1();
+    });
+    function validatebookcontact1(){
+        let bookcontact=$('#usernumber').val();
+        let booknumber=/^[0-9-+]+$/;
+
+        if(bookcontact.length==''){
+            $('#spanotpnumber').show().css('color','red');
+            $('.login_send_otp').attr('disabled',true);
+            contact_error1 = false;
+            return false;
+        }else if(!booknumber.test(bookcontact)){
+            $('#spanotpnumber').show().css('color','red').html('** Enter Only number');
+            $('.login_send_otp').attr('disabled',true);
+            contact_error1 = false;
+            return false;
+        }else if(bookcontact.length != '10'){
+            $('#spanotpnumber').show().css('color','red').html('** Enter Only 10 digit number');
+            $('.login_send_otp').attr('disabled',true);
+            contact_error1 = false;
+            return false;
+        } else{
+            $('#spanotpnumber').hide();
+            $('.login_send_otp').attr('disabled',false);
+
+        }
+    }
+});
+
+$(document).ready(function(){
+    $('#spanNewPass').hide();
+    $('#new_pass').keyup(function(){
+        validatebookcontact1();
+    });
+    function validatebookcontact1(){
+        let bookcontact=$('#new_pass').val();
+
+        if(bookcontact.length==''){
+            $('#spanNewPass').show().css('color','red');
+            contact_error1 = false;
+            return false;
+        }else{
+            $('#spanNewPass').hide();
+            $('.new_pass_btn').attr('disabled',false);
+
+        }
+    }
+
+$('#summarycheck').hide();
+	$('.checlout').click(function(){
+		$('#staticBackdrop').modal('show');
+	});
+    $('.pay').click(function(){
+        $('#summarycheck').show();
+        $('.checlout').css('display','none');
+
+    })
+});
+
+$(document).ready(function(){
+    // $('.cust_form_field').hide();
+    $('.cust_edit').click(function(){
+        // alert($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cid').val());
+        $('#customer_btn').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cbtn').val());
+        $('#customer_id').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cid').val());
+        $('.cusid').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cid').val());
+        $('#customer_name').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cname').text());
+        $('#customer_contact').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.ccont').text());
+        $('#customer_city').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.ccity').val());
+        $('#customer_email').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cemail').text());
+        $('#customer_address').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.caddress').text());
+        $('#customer_pincode').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cpincode').text());
+        $('#modal_edit').modal('show');
+
+        // $('.cust_form_field').toggle();
+    })
+});
+
+// $(document).ready(function(){
+//     // $('.cust_form_field').hide();
+//     $('.cust_edit1').click(function(){
+//         alert($(this).parents('.col-lg-6').children('.section-header').children('.cid').val());
+//         $('#customer_btn').val($(this).parents('.col-lg-6').children('.section-header').children('.cbtn').val());
+//         $('#customer_id').val($(this).parents('.col-lg-6').children('.section-header').children('.cid').val());
+//         $('#customer_name').val($(this).parents('.col-lg-6').children('.section-header').children('.cname').text());
+//         $('#customer_contact').val($(this).parents('.col-lg-6').children('.section-header').children('.ccont').text());
+//         $('#customer_city').val($(this).parents('.col-lg-6').children('.section-header').children('.ccity').val());
+//         $('#customer_email').val($(this).parents('.col-lg-6').children('.section-header').children('.cemail').text());
+//         $('#customer_address').val($(this).parents('.col-lg-6').children('.section-header').children('.caddress').text());
+//         $('#customer_pincode').val($(this).parents('.col-lg-6').children('.section-header').children('.cpincode').text());
+//         $('#modal_edit').modal('show');
+
+//         // $('.cust_form_field').toggle();
+//     })
+// });
+
+$(document).ready(function(){
+    $('.btn-booking').click(function(){
+        // $('#customer_btn').val($(this).parents('.col-lg-6').children('.section-header').children('.cbtn').val());
+        // $('#custid').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cid').val());
+        $('#c_name').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cname').text());
+        $('#c_contact').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.ccont').text());
+        $('#c_city').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.ccity').val());
+        $('#c_email').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cemail').text());
+        $('#c_address').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.caddress').text());
+        $('#c_pincode').val($(this).parents('.col-lg-6').children('.b0x-shadow').children('.section-header').children('.cpincode').text());
+        $(this).addClass('btn-active').text('Selected address');
+        $(this).parents('.col-lg-6').siblings().find('button').removeClass('btn-active').text('Booking to this address');
+    })
+});
+
+function explode(){
+    $('#toaster').hide('');
+}
+
+  setTimeout(explode, 2000);

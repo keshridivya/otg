@@ -34,9 +34,9 @@
 							<td><?= $client['status'] ?></td>
 							<td><?= $client['created_date'] ?></td>
 							<td>
-								<a href="<?php echo base_url('admin/client/edit/'.$client['id']); ?>"><i
+								<a href="<?php echo base_url('admin/client/edit/'.$client['id']); ?>" class="btn btn-primary"><i
 										class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-								<a href="<?php echo base_url('admin/client/delete/'.$client['id']); ?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash" aria-hidden="true"></i></a>
+								<a href="<?php echo base_url('admin/client/delete/'.$client['id']); ?>" type="button" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash" aria-hidden="true"></i></a>
 							</td>
 						</tr>
 						<?php $count++; }

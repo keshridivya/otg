@@ -1,9 +1,6 @@
 <!--Body Content-->
 <div id="page-content">
 
-
-
-
 	<!-- <?php print_r($cartItems);?> -->
 	<div class="section cart">
 		<div class="container">
@@ -13,7 +10,6 @@
 						<div class="card-body">
 							<div class="section-header text-center">
 								<h2 class="heading">My Cart</h2>
-
 							</div>
 							<hr>
 							<div class="row">
@@ -58,7 +54,7 @@
 											<input type="hidden" class="txt_csrfname"
 												name="<?php echo $this->security->get_csrf_token_name(); ?>"
 												value="<?php echo $this->security->get_csrf_hash();?>">
-											<div class="d-flex">
+											<div class="d-flex justify-content-end">
 												<input type='button' value='-' class='qtyminus minus qty'
 													field='quantity' />
 												<input type="text" class="form-control text-center item-qty"
@@ -110,7 +106,7 @@
                                                 }
                                                 ?>
 								</div>
-								r̥
+								
 							</div>
 
 							<div class="row justify-content-center">
@@ -137,22 +133,12 @@
 
 								</div>
 							</div>
-
 						</div>
-
-
 					</div>
-
 				</div>
-
-
-
 			</div>
 		</div>
 	</div>
-
-
-
 	<div class="section"></div>
 
 

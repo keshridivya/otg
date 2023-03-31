@@ -2,38 +2,30 @@
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
 <form name='razorpayform' action="<?php echo base_url().'verify';?>" method="POST">
+<?php  if($this->cart->total_items()>0){
+                                    foreach($cartItems as $item){ ?>
 	<input type="hidden" class="form-control form-control-user" name="customer_id"
-		value="<?php echo $customers[0]['cust_id'];?>">
-
-	<input type="hidden" class="form-control form-control-user" value="<?php echo $customers[0]['email_id'];?>"
+		value="<?php echo $_SESSION['id'];?>">
+        <input type="hidden" value='<?= rand(10000,100000) ?>' name='order_id'>
+	<input type="hidden" class="form-control form-control-user" value="<?php echo $_SESSION['c_email'];?>"
 		name="c_email">
 
-	<input type="hidden" class="form-control form-control-user" value="<?php echo $customers[0]['contact'];?>"
+	<input type="hidden" class="form-control form-control-user" value="<?php echo $_SESSION['c_contact'];?>"
 		name="c_contact">
-        <input type="hidden" name="c_name"
-											value="<?php echo $customers[0]['cust_name'];?>" id="c_name"
-											class="form-control form-control-user" placeholder="Customer Name" readonly>
-	<input type="hidden" name="s_plan" value="<?php if($this->cart->total_items()>0){
-                                                foreach($cartItems as $item){
-                                                     echo $item['name']." "; 
-                                                     
-                                                    }
-                                                    }?>" id="s_plan" class="form-control form-control-user"
+	<input type="hidden" name="c_name" value="<?php echo $_SESSION['c_name'];?>" id="c_name" class="form-control form-control-user" placeholder="Customer Name" readonly>
+	<input type="hidden" name="s_plan[]" value="<?php echo $item['name']; ?>" id="s_plan" class="form-control form-control-user"
 		placeholder="Service Plan" readonly>
-	<input type="hidden" name="s_device" value="<?php if($this->cart->total_items()>0){
-                                                foreach($cartItems as $item){
-                                                     echo $item['product_name']." ";
-                                                    
-                                                    }
-                                                    }?>" id="s_device" class="form-control form-control-user"
+	<input type="hidden" name="s_device[]" value="<?php 
+                                                     echo $item['product_name']; ?>" id="s_device" class="form-control form-control-user"
 		placeholder="Service Device" readonly>
-        <input type="hidden" name="quantity" id="quantity" value="<?= $item['qty'] ?>"
-											class="form-control form-control-user" placeholder="Total Amount" readonly>
+	<input type="hidden" name="quantity[]" id="quantity" value="<?= $item['qty'] ?>"
+		class="form-control form-control-user" placeholder="Total Amount" readonly>
+        <input type="hidden" name="sub_total" value='<?= $item['price'] ?>'>
+        <?php  } } ?>
 	<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 		value="<?php echo $this->security->get_csrf_hash();?>">
-        <input type="hidden" name="t_amnt" id="t_amnt"
-											value="<?= $this->cart->format_number($this->cart->total()) ?>"
-											class="form-control form-control-user" placeholder="Total Amount" readonly>
+	<input type="hidden" name="t_amnt" id="t_amnt" value="<?= $this->cart->format_number($this->cart->total()) ?>"
+		class="form-control form-control-user" placeholder="Total Amount" readonly>
 	<input type="hidden" name="razorpay_payment_id" id="razorpay_payment_id">
 	<input type="hidden" name="razorpay_signature" id="razorpay_signature">
 </form>

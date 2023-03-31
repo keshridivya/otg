@@ -10,18 +10,15 @@ class Admin extends CI_Controller {
 	 }
 	public function index()
 	{
-		
-		if(@$this->input->post()){
-			$email=$this->input->post('email');
-			$password=sha1($this->input->post('password'));
-			$result=$this->db->get_where('admin',array('email_id'=>$email,'password'=>$password,'status'=>'active'))->result_array();
-			// print_r($result);
-			$aid=$result[0]['admin_id'];
-			$aemail=$result[0]['email_id'];
-			$this->session->set_userdata('a_id',$aid);
-			$this->session->set_userdata('e_id',$aemail);
-		
-		}
+		// if(@$this->input->post()){
+		// 	$email=$this->input->post('email');
+		// 	$password=sha1($this->input->post('password'));
+		// 	$result=$this->db->get_where('admin',array('email_id'=>$email,'password'=>$password,'status'=>'active'))->result_array();
+		// 	$aid=$result[0]['admin_id'] ?? '';
+		// 	$aemail=$result[0]['email_id'] ?? '';
+		// 	$this->session->set_userdata('a_id',$aid);
+		// 	$this->session->set_userdata('e_id',$aemail);
+		// }
 		if(@$this->session->userdata['a_id']){
 			//redirect to dashboard
 			$customers_table=$this->db->get("customer")->result_array();
@@ -41,11 +38,74 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	public function loginotp(){
+        if($this->input->post('number')){
+            $this->load->helper('msg');
+            $number = $this->input->post('number');
+            $result=$this->db->get_where('admin',array('contact'=>$number))->result_array();
+			$name = $result[0]['name'];
+            if (count($result) > 0)
+            {
+                $otp = rand(10000, 99999);
+				$otp_resu = 'success';
+				$timestamp =  $_SERVER["REQUEST_TIME"];  
+                $_SESSION['time'] = $timestamp;
+                //   $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
+                //   if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
+                //       $data['message'] = "success";
+                //       } else {
+                //       $data['message'] = "Something went wrong, please try again later.";
+                //       }
+            }
+            else
+            {
+                $otp_resu = 'error';
+				$otp = '';
+            }
+        }
+        $this->session->set_userdata('admin_login_otp',$otp);
+        $data['otp'] = $otp_resu;
+		$data['otp1'] = $otp;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
+    public function login_otp_verify(){
+        if($this->input->post('loginotp')){
+            $loginotp=$this->input->post('loginotp');
+            $number = $this->input->post('number');
+			$timestamp = $_SERVER['REQUEST_TIME'];
+			if(($timestamp - $_SESSION['time']) > 300) //5min
+			{
+				$otp = "expired";
+				// echo json_encode(array("type"=>"error", "message"=>"OTP expired. Pls. try again."));
+			}else{
+				if($this->session->userdata['admin_login_otp'] == $loginotp){
+					$otp = 'success';
+						$result=$this->menu->adminlogin($number);
+						if(!empty($result)){
+							$this->session->set_userdata('a_id', $result->admin_id);
+							$this->session->set_userdata('e_id', $result->email_id);
+							$this->session->unset_userdata('login_otp');
+						}else{
+							$page_data['message']="User not found";
+						}
+				}
+				else{
+					$otp='error';
+				}
+		}
+           
+        }
+        $data['otp'] = $otp;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
 	//Customer page in admin
 	public function customer($action,$id=false){
 		switch ($action) {
 			case 'view':
-				// echo "View";
 				$customer_data=$this->db->get("customer")->result_array();
 				$page_data['page_title']="Our Customers";
 				$page_data['customers']=$customer_data;
@@ -127,6 +187,7 @@ class Admin extends CI_Controller {
 				break;
 		}
 	}
+
 	public function amc($action,$id=false){
 		switch ($action) {
 			case 'view':
@@ -430,7 +491,6 @@ class Admin extends CI_Controller {
 		}
 	}
 
-
 	//Engineer page in admin
 	public function engineer($action,$id=false){
 		switch ($action) {
@@ -510,8 +570,6 @@ class Admin extends CI_Controller {
 				break;
 		}
 	}
-
-
 
 	//Category page in admin
 	public function category($action,$id=false){
@@ -1100,7 +1158,7 @@ class Admin extends CI_Controller {
 						if($this->db->insert('blog',$data)){
 							$page_data['message']="Successfully created.";
 						}else{
-							$page_data['message']="Problem occured while adding customer.";
+							$page_data['message']="Problem occured while adding blog.";
 	
 						}
 					}
@@ -1149,6 +1207,75 @@ class Admin extends CI_Controller {
 			redirect('admin/blog');
 			}
 			break;	
+		}
+	}
+
+	//coupon in admin
+	public function coupon($action,$id=false){
+		switch($action){
+			case 'view':
+				$page_data['page_title'] = 'Coupons';
+				$page_data['page'] = 'coupons/view';
+				// $page_data['coupon'] = $this->db->get_where('coupons')->result_array();
+				$page_data['coupon'] = $this->menu->coupon();
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'add':
+				if($this->input->post()){
+					$data = [
+						'code' => $this->input->post('code'),
+						'cproduct' => $this->input->post('pname'),
+						'cplan' => $this->input->post('plan'),
+						'percentage' => $this->input->post('percent'),
+						'status' => $this->input->post('ct_status'),
+						'expiry_date' => $this->input->post('expiry'),
+						'created_on' => date('y-m-d'),
+					];
+					if($this->db->insert('coupons',$data)){
+						$page_data['message'] = 'Successfully created';
+					}
+					else{
+						$page_data['message'] = 'something went wrong';
+					}
+				}
+				$page_data['product'] = $this->db->get('category_product')->result_array();
+					$page_data['plan'] = $this->db->get('category_plans')->result_array();
+				$page_data['page_title'] = 'Add Coupon';
+				$page_data['page'] = 'coupons/add';
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'edit':
+				if($this->input->post()){
+					$data = [
+						'code' => $this->input->post('code'),
+						'cproduct' => $this->input->post('pname'),
+						'cplan' => $this->input->post('plan'),
+						'percentage' => $this->input->post('percent'),
+						'status' => $this->input->post('ct_status'),
+						'expiry_date' => $this->input->post('expiry'),
+						'created_on' => date('y-m-d'),
+					];
+					$this->db->where('coupon_id',$id);
+					if($this->db->update('coupons',$data)){
+						$page_data['message'] = 'Successfully updated';
+					}
+					else{
+						$page_data['message'] = 'something went wrong';
+					}
+				}
+				$page_data['coupon'] = $this->menu->coupondata($id);
+				$page_data['product'] = $this->db->get('category_product')->result_array();
+					$page_data['plan'] = $this->db->get('category_plans')->result_array();
+				$page_data['page_title'] = 'Edit Coupon';
+				$page_data['page'] = 'coupons/add';
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'delete':
+				$this->db->where('coupon_id',$id);
+				$this->db->delete('coupons');
+				redirect('admin/coupon');
+				break;
+
 		}
 	}
 
@@ -1416,20 +1543,87 @@ class Admin extends CI_Controller {
 				break;
 		}
 	}
-	
-		// public function plans_features($action,$id=false){
-		// 	switch ($action){
-		// 		case 'view':
-		// 			// echo "View";
-		// 			$cfeatures_data=$this->db->get("plan_features")->result_array();
-		// 			$page_data['page_title']="Plan Features";
-		// 			$page_data['cfeatures']=$cfeatures_data;
-		// 			$page_data['page']="plans_features/view";
-		// 			$this->load->view('admin/index',$page_data);
-		// 			break;
-		// 	}
-		// }
-	//file upload
+
+	//generate invoice
+	public function generateinvoice($action,$id=false){
+		switch($action){
+			case 'view':
+				$page_data['invoice'] = $this->menu->admininvoiceview($id);
+				$page_data['page_title'] = 'Generate Invoice';
+				$page_data['page']="generateinvoice/view";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'add':
+				if($this->input->post()){
+					$order_id = $this->input->post('order_id');
+					if(empty($this->input->post('id'))){
+						$data = [
+							'cust_name' =>$this->input->post('name'),
+							'email_id' => $this->input->post('email'),
+							'contact' =>$this->input->post('contact_login'),
+							'created_on' => date('y-m-d'),
+						];
+						$this->db->insert('customer',$data);
+					}
+					
+					$post = $this->input->post('Product');
+					echo '<pre>';
+					print_r($this->input->post());
+					echo '</pre>';
+					for ($i = 0; $i < count($post); $i++) 
+					{
+						$datainvoice = [
+							'contact' => $this->input->post('contact_login'),
+							'order_id' => $this->input->post('order_id'),
+							'product' => $this->input->post('Product')[$i],
+							'qua' => $this->input->post('qua')[$i],
+							'mrp' => $this->input->post('mrp')[$i],
+							'discount' => $this->input->post('dis')[$i],
+							'created_date' => date('y-m-d')
+						];
+						$QUERY = $this->db->insert('invoice',$datainvoice);
+						
+					}
+					if($QUERY){
+						$page_data['message'] = 'Invoice Submit Successfully';
+						redirect('admin/generateinvoice/invoice/'.$order_id);
+					}
+					else{
+						$page_data['message'] = 'Something went wrong. Please try again';
+					}
+				}
+				$page_data['page_title'] = 'Add Invoice';
+				$page_data['page']="generateinvoice/add";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'invoice':
+				$page_data['invoice'] = $this->menu->admininvoice($id);
+				$page_data['page']="generateinvoice/invoice";
+				$this->load->view('admin/index',$page_data);
+				break;
+			   case 'edit':
+				break;
+		}
+	}
+
+	public function checkcontact(){
+            $number = $this->input->post('contact');
+                    $result=$this->menu->checklogin($number);
+                    if(!empty($result)){
+						$email=$result->email_id;
+						$cid=$result->cust_id;
+						$cname=$result->cust_name;
+                    }else{
+                        $page_data['message']="User not found";
+						
+                    }
+           
+        $data['email'] = $email ?? '';
+		$data['cid'] = $cid ?? '';
+		$data['cname'] = $cname ?? '';
+		$data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
 	
 	//Logout session
 	public function logout()
@@ -1438,7 +1632,6 @@ class Admin extends CI_Controller {
 		redirect('admin');
 	}
 	
-			
 			public function uploadimg($data)
 			{
 				// print_r($data);
@@ -1528,7 +1721,7 @@ class Admin extends CI_Controller {
 				// print_r($data);
 					$config['upload_path']          = $data['upload_path'];
 					$config['allowed_types']        = 'gif|jpg|png';
-					$config['max_size']             = 400;
+					$config['max_size']             = 500;
 					$config['max_width']            = 1074;
 					$config['max_height']           = 768;
 	
@@ -1549,7 +1742,7 @@ class Admin extends CI_Controller {
 				// print_r($data);
 					$config['upload_path']          = $data['upload_path'];
 					$config['allowed_types']        = 'gif|jpg|png';
-					$config['max_size']             = 400;
+					$config['max_size']             = 500;
 					$config['max_width']            = 1074;
 					$config['max_height']           = 768;
 	
@@ -1570,7 +1763,7 @@ class Admin extends CI_Controller {
 				// print_r($data);
 					$config['upload_path']          = $data['upload_path'];
 					$config['allowed_types']        = 'gif|jpg|png';
-					$config['max_size']             = 400;
+					$config['max_size']             = 500;
 					$config['max_width']            = 1074;
 					$config['max_height']           = 768;
 	

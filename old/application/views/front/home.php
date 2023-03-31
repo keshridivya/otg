@@ -850,7 +850,7 @@
 							</div>
 							<div class="item">
 								<div class="popular-img">
-									<img src="<?php echo base_url();?>assets/images/icons/products/Water-purifier.png"
+									<img src="<?php echo base_url();?>assets/images/product-images/Water-purifier.png"
 										alt="">
 								</div>
 								<div class="popular-title">

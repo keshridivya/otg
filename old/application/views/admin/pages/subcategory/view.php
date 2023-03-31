@@ -24,7 +24,6 @@
 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 					<thead>
 						<tr>
-
 							<th> Id</th>
 							<th>Category Product Name</th>
 							<th>Subcategory Name</th>
@@ -51,9 +50,9 @@
 						<td><?php echo $scats['created_on']; ?></td>
 						<td><?php echo $scats['modified_on']?></td>
 						<td>
-							<a href="<?php echo base_url('admin/subcategory/edit/'.$scats['subcat_id']); ?>"><i
+							<a href="<?php echo base_url('admin/subcategory/edit/'.$scats['subcat_id']); ?>" class="btn btn-primary"><i
 									class="fas fa-pencil-alt" aria-hidden="true"></i></a>
-							<a href="<?php echo base_url('admin/subcategory/delete/'.$scats['subcat_id']); ?>" type="button" class="btn btn-primary" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash" aria-hidden="true"></i></a>
+							<a href="<?php echo base_url('admin/subcategory/delete/'.$scats['subcat_id']); ?>" type="button" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i class="fas fa-trash" aria-hidden="true"></i></a>
 						</td>
 					</tr>
 					<?php

@@ -52,7 +52,7 @@
 						<td><?php echo $book['created_on']; ?></td>
 						<td><?php echo $book['modified_on']?></td>
 						<td>
-							<a href="<?php echo base_url('admin/one_time_service/edit/'.$book['request_id']); ?>"><i
+							<a href="<?php echo base_url('admin/one_time_service/edit/'.$book['request_id']); ?>" class="btn btn-primary"><i
 									class="fas fa-pencil-alt" aria-hidden="true"></i></a>
 
 							<!-- <a href="<?php echo base_url('admin/one_time_service/delete/'.$book['request_id']); ?>"

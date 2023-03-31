@@ -6,14 +6,14 @@ use Razorpay\Api\Api;
 use Razorpay\Api\Errors\SignatureVerificationError;
 class Welcome extends CI_Controller {
 
-     function __construct()
-     {
+    function __construct()
+    {
         parent::__construct();
         $this->load->library('cart');
         // $this->load->library('menu_all');
         $this->load->model('Menu','menu',true);
 
-     }
+    }
          //menu list
     
     public function index()
@@ -285,16 +285,16 @@ class Welcome extends CI_Controller {
             {
                 $otp = rand(10000, 99999);
                 $otp_resu = 'success';
-                  $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
-                  Do not share it with anyone';
-                  if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
-                      $page_data['status'] = true;
-                      $page_data['message'] = "success";
+                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                //   Do not share it with anyone';
+                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                //       $page_data['status'] = true;
+                //       $page_data['message'] = "success";
                     
-                      } else {
-                      $page_data['status'] = false;
-                      $page_data['message'] = "Something went wrong, please try again later.";
-                      }
+                //       } else {
+                //       $page_data['status'] = false;
+                //       $page_data['message'] = "Something went wrong, please try again later.";
+                //       }
             }
             else
             {
@@ -434,37 +434,37 @@ class Welcome extends CI_Controller {
                         </div>
                             ';
                         }
-            }
-            else{
-                $data=array(
-                    "cust_name"=>$this->input->post('customer_name'),
-                    "contact"=>$this->input->post('customer_contact'),
-                    "email_id"=>$this->input->post('customer_email'),
-                    "city"=>$this->input->post('customer_city'),
-                    "address"=>$this->input->post('customer_address'),
-                    "pincode"=>$this->input->post('customer_pincode'),
-                    "modified_on"=>date('Y-m-d h:i:s')
-                );
-                $this->db->where('cust_id',$session_cust);
-                if($this->db->update('customer',$data)){
-                    $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
-                    min-height: 50px;
-                    z-index: 9;padding:10px;background:#fff">
-                    <div class="toast-header">
-                      <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
-                      <strong class="mr-auto">OTG</strong>
-                      
-                      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="toast-body">
-                    Update Succesfully. Once refresh web page.
-                    </div>
-                  </div>
-                    ';
-                }
-            }
+                    }
+                    else{
+                        $data=array(
+                            "cust_name"=>$this->input->post('customer_name'),
+                            "contact"=>$this->input->post('customer_contact'),
+                            "email_id"=>$this->input->post('customer_email'),
+                            "city"=>$this->input->post('customer_city'),
+                            "address"=>$this->input->post('customer_address'),
+                            "pincode"=>$this->input->post('customer_pincode'),
+                            "modified_on"=>date('Y-m-d h:i:s')
+                        );
+                        $this->db->where('cust_id',$session_cust);
+                        if($this->db->update('customer',$data)){
+                            $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                            min-height: 50px;
+                            z-index: 9;padding:10px;background:#fff">
+                            <div class="toast-header">
+                            <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                            <strong class="mr-auto">OTG</strong>
+                            
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="toast-body">
+                            Update Succesfully. Once refresh web page.
+                            </div>
+                        </div>
+                            ';
+                        }
+                    }
                 }
                 else if($this->input->post('submit') == 'add'){
                     $data=array(
@@ -517,7 +517,8 @@ class Welcome extends CI_Controller {
                 
                 $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
                 $page_data['customers']=$customers_table;
-                $bookings_table=$this->db->get_where('bookings',array('cust_id'=>$session_cust))->result_array();
+                $bookings_table = $this->menu->booking_table($session_cust);
+                // $bookings_table=$this->db->get_where('bookings',array('cust_id'=>$session_cust))->result_array();
                 $checklist=$this->db->get_where('checklist',array('cust_id'=>$session_cust))->result_array();
             $page_data['dropdown']         =  $this->menu->menu_all();
             $page_data['page_title']       =  "My Account";
@@ -534,7 +535,7 @@ class Welcome extends CI_Controller {
     }
 
     public function service_address_delete(){
-        $id=$_GET['id'];
+        $id=$_POST['id'];
         $this->db->where('id',$id);
         $this->db->delete('shipping_address');
         redirect(base_url('account?show=myaccount'));
@@ -657,6 +658,73 @@ class Welcome extends CI_Controller {
                 }
             }
             redirect(base_url('checkout'));
+        }
+        else if($this->input->post('submit') == 'add'){
+            $data=array(
+                "name"=>$this->input->post('username'),
+                "contact"=>$this->input->post('mobile'),
+                "email"=>$this->input->post('email_id'),
+                "city"=>$this->input->post('city'),
+                "address"=>$this->input->post('address'),
+                "pincode"=>$this->input->post('pincode'),
+                "customer_id"=>$session_cust,
+                "created_on"=>date('Y-m-d h:i:s'),
+            );
+            if($this->db->insert('shipping_address',$data)){
+                $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                min-height: 50px;
+                z-index: 9;padding:10px;background:#fff">
+                <div class="toast-header">
+                  <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                  <strong class="mr-auto">OTG</strong>
+                  
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="toast-body">
+                Successfully Add
+                </div>
+              </div>
+                ';
+            }
+            else{
+                $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                min-height: 50px;
+                z-index: 9;padding:10px;background:#fff">
+                <div class="toast-header">
+                  <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                  <strong class="mr-auto">OTG</strong>
+                  
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="toast-body">
+                Something Went Wrong. Please try again.
+                </div>
+              </div>
+                ';
+            }
+            redirect(base_url('checkout'));
+        }
+        else{
+            $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+            min-height: 50px;
+            z-index: 9;padding:10px;background:#fff">
+            <div class="toast-header">
+              <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+              <strong class="mr-auto">OTG</strong>
+              
+              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="toast-body">
+            Something Went Wrong. Please try again.
+            </div>
+          </div>
+            ';
         }
     }
 
@@ -940,7 +1008,7 @@ class Welcome extends CI_Controller {
 			$this->load->view('index',$page_data);
 		
 	}
-    
+
     public function receipt(){
         
         $page_data['cartItems']=$this->cart->contents();
@@ -993,6 +1061,7 @@ class Welcome extends CI_Controller {
         $this->cart->update($data);
         echo json_encode($data);
     }
+
     public function removeItem($rowid){
         $this->cart->remove($rowid);
         redirect(base_url('cart'));
@@ -1094,6 +1163,21 @@ class Welcome extends CI_Controller {
         $page_data['page']="tracker";
         $this->load->view('index',$page_data);
     }
+
+    public function service_request(){
+        $serviceno = $this->input->post('serviceno');
+        $service_track = $this->menu->service_track($serviceno);
+        if(count($service_track) > 0){
+            $msg = $service_track;
+        }
+        else{
+            $msg = 'error';
+        }
+        $data['data'] = $msg;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
     public function upi(){
         $page_data['cartItems']=$this->cart->contents();
         if($this->input->post()){
@@ -1132,37 +1216,44 @@ class Welcome extends CI_Controller {
         $page_data['page']="upi";
         $this->load->view('index',$page_data);
     }
+
     public function forget(){
         $page_data['dropdown']=$this->menu->menu_all();
         $page_data['page_title']="Forget Password";
         $page_data['page']="forget";
         $this->load->view('index',$page_data);
     }
+
     public function return(){
         $page_data['dropdown']=$this->menu->menu_all();
         $page_data['page_title']="Return Policy";
         $page_data['page']="Return";
         $this->load->view('index',$page_data);
     }
+
     public function invoice($id){
         if($this->session->userdata('cid')){
         $page_data['dropdown'] = $this->menu->menu_all();
         $invoice_generate = $this->menu->invoice($id);
-        $order_id = $invoice_generate[0]['request_id_value'];
+        $request_id = $invoice_generate[0]['request_id_value'];
+        $invoiceorder_id = $invoice_generate[0]['order_id'];
+        $service_device = $invoice_generate[0]['service_device'];
         $data = [
-            'order_id' => $invoice_generate[0]['request_id_value'],
+            'order_id' => $invoice_generate[0]['order_id'],
             'contact' => $invoice_generate[0]['contact'],
             'created_date' => date('y-m-d'),
             'product' =>  $invoice_generate[0]['service_device'],
             'qua' =>  $invoice_generate[0]['quantity'],
             'mrp' => $invoice_generate[0]['amt'],
+            'request_id' => $invoice_generate[0]['request_id_value'],
             'discount' => '20',
         ];
-        $checkdata = $this->db->get_where('invoice',array('order_id'=>$order_id))->result_array();
+        $checkdata = $this->db->get_where('invoice',array('request_id'=>$request_id))->result_array();
         if(count($checkdata) == 0){
             $this->db->insert('invoice',$data);
         }
-        $page_data['invoice_create'] = $this->menu->admininvoice($order_id);
+        // $page_data['invoiceOrder_id'] = $this->menu->invoiceorder_id($invoiceorder_id);
+        $page_data['invoice_create'] = $this->menu->invoiceorder_id($invoiceorder_id,$service_device);
         // print_r($this->db->last_query());
         $page_data['page_title']="Invoice";
         $page_data['page']="invoice";

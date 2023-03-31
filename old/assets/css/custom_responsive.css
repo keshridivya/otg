@@ -216,6 +216,7 @@
     }
     .order2 {
         order: 2;
+        margin-left: -12px;
     }
     .site-cart {
         margin-left: auto;
@@ -423,9 +424,7 @@
     .cart-row.delete-item {
         justify-content: end;
     }
-    .cart-row .form-control {
-        width: 42%;
-    }
+   
     .cart-row h6 {
         margin: auto 0;
     }
@@ -449,4 +448,25 @@
         display: flex;
         justify-content: space-between;
     }
+}
+@media(max-width:991px){
+    .cart-row .form-control {
+        width: 20%;
+    }
+    .qty {
+        cursor: pointer;
+        width: 30px;
+    }
+}
+@media(min-width:991px){
+    .booking_design span{
+
+    }
+}
+.booking_design{
+    font-size: 15px;
+}
+.booking_design span{
+      color:#0e7668 !important;
+      font-weight: 700;
 }

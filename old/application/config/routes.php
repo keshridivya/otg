@@ -54,6 +54,9 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['about-us']='welcome/about_us';
 $route['sign-up']='welcome/sign_up';
+$route['otp']='welcome/otp';
+$route['resend_otp']='welcome/resend_otp';
+$route['login-otp-verify']='welcome/login_otp_verify';
 $route['account']='welcome/account';
 $route['maintenance']='welcome/maintenance';   
 $route['maintenance/(:any)']='welcome/maintenance/$1';
@@ -76,7 +79,16 @@ $route['tracker']='welcome/tracker';
 $route['pay']='welcome/pay';
 $route['verify']='welcome/verify';
 $route['success']='welcome/success';
+$route['upi']='welcome/upi';
+$route['return']='welcome/return';
+$route['regloginotp']='welcome/regloginotp';
+$route['forgetotp']='welcome/forgetotp';
+$route['reset-password']='welcome/reset_password';
 $route['paymentFailed']='welcome/paymentFailed';
+$route['summerydetail']='welcome/summerydetail';
+$route['invoice/(:any)']='welcome/invoice/$1';
+$route['resg_otp_verify'] = 'welcome/resg_otp_verify';
+// $route['coupon_check'] = 'welcome/coupon_check';
 
 // $route['update_cart']='welcome/update_cart';
 
@@ -84,6 +96,8 @@ $route['paymentFailed']='welcome/paymentFailed';
 
 //admin routes
 $route['admin']="admin/index";
+$route['loginotp'] = "admin/loginotp";
+$route['login_otp_verify'] = 'admin/login_otp_verify';
 $route['admin/logout']="admin/logout";
 
 //admin AMC routes
@@ -96,6 +110,7 @@ $route['admin/amc/edit/(:any)']="admin/amc/edit/$1";
 $route['admin/one_time_service']="admin/one_time_service/view";
 $route['admin/one_time_service/add']="admin/one_time_service/add";
 $route['admin/one_time_service/edit/(:any)']="admin/one_time_service/edit/$1";
+
 //admin customer
 $route['admin/customer']="admin/customer/view";
 $route['admin/customer/add']="admin/customer/add";
@@ -190,11 +205,26 @@ $route['admin/product_benefit/delete/(:any)']='admin/product_benefit/delete/$1';
 
 //admin contact
 $route['admin/contact']='admin/contact/view';
-$route['admin/contact/delete/any(:any)']='admin/contact/delete/$1';
+$route['admin/contact/delete/(:any)']='admin/contact/delete/$1';
 
 //admin offer banner
 $route['admin/offer']='admin/offer/view';
 $route['admin/offer/edit/(:any)']='admin/offer/edit/$1';
+
+//admin generate invoice
+$route['admin/generateinvoice']='admin/generateinvoice/view';
+$route['admin/generateinvoice/edit/(:any)']='admin/generateinvoice/edit/$1';
+$route['admin/generateinvoice/add']='admin/generateinvoice/add';
+$route['admin/checkcontact']='admin/checkcontact';
+$route['admin/generateinvoice/invoice/(:any)']='admin/generateinvoice/invoice/$1';
+
+//admin coupons
+$route['admin/coupon'] = 'admin/coupon/view';
+$route['admin/coupon/add'] = 'admin/coupon/add';
+$route['admin/coupon/edit/(:any)'] = 'admin/coupon/edit/$1';
+$route['admin/coupon/delete/(:any)'] = 'admin/coupon/delete/$1';
+
+
 
 
 
@@ -216,8 +246,17 @@ $route['engineer/reschedule']='engineer/reschedule/view';
 
 //engineer complete assignment
 $route['engineer/complete_assignment']='engineer/complete_assignment/view';
-
 $route['engineer/create']='engineer/create';
+$route['engineer/engineerupi']='engineer/engineerupi/view';
+
+
+
+//shop login
+$route['shop'] = 'shop/index';
+
+//shop account
+$route['shop/account'] = 'shop/account/view';
+
 
 
 
