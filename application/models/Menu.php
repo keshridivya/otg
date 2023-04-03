@@ -207,15 +207,22 @@ class Menu extends CI_model {
 
     //front service track
     public function service_track($serviceno){
-        $this->db->select('*');
+        $this->db->select('*,DATE_FORMAT(created_on,"%Y-%m-%d") as created_on');
         $this->db->from('bookings');
         $this->db->where('cust_contact',$serviceno);
         $this->db->or_where('cust_email',$serviceno);
         $this->db->or_where('request_id_value',$serviceno);
         $query = $this->db->get();
         return $query->result_array();
-        print_r($this->db->last_query());
+    }
 
+    //front track
+    public function track($req_id){
+        $this->db->select('*,DATE_FORMAT(created_on,"%Y-%m-%d") as cdate,DATE_FORMAT(modified_on,"%Y-%m-%d") as mdate');
+        $this->db->from('bookings');
+        $this->db->where('request_id_value',$req_id);
+        $query = $this->db->get();
+        return $query->row();
     }
 
     public function createData($data) {

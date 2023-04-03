@@ -24,8 +24,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['code_version'] = '?v=1.000001';
-$config['base_url'] = 'http://localhost/otg/';
-// $config['base_url'] = 'http://otg.omsaifoodservices.com/';
+// $config['base_url'] = 'http://localhost/otg/';
+$config['base_url'] = 'http://otg.omsaifoodservices.com/';
 
 
 /*

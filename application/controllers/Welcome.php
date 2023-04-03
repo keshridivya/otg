@@ -1164,6 +1164,15 @@ class Welcome extends CI_Controller {
         $this->load->view('index',$page_data);
     }
 
+    public function service_tracker($id=false){
+        $track = $this->menu->track($id);
+        $page_data['track'] = $track;
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Track Service Request";
+        $page_data['page']="service_tracker";
+        $this->load->view('index',$page_data);
+    }
+
     public function service_request(){
         $serviceno = $this->input->post('serviceno');
         $service_track = $this->menu->service_track($serviceno);
