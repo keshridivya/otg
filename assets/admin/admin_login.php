@@ -203,6 +203,8 @@
 					if (response.cid != "") {
 						$('#email').val(response.email).attr('readonly', true);
 						$('#name').val(response.cname).attr('readonly', true);
+						$('#address').val(response.address).attr('readonly', true);
+						$('#pincode').val(response.pincode).attr('readonly', true);
 						$('#id').val(response.cid);
 					}
 				},

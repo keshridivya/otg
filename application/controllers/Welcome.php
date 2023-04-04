@@ -373,6 +373,7 @@ class Welcome extends CI_Controller {
             'name'=>$plans[0]['cplan_name'],
             'image'=>$products[0]['cproduct_img'],
             'product_name'=>$products[0]['cproduct_name'],
+            'category_name'=>$products[0]['category_name'],
             'product_category'=>$products[0]['category_name'],
         );
         $this->cart->insert($data);
@@ -730,8 +731,10 @@ class Welcome extends CI_Controller {
 
     public function coupon_check(){
         $inputcoupon = $_POST['inputcoupon'];
+        $servicename = $_POST['servicename'];
         $cartItems = $_POST['cartItems'];
-         $query = $this->menu->couponcheck($cartItems,$inputcoupon);
+        $service = $_POST['service'];
+         $query = $this->menu->couponcheck($cartItems,$inputcoupon,$servicename,$service);
 
         if($query){
             $data['coupon'] = 'success';

@@ -1176,7 +1176,6 @@ $(document).ready(function(){
     let city_error = true;
     let address_error = true;
     let pin_error = true;
-    let pass_error =true;
     let check_error = true;
 
     $('#c_name').keyup(function(){
@@ -1266,43 +1265,27 @@ $(document).ready(function(){
         }
     }
 
-    //address
-    $('#c_address').keyup(function(){
-        validatebookaddress();
-    });
-    function validatebookaddress(){
-        let bookaddress=$('#c_address').val();
-        if(bookaddress.length==''){
-            $('#spanAddress').show().css('color','red');
-            address_error = false;
-            return false;
-        }
-        else{
-            $('#spanAddress').hide();
-        }
-    }
-
     //pincode
-    $('#c_pincode').keyup(function(){
-        validatebookpin();
-    });
-    function validatebookpin(){
-        let bookpin=$('#c_pincode').val();
-        let zipRegex = /^\d{6}$/;
-        if(bookpin.length==''){
-            $('#spanPin').show().css('color','red');
-            pin_error = false;
-            return false;
-        }
-        else if(!zipRegex.test(bookpin)){
-            $('#spanPin').show().css('color','red').html('** zipcode should only be 5 digits');
-            pin_error = false;
-            return false;
-        }
-        else{
-            $('#spanPin').hide();
-        }
-    }
+    // $('#c_pincode').keyup(function(){
+    //     validatebookpin();
+    // });
+    // function validatebookpin(){
+    //     let bookpin=$('#c_pincode').val();
+    //     let zipRegex = /^\d{6}$/;
+    //     if(bookpin.length==''){
+    //         $('#spanPin').show().css('color','red');
+    //         pin_error = false;
+    //         return false;
+    //     }
+    //     else if(!zipRegex.test(bookpin)){
+    //         $('#spanPin').show().css('color','red').html('** zipcode should only be 5 digits');
+    //         pin_error = false;
+    //         return false;
+    //     }
+    //     else{
+    //         $('#spanPin').hide();
+    //     }
+    // }
 
     //checkbox
     $('#terms_services').click(function(){
@@ -1327,21 +1310,18 @@ $(document).ready(function(){
         contact_error = true;
          email_error = true;
         city_error = true;
-         address_error = true;
-         pin_error= true;
-         pass_error = true;
          check_error = true;
          validatebookname();
          validatebookcontact();
          validatebookemail();
          validatebookcity();
-         validatebookaddress();
-         validatebookpin();
          validatecheck();
-          if (name_error == true  && contact_error == true && email_error == true && city_error == true && address_error == true && pin_error==true && check_error == true) {
+          if (name_error == true  && contact_error == true && email_error == true && city_error == true  && check_error == true) {
+            alert('ee');
             return true;
               
           } else {
+            alert('ff');
                       return false;
           }
       });

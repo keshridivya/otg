@@ -108,7 +108,7 @@ class Menu extends CI_model {
     }
 
     public function admininvoice($id){
-        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
+        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt,CONCAT(customer.address, customer.pincode) as addr');
         $this->db->from('invoice');
         $this->db->join('customer','invoice.contact=customer.contact');
         $this->db->where(array('invoice.order_id'=>$id));
@@ -128,7 +128,7 @@ class Menu extends CI_model {
     
     //froninvoice
     public function invoiceorder_id($id,$service_device){
-        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
+        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt,CONCAT(customer.address, customer.pincode) as addr');
         $this->db->from('invoice');
         $this->db->join('customer','invoice.contact=customer.contact');
         $this->db->where(array('invoice.order_id'=>$id,'invoice.product'=>$service_device));
@@ -186,12 +186,15 @@ class Menu extends CI_model {
     }
 
     //front coupon
-    function couponcheck($cartItems,$inputcoupon){
+    function couponcheck($cartItems,$inputcoupon,$servicename,$service){
         $this->db->select('*');
         $this->db->from('coupons');
-        $this->db->join('category_product','category_product.cproduct_id = coupons.cproduct');
-        $this->db->where(['category_product.cproduct_name'=>$cartItems,'coupons.code'=>$inputcoupon]);
+        $this->db->join('category_product','category_product.cproduct_name = coupons.cproduct');
+        $this->db->join('category_plans','category_plans.cplan_id = coupons.cplan');
+        $this->db->where("FIND_IN_SET('$service',coupons.service_name) !=", 0);
+         $this->db->where(['category_product.cproduct_name'=>$cartItems,'coupons.code'=>$inputcoupon,'category_plans.cplan_name'=>$servicename,'coupons.status'=>'active']);
         $query = $this->db->get();
+        // print_r($this->db->last_query());
         return $query->row();
     }
 

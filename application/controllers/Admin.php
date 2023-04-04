@@ -50,12 +50,12 @@ class Admin extends CI_Controller {
 				$otp_resu = 'success';
 				$timestamp =  $_SERVER["REQUEST_TIME"];  
                 $_SESSION['time'] = $timestamp;
-                  $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
-                  if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
-                      $data['message'] = "success";
-                      } else {
-                      $data['message'] = "Something went wrong, please try again later.";
-                      }
+                //   $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
+                //   if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
+                //       $data['message'] = "success";
+                //       } else {
+                //       $data['message'] = "Something went wrong, please try again later.";
+                //       }
             }
             else
             {
@@ -1210,6 +1210,15 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	//fetch service plan
+	public function service_plan(){
+		$pname = $this->input->post('pname');
+		$msg = $this->db->get_where('category_plans',['cproduct_name'=>$pname])->result_array();
+		$data_plan['plan'] = $msg;
+        $data_plan['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data_plan);
+	}
+
 	//coupon in admin
 	public function coupon($action,$id=false){
 		switch($action){
@@ -1231,6 +1240,15 @@ class Admin extends CI_Controller {
 						'expiry_date' => $this->input->post('expiry'),
 						'created_on' => date('y-m-d'),
 					];
+					if(!empty($_POST['service'])){
+                        
+                        $number_of_file = sizeof($_POST['service']);
+						$files = $_POST['service'];
+                        for ($i = 0; $i < $number_of_file; $i++) {
+                            $data['service_name']= implode(",",$files);
+                    }
+                    }
+
 					if($this->db->insert('coupons',$data)){
 						$page_data['message'] = 'Successfully created';
 					}
@@ -1239,7 +1257,7 @@ class Admin extends CI_Controller {
 					}
 				}
 				$page_data['product'] = $this->db->get('category_product')->result_array();
-					$page_data['plan'] = $this->db->get('category_plans')->result_array();
+					// $page_data['plan'] = $this->db->get('category_plans')->result_array();
 				$page_data['page_title'] = 'Add Coupon';
 				$page_data['page'] = 'coupons/add';
 				$this->load->view('admin/index',$page_data);
@@ -1251,6 +1269,7 @@ class Admin extends CI_Controller {
 						'cproduct' => $this->input->post('pname'),
 						'cplan' => $this->input->post('plan'),
 						'percentage' => $this->input->post('percent'),
+						'service_name'=>$this->input->post('service'),
 						'status' => $this->input->post('ct_status'),
 						'expiry_date' => $this->input->post('expiry'),
 						'created_on' => date('y-m-d'),
@@ -1265,7 +1284,6 @@ class Admin extends CI_Controller {
 				}
 				$page_data['coupon'] = $this->menu->coupondata($id);
 				$page_data['product'] = $this->db->get('category_product')->result_array();
-					$page_data['plan'] = $this->db->get('category_plans')->result_array();
 				$page_data['page_title'] = 'Edit Coupon';
 				$page_data['page'] = 'coupons/add';
 				$this->load->view('admin/index',$page_data);
@@ -1561,6 +1579,8 @@ class Admin extends CI_Controller {
 							'cust_name' =>$this->input->post('name'),
 							'email_id' => $this->input->post('email'),
 							'contact' =>$this->input->post('contact_login'),
+							'address' =>$this->input->post('address'),
+							'pincode' =>$this->input->post('pincode'),
 							'created_on' => date('y-m-d'),
 						];
 						$this->db->insert('customer',$data);
@@ -1613,6 +1633,8 @@ class Admin extends CI_Controller {
 						$email=$result->email_id;
 						$cid=$result->cust_id;
 						$cname=$result->cust_name;
+						$address=$result->address;
+						$pincode=$result->pincode;
                     }else{
                         $page_data['message']="User not found";
 						
@@ -1621,6 +1643,8 @@ class Admin extends CI_Controller {
         $data['email'] = $email ?? '';
 		$data['cid'] = $cid ?? '';
 		$data['cname'] = $cname ?? '';
+		$data['address'] = $address ?? '';
+		$data['pincode'] = $pincode ?? '';
 		$data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }

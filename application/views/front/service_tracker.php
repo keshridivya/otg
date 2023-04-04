@@ -108,8 +108,21 @@
 
 	@media screen and (max-width: 992px) {
 		.icon-content {
-			width: 50%;
+			width: 25%;
 		}
+		.icon {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 6px;
+    margin-left: 15px;
+}
+.font-weight-bold {
+    font-weight: 700!important;
+    font-size: 10px;
+}
+.top {
+    padding-top: 2px;
+}
 	}
 
 </style>
@@ -137,15 +150,15 @@
 								<li class="active step0"></li>
 								<li class="<?= ($track->eng_name != '0') ? 'active': ''; ?> step0">
                             <p><?= ($track->eng_name != '0') ? 'Engineer appointment confirmed': ''; ?></p></li>
-								<li class="<?php echo ($track->status == ('pending'||'process'||'completed'||'close')) ? 'active': ''; ?> step0">
-                                <p><?= ($track->status == 'pending') ? 'Service Reschduled date('.$track->mdate.')': ''; ?></p></li>
-								<li class="<?php echo ($track->status == ('close'||'completed')) ? 'active': ''; ?>"></li>
+								<li class="<?php if ($track->status == 'pending' || $track->status == 'process'  || $track->status == 'completed'  ||  $track->status == 'close' ) {echo 'active'; } ?> step0">
+                                <p><?= ($track->status == 'pending') ? 'Service Reschduled date('.$track->mdate.')': ''; ?></p></li> 
+								<li class="<?php if ($track->status == 'completed'  ||  $track->status == 'close' ) {echo 'active'; } ?>"></li>
 							</ul>
 						</div>
 					</div>
 					<div class="row justify-content-between top">
 						<div class="row d-flex icon-content">
-							<img class="icon" src="https://i.imgur.com/9nnc9Et.png">
+							<img class="icon" src="<?= base_url('assets/images/request.png') ?>">
 							<div class="d-flex flex-column">
 								<p class="font-weight-bold">Request <br>Created</p>
 							</div>
@@ -157,13 +170,13 @@
 							</div>
 						</div>
 						<div class="row d-flex icon-content">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>
+						<img class="icon" src="<?= base_url('assets/images/service.png') ?>">
 							<div class="d-flex flex-column">
 								<p class="font-weight-bold">Service in <br>Progress</p>
 							</div>
 						</div>
 						<div class="row d-flex icon-content">
-							<img class="icon" src="https://i.imgur.com/HdsziHP.png">
+							<img class="icon" src="<?= base_url('assets/images/completed.png') ?>">
 							<div class="d-flex flex-column">
 								<p class="font-weight-bold">Request<br>Completed</p>
 							</div>
@@ -181,32 +194,3 @@
 <!--Footer-->
 <script src="<?php echo base_url();?>assets/js/vendor/jquery-3.3.1.min.js"></script>
 
-<script>
-
-
-	// $(document).on('click','.trackid',function(){
-	// 	alert('fgfg');
-	// 		let req_id = $(this).data('id');
-	// 		let req_date = $(this).data('date');
-	// 		$('#requestid').text(req_id);
-	// 		$('#reqdate').text(req_date);
-	// 		var csrfName = $('.csrf').attr('name');
-	// 		var csrfHash = $('.csrf').val();
-	// 		$.ajax({
-	// 			url: "<?= base_url('welcome/track') ?>",
-	// 			method: "post",
-	// 			data: {
-	// 				req_id: req_id,
-	// 				[csrfName]: csrfHash,
-	// 			},
-	// 			dataType: "json",
-	// 			success: function (response) {
-	// 				$('.csrf').val(response.token);
-	// 			},
-	// 			error: function () {
-	// 				alert('Request not send. Please try gain');
-	// 			}
-	// 		})
-	// })
-
-</script>

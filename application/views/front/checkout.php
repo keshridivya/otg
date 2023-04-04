@@ -28,6 +28,9 @@
 											-
 											<?php echo $item['name']?><br>
 											<?php
+											if($item['category_name'] == 'Maintenance and repair'){
+												echo '<input type="hidden" value="One Time Service" class="mainten" >'; 
+											}
                                                 }
                                             }
                                             ?>
@@ -195,24 +198,24 @@
 															name="payment_method" checked="checked">Cash On Booking
 													</label>
 												</div>
-												<div class="form-check col-lg-8 text-left mb-3">
+												<!-- <div class="form-check col-lg-8 text-left mb-3">
 													<label class="form-check-label">
 														<input type="radio" class="form-check-input" value="razorpay"
 															name="payment_method">Pay Now
 													</label>
-												</div>
+												</div> -->
 											</div>
 										</div>
-										<div class="col-sm-6 col-12 mt-3">
+										<div class="col-sm-6 col-12 ">
 											<h3 class="">Time Slot</h3>
 											<div class="row justify-content-center" style="    margin-left: 20px;">
-												<div class="form-check col-sm-3 col-12 text-left mb-3">
+												<div class="form-check col-sm-8 col-12 text-left mb-3">
 													<label class="form-check-label float-left">
-														<input type="radio" class="form-check-input" value="9 am to 1pm"
-															name="time_slot" >9 am to 1pm
+														<input type="datetime-local" class="form-check-input" value="<?= date('y-m-d h:i') ?>"
+															name="time_slot" >
 													</label>
 												</div>
-												<div class="form-check col-sm-3 col-12 text-left mb-3">
+												<!-- <div class="form-check col-sm-3 col-12 text-left mb-3">
 													<label class="form-check-label">
 													<input type="radio" class="form-check-input" value="1 pm to 5pm"
 															name="time_slot" >1 pm to 5pm
@@ -223,7 +226,7 @@
 													<input type="radio" class="form-check-input" value="5 pm to 9pm"
 															name="time_slot" >5 pm to 9pm
 													</label>
-												</div>
+												</div> -->
 											</div>
 										</div>
 										
@@ -438,7 +441,9 @@
 <script>
 	$(document).on('click', '.coupon', function () {
 		let cartItems ="<?=  $item['product_name'] ?>";
+		let servicename ="<?=  $item['name'] ?>";
 		let inputcoupon = $('.inputcoupon').val();
+		let service= $('.mainten').val();
 		var csrfName = $('.csrf').attr('name');
 		var csrfHash = $('.csrf').val();
 		let total_amt = $('#total_amt').text();
@@ -448,6 +453,8 @@
 			data: {
 				inputcoupon: inputcoupon,
 				cartItems :cartItems,
+				servicename:servicename,
+				service:service,
 				[csrfName]: csrfHash,
 			},
 			dataType: "json",
