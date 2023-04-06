@@ -12,6 +12,7 @@ class Welcome extends CI_Controller {
         $this->load->library('cart');
         // $this->load->library('menu_all');
         $this->load->model('Menu','menu',true);
+        $this->load->helper(array('cookie', 'url'));
 
     }
          //menu list
@@ -98,9 +99,13 @@ class Welcome extends CI_Controller {
 
                         $result = $this->db->get_where('customer',array('contact' => $mob_num))->row();
                         if(!empty($result)){
+                            set_cookie('cid',$result->cust_id,time()+60*60*24*90);
+                            set_cookie('cemail',$result->email_id,time()+60*60*24*90);
+                            set_cookie('cname',$result->cust_name,time()+60*60*24*90);
                             $this->session->set_userdata('cid', $result->cust_id);
                             $this->session->set_userdata('cemail', $result->email_id);
                             $this->session->set_userdata('cname', $result->cust_name);
+
 
                         }else{
                             $page_data['message']="User not found";
@@ -171,7 +176,7 @@ class Welcome extends CI_Controller {
                     $this->load->view('index',$page_data);
                 }
         }
-        elseif(@$this->session->userdata['cid']){
+        elseif(@get_cookie("cid")){
             $testimonial=$this->db->get_where('testimonials',array('status'=>'active'))->result_array();
             $client=$this->db->get_where('our_client',array('status'=>'active'))->result_array();
             $banner=$this->db->get_where('banner',array('status'=>'active'))->result_array();
@@ -318,6 +323,17 @@ class Welcome extends CI_Controller {
                 $otp = 'success';
                     $result=$this->menu->checklogin($number);
                     if(!empty($result)){
+                        // $cookie = array(
+                        //     'cid'   => $result->cust_id,
+                        //     'cemail'  =>$result->email_id,
+                        //     'cname' => $result->cust_name,
+                        //     'expire' => '7776000',
+                        //     'secure' => TRUE
+                        // );
+                        // $this->input->set_cookie($cookie);
+                        set_cookie('cid',$result->cust_id,time()+60*60*24*90);
+                        set_cookie('cemail',$result->email_id,time()+60*60*24*90);
+                        set_cookie('cname',$result->cust_name,time()+60*60*24*90);
                         $this->session->set_userdata('cid', $result->cust_id);
                         $this->session->set_userdata('cemail', $result->email_id);
                         $this->session->set_userdata('cname', $result->cust_name);
@@ -400,8 +416,8 @@ class Welcome extends CI_Controller {
 
     public function account()
     {
-        if($this->session->userdata('cid') || $this->session->userdata('custid')){
-            $session_cust=$this->session->userdata('cid');
+        if(get_cookie("cid") || $this->session->userdata('custid')){
+            $session_cust=get_cookie("cid");
               
                 if($this->input->post('submit') == 'Edit'){
                     $btn = $this->input->post('customer_btn');
@@ -548,7 +564,7 @@ class Welcome extends CI_Controller {
             redirect(base_url('services'));
         }
         //if user logged in
-        if($this->session->userdata['cid']){
+        if(get_cookie("cid")){
             if($this->input->post()){
                 $_SESSION['id'] = $this->input->post('id');
                 $_SESSION['c_name'] = $this->input->post('c_name');
@@ -562,7 +578,7 @@ class Welcome extends CI_Controller {
                 $_SESSION['time_slot'] = $this->input->post('time_slot');
             }
             $page_data['cartItems']=$this->cart->contents();
-            $session_cust=$this->session->userdata['cid'];
+            $session_cust=get_cookie("cid");
             $ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
             if($this->input->post()){
                 $payment_method=$this->input->post('payment_method');
@@ -594,7 +610,7 @@ class Welcome extends CI_Controller {
     }
     
     public function checkout_form(){
-        $session_cust=$this->session->userdata('cid');
+        $session_cust=get_cookie("cid");
         if($this->input->post('submit') == 'Edit'){
             $btn = $this->input->post('customer_btn');
             if($btn == 'shipping'){
@@ -729,6 +745,25 @@ class Welcome extends CI_Controller {
         }
     }
 
+    public function checkpin(){
+        if($this->input->post('c_pincode')){
+            $c_pincode = $this->input->post('c_pincode');
+            $cartItems =$this->input->post('cartItems');
+            $result=$this->menu->checkpin($c_pincode,$cartItems);
+            if (count($result) > 0)
+            {
+                $msg = 'success';
+            }
+            else
+            {
+                $msg = 'error';
+            }
+        }
+        $data['msg'] = $msg;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
     public function coupon_check(){
         $inputcoupon = $_POST['inputcoupon'];
         $servicename = $_POST['servicename'];
@@ -749,8 +784,8 @@ class Welcome extends CI_Controller {
     }
     
     public function summery(){
-        if($this->session->userdata('cid')){
-            $session_cust=$this->session->userdata('cid');
+        if(get_cookie("cid")){
+            $session_cust=get_cookie("cid");
             $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
             $page_data['customers']=$customers_table;
         }else if($this->session->userdata('custid')){
@@ -793,7 +828,7 @@ class Welcome extends CI_Controller {
         $razorpayOrderId = $razorpayOrder['id'];
         $_SESSION['razorpay_order_id'] = $razorpayOrderId;
         $data = $this->prepareData($amount,$razorpayOrderId);
-        $session_cust=$this->session->userdata('cid');
+        $session_cust=get_cookie("cid");
         $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
         $data=array(
             'data'=>$data,
@@ -894,7 +929,7 @@ class Welcome extends CI_Controller {
             );
             $main_arr[]=$arr;
         }
-        $cust_id = $this->session->userdata('cid');	
+        $cust_id = get_cookie("cid");	
 				$sql = $this->db->insert_batch('bookings',$main_arr);
 
             // $customer_email=$this->db->get_where("customer",array('cust_id'=>$data['cust_id']))->result_array();
@@ -956,8 +991,8 @@ class Welcome extends CI_Controller {
     }
 
     public function summerydetail(){
-		// if($this->session->userdata('cid')){
-		// 	$session_cust=$this->session->userdata('cid');
+		// if(get_cookie("cid")){
+		// 	$session_cust=get_cookie("cid");
 		// 	$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
 		// 	$page_data['customers']=$customers_table;
 		// }elseif($this->session->userdata('custid')){
@@ -993,7 +1028,7 @@ class Welcome extends CI_Controller {
 				);
                 $main_arr[]=$arr;
             }
-				$cust_id = $this->session->userdata('cid');	
+				$cust_id = get_cookie("cid");	
 				$sql = $this->db->insert_batch('bookings',$main_arr);
                 if($sql == true){
 					$page_data['message']="Successfully created.";
@@ -1050,6 +1085,12 @@ class Welcome extends CI_Controller {
 
     public function logout()
     {
+        // setcookie('cid',$_SESSION['cid'],60);
+        // setcookie('cemail',$_SESSION['cemail'],60);
+        // setcookie('cname',$_SESSION['cname'],60);
+        delete_cookie('cid');
+        delete_cookie('cemail');
+        delete_cookie('cname');
         $this->session->sess_destroy();
         redirect(base_url('sign-up'));
     }
@@ -1209,7 +1250,7 @@ class Welcome extends CI_Controller {
                 );
                 $main_arr[]=$arr;
             }
-                $cust_id = $this->session->userdata('cid');	
+                $cust_id = get_cookie("cid");	
                 $sql = $this->db->insert_batch('bookings',$main_arr);
                 if($sql == true){
                     $page_data['message']="Successfully created.";
@@ -1244,7 +1285,7 @@ class Welcome extends CI_Controller {
     }
 
     public function invoice($id){
-        if($this->session->userdata('cid')){
+        if(get_cookie("cid")){
         $page_data['dropdown'] = $this->menu->menu_all();
         $invoice_generate = $this->menu->invoice($id);
         $request_id = $invoice_generate[0]['request_id_value'];

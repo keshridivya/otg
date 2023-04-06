@@ -108,7 +108,7 @@ class Menu extends CI_model {
     }
 
     public function admininvoice($id){
-        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt,CONCAT(customer.address, customer.pincode) as addr');
+        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt,CONCAT(customer.address,", ", customer.pincode) as addr');
         $this->db->from('invoice');
         $this->db->join('customer','invoice.contact=customer.contact');
         $this->db->where(array('invoice.order_id'=>$id));
@@ -128,12 +128,59 @@ class Menu extends CI_model {
     
     //froninvoice
     public function invoiceorder_id($id,$service_device){
-        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt,CONCAT(customer.address, customer.pincode) as addr');
+        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt,CONCAT(customer.address,", ", customer.pincode) as addr');
         $this->db->from('invoice');
         $this->db->join('customer','invoice.contact=customer.contact');
         $this->db->where(array('invoice.order_id'=>$id,'invoice.product'=>$service_device));
         $query = $this->db->get();
             return $query->result_array();
+    }
+
+    //admin quo
+    public function adminquotation($id){
+        $this->db->select('*,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qty as amt,CONCAT(address,", ", pincode) as addr');
+        $this->db->from('quotation');
+        $this->db->where(array('quotation.quo_code'=>$id));
+        $query = $this->db->get();
+            return $query->result_array();
+    }
+
+    //admin quo view
+    public function adminquoview(){
+        $this->db->select('*,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qty as amt,CONCAT(address,", ", pincode) as addr');
+        $this->db->from('quotation');
+        $this->db->group_by('quo_code');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+     //admin create quo view
+     public function adminquoinvoice(){
+        $this->db->select('*,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qty as amt,CONCAT(address,", ", pincode) as addr');
+        $this->db->from('quotation');
+        $this->db->join('quotation_invoice','quotation.quo_code=quotation_invoice.quo_code');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    //admin pincode view
+    public function pincodeview(){
+        $this->db->select('*');
+        $this->db->from('pincode');
+        $this->db->join('category_product','category_product.cproduct_id=pincode.service_product');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    //front pincode view
+    public function checkpin($c_pincode, $cartItems){
+        $this->db->select('*');
+        $this->db->from('pincode');
+        $this->db->join('category_product','category_product.cproduct_id=pincode.service_product');
+        $this->db->where(['category_product.cproduct_name'=>$cartItems, 'pincode.pincode'=>$c_pincode]);
+        $query = $this->db->get();
+        // print_r($this->db->last_query());
+        return $query->result_array();
     }
 
     // function checklogin($email,$password)

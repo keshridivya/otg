@@ -203,7 +203,10 @@
 		width: 100%;
 		object-fit: cover
 	}
-
+.check{
+	display:block;
+	color:red;
+}
 </style>
 <div class="container-fluid">
 	<!-- Page Heading -->
@@ -227,89 +230,86 @@
 								<div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-5 text-center p-0 mt-3 mb-2">
 									<div class="card px-0 pt-4 pb-0 mt-3 mb-3">
 										<form id="msform" method='post'>
-											<input type="hidden" name='order_id' id='order_id'
-												value='OTG-<?= time().rand(100, 999) ?>'>
-											<input type='hidden' id='id' name='id'>
+
 											<input type="hidden" class='csrf'
 												name="<?php echo $this->security->get_csrf_token_name(); ?>"
 												value="<?php echo $this->security->get_csrf_hash();?>">
 											<!-- progressbar -->
-											<ul id="progressbar">
-												<li class="active" id="account"><strong>Contact Info</strong></li>
-												<li id="account"><strong>Detail</strong></li>
+											<!-- <ul id="progressbar">
+												<li class="active" id="account"><strong>Detail</strong></li>
 												<li id="personal"><strong>Product</strong></li>
-												<!-- <li id="confirm"><strong>Finish</strong></li> -->
-											</ul>
-											<div class="progress">
+												<li id="confirm"><strong>Finish</strong></li>
+											</ul> -->
+											<!-- <div class="progress">
 												<div class="progress-bar progress-bar-striped progress-bar-animated"
 													role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
-											</div> <br>
-											<fieldset class='fieldset'>
+											</div> <br> -->
+											<fieldset class='fieldset set1'>
 												<div class="form-card">
 													<div class="row">
 														<div class="col-7">
 															<h2 class="fs-title">Customer Info</h2>
 														</div>
 														<div class="col-5">
-															<h2 class="steps">Step 1 - 3</h2>
+															<h2 class="steps">Step 1 - 2</h2>
 														</div>
 													</div>
-													<label class="fieldlabels">Contact Number: *</label> <input
-														type="Contact" name="contact_login" id='contact_login'
-														placeholder="Contact" />
-												</div>
-												<input type="button" name="next" id='contct_check'
-													class="next action-button" value="Next" />
-											</fieldset>
-											<fieldset class='fieldset'>
-												<div class="form-card">
-													<div class="row">
-														<div class="col-7">
-															<h2 class="fs-title">Customer Info</h2>
-														</div>
-														<div class="col-5">
-															<h2 class="steps">Step 2 - 3</h2>
-														</div>
-													</div>
-													<label class="fieldlabels">Email: *</label> <input type="email"
-														name="email" id='email' placeholder="Email Id" /> 
+													
 														<label
 														class="fieldlabels">Client Name: *</label> <input type="text"
-														name="name" id='name' placeholder="Client Name" />
+														name="name" id='quoname' placeholder="Client Name" />
+														<span id="spannamequo" class="check"> Please Enter Name</span>
+														<label class="fieldlabels">Contact Number: *</label> <input
+														type="Contact" name="contact_login"  id='quocontact'
+														placeholder="Contact" />
+														<span id="spanecontactquo" class="check"> Please Enter 10 digit correct number</span>
+														<label class="fieldlabels">Email: *</label> <input type="email"
+														name="email" id='quoemail' placeholder="Email Id" /> 
+														<span id="spanemailquo" class="check"> Please Enter correct emailid</span>
 														<label
 														class="fieldlabels">Client Address: *</label> <input type="text"
-														name="address" id='address' placeholder="Client Address" />
+														name="address" id='quoaddress' placeholder="Client Address" />
+														<span id="spantextquo" class="check"> Please Enter Name</span>
 														<label
 														class="fieldlabels">Client Pincode: *</label> <input type="text"
-														name="pincode" id='pincode' placeholder="Client Pincode" />
+														name="pincode" id='quopincode' placeholder="Client Pincode" />
+														<span id="spanPinquo" class="check"> Please Enter Name</span>
+														
 												</div>
-												<input type="button" name="next" class="next action-button"
-													value="Next" />
+												<input type="button" name=""  id="info_check" class="action-button "
+													value="Next"  />
 											</fieldset>
-											<fieldset class='fieldset'>
+											<fieldset class='fieldset set2'  >
 												<div class="form-card">
 													<div class="row">
 														<div class="col-7">
 															<h2 class="fs-title">Product : </h2>
 														</div>
 														<div class="col-5">
-															<h2 class="steps">Step 3 - 3</h2>
+															<h2 class="steps">Step 2 -2</h2>
 														</div>
 													</div>
 													<label class="fieldlabels">Product: </label>
 													<input type="text" name="Product[]" id='product'
-														placeholder="Product" />
+														placeholder="Product" required/>
 													<label class="fieldlabels">Quantity: </label>
-													<input type="text" name="qua[]" id='qua' placeholder="Quantity" />
+													<input type="text" name="qua[]" id='qua' placeholder="Quantity" required/>
 													<label class="fieldlabels">MRP : </label>
-													<input type="text" name="mrp[]" id='mrp' placeholder="MRp" />
+													<input type="text" name="mrp[]" id='mrp' placeholder="MRP" required/>
 													<label class="fieldlabels">Discount : </label>
-													<input type="text" name="dis[]" id='dis' placeholder="Discount" />
+													<input type="text" name="dis[]" id='dis' placeholder="Discount" required/>
+													
 												</div>
 												<div class="addinput"></div>
 												<div class="text-left">
 												<button class='btn btn-success addbutton' type="button">+</button>
 												</div> 
+												<div class="text-left">
+												<label class="fieldlabels">Gst : </label>
+													<input type="text" name="gst" id='dis' placeholder="Gst" />
+												<label for="" class="fieldlabels">Terms & Condition</label>
+												<textarea name="terms" id="summernote" cols="30" rows="10"></textarea>
+												</div>
 												<input type="submit" name="next" class="next action-button"
 													value="Submit" id='submit' /> <input type="button" name="previous"
 													class="previous action-button-previous" value="Previous" />

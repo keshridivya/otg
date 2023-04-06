@@ -41,7 +41,9 @@
 											readonly>
 									</div>
 									<div class="col-md-4 mt-3">
-										<select name="service_type" id="" class='service_type form-control'>
+										<select name="service_type" id="" class='service_type form-control otm'>
+											<option value="" disabled selected>Select service type</option>
+										<option value="One Time Service">One Time Service</option>
 											<option value="AMC">AMC</option>
 											<option value="Extended">Extended</option>
 										</select>
@@ -116,7 +118,7 @@
 											placeholder='Expenses' required readonly>
 									</div>
 									<div class="col-md-4 mt-3">
-										<input type='number' name='advance_payment' class='form-control advance_payment' placeholder='Advance Payment' required>
+										<input type='number' name='advance_payment' class='form-control advance_payment adp' placeholder='Advance Payment' value="Advance Payment" >
 									</div>
 
 									<div class='datetimerow row mt-4'>

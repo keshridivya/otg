@@ -40,6 +40,9 @@ class Engineer extends CI_Controller {
                 $eid=$query[0]['eng_id'];
                 $ename=$query[0]['eng_name'];
                 $email=$query[0]['email_id'];
+                // setcookie('eng_id',$eid,time()+60*60*24*90);
+                // setcookie('e_name',$ename,time()+60*60*24*90);
+                // setcookie('e_mail',$email,time()+60*60*24*90);
                 $this->session->set_userdata('eng_id',$eid);
                 $this->session->set_userdata('e_name',$ename);
                 $this->session->set_userdata('e_mail',$email);

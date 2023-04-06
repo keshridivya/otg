@@ -6,8 +6,11 @@
 
 		</div>
 		<div class="col-lg-6">
-			<div class="add-btn">
-				<a href="<?php echo base_url()?>admin/generateinvoice/add" class="pull-right">Add Invoice</a>
+		<div class="add-btn ml-3">
+				<a href="<?php echo base_url()?>admin/quotation/invoicelist" class="pull-right">Quotation Invoice List</a>
+			</div>
+			<div class="add-btn ml-3">
+				<a href="<?php echo base_url()?>admin/quotation/add" class="pull-right">Add Invoice</a>
 			</div>
 		</div>
 	</div>
@@ -21,10 +24,9 @@
 				<table class="table table-bordered" id="dataTable"  width="100%" cellspacing="0">
 					<thead>
 						<tr>
-							<th>S.no</th>
+							<th>Invoice no</th>
 							<th>Name</th>
-							<th>Contact</th>
-							<th>Order Id</th>
+							<th>Quotation no</th>
 							<th>Created On</th>
 							<th>Action</th>
 						</tr>
@@ -33,16 +35,14 @@
 						$count = 1;
 						foreach($invoice as $invoice){ ?>
 						<tr>
-							<td><?= $count; ?></td>
-							<td><?= $invoice['cust_name'] ?></td>
-							<td><?= $invoice['cont'] ?></td>
-							<td><?= $invoice['order_id'] ?></td>
+							<td><?= $invoice['inv_code']; ?></td>
+							<td><?= $invoice['name'] ?></td>
+							<td><?= $invoice['quo_code'] ?></td>
 							<td><?= $invoice['created_date'] ?></td>
 							<td>
-								<a href="<?= base_url('admin/generateinvoice/invoice/'.$invoice['order_id']) ?>" class="btn btn-primary"><i
+                                <a href="<?= base_url('admin/quotation/generateinvoice/'.$invoice['quo_code']) ?>" class="btn btn-primary" title="invoice"><i
 										class="fa fa-download"></i></a>
-								<a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-							</td>
+
 						</tr>
 
 						<?php $count++; }

@@ -217,6 +217,17 @@ $route['admin/generateinvoice/edit/(:any)']='admin/generateinvoice/edit/$1';
 $route['admin/generateinvoice/add']='admin/generateinvoice/add';
 $route['admin/checkcontact']='admin/checkcontact';
 $route['admin/generateinvoice/invoice/(:any)']='admin/generateinvoice/invoice/$1';
+$route['admin/generateinvoice/delete/(:any)']='admin/generateinvoice/delete/$1';
+
+//admin generate quotation
+$route['admin/quotation']='admin/quotation/view';
+$route['admin/quotation/edit/(:any)']='admin/quotation/edit/$1';
+$route['admin/quotation/add']='admin/quotation/add';
+$route['admin/checkcontact']='admin/checkcontact';
+$route['admin/quotation/invoice/(:any)']='admin/quotation/invoice/$1';
+$route['admin/quotation/generateinvoice/(:any)']='admin/quotation/generateinvoice/$1';
+$route['admin/quotation/invoicelist']='admin/quotation/invoicelist';
+$route['admin/quotation/edit/(:any)']='admin/quotation/edit/$1';
 
 //admin coupons
 $route['admin/coupon'] = 'admin/coupon/view';
@@ -224,6 +235,13 @@ $route['admin/coupon/add'] = 'admin/coupon/add';
 $route['admin/coupon/edit/(:any)'] = 'admin/coupon/edit/$1';
 $route['admin/coupon/delete/(:any)'] = 'admin/coupon/delete/$1';
 
+//admin pincode
+$route['admin/pincode']="admin/pincode/view";
+$route['admin/pincode/add']="admin/pincode/add";
+$route['admin/pincode/edit/(:any)']="admin/pincode/edit/$1";
+$route['admin/pincode/delete/(:any)']="admin/pincode/delete/$1";
+$route['admin/pincode/active/(:any)']="admin/pincode/active/$1";
+$route['admin/pincode/inactive/(:any)']="admin/pincode/inactive/$1";
 
 
 

@@ -55,7 +55,6 @@
 								title="OTG CARES" />
 						</a>
 					</div>
-
 					<!--End Desktop Logo-->
 					<div class="col-2 col-sm-3 col-md-3 col-lg-8 order2">
 					    <style>
@@ -72,7 +71,7 @@
 								<i class="anm anm-bars-r"></i>
 							</button>
 							<?php
-            					if($this->session->userdata('cid')){
+            					if(get_cookie("cid")){
             					?>
 							<ul class='navbar-nav'>
                                 <li class='nav-item dropdown'>
@@ -80,7 +79,7 @@
                                         <a class="nav-link" href="#" id="navbarDropdownMenuLink" role="button"
                                             data-toggle="dropdown" aria-expanded="false">
                                             <?php
-                                             $name  = strtoupper($this->session->userdata['cname']); 
+                                             $name  = strtoupper(get_cookie("cname")); 
                                                 $remove = ['.', 'MRS', 'MISS', 'MS', 'MASTER', 'DR', 'MR'];
                                                 $nameWithoutPrefix=str_replace($remove," ",$name);
                                             
@@ -98,7 +97,7 @@
                                         </a>
                                         <div class="dropdown-menu drop_menu_id"
                                             aria-labelledby="navbarDropdownMenuLink">
-                                            <p class='dropdown-item'><span style="color:#096459;font-weight:700;border-bottom: 1px solid #f1ecec;">Hey, <?= $this->session->userdata['cname'] ?></span></p>
+                                            <p class='dropdown-item'><span style="color:#096459;font-weight:700;border-bottom: 1px solid #f1ecec;">Hey, <?= get_cookie("cname") ?></span></p>
                                             <a class="dropdown-item" href="<?php echo base_url();?>account?show=myaccount"><i class="fa fa-user" style='color:#096459;'></i> &nbsp; &nbsp;My Account</a>
                                             <a class="dropdown-item" href="<?php echo base_url();?>account?show=booking"><i class="fa fa-info-circle" style='color:#096459;'></i> &nbsp; &nbsp;Booking Detail</a>
                                             <a class="dropdown-item" href="<?php echo base_url();?>account?show=extended"><i class="fa fa-expand" style='color:#096459;'></i> &nbsp; &nbsp;Extended Warrenty</a>
@@ -213,7 +212,7 @@
 					<!-- <li><a href="" class="site-nav">Blog</a></li>
         <li><a href="" class="site-nav">Contact Us</a></li> -->
 					<?php
-					if(!@$this->session->userdata['cid']){
+					if(!@get_cookie("cid")){
 					?>
 					<li class="lvl1 sign-in"><a href="<?php echo base_url();?>sign-up"><b>Sign In</b> <i
 								class="anm anm-angle-down-l"></i></a></li>
@@ -221,7 +220,7 @@
 				<li class="lvl1 parent dropdown" style='height:40px'>
                                     <p><a class="site-nav"><small>Hello &nbsp;&nbsp; <i
                                             class="fa fa-caret-down"></i> </small> 
-                                        <br><span style="color:var(--var-green);"><?php echo $this->session->userdata['cname']?></span></a>
+                                        <br><span style="color:var(--var-green);"><?php echo get_cookie("cname")?></span></a>
                                     <ul class="dropdown">
                                         
                                         <li><a href="<?php echo base_url();?>account?show=myaccount" class="site-nav">My Account</a></li>
@@ -231,10 +230,10 @@
                                     </ul>
                                 </p>
                                     <!-- <a
-                                        href="<?php echo base_url();?>account"><b><?php echo "Hello"." ".$this->session->userdata['cid']?></b>
+                                        href="<?php echo base_url();?>account"><b><?php echo "Hello"." ".get_cookie("cid")?></b>
                                         <i class="anm anm-angle-down-l"></i></a> -->
                                 </li>
-						<!--<li class="lvl1 sign-in"><a href="<?php echo base_url();?>account"><b><?php echo "Hello"." ".$this->session->userdata['cname']?></b> <i-->
+						<!--<li class="lvl1 sign-in"><a href="<?php echo base_url();?>account"><b><?php echo "Hello"." ".get_cookie("cname")?></b> <i-->
 						<!--		class="anm anm-angle-down-l"></i></a></li>-->
 						<?php } ?>
 					</ul>
@@ -378,7 +377,7 @@
 			<li><a href="<?php echo base_url();?>blog" class="site-nav">Blog</a></li>
 			<li><a href="<?php echo base_url();?>contact" class="site-nav">Contact Us</a></li>
 			<?php
-                if(!$this->session->userdata('cid')){
+                if(!(get_cookie("cid"))){
                 ?>
 			<li class="lvl1 signinbtn" style='margin-bottom: 100px;'><a href="<?php echo base_url();?>sign-up"> <i class='fas fa-user-circle'></i>
 					<b>Sign In</b></a>
