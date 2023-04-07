@@ -7,9 +7,10 @@ class Menu extends CI_model {
     }
 
     public function menu_all(){
-        $this->db->select('*');
+        $this->db->select('*,group_concat(category_name) as category_name');
         $this->db->from('category_product');
         $this->db->where('status','active');
+        $this->db->group_by('cproduct_name');
         $query=$this->db->get();
         return $query->result_array();
     }

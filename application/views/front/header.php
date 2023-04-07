@@ -119,33 +119,35 @@
 										<ul class="grid mmWrapper">
 											<li class="grid__item large-up--one-whole">
 												<ul class="row grid">
-													<?php foreach($dropdown as $drop){  ?>
+													<?php foreach($dropdown as $drop){  
+														$all_cate = array();
+														$langs = explode(",", $drop['category_name']);
+														?>
 													<li class="grid__item lvl-1 col-md-3 col-lg-3">
 
 														<a class="site-nav lvl-1"><?= $drop['cproduct_name']; ?></a>
 														<ul class="subLinks">
-															<li class="lvl-2"><a
+															<li class="lvl-2">
+															<?php 
+							if(in_array('Maintenance and repair', $langs)){ ?> 
+							
+								<a class="maintenancefont"
+								href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>">Maintenance and repair</a>
+							<?php }
+							?>
+							<?php 
+							if(in_array('Extended Warrenty', $langs)){ ?> 
+								<a class="maintenancefont"
+								href="<?php echo base_url('extended/'. $drop['cproduct_name'])?>">Extended Warranty</a>
+							<?php }
+							?>
+																<!-- <a
 																	href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>"
-																	class="site-nav lvl-2"><?= $drop['category_name']; ?></a>
+																	class="site-nav lvl-2"><?= $drop['category_name']; ?></a> -->
 															</li>
 														</ul>
 													</li>
 													<?php } ?>
-													<!-- <a class="site-nav lvl-1">Water Purifier</a>
-														<ul class="subLinks">
-															<li class="lvl-2"><a href="<?php echo base_url('maintenance/Water Purifier')?>"
-																	class="site-nav lvl-2">Maintenance and Repair</a></li>
-
-														</ul>
-														<a class="site-nav lvl-1">Washing Machine</a>
-														<ul class="subLinks">
-															<li class="lvl-2"><a href="<?php echo base_url('maintenance/Washing Machine')?>"
-																	class="site-nav lvl-2">Maintenance and Repair</a></li>
-
-														</ul> -->
-
-
-
 											</li>
 
 										</ul>
@@ -294,29 +296,26 @@
 					<li class='row'>
 						<?php
 					foreach($dropdown as $drop){
+						$langs = explode(",", $drop['category_name']);
 					 ?>
 						<div class="mobile-sublink col-6">
 							<p><?= $drop['cproduct_name']; ?></p>
-							<a class="maintenancefont"
-								href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>"><?= $drop['category_name']; ?></a>
+							<?php 
+							if(in_array('Maintenance and repair', $langs)){ ?> 
+								<a class="maintenancefont"
+								href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>">Maintenance and repair</a>
+							<?php }
+							?>
+							<?php 
+							if(in_array('Extended Warrenty', $langs)){ ?> 
+								<a class="maintenancefont"
+								href="<?php echo base_url('extended/'. $drop['cproduct_name'])?>">Extended Warranty</a>
+							<?php }
+							?>
+							<!-- <a class="maintenancefont"
+								href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>"><?= $drop['category_name']; ?></a> -->
 						</div>
 						<?php } ?>
-						<!-- <div class="mobile-sublink">
-								<p>Water Purifier</p>
-								<a href="<?php echo base_url('maintenance/Water Purifier')?>">Maintenance & Repair</a>
-							</div>
-							<div class="mobile-sublink">
-								<p>Washing Machine</p>
-								<a href="<?php echo base_url('maintenance/Washing Machine')?>">Maintenance & Repair</a>
-							</div>
-							<div class="mobile-sublink">
-								<p>Laptop</p>
-								<a href="<?php echo base_url('maintenance/Laptop')?>">Maintenance & Repair</a>
-							</div>
-							<div class="mobile-sublink">
-								<p>Microwave</p>
-								<a href="<?php echo base_url('maintenance/Microwave')?>">Maintenance & Repair</a>
-							</div> -->
 					</li>
 
 				</ul>
@@ -338,20 +337,6 @@
 															</li>
 														
 													<?php } ?>
-							<!--<li><a href="" class="site-nav">Air Conditioner</a></li>-->
-							<!--<li><a href="" class="site-nav">Water Purifier</a></li>-->
-							<!--<li><a href="" class="site-nav">Washing Machine</a></li>-->
-							<!--<li><a href="" class="site-nav">Laptop</a></li>-->
-							<!--<li><a href="" class="site-nav">Microwave</a></li>-->
-							<!--<li><a href="" class="site-nav">Mobile Phone</a></li>-->
-							<!--<li><a href="" class="site-nav">Geyser</a></li>-->
-							<!--<li><a href="" class="site-nav">Printer</a></li>-->
-							<!--<li><a href="" class="site-nav">Refridgerator</a></li>-->
-							<!--<li><a href="" class="site-nav">Chimney</a></li>-->
-							<!--<li><a href="" class="site-nav">Tablet</a></li>-->
-							<!--<li><a href="" class="site-nav">Television</a></li>-->
-
-
 						</ul>
 					</li>
 					<li class=''><a href="" class="site-nav dropdownmenubar">Other Services <i
