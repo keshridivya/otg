@@ -176,7 +176,11 @@ class Welcome extends CI_Controller {
                     $this->load->view('index',$page_data);
                 }
         }
+<<<<<<< HEAD
         elseif(@get_cookie('cid')){
+=======
+        elseif(@get_cookie("cid")){
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
             $testimonial=$this->db->get_where('testimonials',array('status'=>'active'))->result_array();
             $client=$this->db->get_where('our_client',array('status'=>'active'))->result_array();
             $banner=$this->db->get_where('banner',array('status'=>'active'))->result_array();
@@ -425,8 +429,13 @@ class Welcome extends CI_Controller {
 
     public function account()
     {
+<<<<<<< HEAD
         if($_COOKIE['cid'] || $this->session->userdata('custid')){
             $session_cust=$_COOKIE['cid'];
+=======
+        if(get_cookie("cid") || $this->session->userdata('custid')){
+            $session_cust=get_cookie("cid");
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
               
                 if($this->input->post('submit') == 'Edit'){
                     $btn = $this->input->post('customer_btn');
@@ -573,7 +582,11 @@ class Welcome extends CI_Controller {
             redirect(base_url('services'));
         }
         //if user logged in
+<<<<<<< HEAD
         if(get_cookie('cid')){
+=======
+        if(get_cookie("cid")){
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
             if($this->input->post()){
                 $_SESSION['id'] = $this->input->post('id');
                 $_SESSION['c_name'] = $this->input->post('c_name');
@@ -587,7 +600,11 @@ class Welcome extends CI_Controller {
                 $_SESSION['time_slot'] = $this->input->post('time_slot');
             }
             $page_data['cartItems']=$this->cart->contents();
+<<<<<<< HEAD
             $session_cust=get_cookie('cid');
+=======
+            $session_cust=get_cookie("cid");
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
             $ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
             if($this->input->post()){
                 $payment_method=$this->input->post('payment_method');
@@ -619,7 +636,11 @@ class Welcome extends CI_Controller {
     }
     
     public function checkout_form(){
+<<<<<<< HEAD
         $session_cust=$_COOKIE['cid'];
+=======
+        $session_cust=get_cookie("cid");
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
         if($this->input->post('submit') == 'Edit'){
             $btn = $this->input->post('customer_btn');
             if($btn == 'shipping'){
@@ -793,8 +814,13 @@ class Welcome extends CI_Controller {
     }
     
     public function summery(){
+<<<<<<< HEAD
         if($_COOKIE['cid']){
             $session_cust=$_COOKIE['cid'];
+=======
+        if(get_cookie("cid")){
+            $session_cust=get_cookie("cid");
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
             $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
             $page_data['customers']=$customers_table;
         }else if($this->session->userdata('custid')){
@@ -837,7 +863,11 @@ class Welcome extends CI_Controller {
         $razorpayOrderId = $razorpayOrder['id'];
         $_SESSION['razorpay_order_id'] = $razorpayOrderId;
         $data = $this->prepareData($amount,$razorpayOrderId);
+<<<<<<< HEAD
         $session_cust=$_COOKIE['cid'];
+=======
+        $session_cust=get_cookie("cid");
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
         $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
         $data=array(
             'data'=>$data,
@@ -938,7 +968,11 @@ class Welcome extends CI_Controller {
             );
             $main_arr[]=$arr;
         }
+<<<<<<< HEAD
         $cust_id = $_COOKIE['cid'];	
+=======
+        $cust_id = get_cookie("cid");	
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
 				$sql = $this->db->insert_batch('bookings',$main_arr);
 
             // $customer_email=$this->db->get_where("customer",array('cust_id'=>$data['cust_id']))->result_array();
@@ -1000,8 +1034,13 @@ class Welcome extends CI_Controller {
     }
 
     public function summerydetail(){
+<<<<<<< HEAD
 		// if($_COOKIE['cid']){
 		// 	$session_cust=$_COOKIE['cid'];
+=======
+		// if(get_cookie("cid")){
+		// 	$session_cust=get_cookie("cid");
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
 		// 	$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
 		// 	$page_data['customers']=$customers_table;
 		// }elseif($this->session->userdata('custid')){
@@ -1037,7 +1076,11 @@ class Welcome extends CI_Controller {
 				);
                 $main_arr[]=$arr;
             }
+<<<<<<< HEAD
 				$cust_id = $_COOKIE['cid'];	
+=======
+				$cust_id = get_cookie("cid");	
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
 				$sql = $this->db->insert_batch('bookings',$main_arr);
                 if($sql == true){
 					$page_data['message']="Successfully created.";
@@ -1094,6 +1137,12 @@ class Welcome extends CI_Controller {
 
     public function logout()
     {
+<<<<<<< HEAD
+=======
+        // setcookie('cid',$_SESSION['cid'],60);
+        // setcookie('cemail',$_SESSION['cemail'],60);
+        // setcookie('cname',$_SESSION['cname'],60);
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
         delete_cookie('cid');
         delete_cookie('cemail');
         delete_cookie('cname');
@@ -1256,7 +1305,11 @@ class Welcome extends CI_Controller {
                 );
                 $main_arr[]=$arr;
             }
+<<<<<<< HEAD
                 $cust_id = $_COOKIE['cid'];	
+=======
+                $cust_id = get_cookie("cid");	
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
                 $sql = $this->db->insert_batch('bookings',$main_arr);
                 if($sql == true){
                     $page_data['message']="Successfully created.";
@@ -1291,7 +1344,11 @@ class Welcome extends CI_Controller {
     }
 
     public function invoice($id){
+<<<<<<< HEAD
         if($_COOKIE['cid']){
+=======
+        if(get_cookie("cid")){
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
         $page_data['dropdown'] = $this->menu->menu_all();
         $invoice_generate = $this->menu->invoice($id);
         $request_id = $invoice_generate[0]['request_id_value'];

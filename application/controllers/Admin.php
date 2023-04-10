@@ -51,12 +51,12 @@ class Admin extends CI_Controller {
 				$otp_resu = 'success';
 				$timestamp =  $_SERVER["REQUEST_TIME"];  
                 $_SESSION['time'] = $timestamp;
-                  $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
-                  if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
-                      $data['message'] = "success";
-                      } else {
-                      $data['message'] = "Something went wrong, please try again later.";
-                      }
+                //   $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
+                //   if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
+                //       $data['message'] = "success";
+                //       } else {
+                //       $data['message'] = "Something went wrong, please try again later.";
+                //       }
             }
             else
             {
@@ -1435,8 +1435,80 @@ class Admin extends CI_Controller {
 		}
 	}
 
+	//fetch service plan
+	public function service_plan(){
+		$pname = $this->input->post('pname');
+		$msg = $this->db->get_where('category_plans',['cproduct_name'=>$pname])->result_array();
+		$data_plan['plan'] = $msg;
+        $data_plan['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data_plan);
+	}
+
+	//pincode
+	public function pincode($action,$id=false){
+		switch ($action) {
+			case 'view':
+				// echo "View";
+				$pincode=$this->menu->pincodeview();
+				$page_data['page_title']="Not Allowed Pincode List";
+				$page_data['pincode']=$pincode;
+				$page_data['page']="pincode/view";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'add':
+				if($this->input->post()){
+					$data=array(
+						"pincode"=>$this->input->post('pincode'),
+						"service_product"=>$this->input->post('category'),
+					);
+				
+					if($this->db->insert('pincode',$data)){
+						$page_data['message']="Successfully created.";
+					}else{
+						$page_data['message']="Problem occured while adding customer.";
+					}
+				}
+				$page_data['cate']=$this->db->get('category_product')->result_array();
+				$page_data['page_title']="add Category";
+				$page_data['page']="pincode/form";
+				$page_data['action']="add";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'edit':
+				if($this->input->post()){
+					$data=array(
+						"pincode"=>$this->input->post('pincode'),
+						"service_product"=>$this->input->post('category'),
+					);
+					$this->db->where('id',$id);
+					
+					if($this->db->update('pincode',$data)){
+						$page_data['message']="Successfully updated.";
+					}else{
+						$page_data['message']="Problem occured while adding customer.";
+					}
+				}
+				$page_data['pincode']=$this->db->get_where('pincode',['id'=>$id])->row();
+				$page_data['cate']=$this->db->get('category_product')->result_array();
+				$page_data['page_title']="Edit Pincode";
+				$page_data['page']="pincode/form";
+				$page_data['action']="edit";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'delete':
+				
+				if($id){
+					$this->db->where('id',$id);
+					$this->db->delete('pincode');
+					redirect('admin/pincode');
+				}
+				break;
+		}
+	}
+
 	//coupon in admin
 	public function coupon($action,$id=false){
+<<<<<<< HEAD
 		if(@$this->session->userdata['a_id']){
 			switch($action){
 				case 'view':
@@ -1472,6 +1544,38 @@ class Admin extends CI_Controller {
 						else{
 							$page_data['message'] = 'something went wrong';
 						}
+=======
+		switch($action){
+			case 'view':
+				$page_data['page_title'] = 'Coupons';
+				$page_data['page'] = 'coupons/view';
+				// $page_data['coupon'] = $this->db->get_where('coupons')->result_array();
+				$page_data['coupon'] = $this->menu->coupon();
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'add':
+				if($this->input->post()){
+					$data = [
+						'code' => $this->input->post('code'),
+						'cproduct' => $this->input->post('pname'),
+						'cplan' => $this->input->post('plan'),
+						'percentage' => $this->input->post('percent'),
+						'status' => $this->input->post('ct_status'),
+						'expiry_date' => $this->input->post('expiry'),
+						'created_on' => date('y-m-d'),
+					];
+					if(!empty($_POST['service'])){
+                        
+                        $number_of_file = sizeof($_POST['service']);
+						$files = $_POST['service'];
+                        for ($i = 0; $i < $number_of_file; $i++) {
+                            $data['service_name']= implode(",",$files);
+                    }
+                    }
+
+					if($this->db->insert('coupons',$data)){
+						$page_data['message'] = 'Successfully created';
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
 					}
 					$page_data['product'] = $this->db->get('category_product')->result_array();
 						// $page_data['plan'] = $this->db->get('category_plans')->result_array();
@@ -1499,6 +1603,7 @@ class Admin extends CI_Controller {
 							$page_data['message'] = 'something went wrong';
 						}
 					}
+<<<<<<< HEAD
 					$page_data['coupon'] = $this->menu->coupondata($id);
 					$page_data['product'] = $this->db->get('category_product')->result_array();
 					$page_data['page_title'] = 'Edit Coupon';
@@ -1515,6 +1620,46 @@ class Admin extends CI_Controller {
 		}else{
 			$page_data['page_title']="Login Admin";
 		$this->load->view('admin/login',$page_data);
+=======
+				}
+				$page_data['product'] = $this->db->get('category_product')->result_array();
+					// $page_data['plan'] = $this->db->get('category_plans')->result_array();
+				$page_data['page_title'] = 'Add Coupon';
+				$page_data['page'] = 'coupons/add';
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'edit':
+				if($this->input->post()){
+					$data = [
+						'code' => $this->input->post('code'),
+						'cproduct' => $this->input->post('pname'),
+						'cplan' => $this->input->post('plan'),
+						'percentage' => $this->input->post('percent'),
+						'service_name'=>$this->input->post('service'),
+						'status' => $this->input->post('ct_status'),
+						'expiry_date' => $this->input->post('expiry'),
+						'created_on' => date('y-m-d'),
+					];
+					$this->db->where('coupon_id',$id);
+					if($this->db->update('coupons',$data)){
+						$page_data['message'] = 'Successfully updated';
+					}
+					else{
+						$page_data['message'] = 'something went wrong';
+					}
+				}
+				$page_data['coupon'] = $this->menu->coupondata($id);
+				$page_data['product'] = $this->db->get('category_product')->result_array();
+				$page_data['page_title'] = 'Edit Coupon';
+				$page_data['page'] = 'coupons/add';
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'delete':
+				$this->db->where('coupon_id',$id);
+				$this->db->delete('coupons');
+				redirect('admin/coupon');
+				break;
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
 
 		}
 	}
@@ -1811,6 +1956,7 @@ class Admin extends CI_Controller {
 
 	//generate invoice
 	public function generateinvoice($action,$id=false){
+<<<<<<< HEAD
 		if(@$this->session->userdata['a_id']){
 			switch($action){
 				case 'view':
@@ -1833,6 +1979,46 @@ class Admin extends CI_Controller {
 							];
 							$this->db->insert('customer',$data);
 						}
+=======
+		switch($action){
+			case 'view':
+				$page_data['invoice'] = $this->menu->admininvoiceview($id);
+				$page_data['page_title'] = 'Generate Invoice';
+				$page_data['page']="generateinvoice/view";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'add':
+				if($this->input->post()){
+					$order_id = $this->input->post('order_id');
+					if(empty($this->input->post('id'))){
+						$data = [
+							'cust_name' =>$this->input->post('name'),
+							'email_id' => $this->input->post('email'),
+							'contact' =>$this->input->post('contact_login'),
+							'address' =>$this->input->post('address'),
+							'pincode' =>$this->input->post('pincode'),
+							'created_on' => date('y-m-d'),
+						];
+						$this->db->insert('customer',$data);
+					}
+					
+					$post = $this->input->post('Product');
+					// echo '<pre>';
+					// print_r($this->input->post());
+					// echo '</pre>';
+					for ($i = 0; $i < count($post); $i++) 
+					{
+						$datainvoice = [
+							'contact' => $this->input->post('contact_login'),
+							'order_id' => $this->input->post('order_id'),
+							'product' => $this->input->post('Product')[$i],
+							'qua' => $this->input->post('qua')[$i],
+							'mrp' => $this->input->post('mrp')[$i],
+							'discount' => $this->input->post('dis')[$i],
+							'created_date' => date('y-m-d')
+						];
+						$QUERY = $this->db->insert('invoice',$datainvoice);
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
 						
 						$post = $this->input->post('Product');
 						// echo '<pre>';
@@ -1860,6 +2046,7 @@ class Admin extends CI_Controller {
 							$page_data['message'] = 'Something went wrong. Please try again';
 						}
 					}
+<<<<<<< HEAD
 					$page_data['page_title'] = 'Add Invoice';
 					$page_data['page']="generateinvoice/add";
 					$this->load->view('admin/index',$page_data);
@@ -1882,6 +2069,32 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/login',$page_data);
 
 		}
+=======
+					if($QUERY){
+						$page_data['message'] = 'Invoice Submit Successfully';
+						redirect('admin/generateinvoice/invoice/'.$order_id);
+					}
+					else{
+						$page_data['message'] = 'Something went wrong. Please try again';
+					}
+				}
+				$page_data['page_title'] = 'Add Invoice';
+				$page_data['page']="generateinvoice/add";
+				$this->load->view('admin/index',$page_data);
+				break;
+			case 'invoice':
+				$page_data['invoice'] = $this->menu->admininvoice($id);
+				$page_data['page']="generateinvoice/invoice";
+				$this->load->view('admin/index',$page_data);
+				break;
+			   case 'edit':
+				break;
+				case 'delete':
+					$this->db->where('id',$id);
+					$this->db->delete('invoice');
+					redirect('admin/generateinvoice');
+					break;
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
 		}
 
 	public function checkcontact(){
@@ -1909,6 +2122,7 @@ class Admin extends CI_Controller {
 	
 		//generate quotation
 		public function quotation($action,$id=false){
+<<<<<<< HEAD
 			if(@$this->session->userdata['a_id']){
 				switch($action){
 					case 'view':
@@ -1990,6 +2204,20 @@ class Admin extends CI_Controller {
 						break;
 					case 'edit':
 						if($this->input->post()){
+=======
+			switch($action){
+				case 'view':
+					$page_data['invoice'] = $this->menu->adminquoview($id);
+					$page_data['page_title'] = 'Generate Quotation';
+					$page_data['page']="quotation/view";
+					$this->load->view('admin/index',$page_data);
+					break;
+				case 'add':
+					if($this->input->post()){
+						$post = $this->input->post('Product');
+						for ($i = 0; $i < count($post); $i++) 
+						{
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
 							$datainvoice = [
 								'name' => $this->input->post('name'),
 								'contact' => $this->input->post('contact_login'),
@@ -1998,6 +2226,7 @@ class Admin extends CI_Controller {
 								'pincode' => $this->input->post('pincode'),
 								'gst' => $this->input->post('gst'),
 								'terms' => $this->input->post('terms'),
+<<<<<<< HEAD
 								'product' => $this->input->post('Product'),
 								'qty' => $this->input->post('qua'),
 								'mrp' => $this->input->post('mrp'),
@@ -2029,6 +2258,102 @@ class Admin extends CI_Controller {
 			$this->load->view('admin/login',$page_data);
 
 			}			
+=======
+								'product' => $this->input->post('Product')[$i],
+								'qty' => $this->input->post('qua')[$i],
+								'mrp' => $this->input->post('mrp')[$i],
+								'discount' => $this->input->post('dis')[$i],
+								'created_date' => date('y-m-d')
+							];
+							$QUERY = $this->db->insert('quotation',$datainvoice);
+							$last_id = $this->db->insert_id();
+							$quo_id = $this->db->get_where('quotation',['id'=>$last_id])->row();
+							$code = $quo_id->quo_code;
+						}
+						if($QUERY){
+							$page_data['message'] = 'Invoice Submit Successfully';
+							redirect('admin/quotation/invoice/'.$code);
+						}
+						else{
+							$page_data['message'] = 'Something went wrong. Please try again';
+						}
+					}
+					$page_data['page_title'] = 'Add Quotation';
+					$page_data['page']="quotation/add";
+					$this->load->view('admin/index',$page_data);
+					break;
+				case 'invoice':
+					$page_data['invoice'] = $this->menu->adminquotation($id);
+					$page_data['page_title'] = 'Quotation';
+					$page_data['page']="quotation/invoice";
+					$this->load->view('admin/index',$page_data);
+					break;
+				case 'generateinvoice':
+					// if($this->session->userdata('cid')){
+						$invoice_generate = $this->db->get_where('quotation',['quo_code'=>$id])->result_array();
+						$quo_code = $invoice_generate[0]['quo_code'];
+						$data = [
+							'quo_code' => $id,
+							'created_date' => date('y-m-d'),
+							'name' =>  $invoice_generate[0]['name'],
+						];
+						$checkdata = $this->db->get_where('quotation_invoice',array('quo_code'=>$quo_code))->result_array();
+						if(count($checkdata) == 0){
+							$this->db->insert('quotation_invoice',$data);
+						}
+						$page_data['invoice'] = $this->menu->adminquoinvoice($id);
+						$page_data['page_title'] = 'Generate Invoice';
+						$page_data['page']="quotation/generateinvoice";
+						$this->load->view('admin/index',$page_data);
+						// }
+						// else{
+						// 	redirect(base_url());
+						// }
+				
+					break;
+				case 'invoicelist':
+					$page_data['invoice'] = $this->db->get('quotation_invoice')->result_array();
+					$page_data['page_title'] = 'Quotation Invoice List';
+						$page_data['page']="quotation/invoicelist";
+						$this->load->view('admin/index',$page_data);
+					break;
+				case 'edit':
+					if($this->input->post()){
+						$datainvoice = [
+							'name' => $this->input->post('name'),
+							'contact' => $this->input->post('contact_login'),
+							'address' => $this->input->post('address'),
+							'email' => $this->input->post('email'),
+							'pincode' => $this->input->post('pincode'),
+							'gst' => $this->input->post('gst'),
+							'terms' => $this->input->post('terms'),
+							'product' => $this->input->post('Product'),
+							'qty' => $this->input->post('qua'),
+							'mrp' => $this->input->post('mrp'),
+							'discount' => $this->input->post('dis'),
+							'created_date' => date('y-m-d')
+						];
+						$this->db->where('id',$id);
+						$query = $this->db->update('quotation',$datainvoice);
+						if($query){
+							$page_data['message'] = 'Invoice Update Successfully';
+						}
+						else{
+							$page_data['message'] = 'Something went wrong. Please try again';
+						}
+					}
+					$page_data['invoice'] = $this->db->get_where('quotation',['id'=>$id])->row();
+					$page_data['page_title'] = 'Edit Quotation';
+							$page_data['page']="quotation/edit";
+							$this->load->view('admin/index',$page_data);
+						break;
+				case 'delete':
+						$this->db->where('id',$id);
+						$this->db->delete('quotation');
+						redirect('admin/quotation');
+						break;
+			}
+>>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
 		}
 
 	//Logout session
