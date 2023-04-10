@@ -244,7 +244,6 @@ $route['admin/pincode/edit/(:any)']="admin/pincode/edit/$1";
 $route['admin/pincode/delete/(:any)']="admin/pincode/delete/$1";
 $route['admin/pincode/active/(:any)']="admin/pincode/active/$1";
 $route['admin/pincode/inactive/(:any)']="admin/pincode/inactive/$1";
-<<<<<<< HEAD
 
 //admin Engineers
 $route['admin/shop']="admin/shop/view";
@@ -253,8 +252,6 @@ $route['admin/shop/edit/(:any)']="admin/shop/edit/$1";
 $route['admin/shop/delete/(:any)']="admin/shop/delete/$1";
 $route['admin/shop/active/(:any)']="admin/shop/active/$1";
 $route['admin/shop/inactive/(:any)']="admin/shop/inactive/$1";
-=======
->>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
 
 
 

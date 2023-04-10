@@ -116,10 +116,7 @@
                         <a class="collapse-item" href="<?php echo base_url();?>admin/quotation">Generate Quotation</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/coupon">Coupon</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/pincode">Pincode</a>
-<<<<<<< HEAD
                         <a class="collapse-item" href="<?php echo base_url();?>admin/shop">Shop</a>
-=======
->>>>>>> 743ee277d734450a4dad50aaa9663511983eb4cf
                     </div>
                 </div>
             </li>
