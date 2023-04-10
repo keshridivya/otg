@@ -60,6 +60,8 @@ $route['login-otp-verify']='welcome/login_otp_verify';
 $route['account']='welcome/account';
 $route['maintenance']='welcome/maintenance';   
 $route['maintenance/(:any)']='welcome/maintenance/$1';
+$route['extended']='welcome/extended';   
+$route['extended/(:any)']='welcome/extended/$1';
 $route['services']='welcome/services';
 $route['logout']='welcome/logout';
 $route['checkout']='welcome/checkout';
@@ -88,7 +90,7 @@ $route['paymentFailed']='welcome/paymentFailed';
 $route['summerydetail']='welcome/summerydetail';
 $route['invoice/(:any)']='welcome/invoice/$1';
 $route['resg_otp_verify'] = 'welcome/resg_otp_verify';
-// $route['coupon_check'] = 'welcome/coupon_check';
+$route['service_tracker/(:any)'] = 'welcome/service_tracker/$1';
 
 // $route['update_cart']='welcome/update_cart';
 
@@ -217,6 +219,17 @@ $route['admin/generateinvoice/edit/(:any)']='admin/generateinvoice/edit/$1';
 $route['admin/generateinvoice/add']='admin/generateinvoice/add';
 $route['admin/checkcontact']='admin/checkcontact';
 $route['admin/generateinvoice/invoice/(:any)']='admin/generateinvoice/invoice/$1';
+$route['admin/generateinvoice/delete/(:any)']='admin/generateinvoice/delete/$1';
+
+//admin generate quotation
+$route['admin/quotation']='admin/quotation/view';
+$route['admin/quotation/edit/(:any)']='admin/quotation/edit/$1';
+$route['admin/quotation/add']='admin/quotation/add';
+$route['admin/checkcontact']='admin/checkcontact';
+$route['admin/quotation/invoice/(:any)']='admin/quotation/invoice/$1';
+$route['admin/quotation/generateinvoice/(:any)']='admin/quotation/generateinvoice/$1';
+$route['admin/quotation/invoicelist']='admin/quotation/invoicelist';
+$route['admin/quotation/edit/(:any)']='admin/quotation/edit/$1';
 
 //admin coupons
 $route['admin/coupon'] = 'admin/coupon/view';
@@ -224,6 +237,21 @@ $route['admin/coupon/add'] = 'admin/coupon/add';
 $route['admin/coupon/edit/(:any)'] = 'admin/coupon/edit/$1';
 $route['admin/coupon/delete/(:any)'] = 'admin/coupon/delete/$1';
 
+//admin pincode
+$route['admin/pincode']="admin/pincode/view";
+$route['admin/pincode/add']="admin/pincode/add";
+$route['admin/pincode/edit/(:any)']="admin/pincode/edit/$1";
+$route['admin/pincode/delete/(:any)']="admin/pincode/delete/$1";
+$route['admin/pincode/active/(:any)']="admin/pincode/active/$1";
+$route['admin/pincode/inactive/(:any)']="admin/pincode/inactive/$1";
+
+//admin Engineers
+$route['admin/shop']="admin/shop/view";
+$route['admin/shop/add']="admin/shop/add";
+$route['admin/shop/edit/(:any)']="admin/shop/edit/$1";
+$route['admin/shop/delete/(:any)']="admin/shop/delete/$1";
+$route['admin/shop/active/(:any)']="admin/shop/active/$1";
+$route['admin/shop/inactive/(:any)']="admin/shop/inactive/$1";
 
 
 
@@ -256,6 +284,16 @@ $route['shop'] = 'shop/index';
 
 //shop account
 $route['shop/account'] = 'shop/account/view';
+
+//shop registration
+$route['shop/registration'] = 'shop/registration';
+
+//shop registration
+$route['shop/extended'] = 'shop/extended/view';
+$route['shop/extended/add'] = 'shop/extended/add';
+$route['admin/extended/edit/(:any)']="admin/extended/edit/$1";
+$route['admin/extended/delete/(:any)']="admin/extended/delete/$1";
+
 
 
 

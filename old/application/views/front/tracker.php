@@ -1,10 +1,11 @@
 <!--Body Content-->
+
 <div id="page-content">
 	<div class="section summery">
 		<div class="container">
 			<div class="row justify-content-center">
-				<div class="col-lg-12 mt-4 sendrequest">
-					<div class="card shadow2">
+				<div class="col-lg-12 mt-4 trackersearch">
+					<div class="card shadow">
 						<div class="card-body">
 							<div class="section-header text-center">
 								<h4 class="user-titles">Track Service Request</h4>
@@ -27,47 +28,33 @@
 										<div class="col-lg-12">
 
 											<input type="button" name="submit" value="Continue"
-												class="theme-btn offer-btn " id='servicebnt'>
+												class="theme-btn offer-btn  mt-4" id='servicebnt'>
 										</div>
 								</form>
 							</div>
 						</div>
 					</div>
-</div>
 				</div>
+			</div>
 
-				<div class="col-12 service-request">
-					<div class="card shadow1">
+			<div class="col-12 trackerlist">
+				<div class="container">
+					<div class="card">
 						<div class="card-body">
 							<div class="section-header text-center">
 								<h4 class="user-titles">Track Service Request</h4>
 								<hr>
-
-								<div class="row text-left justify-content-center">
-									<div class="col-12 col-sm-8">
-									<h3 class="mb-4">Split Ac</h3>
-									<div class="row">
-										<div class="col-6">
-											<p>Service Id </p>
-											<p>Request Date</p>
-											<p>Status</p>
-										</div>
-										<div class="col-6">
-											<p>: 12121</p>
-											<p>: 22-32-32</p>
-											<p>: Completed</p>
-										</div>
-									</div>
-									</div>
-								</div>
+								<ul id="list" class="text-left"></ul>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
-	<div class="section"></div>
+</div>
+<div class="section"></div>
 </div>
 <!--End Body Content-->
 
@@ -75,10 +62,10 @@
 <script src="<?php echo base_url();?>assets/js/vendor/jquery-3.3.1.min.js"></script>
 
 <script>
-	$(document).ready(function () {
-		$('#spanservice').hide();
-		$('#servicebnt').click(function () {
-			let serviceno = $('#serviceno').val();
+	$('#spanservice').hide();
+		$('.trackerlist').hide();
+	$(document).on('click','#servicebnt',function(){
+		let serviceno = $('#serviceno').val();
 			var csrfName = $('.csrf').attr('name');
 			var csrfHash = $('.csrf').val();
 			$.ajax({
@@ -94,16 +81,59 @@
 					if (response.data == 'error') {
 						$('#spanservice').show().css('color', 'red');
 					} else {
-						$('.sendrequest').hide();
-						$('.service-request').show();
-						// window.location
+						var len = response.data.length;
+						console.log(len);
+						let textwrit = '';
+						$.each(response.data, function (index) {
+							// dd += response.data[index].request_id_value
+							textwrit +=
+								'<li class="tracker_list_item" tabindex="0"><form action="" method="post"><input type="hidden" name="req_id" value="' +
+								response.data[index].request_id_value +
+								'"><label for="211220-000804" class="tracker_list_item_wrap"><div class="tracker_details"><h4> Others  Split AC (AMC - Breakdown)</h4><div class="tracker_details_box"><div class="tracker_detail_list"><div class="tracker_detail_list_item_"><span class="tracker_head">Request ID</span><span class="tracker_val">: ' +
+								response.data[index].request_id_value +
+								'</span></div><div class="tracker_detail_list_item_"><span class="tracker_head">Request Date</span><span class="tracker_val">: ' +
+								response.data[index].created_on +
+								'</span></div><div class="tracker_detail_list_item_"><span class="tracker_head">Status</span><span class="tracker_val tracker_detail_list_item__highlighted__1sTay">: Service ' +
+								response.data[index].status +
+								'</span></div></div><div class="tracker_list_item__action"><a role="button" data-loading="false" href="<?= base_url()?>'+ 'service_tracker/'+
+								response.data[index].request_id_value +'" class="button_app_btn undefined trackid" data-variant="primary" title="Track Now">Track Now</a></div></div></div></label></form></li>';
+						});
+						$('#list').html(textwrit);
+						// $('#list').html(response.data);
+						$('.trackersearch').hide();
+						$('.trackerlist').show();
 					}
 				},
 				error: function () {
 					alert('Request not send. Please try gain');
 				}
 			})
-		})
 	})
+
+
+	// $(document).on('click','.trackid',function(){
+	// 	alert('fgfg');
+	// 		let req_id = $(this).data('id');
+	// 		let req_date = $(this).data('date');
+	// 		$('#requestid').text(req_id);
+	// 		$('#reqdate').text(req_date);
+	// 		var csrfName = $('.csrf').attr('name');
+	// 		var csrfHash = $('.csrf').val();
+	// 		$.ajax({
+	// 			url: "<?= base_url('welcome/track') ?>",
+	// 			method: "post",
+	// 			data: {
+	// 				req_id: req_id,
+	// 				[csrfName]: csrfHash,
+	// 			},
+	// 			dataType: "json",
+	// 			success: function (response) {
+	// 				$('.csrf').val(response.token);
+	// 			},
+	// 			error: function () {
+	// 				alert('Request not send. Please try gain');
+	// 			}
+	// 		})
+	// })
 
 </script>

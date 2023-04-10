@@ -119,7 +119,7 @@
                                                     ?>
 									<div class="theme-btn offer-btn">
 										<?php
-									if(!@$this->session->userdata['cid']){
+									if(!@get_cookie('cid')){
 									?>
 										<a href="<?php echo base_url('sign-up');?>" class="">Checkout</a>
 										<?php }else{ ?>

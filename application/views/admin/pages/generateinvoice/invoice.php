@@ -62,9 +62,10 @@
 
 	.logo {
 		display: inline-block;
-		vertical-align: middle;
-		width: 110px;
-		overflow: hidden;
+    vertical-align: middle;
+    width: 25%;
+    margin-bottom: 20px;
+    overflow: hidden;
 	}
 
 	.info {
@@ -82,7 +83,6 @@
 	.clientinfo {
 		display: inline-block;
 		vertical-align: middle;
-		margin-left: 20px
 	}
 
 	.title {
@@ -150,7 +150,7 @@
 
 	.tabletitle th {
 		border: 2px solid #fff;
-		background: #0e7668 !important;
+		background: #0db19e !important;
 		text-align: right;
 		color: #fff;
 	}
@@ -198,22 +198,24 @@
 				<div id="invoice" class="effect2">
 
 					<div id="invoice-top">
+					<div class="logo"><img src="<?php echo base_url();?>assets/images/logo/header.png"
+										alt="OTG CARES" /></div>
 						<div class="clearfix">
 							<div class="col-left">
-								<div class="logo"><img src="<?php echo base_url();?>assets/images/logo/header.png"
-										alt="OTG CARES" /></div>
+								
 								<div class="clientinfo">
-									<h2 id="supplier">OTGcares</h2>
-									<p><span id="address">S-53, Haware Fantasia Business park, <br> Vashi Navi Mumbai
+									<h2 id="supplier" style="color:#4c3418;font-weight:bold">OTGcares</h2>
+									<p><span id="address">2nd floor, Haware Fantasia Business park, <br> Vashi Navi Mumbai
 											Thane
-											Maharashtra 400708</span><br>
+											Maharashtra 400705</span><br>
 										<span><b>Phone : </b> <span>9076020306</span></span><br>
-										<span><b>Email : </b> <span>support@otgcares.com</span></span></p>
+										<span><b>Email : </b> <span>support@otgcares.com</span></span><br>
+										<span><b>GSTIN : </b> <span>27AAHFO5291Q1ZF</span></span></p>
 
 								</div>
 							</div>
 							<div class="col-right">
-								<h2 id="supplier">INVOICE</h2>
+								<h2 id="supplier"style="color:#f8b11b;">INVOICE</h2>
 								<table class="table">
 									<tbody>
 										<tr>
@@ -242,7 +244,9 @@
 						<div id="message">
 							<h2>Bill To,</h2>
 							<p><?= $invoice[0]['cust_name'] ?> <span id="supplier_name"></span><br>+91
-								<?= $invoice[0]['contact'] ?></p>
+								<?= $invoice[0]['contact'] ?>
+								<br>
+								<?= $invoice[0]['addr'] ?></p>
 						</div>
 					</div>
 					<!--End Invoice Mid-->
@@ -260,7 +264,6 @@
 										<th>MRP</th>
 										<th>Rate</th>
 										<th>Disc</th>
-										<th>Tax</th>
 										<th> Amount</th>
 									</tr>
 								</thead>
@@ -279,25 +282,24 @@
 									<td data-label="Tax Code" class="tableitem chDiscount" id=''>
 										<?= $invoice1['discount'] ?> %
 									</td>
-									<td data-label="%" class="tableitem"><?= '0.00' ?></td>
 									<td data-label="Tax Amount" class="tableitem amt" id='result'><?= $invoice1['amt'] ?></td>
 								</tr>
 								
 								<?php $count++; } ?>
 								<tr class="list-item">
-									<td colspan="6" style="border-left:2px solid #dee2e6;text-transform:capitalize"
+									<td colspan="5" style="border-left:2px solid #dee2e6;text-transform:capitalize"
 										class='words text-left'></td>
 									<td data-label="Grand Total" class="tableitem">Subtotal</td>
 									<td data-label="Grand Total" class="tableitem numberword result" id='result'></td>
 								</tr>
 								<tr class="list-item">
-									<td colspan="6" style="border-left:2px solid #dee2e6" class=' text-left'> Total Quantity: <?= count($invoice); ?></td>
+									<td colspan="5" style="border-left:2px solid #dee2e6" class=' text-left'> Total Quantity: <span id="qty"></span></td>
 									<td data-label="Grand Total" class="tableitem">Total Payable</td>
 									<td data-label="Grand Total" class="tableitem result" id='result'>
 									</td>
 								</tr>
 								<tr class="list-item">
-									<td colspan="6"
+									<td colspan="5"
 										style="border-bottom: 2px solid #dee2e6;border-left:2px solid #dee2e6">
 									</td>
 									<td data-label="Grand Total" class="tableitem">Received</td>
@@ -312,13 +314,13 @@
 								<tr class="">
 									<th>Notes <p>Thank You For Doing Business With Us</p>
 									</th>
-									<th>Bank Details</th>
+									<!-- <th>Bank Details</th>
 									<th><span>Due Amount</span><span>
 											0.00
-										</span></th>
+										</span></th> -->
 								</tr>
 
-								<tr class="">
+								<!-- <tr class="">
 									<td colspan='2'>
 										<h2>Terms And Conditions</h2>
 										<p> 
@@ -327,22 +329,19 @@
 											echo $invoices['qua'].' '.$invoices['product'];
 										}
 										?>,	
-										<!-- A.M.C Upto 1.5 Ton - 3 Jet Service + 1 Time Gas Recharge + Unlimited Repair
-											Total 3
-											Basic AMC And 2 Service AMC Is Included In Your Contract.</p> -->
 									</td>
 									<td class="">
 										heelo
 										<p> For OTGCares</p>
 									</td>
-								</tr>
+								</tr> -->
 							</table>
 						</div>
 						<!--End Table-->
 					</div>
 				</div>
 				<!--End Invoice-->
-				<div class="container">
+				<div class="container mt-4">
 					<div class="cta-group">
 						<button class="btn btn-primary invoice">Download Invoice</button>
 					</div>
@@ -365,6 +364,15 @@
 		$('.result').text(sum);
 		console.log(sum);
 	});
+
+	$(window).on("load",function(){
+		let qusum = 0 ;
+		$('.qua').each(function(){
+			let qty =$(this).text();
+			qusum += parseInt(qty);
+		});
+		$('#qty').text(qusum);
+	})
 
 </script>
 <script>

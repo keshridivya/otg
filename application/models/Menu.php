@@ -7,9 +7,10 @@ class Menu extends CI_model {
     }
 
     public function menu_all(){
-        $this->db->select('*');
+        $this->db->select('*,group_concat(category_name) as category_name');
         $this->db->from('category_product');
         $this->db->where('status','active');
+        $this->db->group_by('cproduct_name');
         $query=$this->db->get();
         return $query->result_array();
     }
@@ -108,7 +109,7 @@ class Menu extends CI_model {
     }
 
     public function admininvoice($id){
-        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
+        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt,CONCAT(customer.address,", ", customer.pincode) as addr');
         $this->db->from('invoice');
         $this->db->join('customer','invoice.contact=customer.contact');
         $this->db->where(array('invoice.order_id'=>$id));
@@ -128,12 +129,59 @@ class Menu extends CI_model {
     
     //froninvoice
     public function invoiceorder_id($id,$service_device){
-        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt');
+        $this->db->select('*,invoice.contact as cont,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qua as amt,CONCAT(customer.address,", ", customer.pincode) as addr');
         $this->db->from('invoice');
         $this->db->join('customer','invoice.contact=customer.contact');
         $this->db->where(array('invoice.order_id'=>$id,'invoice.product'=>$service_device));
         $query = $this->db->get();
             return $query->result_array();
+    }
+
+    //admin quo
+    public function adminquotation($id){
+        $this->db->select('*,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qty as amt,CONCAT(address,", ", pincode) as addr');
+        $this->db->from('quotation');
+        $this->db->where(array('quotation.quo_code'=>$id));
+        $query = $this->db->get();
+            return $query->result_array();
+    }
+
+    //admin quo view
+    public function adminquoview(){
+        $this->db->select('*,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qty as amt,CONCAT(address,", ", pincode) as addr');
+        $this->db->from('quotation');
+        $this->db->group_by('quo_code');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+     //admin create quo view
+     public function adminquoinvoice(){
+        $this->db->select('*,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qty as amt,CONCAT(address,", ", pincode) as addr');
+        $this->db->from('quotation');
+        $this->db->join('quotation_invoice','quotation.quo_code=quotation_invoice.quo_code');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    //admin pincode view
+    public function pincodeview(){
+        $this->db->select('*');
+        $this->db->from('pincode');
+        $this->db->join('category_product','category_product.cproduct_id=pincode.service_product');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    //front pincode view
+    public function checkpin($c_pincode, $cartItems){
+        $this->db->select('*');
+        $this->db->from('pincode');
+        $this->db->join('category_product','category_product.cproduct_id=pincode.service_product');
+        $this->db->where(['category_product.cproduct_name'=>$cartItems, 'pincode.pincode'=>$c_pincode]);
+        $query = $this->db->get();
+        // print_r($this->db->last_query());
+        return $query->result_array();
     }
 
     // function checklogin($email,$password)
@@ -186,12 +234,15 @@ class Menu extends CI_model {
     }
 
     //front coupon
-    function couponcheck($cartItems,$inputcoupon){
+    function couponcheck($cartItems,$inputcoupon,$servicename,$service){
         $this->db->select('*');
         $this->db->from('coupons');
-        $this->db->join('category_product','category_product.cproduct_id = coupons.cproduct');
-        $this->db->where(['category_product.cproduct_name'=>$cartItems,'coupons.code'=>$inputcoupon]);
+        $this->db->join('category_product','category_product.cproduct_name = coupons.cproduct');
+        $this->db->join('category_plans','category_plans.cplan_id = coupons.cplan');
+        $this->db->where("FIND_IN_SET('$service',coupons.service_name) !=", 0);
+         $this->db->where(['category_product.cproduct_name'=>$cartItems,'coupons.code'=>$inputcoupon,'category_plans.cplan_name'=>$servicename,'coupons.status'=>'active']);
         $query = $this->db->get();
+        // print_r($this->db->last_query());
         return $query->row();
     }
 
@@ -207,20 +258,47 @@ class Menu extends CI_model {
 
     //front service track
     public function service_track($serviceno){
-        $this->db->select('*');
+        $this->db->select('*,DATE_FORMAT(created_on,"%Y-%m-%d") as created_on');
         $this->db->from('bookings');
         $this->db->where('cust_contact',$serviceno);
         $this->db->or_where('cust_email',$serviceno);
         $this->db->or_where('request_id_value',$serviceno);
         $query = $this->db->get();
         return $query->result_array();
-        print_r($this->db->last_query());
+    }
 
+    //front track
+    public function track($req_id){
+        $this->db->select('*,DATE_FORMAT(created_on,"%Y-%m-%d") as cdate,DATE_FORMAT(modified_on,"%Y-%m-%d") as mdate');
+        $this->db->from('bookings');
+        $this->db->where('request_id_value',$req_id);
+        $query = $this->db->get();
+        return $query->row();
     }
 
     public function createData($data) {
         $query = $this->db->insert('booking_items', $data);
         return $query;
+    }
+
+    //shop extended
+    public function extended($id){
+        $this->db->select('*');
+        $this->db->from('warrenty');
+        $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
+        $this->db->where('warrenty.shop_id',$id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+     //shop extended edit
+     public function extendededit($id){
+        $this->db->select('*');
+        $this->db->from('warrenty');
+        $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
+        $this->db->where('warrenty.warrenty_id',$id);
+        $query = $this->db->get();
+        return $query->result_array();
     }
     
 }

@@ -44,9 +44,7 @@
 						<div class="col-lg-6">
 							<?php
 										if($message ?? FALSE){
-
 											echo "<div class='alert alert-danger'>".$message."</div>";
-
 										}
 										?>
 						</div>
@@ -76,13 +74,10 @@
 												<input type="text" class="form-control " id="loginotp" name="loginotp"
 													placeholder="OTP">
 											</div>
-											<!-- <div style='color:red;font-size:15px' class='otp_hide'>OTP expires within 5
-												minutes: <span id="timer"></span></div> -->
 										</div>
 									</div>
 									<div class="row justify-content-center">
 										<div class="col-lg-6 login_err">
-
 										</div>
 									</div>
 									<button type="button" name="submit" value="login" class="btn login_send_otp"

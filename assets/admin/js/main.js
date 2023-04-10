@@ -27,7 +27,7 @@ $(document).ready(function(){
         let eng_name=$('.eng_name').val();
 
         
-        if(device_modal == '' || booking_status== '' ||  payment_method=='' || additional_expens == '' || additional=='' || addon=='' || comment == '' || expenes == '' || advance_payment == '' || visiting_card == '' ){
+        if(device_modal == '' || booking_status== '' ||  payment_method=='' || additional_expens == '' || additional=='' || addon=='' || comment == '' || expenes == '' || visiting_card == '' ){
             $('#message_upload_error').html('Please fill all field').addClass('alert alert-danger');
         }
         else{
@@ -84,7 +84,7 @@ $(document).ready(function(){
         let request_id=$('.request_id').val();
         let eng_name=$('.eng_name').val();
        
-        if(device_modal == '' || booking_status== '' || additional_expens == '' || additional=='' || addon=='' || comment == '' || expenes == '' || advance_payment == '' || visiting_card == '' ){
+        if(device_modal == '' || booking_status== '' || additional_expens == '' || additional=='' || addon=='' || comment == '' || expenes == '' ||  visiting_card == '' ){
             $('#message_upload_error').html('Please fill all field').addClass('alert alert-danger');
         }
         else{
@@ -96,6 +96,15 @@ $(document).ready(function(){
     });
 });
 
+$('.adp').hide();
+$('.otm').change(function(){
+    let service_type = $(this).val();
+    if(service_type == 'AMC'){
+        $('.adp').show();
+    }else{
+        $('.adp').hide();
+    }
+})
 
 
  

@@ -48,17 +48,24 @@
         color:green;
     }
 
+	.header-name{
+text-transform:capitalize
+	}
+	.account_header{
+		text-decoration:underline;
+	}
+
 </style>
 <div class="container rounded bg-white mb-5">
-	<div class="row ">
+	<div class="row text-center justify-content-center">
 		<div class="col-12 col-md-6">
             <div class="d-flex flex-column  p-3 py-3">
-            <span class="font-weight-bold">Information About You</span>
+            <span class="font-weight-bold  account_header">INFORMATION ABOUT YOU</span>
             </div>
 			<div class="d-flex flex-column  py-1">
                
                 <span
-					class="text-black-50"><?= $info->name; ?></span>
+					class="text-black-50 header-name"><?= $info->name; ?></span>
                     <span
 					class="text-black-50"><?= $info->shop_code; ?></span><span>
                     <span

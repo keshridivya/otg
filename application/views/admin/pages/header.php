@@ -113,7 +113,10 @@
                         <a class="collapse-item" href="<?php echo base_url();?>admin/contact">Enquiry Detail</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/offer">Offer Banner</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/generateinvoice">Generate Invoice</a>
+                        <a class="collapse-item" href="<?php echo base_url();?>admin/quotation">Generate Quotation</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/coupon">Coupon</a>
+                        <a class="collapse-item" href="<?php echo base_url();?>admin/pincode">Pincode</a>
+                        <a class="collapse-item" href="<?php echo base_url();?>admin/shop">Shop</a>
                     </div>
                 </div>
             </li>

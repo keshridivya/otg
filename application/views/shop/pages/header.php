@@ -62,12 +62,12 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="<?php echo base_url();?>engineer/ongoing">
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url();?>shop/extended">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Ongoing Assignment</span></a>
+                    <span>Extended Warranty</span></a>
             </li>
-            <hr class="sidebar-divider"> -->
+            <hr class="sidebar-divider">
             <li class="nav-item"><a class="nav-link" href="<?= base_url('shop/account') ?>" >
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     My Account
@@ -104,7 +104,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="" id="userDropdown1" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hello <?php echo ($this->session->userdata('sname') ?? '');?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hello <?php echo (get_cookie('cname') ?? '');?></span>
                                 <i class="fa-solid fa-bars"></i>
                             </a>
                             <!-- Dropdown - User Information -->

@@ -8,7 +8,6 @@
             	<!-- Page Heading -->
             	<h1 class="h3 mb-2 text-gray-800"><?php echo $action?></h1>
 
-            	<?php echo $eng_data['eng_id']; ?>
 
             	<!-- DataTales Example -->
             	<div class="card o-hidden border-0 shadow-lg my-5">
@@ -19,7 +18,7 @@
             				<div class="col-lg-12">
             					<div class="p-5">
             						<?php
-                          if($message){
+                          if($message ?? ''){
                             echo "<div class='alert alert-info'>".$message."</div>";
                           }
                           ?>

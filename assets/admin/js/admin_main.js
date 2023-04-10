@@ -127,7 +127,26 @@ $(document).ready(function () {
 
 });
 
-
+//pincode 
+$(document).ready(function(){
+	$('.pincodecheck').click(function(){
+        let bookpin=$('#pincode').val();
+        let zipRegex = /^\d{6}$/;
+        if(bookpin.length==''){
+            $('.message').show().css('color','red').html('** Please enter 6 digits pincode');
+            pin_error = false;
+            return false;
+        }
+        else if(!zipRegex.test(bookpin)){
+            $('.message').show().css('color','red').html('** pincode should only be 6 digits');
+            pin_error = false;
+            return false;
+        }
+        else{
+            $('.message').hide();
+        }
+	});
+})
 //generate invoice
 $(document).ready(function () {
 

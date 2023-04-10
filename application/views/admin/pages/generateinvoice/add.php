@@ -272,9 +272,16 @@
 														</div>
 													</div>
 													<label class="fieldlabels">Email: *</label> <input type="email"
-														name="email" id='email' placeholder="Email Id" /> <label
+														name="email" id='email' placeholder="Email Id" /> 
+														<label
 														class="fieldlabels">Client Name: *</label> <input type="text"
 														name="name" id='name' placeholder="Client Name" />
+														<label
+														class="fieldlabels">Client Address: *</label> <input type="text"
+														name="address" id='address' placeholder="Client Address" />
+														<label
+														class="fieldlabels">Client Pincode: *</label> <input type="text"
+														name="pincode" id='pincode' placeholder="Client Pincode" />
 												</div>
 												<input type="button" name="next" class="next action-button"
 													value="Next" />

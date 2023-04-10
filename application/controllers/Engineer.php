@@ -40,6 +40,9 @@ class Engineer extends CI_Controller {
                 $eid=$query[0]['eng_id'];
                 $ename=$query[0]['eng_name'];
                 $email=$query[0]['email_id'];
+                // setcookie('eng_id',$eid,time()+60*60*24*90);
+                // setcookie('e_name',$ename,time()+60*60*24*90);
+                // setcookie('e_mail',$email,time()+60*60*24*90);
                 $this->session->set_userdata('eng_id',$eid);
                 $this->session->set_userdata('e_name',$ename);
                 $this->session->set_userdata('e_mail',$email);
@@ -100,6 +103,7 @@ class Engineer extends CI_Controller {
                     $dataInfo = array();
                     $files = $_FILES;
                     $rid=$this->input->post('r_id');
+                    $breq_id = $this->input->post('request_id');
                     if($_FILES['image1']['name']!= ""){
                         $absolute_path=base_url('uploads/eng_client/');
                         $uploaded_data1=$this->uploadimg1(array('upload_path'=>'./uploads/eng_client/','name'=>'image1'));
@@ -178,6 +182,12 @@ class Engineer extends CI_Controller {
                     }
                     }
                     if($this->db->insert('engineer_client',$data)){
+                        $data1=array(
+                            'status'=>'process',
+                            'modified_on'=>date('y-m-d'),
+                        );
+                        $this->db->where('request_id_value',$breq_id);
+                        $this->db->update('bookings',$data1);
                         print_r($this->db->last_query());
                         $page_data['message'] = 'Submitted Succesfully';
                         $data1['procees']='proceed';
@@ -227,6 +237,7 @@ class Engineer extends CI_Controller {
                     if($btn_name=='Reschedule'){
                         $data1=array(
                             'status'=>'pending',
+                            'modified_on'=>date('y-m-d'),
                         );
                         $this->db->where('request_id_value',$req_id);
                         $this->db->update('bookings',$data1);
@@ -234,6 +245,7 @@ class Engineer extends CI_Controller {
                     else if($btn_name=='Generate'){
                         $data1=array(
                             'status'=>'completed',
+                            'modified_on'=>date('y-m-d'),
                         );
                         $this->db->where('request_id_value',$req_id);
                         $this->db->update('bookings',$data1);
@@ -241,6 +253,7 @@ class Engineer extends CI_Controller {
                     else if($btn_name=='close'){
                         $data1=array(
                             'status'=>'close',
+                            'modified_on'=>date('y-m-d'),
                         );
                         $this->db->where('request_id_value',$req_id);
                         $this->db->update('bookings',$data1);
@@ -248,6 +261,7 @@ class Engineer extends CI_Controller {
                     else{
                         $data1=array(
                             'status'=>'close',
+                            'modified_on'=>date('y-m-d'),
                         );
                         $this->db->where('request_id_value',$req_id);
                         $this->db->update('bookings',$data1);

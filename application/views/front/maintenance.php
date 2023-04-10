@@ -99,7 +99,6 @@
 															<div class="plan-title">
 																<h2 class="heading">
 																	<?php echo $plandata['cplan_name'];?></h2>
-
 															</div>
 															<p><?= $plandata['cplan_desc'] ?></p>
 														</div>

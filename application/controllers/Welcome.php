@@ -12,6 +12,7 @@ class Welcome extends CI_Controller {
         $this->load->library('cart');
         // $this->load->library('menu_all');
         $this->load->model('Menu','menu',true);
+        $this->load->helper(array('cookie', 'url'));
 
     }
          //menu list
@@ -98,9 +99,13 @@ class Welcome extends CI_Controller {
 
                         $result = $this->db->get_where('customer',array('contact' => $mob_num))->row();
                         if(!empty($result)){
+                            set_cookie('cid',$result->cust_id,time()+60*60*24*90);
+                            set_cookie('cemail',$result->email_id,time()+60*60*24*90);
+                            set_cookie('cname',$result->cust_name,time()+60*60*24*90);
                             $this->session->set_userdata('cid', $result->cust_id);
                             $this->session->set_userdata('cemail', $result->email_id);
                             $this->session->set_userdata('cname', $result->cust_name);
+
 
                         }else{
                             $page_data['message']="User not found";
@@ -171,7 +176,7 @@ class Welcome extends CI_Controller {
                     $this->load->view('index',$page_data);
                 }
         }
-        elseif(@$this->session->userdata['cid']){
+        elseif(@get_cookie('cid')){
             $testimonial=$this->db->get_where('testimonials',array('status'=>'active'))->result_array();
             $client=$this->db->get_where('our_client',array('status'=>'active'))->result_array();
             $banner=$this->db->get_where('banner',array('status'=>'active'))->result_array();
@@ -276,7 +281,6 @@ class Welcome extends CI_Controller {
 
     // public function forgetotp(){
     public function regloginotp(){
-
         if($this->input->post('number')){
             $this->load->helper('msg');
             $number = $this->input->post('number');
@@ -285,16 +289,15 @@ class Welcome extends CI_Controller {
             {
                 $otp = rand(10000, 99999);
                 $otp_resu = 'success';
-                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
-                //   Do not share it with anyone';
-                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
-                //       $page_data['status'] = true;
-                //       $page_data['message'] = "success";
-                    
-                //       } else {
-                //       $page_data['status'] = false;
-                //       $page_data['message'] = "Something went wrong, please try again later.";
-                //       }
+                  $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                  Do not share it with anyone';
+                  if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                      $page_data['status'] = true;
+                      $page_data['message'] = "success";
+                      } else {
+                      $page_data['status'] = false;
+                      $page_data['message'] = "Something went wrong, please try again later.";
+                      }
             }
             else
             {
@@ -305,7 +308,7 @@ class Welcome extends CI_Controller {
         }
         $this->session->set_userdata('login_otp',$otp);
         $data['otp'] = $otp_resu;
-        $data['otp1'] = $otp;
+        // $data['otp1'] = $otp;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }
@@ -318,6 +321,17 @@ class Welcome extends CI_Controller {
                 $otp = 'success';
                     $result=$this->menu->checklogin($number);
                     if(!empty($result)){
+                        // $cookie = array(
+                        //     'cid'   => $result->cust_id,
+                        //     'cemail'  =>$result->email_id,
+                        //     'cname' => $result->cust_name,
+                        //     'expire' => '7776000',
+                        //     'secure' => TRUE
+                        // );
+                        // $this->input->set_cookie($cookie);
+                        set_cookie('cid',$result->cust_id,time()+60*60*24*90);
+                        set_cookie('cemail',$result->email_id,time()+60*60*24*90);
+                        set_cookie('cname',$result->cust_name,time()+60*60*24*90);
                         $this->session->set_userdata('cid', $result->cust_id);
                         $this->session->set_userdata('cemail', $result->email_id);
                         $this->session->set_userdata('cname', $result->cust_name);
@@ -363,6 +377,17 @@ class Welcome extends CI_Controller {
         
     }
 
+    public function extended($action)
+    {
+        $product_arg=urldecode($action);
+        $product_data=$this->db->get_where('category_product',array('cproduct_name'=>$product_arg,'category_name'=>'Extended Warrenty'))->result_array();
+        $page_data['product_data']=$product_data;
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page']="extended";
+        $this->load->view('index',$page_data);
+        $this->load->library('cart');
+    }
+
     function addtocart($proid){
         $plans=$this->db->get_where('category_plans',array('cplan_id'=>$proid))->result_array();
         $products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
@@ -373,6 +398,7 @@ class Welcome extends CI_Controller {
             'name'=>$plans[0]['cplan_name'],
             'image'=>$products[0]['cproduct_img'],
             'product_name'=>$products[0]['cproduct_name'],
+            'category_name'=>$products[0]['category_name'],
             'product_category'=>$products[0]['category_name'],
         );
         $this->cart->insert($data);
@@ -399,8 +425,8 @@ class Welcome extends CI_Controller {
 
     public function account()
     {
-        if($this->session->userdata('cid') || $this->session->userdata('custid')){
-            $session_cust=$this->session->userdata('cid');
+        if($_COOKIE['cid'] || $this->session->userdata('custid')){
+            $session_cust=$_COOKIE['cid'];
               
                 if($this->input->post('submit') == 'Edit'){
                     $btn = $this->input->post('customer_btn');
@@ -547,7 +573,7 @@ class Welcome extends CI_Controller {
             redirect(base_url('services'));
         }
         //if user logged in
-        if($this->session->userdata['cid']){
+        if(get_cookie('cid')){
             if($this->input->post()){
                 $_SESSION['id'] = $this->input->post('id');
                 $_SESSION['c_name'] = $this->input->post('c_name');
@@ -561,7 +587,7 @@ class Welcome extends CI_Controller {
                 $_SESSION['time_slot'] = $this->input->post('time_slot');
             }
             $page_data['cartItems']=$this->cart->contents();
-            $session_cust=$this->session->userdata['cid'];
+            $session_cust=get_cookie('cid');
             $ex_cust=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
             if($this->input->post()){
                 $payment_method=$this->input->post('payment_method');
@@ -593,7 +619,7 @@ class Welcome extends CI_Controller {
     }
     
     public function checkout_form(){
-        $session_cust=$this->session->userdata('cid');
+        $session_cust=$_COOKIE['cid'];
         if($this->input->post('submit') == 'Edit'){
             $btn = $this->input->post('customer_btn');
             if($btn == 'shipping'){
@@ -728,10 +754,31 @@ class Welcome extends CI_Controller {
         }
     }
 
+    public function checkpin(){
+        if($this->input->post('c_pincode')){
+            $c_pincode = $this->input->post('c_pincode');
+            $cartItems =$this->input->post('cartItems');
+            $result=$this->menu->checkpin($c_pincode,$cartItems);
+            if (count($result) > 0)
+            {
+                $msg = 'success';
+            }
+            else
+            {
+                $msg = 'error';
+            }
+        }
+        $data['msg'] = $msg;
+        $data['token'] = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+
     public function coupon_check(){
         $inputcoupon = $_POST['inputcoupon'];
+        $servicename = $_POST['servicename'];
         $cartItems = $_POST['cartItems'];
-         $query = $this->menu->couponcheck($cartItems,$inputcoupon);
+        $service = $_POST['service'];
+         $query = $this->menu->couponcheck($cartItems,$inputcoupon,$servicename,$service);
 
         if($query){
             $data['coupon'] = 'success';
@@ -746,8 +793,8 @@ class Welcome extends CI_Controller {
     }
     
     public function summery(){
-        if($this->session->userdata('cid')){
-            $session_cust=$this->session->userdata('cid');
+        if($_COOKIE['cid']){
+            $session_cust=$_COOKIE['cid'];
             $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
             $page_data['customers']=$customers_table;
         }else if($this->session->userdata('custid')){
@@ -790,7 +837,7 @@ class Welcome extends CI_Controller {
         $razorpayOrderId = $razorpayOrder['id'];
         $_SESSION['razorpay_order_id'] = $razorpayOrderId;
         $data = $this->prepareData($amount,$razorpayOrderId);
-        $session_cust=$this->session->userdata('cid');
+        $session_cust=$_COOKIE['cid'];
         $customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
         $data=array(
             'data'=>$data,
@@ -891,7 +938,7 @@ class Welcome extends CI_Controller {
             );
             $main_arr[]=$arr;
         }
-        $cust_id = $this->session->userdata('cid');	
+        $cust_id = $_COOKIE['cid'];	
 				$sql = $this->db->insert_batch('bookings',$main_arr);
 
             // $customer_email=$this->db->get_where("customer",array('cust_id'=>$data['cust_id']))->result_array();
@@ -953,8 +1000,8 @@ class Welcome extends CI_Controller {
     }
 
     public function summerydetail(){
-		// if($this->session->userdata('cid')){
-		// 	$session_cust=$this->session->userdata('cid');
+		// if($_COOKIE['cid']){
+		// 	$session_cust=$_COOKIE['cid'];
 		// 	$customers_table=$this->db->get_where("customer",array('cust_id'=>$session_cust))->result_array();
 		// 	$page_data['customers']=$customers_table;
 		// }elseif($this->session->userdata('custid')){
@@ -990,7 +1037,7 @@ class Welcome extends CI_Controller {
 				);
                 $main_arr[]=$arr;
             }
-				$cust_id = $this->session->userdata('cid');	
+				$cust_id = $_COOKIE['cid'];	
 				$sql = $this->db->insert_batch('bookings',$main_arr);
                 if($sql == true){
 					$page_data['message']="Successfully created.";
@@ -1047,6 +1094,9 @@ class Welcome extends CI_Controller {
 
     public function logout()
     {
+        delete_cookie('cid');
+        delete_cookie('cemail');
+        delete_cookie('cname');
         $this->session->sess_destroy();
         redirect(base_url('sign-up'));
     }
@@ -1164,6 +1214,15 @@ class Welcome extends CI_Controller {
         $this->load->view('index',$page_data);
     }
 
+    public function service_tracker($id=false){
+        $track = $this->menu->track($id);
+        $page_data['track'] = $track;
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Track Service Request";
+        $page_data['page']="service_tracker";
+        $this->load->view('index',$page_data);
+    }
+
     public function service_request(){
         $serviceno = $this->input->post('serviceno');
         $service_track = $this->menu->service_track($serviceno);
@@ -1197,7 +1256,7 @@ class Welcome extends CI_Controller {
                 );
                 $main_arr[]=$arr;
             }
-                $cust_id = $this->session->userdata('cid');	
+                $cust_id = $_COOKIE['cid'];	
                 $sql = $this->db->insert_batch('bookings',$main_arr);
                 if($sql == true){
                     $page_data['message']="Successfully created.";
@@ -1232,7 +1291,7 @@ class Welcome extends CI_Controller {
     }
 
     public function invoice($id){
-        if($this->session->userdata('cid')){
+        if($_COOKIE['cid']){
         $page_data['dropdown'] = $this->menu->menu_all();
         $invoice_generate = $this->menu->invoice($id);
         $request_id = $invoice_generate[0]['request_id_value'];

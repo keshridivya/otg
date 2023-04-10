@@ -28,6 +28,9 @@
 											-
 											<?php echo $item['name']?><br>
 											<?php
+											if($item['category_name'] == 'Maintenance and repair'){
+												echo '<input type="hidden" value="One Time Service" class="mainten" >'; 
+											}
                                                 }
                                             }
                                             ?>
@@ -47,22 +50,23 @@
 									</tr>
 									<tr></tr>
 								<tfoot style='border-top:1px solid #e7e0e0; margin-top:20px'>
-								<tr>
-									<td></td>
-									<td>
+									<tr>
+										<td></td>
+										<td>
 											<div class="form-group text-left"> <label>Have coupon?</label>
 												<div class="input-group"> <input type="text"
 														class="form-control inputcoupon" name=""
 														placeholder="Coupon code"> <span class="input-group-append">
-														<button type="button" class="btn btn-primary btn-apply coupon">Apply</button>
+														<button type="button"
+															class="btn btn-primary btn-apply coupon">Apply</button>
 													</span> </div>
-													<span id="spancoupon"></span>
+												<span id="spancoupon"></span>
 											</div>
 										</td>
-								</tr>
+									</tr>
 									<tr>
 										<td></td>
-										<td style="text-align:end" ><i class="fa-solid fa-indian-rupee-sign"></i>
+										<td style="text-align:end"><i class="fa-solid fa-indian-rupee-sign"></i>
 											<span id="total_amt"><?php print_r($this->cart->total()); ?></span>
 										</td>
 									</tr>
@@ -77,33 +81,35 @@
 						<div class="card-body">
 							<div class="section-header text-center">
 								<div class="tracker_details_box">
-								<h4 class="user-titles mobiletitle">Booking Details</h4>
-								<div class="col-lg-2 col-sm-4 floatright">
-									<div class="section-header text-right">
-										<div class="plan-btns">
-											<a style="cursor:pointer" data-toggle="modal" data-target="#staticBackdrop"
-												class="add_address">Add Address</a>
+									<h4 class="user-titles mobiletitle">Booking Details</h4>
+									<div class="col-lg-2 col-sm-4 floatright">
+										<div class="section-header text-right">
+											<div class="plan-btns">
+												<a style="cursor:pointer" data-toggle="modal"
+													data-target="#staticBackdrop" class="add_address">Add Address</a>
+											</div>
 										</div>
 									</div>
-								</div>
 								</div>
 								<hr>
 								<div class="row text-left">
 									<div class="col-lg-6  mb-4 ">
-										<div class=" b0x-shadow"><div class="section-header account_heading">
-											<input type="hidden" class="cbtn" value="booking">
-											<input type="hidden" class="ccity"
-												value="<?php echo $ex_cust[0]['city'];?>">
-											<input type="hidden" class="cid"
-												value="<?php echo $ex_cust[0]['cust_id'];?>">
-											<h3 class="cname"><?php echo $ex_cust[0]['cust_name'];?></h3>
-											<p class="ccont"><?php echo $ex_cust[0]['contact'];?></p>
-											<p class="cemail"><?php echo $ex_cust[0]['email_id'];?></p>
-											<p class="caddress"><?php echo $ex_cust[0]['address'];?>,</p>
-											<p class="cpincode"><?php echo $ex_cust[0]['pincode'];?></p>
+										<div class=" b0x-shadow">
+											<div class="section-header account_heading">
+												<input type="hidden" class="cbtn" value="booking">
+												<input type="hidden" class="ccity"
+													value="<?php echo $ex_cust[0]['city'];?>">
+												<input type="hidden" class="cid"
+													value="<?php echo $ex_cust[0]['cust_id'];?>">
+												<h3 class="cname"><?php echo $ex_cust[0]['cust_name'];?></h3>
+												<p class="ccont"><?php echo $ex_cust[0]['contact'];?></p>
+												<p class="cemail"><?php echo $ex_cust[0]['email_id'];?></p>
+												<p class="caddress"><?php echo $ex_cust[0]['address'];?>,</p>
+												<p class="cpincode"><?php echo $ex_cust[0]['pincode'];?></p>
+											</div>
+											<div><a class="cust_edit">Edit</a>
+												<button class="btn-booking btn-active">Selected address</button></div>
 										</div>
-										<div><a class="cust_edit">Edit</a>
-											<button class="btn-booking btn-active">Selected address</button></div></div>
 									</div>
 
 									<?php
@@ -111,19 +117,20 @@
 								?>
 									<div class="col-lg-6 mb-4 ">
 										<div class=" b0x-shadow">
-										<div class="section-header account_heading">
-											<input type="hidden" class="cbtn" value="shipping">
-											<input type="hidden" class="ccity" value="<?php echo $add['city'];?>">
-											<input type="hidden" class="cid" value="<?php echo $add['id'];?>">
-											<h3 class="cname"><?php echo $add['name'];?></h3>
-											<p class="ccont"><?php echo $add['contact'];?></p>
-											<p class="cemail"><?php echo $add['email'];?></p>
-											<p class="caddress"><?php echo $add['address'];?>,</p>
-											<p class="cpincode"><?php echo $add['pincode'];?></p>
+											<div class="section-header account_heading">
+												<input type="hidden" class="cbtn" value="shipping">
+												<input type="hidden" class="ccity" value="<?php echo $add['city'];?>">
+												<input type="hidden" class="cid" value="<?php echo $add['id'];?>">
+												<h3 class="cname"><?php echo $add['name'];?></h3>
+												<p class="ccont"><?php echo $add['contact'];?></p>
+												<p class="cemail"><?php echo $add['email'];?></p>
+												<p class="caddress"><?php echo $add['address'];?>,</p>
+												<p class="cpincode"><?php echo $add['pincode'];?></p>
+											</div>
+											<div><a class="cust_edit"> Edit</a> <button class="btn-booking">Booking to
+													this
+													address</button></div>
 										</div>
-										<div><a class="cust_edit"> Edit</a> <button class="btn-booking">Booking to this
-												address</button></div>
-												</div>
 									</div>
 									<?php } ?>
 								</div>
@@ -131,11 +138,12 @@
 								<form class="customer" method="post" action="" id="book_form">
 									<input type="hidden" class="form-control form-control-user" id="custid"
 										value="<?php echo $ex_cust[0]['cust_id'];?>" name="id">
-										<input type="hidden" class="form-control form-control-user" id="codeper"
+									<input type="hidden" class="form-control form-control-user" id="codeper"
 										value="<?php print_r($this->cart->total()); ?>" name="codeper">
-										<input type="hidden" class="form-control form-control-user" id="perge"
-										value="0" name="percentage">
-									<input type="hidden" class="csrf" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+									<input type="hidden" class="form-control form-control-user" id="perge" value="0"
+										name="percentage">
+									<input type="hidden" class="csrf"
+										name="<?php echo $this->security->get_csrf_token_name(); ?>"
 										value="<?php echo $this->security->get_csrf_hash();?>">
 									<div class="form-group row">
 										<div class="col-lg-6 mb-sm-0">
@@ -195,24 +203,24 @@
 															name="payment_method" checked="checked">Cash On Booking
 													</label>
 												</div>
-												<div class="form-check col-lg-8 text-left mb-3">
+												<!-- <div class="form-check col-lg-8 text-left mb-3">
 													<label class="form-check-label">
 														<input type="radio" class="form-check-input" value="razorpay"
 															name="payment_method">Pay Now
 													</label>
-												</div>
+												</div> -->
 											</div>
 										</div>
-										<div class="col-sm-6 col-12 mt-3">
+										<div class="col-sm-6 col-12 ">
 											<h3 class="">Time Slot</h3>
 											<div class="row justify-content-center" style="    margin-left: 20px;">
-												<div class="form-check col-sm-3 col-12 text-left mb-3">
+												<div class="form-check col-sm-8 col-12 text-left mb-3">
 													<label class="form-check-label float-left">
-														<input type="radio" class="form-check-input" value="9 am to 1pm"
-															name="time_slot" >9 am to 1pm
+														<input type="datetime-local" class="form-check-input"
+															value="<?= date('y-m-d h:i') ?>" name="time_slot">
 													</label>
 												</div>
-												<div class="form-check col-sm-3 col-12 text-left mb-3">
+												<!-- <div class="form-check col-sm-3 col-12 text-left mb-3">
 													<label class="form-check-label">
 													<input type="radio" class="form-check-input" value="1 pm to 5pm"
 															name="time_slot" >1 pm to 5pm
@@ -223,17 +231,17 @@
 													<input type="radio" class="form-check-input" value="5 pm to 9pm"
 															name="time_slot" >5 pm to 9pm
 													</label>
-												</div>
+												</div> -->
 											</div>
 										</div>
-										
+
 									</div>
 
 									<!-- <div class="form-group row">
 										
 									</div> -->
 
-									
+
 
 									<div class="form-group row text-left">
 										<div class="col-lg-12 mt-3 text-justify d-flex">
@@ -260,7 +268,7 @@
 										</div>
 									</div>
 									<div class="form-group row">
-										
+
 										<div class="col-lg-6">
 											<div class="form-checkboxes">
 												<div class="col-lg-12  float-left">
@@ -277,7 +285,8 @@
 										</div>
 									</div>
 									<div class="col-lg-12">
-										<input type="submit" name="submit" value="I AGREE" class="theme-btn offer-btn " id='btn_fill'>
+										<input type="submit" name="submit" value="I AGREE" class="theme-btn offer-btn "
+											id='btn_fill'>
 										<a href="<?php echo base_url('/'); ?>" class="theme-btn offer-btn1">I
 											DISAGREE</a>
 									</div>
@@ -301,12 +310,11 @@
 					</button>
 				</div>
 				<form class="customer pt-4 p-4" method="post" action="<?= base_url('welcome/checkout_form') ?>">
-					<div class="modal-body" >
+					<div class="modal-body">
 						<div class="row justify-content-center">
 							<input type="hidden" id="customer_btn" name="customer_btn">
 							<input type="hidden" id="customer_id" value="" name="customer_id">
-							<input type="hidden" 
-								name="<?php echo $this->security->get_csrf_token_name(); ?>"
+							<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 								value="<?php echo $this->security->get_csrf_hash();?>">
 							<div class="form-group row">
 								<div class="col-sm-6 mb-3">
@@ -359,86 +367,90 @@
 	</div>
 
 	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-	aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 style='color:green;padding:10px'>Service Address</h1>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<form class="customer pt-4 p-4" method="post"  action="<?= base_url('welcome/checkout_form') ?>">
-				<div class="modal-body" >
-					<div class="row justify-content-center">
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 style='color:green;padding:10px'>Service Address</h1>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form class="customer pt-4 p-4" method="post" action="<?= base_url('welcome/checkout_form') ?>">
+					<div class="modal-body">
+						<div class="row justify-content-center">
 
-						<input type="hidden" id="customer_id" value="" name="id">
-						<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
-							value="<?php echo $this->security->get_csrf_hash();?>">
-						<div class="form-group row">
-							<div class="col-sm-6 mb-3 ">
-								<label for="c_name">Customer Name</label>
-								<input type="text" name="username" value="" id="username"
-									class="form-control form-control-user" placeholder="Customer Name">
-								<span id='spanusername'>Enter your name</span>
-							</div>
-							<div class="col-sm-6 mb-3 ">
-								<label for="c_contact">Customer Contact</label>
-								<input type="text" name="mobile" id="mobile" class="form-control form-control-user"
-									placeholder="Contact">
-								<span id='spanmobile'>Enter 10 digit Mobile number</span>
-							</div>
-						
-							<div class="col-sm-6 mb-3 ">
-								<label for="c_email">Email Address</label>
-								<input type="email" name="email_id" value="" id="email_id"
-									class="form-control form-control-user" placeholder="Email Address">
-								<span id='spanemail'>Please enter correct email address</span>
-							</div>
-							<div class="col-sm-6 mb-3 ">
-								<label for="c_city">City</label>
-								<input type="text" name="city" id="city" value="" class="form-control form-control-user"
-									placeholder="City">
-								<span id='spancity'>Please enter correct city</span>
+							<input type="hidden" id="customer_id" value="" name="id">
+							<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+								value="<?php echo $this->security->get_csrf_hash();?>">
+							<div class="form-group row">
+								<div class="col-sm-6 mb-3 ">
+									<label for="c_name">Customer Name</label>
+									<input type="text" name="username" value="" id="username"
+										class="form-control form-control-user" placeholder="Customer Name">
+									<span id='spanusername'>Enter your name</span>
+								</div>
+								<div class="col-sm-6 mb-3 ">
+									<label for="c_contact">Customer Contact</label>
+									<input type="text" name="mobile" id="mobile" class="form-control form-control-user"
+										placeholder="Contact">
+									<span id='spanmobile'>Enter 10 digit Mobile number</span>
+								</div>
+
+								<div class="col-sm-6 mb-3 ">
+									<label for="c_email">Email Address</label>
+									<input type="email" name="email_id" value="" id="email_id"
+										class="form-control form-control-user" placeholder="Email Address">
+									<span id='spanemail'>Please enter correct email address</span>
+								</div>
+								<div class="col-sm-6 mb-3 ">
+									<label for="c_city">City</label>
+									<input type="text" name="city" id="city" value=""
+										class="form-control form-control-user" placeholder="City">
+									<span id='spancity'>Please enter correct city</span>
+								</div>
+
+								<div class="col-sm-6 mb-3 ">
+									<label for="c_address">Address</label>
+									<input type="text" name="address" value="" id="address"
+										class="form-control form-control-user" placeholder="Address">
+									<span id='spanAddress'>Please enter correct address</span>
+								</div>
+								<div class="col-sm-6 mb-3 ">
+									<label for="c_pincode">Pincode</label>
+									<input type="text" name="pincode" value="" id="pincode"
+										class="form-control form-control-user" placeholder="Pincode">
+									<span id='spanPin'>Please enter 6 digit pincode</span>
+								</div>
 							</div>
 
-							<div class="col-sm-6 mb-3 ">
-								<label for="c_address">Address</label>
-								<input type="text" name="address" value="" id="address"
-									class="form-control form-control-user" placeholder="Address">
-								<span id='spanAddress'>Please enter correct address</span>
-							</div>
-							<div class="col-sm-6 mb-3 ">
-								<label for="c_pincode">Pincode</label>
-								<input type="text" name="pincode" value="" id="pincode"
-									class="form-control form-control-user" placeholder="Pincode">
-								<span id='spanPin'>Please enter 6 digit pincode</span>
-							</div>
 						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" name="submit" id="signupbtn" class="theme-btn  offer-btn " value="add"
+							style="font-size:20px;cursor:pointer;color:#fff">Add</button>
+						<button type="button" class="theme-btn" data-dismiss="modal"
+							style="font-size:20px">Close</button>
 
 					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="submit" name="submit" id="signupbtn" class="theme-btn  offer-btn " value="add"
-						style="font-size:20px;cursor:pointer;color:#fff">Add</button>
-					<button type="button" class="theme-btn" data-dismiss="modal" style="font-size:20px">Close</button>
+				</form>
 
-				</div>
-			</form>
-
+			</div>
 		</div>
 	</div>
-</div>
 
 </div>
 <!--End Body Content-->
 
 <!--Footer-->
 <script src="<?php echo base_url();?>assets/js/vendor/jquery-3.3.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 	$(document).on('click', '.coupon', function () {
-		let cartItems ="<?=  $item['product_name'] ?>";
+		let cartItems = "<?=  $item['product_name'] ?>";
+		let servicename = "<?=  $item['name'] ?>";
 		let inputcoupon = $('.inputcoupon').val();
+		let service = $('.mainten').val();
 		var csrfName = $('.csrf').attr('name');
 		var csrfHash = $('.csrf').val();
 		let total_amt = $('#total_amt').text();
@@ -447,30 +459,32 @@
 			method: "post",
 			data: {
 				inputcoupon: inputcoupon,
-				cartItems :cartItems,
+				cartItems: cartItems,
+				servicename: servicename,
+				service: service,
 				[csrfName]: csrfHash,
 			},
 			dataType: "json",
 			success: function (response) {
 				$('.csrf').val(response.token);
 				let percentage = response.percentage;
-				let amt = total_amt-(total_amt*percentage/100);
-				if(response.coupon == 'success'){
-				$('#spancoupon').text(
-					'Coupon code applied successfully'
-				).css('color','green');
-				$('#codeper').val(amt);
-				$('#total_amt').text(amt);
-				$('#perge').val(response.percentage);
-				// alert(total_amt);
-				// $('#btn_fill').attr('disabled',false);
-			}else{
-				$('#spancoupon').text(
-					'Sorry. The offer you are trying to avail does not exist or has expired!'
-				).css('color','red');
-				$('#codeper').val(total_amt);
-				// $('#btn_fill').attr('disabled',true);
-			}
+				let amt = total_amt - (total_amt * percentage / 100);
+				if (response.coupon == 'success') {
+					$('#spancoupon').text(
+						'Coupon code applied successfully'
+					).css('color', 'green');
+					$('#codeper').val(amt);
+					$('#total_amt').text(amt);
+					$('#perge').val(response.percentage);
+					// alert(total_amt);
+					// $('#btn_fill').attr('disabled',false);
+				} else {
+					$('#spancoupon').text(
+						'Sorry. The offer you are trying to avail does not exist or has expired!'
+					).css('color', 'red');
+					$('#codeper').val(total_amt);
+					// $('#btn_fill').attr('disabled',true);
+				}
 			},
 			error: function () {
 				alert('OTP not send .Please try again');
@@ -478,6 +492,37 @@
 		})
 	});
 
-	
+	// checkdata();
+	function checkdata(){
+		let cartItems = "<?=  $item['product_name'] ?>";
+		var csrfName = $('.csrf').attr('name');
+		var csrfHash = $('.csrf').val();
+		let c_pincode = $('#c_pincode').val();
+		$.ajax({
+			url: "<?= base_url('welcome/checkpin') ?>",
+			method: "post",
+			data: {
+				c_pincode: c_pincode,
+				cartItems: cartItems,
+				[csrfName]: csrfHash,
+			},
+			dataType: "json",
+			success: function (response) {
+				$('.csrf').val(response.token);
+				if (response.msg == 'success') {
+					alert('sorry, this pincode is not serviceable on this product');
+					pincheck_error = false;
+					window.location.href='<?= base_url("welcome/checkout") ?>';
+					return false;
+				} else {
+					pincheck_error =true;
+					return true;
+				}
+			},
+			error: function () {
+				alert('OTP not send .Please try again');
+			}
+		})
+	}
 
 </script>

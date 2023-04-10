@@ -76,7 +76,17 @@
 					<div class="card shadow">
 						<div class="card-body">
 							<div class="section-header text-center">
-								<h4 class="user-titles">Booking Details</h4>
+								<div class="tracker_details_box">
+								<h4 class="user-titles mobiletitle">Booking Details</h4>
+								<div class="col-lg-2 col-sm-4 floatright">
+									<div class="section-header text-right">
+										<div class="plan-btns">
+											<a style="cursor:pointer" data-toggle="modal" data-target="#staticBackdrop"
+												class="add_address">Add Address</a>
+										</div>
+									</div>
+								</div>
+								</div>
 								<hr>
 								<div class="row text-left">
 									<div class="col-lg-6  mb-4 ">
@@ -163,16 +173,16 @@
 											<input type="hidden" name="c_address"
 												value="<?php echo $ex_cust[0]['address'];?>" id="c_address"
 												class="form-control form-control-user" placeholder="Address" required>
-											<span id='spanAddress' class='float-left mt-2'>** Please enter correct
-												address</span>
+											<!-- <span id='spanAddress' class='float-left mt-2'>** Please enter correct
+												address</span> -->
 										</div>
 
 										<div class="col-lg-6">
 											<input type="hidden" name="c_pincode"
 												value="<?php echo $ex_cust[0]['pincode'];?>" id="c_pincode"
 												class="form-control form-control-user" placeholder="Pincode" required>
-											<span id='spanPin' class='float-left mt-2'>** Please enter correct
-												pincode</span>
+											<!-- <span id='spanPin' class='float-left mt-2'>** Please enter correct
+												pincode</span> -->
 										</div>
 									</div>
 
@@ -291,7 +301,7 @@
 					</button>
 				</div>
 				<form class="customer pt-4 p-4" method="post" action="<?= base_url('welcome/checkout_form') ?>">
-					<div class="modal-body" style="height:67vh;overflow-x:hidden">
+					<div class="modal-body" >
 						<div class="row justify-content-center">
 							<input type="hidden" id="customer_btn" name="customer_btn">
 							<input type="hidden" id="customer_id" value="" name="customer_id">
@@ -299,7 +309,7 @@
 								name="<?php echo $this->security->get_csrf_token_name(); ?>"
 								value="<?php echo $this->security->get_csrf_hash();?>">
 							<div class="form-group row">
-								<div class="col-sm-6 mb-3 mb-sm-0">
+								<div class="col-sm-6 mb-3">
 									<label for="c_name">Customer Name</label>
 									<input type="text" name="customer_name" value="" id="customer_name"
 										class="form-control form-control-user" placeholder="Customer Name">
@@ -347,6 +357,78 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+	aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 style='color:green;padding:10px'>Service Address</h1>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form class="customer pt-4 p-4" method="post"  action="<?= base_url('welcome/checkout_form') ?>">
+				<div class="modal-body" >
+					<div class="row justify-content-center">
+
+						<input type="hidden" id="customer_id" value="" name="id">
+						<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+							value="<?php echo $this->security->get_csrf_hash();?>">
+						<div class="form-group row">
+							<div class="col-sm-6 mb-3 ">
+								<label for="c_name">Customer Name</label>
+								<input type="text" name="username" value="" id="username"
+									class="form-control form-control-user" placeholder="Customer Name">
+								<span id='spanusername'>Enter your name</span>
+							</div>
+							<div class="col-sm-6 mb-3 ">
+								<label for="c_contact">Customer Contact</label>
+								<input type="text" name="mobile" id="mobile" class="form-control form-control-user"
+									placeholder="Contact">
+								<span id='spanmobile'>Enter 10 digit Mobile number</span>
+							</div>
+						
+							<div class="col-sm-6 mb-3 ">
+								<label for="c_email">Email Address</label>
+								<input type="email" name="email_id" value="" id="email_id"
+									class="form-control form-control-user" placeholder="Email Address">
+								<span id='spanemail'>Please enter correct email address</span>
+							</div>
+							<div class="col-sm-6 mb-3 ">
+								<label for="c_city">City</label>
+								<input type="text" name="city" id="city" value="" class="form-control form-control-user"
+									placeholder="City">
+								<span id='spancity'>Please enter correct city</span>
+							</div>
+
+							<div class="col-sm-6 mb-3 ">
+								<label for="c_address">Address</label>
+								<input type="text" name="address" value="" id="address"
+									class="form-control form-control-user" placeholder="Address">
+								<span id='spanAddress'>Please enter correct address</span>
+							</div>
+							<div class="col-sm-6 mb-3 ">
+								<label for="c_pincode">Pincode</label>
+								<input type="text" name="pincode" value="" id="pincode"
+									class="form-control form-control-user" placeholder="Pincode">
+								<span id='spanPin'>Please enter 6 digit pincode</span>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" name="submit" id="signupbtn" class="theme-btn  offer-btn " value="add"
+						style="font-size:20px;cursor:pointer;color:#fff">Add</button>
+					<button type="button" class="theme-btn" data-dismiss="modal" style="font-size:20px">Close</button>
+
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
 
 </div>
 <!--End Body Content-->

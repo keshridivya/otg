@@ -8237,10 +8237,10 @@ font-size: .975rem;
 .modal-dialog{
     overflow-y: initial !important
 }
-.modal-body{
+/* .modal-body{
     height: 80vh;
     overflow-y: auto;
-}
+} */
 .modal-title{
     font-size: 1.6rem;
     color: #4c3418;
@@ -8304,6 +8304,100 @@ font-size: .975rem;
 .btn-active{
     background-color: var(--var-yellow);
 }
+.tracker_list_item{
+    list-style: none;
+    width: 80%;
+    margin: auto;
+}
+.tracker_details{
+    border-radius: 8px;
+    padding: 1.25rem;
+    border: 2px solid #c7c7c7;
+    cursor: pointer;
+    -webkit-transition: all .1s ease-in;
+    -o-transition: all .1s ease-in;
+    transition: all .1s ease-in;
+}
+.tracker_details h4 {
+    font-size: 1.125rem;
+}
+.tracker_detail_list {
+    width: 100%;
+    margin-top: 0.625rem;
+    display: inline-block;
+}
+.tracker_list_item__action {
+    margin-top: 1.25rem;
+}
+.tracker_list_item__action a {
+    width: 100%;
+}
+.tracker_list_item_wrap{
+    width: 100%;
+}
+.button_app_btn {
+    position: relative;
+    display: inline-block;
+    border-radius: 25px;
+    font-size: .8125rem;
+    text-decoration: none;
+    padding: 0.625rem 2.1875rem;
+    font-family: var(--font-bold);
+    color: #1c1c1c;
+    text-align: center;
+    -webkit-transition: background .3s ease-in-out;
+    -o-transition: background .3s ease-in-out;
+    transition: background .3s ease-in-out;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+.tracker_head{
+    font-weight: bold;
+}
+.button_app_btn {
+    background:var(--var-yellow);
+}
+.tracker_detail_list_item_ {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.tracker_detail_list_item_ span:first-child {
+    position: relative;
+    opacity: .8;
+    padding-right: 0.625rem;
+}
+.tracker_detail_list_item_ span {
+    display: inline-block;
+    width: 50%;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+    font-size: .875rem;
+    line-height: 1.2;
+}
+@media (min-width: 992px){
+.tracker_detail_list{
+    max-width: 80%;
+}
+.tracker_list_item__action {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 0;
+}
+.tracker_details_box{
+    display: flex;
+}
+.floatright{
+    position: absolute;
+    right: 0;
+    margin-bottom: 0;
+}
+}
 @media(max-width:768px){
     .btn-primary{
         background-color: var(--var-green);
@@ -8314,4 +8408,17 @@ font-size: .975rem;
         font-size: 10px;
         padding: 0.375rem 0.35rem;
     }
+}
+@media (min-width: 576px){
+.modal-dialog {
+    max-width: 650px;
+    margin: 1.75rem auto;
+}
+.mobiletitle{
+    text-align: left;
+}
+
+}
+.floatright{
+  margin-bottom: 28px;
 }

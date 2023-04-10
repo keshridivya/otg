@@ -41,7 +41,9 @@
 							<td>
 								<a href="<?= base_url('admin/generateinvoice/invoice/'.$invoice['order_id']) ?>" class="btn btn-primary"><i
 										class="fa fa-download"></i></a>
-								<a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+										<a href="<?php echo base_url('admin/generateinvoice/delete/'.$invoice['id']); ?>" type="button"
+								class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i
+									class="fas fa-trash" aria-hidden="true"></i></a>
 							</td>
 						</tr>
 

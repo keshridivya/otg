@@ -1161,191 +1161,172 @@ $(document).ready(function () {
     });
     });
     
-$(document).ready(function(){
-    $('#spanName').hide();
-    $('#spanContact').hide();
-    $('#spanEmail').hide();
-    $('#spanCity').hide();
-    $('#spanAddress').hide();
-    $('#spanPin').hide();
-    $('#spanPassword').hide();
-    $('#spanterm').hide();
-    let name_error = true;
-    let contact_error = true;
-    let email_error = true;
-    let city_error = true;
-    let address_error = true;
-    let pin_error = true;
-    let pass_error =true;
-    let check_error = true;
-
-    $('#c_name').keyup(function(){
-        validatebookname();
-    });
-    function validatebookname(){
-        let bookname=$('#c_name').val();
-        let booktext=/^[A-Za-z ]+$/;
-        if(bookname.length == ''){
-            $('#spanName').show().css('color','red');
-            name_error = false;
-            return false;
-        }else if(!booktext.test(bookname)){
-                $('#spanName').show().html('** Enter Alphabets only').css('color','red');
+    $(document).ready(function(){
+        $('#spanName').hide();
+        $('#spanContact').hide();
+        $('#spanEmail').hide();
+        $('#spanCity').hide();
+        $('#spanAddress').hide();
+        $('#spanPin').hide();
+        $('#spanPassword').hide();
+        $('#spanterm').hide();
+        let name_error = true;
+        let contact_error = true;
+        let email_error = true;
+        let city_error = true;
+        let address_error = true;
+        let pin_error = true;
+        let check_error = true;
+        let pincheck_error = true;
+    
+        $('#c_name').keyup(function(){
+            validatebookname();
+        });
+        function validatebookname(){
+            let bookname=$('#c_name').val();
+            let booktext=/^[A-Za-z ]+$/;
+            if(bookname.length == ''){
+                $('#spanName').show().css('color','red');
                 name_error = false;
                 return false;
-        }else{
-            $('#spanName').hide();
+            }else if(!booktext.test(bookname)){
+                    $('#spanName').show().html('** Enter Alphabets only').css('color','red');
+                    name_error = false;
+                    return false;
+            }else{
+                $('#spanName').hide();
+            }
         }
-    }
-
-    //contact
-    $('#c_contact').keyup(function(){
-        validatebookcontact();
-    });
-    function validatebookcontact(){
-        let bookcontact=$('#c_contact').val();
-        let booknumber=/^[0-9-+]+$/;
-
-        if(bookcontact.length==''){
-            $('#spanContact').show().css('color','red');
-            contact_error = false;
-            return false;
-        }else if(!booknumber.test(bookcontact)){
-            $('#spanContact').show().css('color','red').html('** Enter Only number');
-            contact_error = false;
-            return false;
-        }else if(bookcontact.length != '10'){
-            $('#spanContact').show().css('color','red').html('** Enter Only 10 digit number');
-            contact_error = false;
-            return false;
-        } else{
-            $('#spanContact').hide();
-        }
-    }
-
-    //email
-    $('#c_email').keyup(function(){
-        validatebookemail();
-    });
-    function validatebookemail(){
-        let bookemail=$('#c_email').val();
-        let bookregex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
-        if(bookemail.length==''){
-            $('#spanEmail').show().css('color','red');
-            email_error = false;
-            return false;
-        }else if(!bookregex.test(bookemail)){
-            $('#spanEmail').show().css('color','red');
-            email_error = false;
-            return false;
-        }
-        else{
-            $('#spanEmail').hide();
-        }
-    }
     
-    //city
-    $('#c_city').keyup(function(){
-        validatebookcity();
+        //contact
+        $('#c_contact').keyup(function(){
+            validatebookcontact();
+        });
+        function validatebookcontact(){
+            let bookcontact=$('#c_contact').val();
+            let booknumber= /^[6,7,8,9][0-9]{0,9}$/;
+    
+            if(bookcontact.length==''){
+                $('#spanContact').show().css('color','red');
+                contact_error = false;
+                return false;
+            }else if(!booknumber.test(bookcontact)){
+                $('#spanContact').show().css('color','red').html('** please enter 10 digit mobile number without space and starting with 6,7,8,9');
+                contact_error = false;
+                return false;
+            }else if(bookcontact.length != '10'){
+                $('#spanContact').show().css('color','red').html('** Enter Only 10 digit number');
+                contact_error = false;
+                return false;
+            } else{
+                $('#spanContact').hide();
+            }
+        }
+    
+        //email
+        $('#c_email').keyup(function(){
+            validatebookemail();
+        });
+        function validatebookemail(){
+            let bookemail=$('#c_email').val();
+            let bookregex = /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+            if(bookemail.length==''){
+                $('#spanEmail').show().css('color','red');
+                email_error = false;
+                return false;
+            }else if(!bookregex.test(bookemail)){
+                $('#spanEmail').show().css('color','red');
+                email_error = false;
+                return false;
+            }
+            else{
+                $('#spanEmail').hide();
+            }
+        }
+        
+        //city
+        $('#c_city').keyup(function(){
+            validatebookcity();
+        });
+        function validatebookcity(){
+            let bookcity =$('#c_city').val();
+            let cityregrex=/^[A-za-z ]+$/;
+            if(bookcity.length==''){
+                $('#spanCity').show().css('color','red');
+                city_error = false;
+                return false;
+            }
+            else if(!cityregrex.test(bookcity)){
+                $('#spanCity').show().css('color','red').html('** Please enter correct city');
+                city_error = false;
+                return false;
+            }
+            else{
+                $('#spanCity').hide();
+            }
+        }
+    
+        //pincode
+        // $('#c_pincode').keyup(function(){
+        //     validatebookpin();
+        // });
+        // function validatebookpin(){
+        //     let bookpin=$('#c_pincode').val();
+        //     let zipRegex = /^\d{6}$/;
+        //     if(bookpin.length==''){
+        //         $('#spanPin').show().css('color','red');
+        //         pin_error = false;
+        //         return false;
+        //     }
+        //     else if(!zipRegex.test(bookpin)){
+        //         $('#spanPin').show().css('color','red').html('** zipcode should only be 5 digits');
+        //         pin_error = false;
+        //         return false;
+        //     }
+        //     else{
+        //         $('#spanPin').hide();
+        //     }
+        // }
+    
+        //checkbox
+        $('#terms_services').click(function(){
+            validatecheck();
+        });
+        function validatecheck(){
+            if($('#terms_services').is(":not(:checked)")){
+                $('#spanterm').show().css('color','red');
+                check_error = false;
+                return false;
+            }
+            else{
+                $('#spanterm').hide();
+            }
+        }
+    
+    
+    
+        // Submit button
+        $("#btn_fill").click(function () {
+            name_error = true;
+            contact_error = true;
+             email_error = true;
+            city_error = true;
+             check_error = true;
+             pincheck_error = true;
+             validatebookname();
+             validatebookcontact();
+             validatebookemail();
+             validatebookcity();
+             validatecheck();
+             checkdata();
+              if (name_error == true  && contact_error == true && email_error == true && city_error == true  && check_error == true && pincheck_error == true) {
+                return true;
+                  
+              } else {
+                          return false;
+              }
+          });
     });
-    function validatebookcity(){
-        let bookcity =$('#c_city').val();
-        let cityregrex=/^[A-za-z ]+$/;
-        if(bookcity.length==''){
-            $('#spanCity').show().css('color','red');
-            city_error = false;
-            return false;
-        }
-        else if(!cityregrex.test(bookcity)){
-            $('#spanCity').show().css('color','red').html('** Please enter correct city');
-            city_error = false;
-            return false;
-        }
-        else{
-            $('#spanCity').hide();
-        }
-    }
-
-    //address
-    $('#c_address').keyup(function(){
-        validatebookaddress();
-    });
-    function validatebookaddress(){
-        let bookaddress=$('#c_address').val();
-        if(bookaddress.length==''){
-            $('#spanAddress').show().css('color','red');
-            address_error = false;
-            return false;
-        }
-        else{
-            $('#spanAddress').hide();
-        }
-    }
-
-    //pincode
-    $('#c_pincode').keyup(function(){
-        validatebookpin();
-    });
-    function validatebookpin(){
-        let bookpin=$('#c_pincode').val();
-        let zipRegex = /^\d{6}$/;
-        if(bookpin.length==''){
-            $('#spanPin').show().css('color','red');
-            pin_error = false;
-            return false;
-        }
-        else if(!zipRegex.test(bookpin)){
-            $('#spanPin').show().css('color','red').html('** zipcode should only be 5 digits');
-            pin_error = false;
-            return false;
-        }
-        else{
-            $('#spanPin').hide();
-        }
-    }
-
-    //checkbox
-    $('#terms_services').click(function(){
-        validatecheck();
-    });
-    function validatecheck(){
-        if($('#terms_services').is(":not(:checked)")){
-            $('#spanterm').show().css('color','red');
-            check_error = false;
-            return false;
-        }
-        else{
-            $('#spanterm').hide();
-        }
-    }
-
-
-
-    // Submit button
-    $("#btn_fill").click(function () {
-        name_error = true;
-        contact_error = true;
-         email_error = true;
-        city_error = true;
-         address_error = true;
-         pin_error= true;
-         pass_error = true;
-         check_error = true;
-         validatebookname();
-         validatebookcontact();
-         validatebookemail();
-         validatebookcity();
-         validatebookaddress();
-         validatebookpin();
-         validatecheck();
-          if (name_error == true  && contact_error == true && email_error == true && city_error == true && address_error == true && pin_error==true && check_error == true) {
-            return true;
-              
-          } else {
-                      return false;
-          }
-      });
-});
 
 $(document).ready(function(){
     $('#spanusername').hide();
@@ -1390,14 +1371,14 @@ $(document).ready(function(){
     });
     function validatebookcontact1(){
         let bookcontact=$('#mobile').val();
-        let booknumber=/^[0-9-+]+$/;
+        let booknumber= /^[6,7,8,9][0-9]{0,9}$/;
 
         if(bookcontact.length==''){
             $('#spanmobile').show().css('color','red');
             contact_error1 = false;
             return false;
         }else if(!booknumber.test(bookcontact)){
-            $('#spanmobile').show().css('color','red').html('** Enter Only number');
+            $('#spanmobile').show().css('color','red').html('** please enter 10 digit mobile number without space and starting with 6,7,8,9');
             contact_error1 = false;
             return false;
         }else if(bookcontact.length != '10'){
@@ -1576,14 +1557,15 @@ $(document).ready(function(){
     });
     function validatebookcontact2(){
         let bookcontact=$('#customer_contact').val();
-        let booknumber=/^[0-9-+]+$/;
+        var booknumber = /^[6,7,8,9][0-9]{0,9}$/;
+
 
         if(bookcontact.length==''){
             $('#spancustomer_contact').show().css('color','red');
             contact_error2 = false;
             return false;
         }else if(!booknumber.test(bookcontact)){
-            $('#spancustomer_contact').show().css('color','red').html('** Enter Only number');
+            $('#spancustomer_contact').show().css('color','red').html('** please enter 10 digit mobile number without space and starting with 6,7,8,9');
             contact_error2 = false;
             return false;
         }else if(bookcontact.length != '10'){
@@ -1741,14 +1723,14 @@ $(document).ready(function(){
     });
     function validatebookcontact2(){
         let bookcontact=$('#customer_contact').val();
-        let booknumber=/^[0-9-+]+$/;
+        let booknumber= /^[6,7,8,9][0-9]{0,9}$/;
 
         if(bookcontact.length==''){
             $('#spancustomer_contact').show().css('color','red');
             contact_error2 = false;
             return false;
         }else if(!booknumber.test(bookcontact)){
-            $('#spancustomer_contact').show().css('color','red').html('** Enter Only number');
+            $('#spancustomer_contact').show().css('color','red').html('** please enter 10 digit mobile number withou space and  starting with 6,7,8,9');
             contact_error2 = false;
             return false;
         }else if(bookcontact.length != '10'){
@@ -1873,14 +1855,14 @@ $(document).ready(function(){
     });
     function validatebookcontact1(){
         let bookcontact=$('#otp_number').val();
-        let booknumber=/^[0-9-+]+$/;
+        let booknumber= /^[6,7,8,9][0-9]{0,9}$/;
 
         if(bookcontact.length==''){
             $('#spanotpnumber2').show().css('color','red');
             contact_error1 = false;
             return false;
         }else if(!booknumber.test(bookcontact)){
-            $('#spanotpnumber2').show().css('color','red').html('** Enter Only number');
+            $('#spanotpnumber2').show().css('color','red').html('** please enter 10 digit mobile number without space and starting with 6,7,8,9');
             contact_error1 = false;
             return false;
         }else if(bookcontact.length != '10'){
@@ -1903,7 +1885,7 @@ $(document).ready(function(){
     });
     function validatebookcontact1(){
         let bookcontact=$('#usernumber').val();
-        let booknumber=/^[0-9-+]+$/;
+        let booknumber= /^[6,7,8,9][0-9]{0,9}$/;
 
         if(bookcontact.length==''){
             $('#spanotpnumber').show().css('color','red');
@@ -1911,7 +1893,7 @@ $(document).ready(function(){
             contact_error1 = false;
             return false;
         }else if(!booknumber.test(bookcontact)){
-            $('#spanotpnumber').show().css('color','red').html('** Enter Only number');
+            $('#spanotpnumber').show().css('color','red').html('** please enter 10 digit mobile number without space and starting with 6,7,8,9');
             $('.login_send_otp').attr('disabled',true);
             contact_error1 = false;
             return false;

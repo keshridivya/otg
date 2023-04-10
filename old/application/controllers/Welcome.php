@@ -285,16 +285,16 @@ class Welcome extends CI_Controller {
             {
                 $otp = rand(10000, 99999);
                 $otp_resu = 'success';
-                  $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
-                  Do not share it with anyone';
-                  if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
-                      $page_data['status'] = true;
-                      $page_data['message'] = "success";
+                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                //   Do not share it with anyone';
+                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                //       $page_data['status'] = true;
+                //       $page_data['message'] = "success";
                     
-                      } else {
-                      $page_data['status'] = false;
-                      $page_data['message'] = "Something went wrong, please try again later.";
-                      }
+                //       } else {
+                //       $page_data['status'] = false;
+                //       $page_data['message'] = "Something went wrong, please try again later.";
+                //       }
             }
             else
             {
@@ -305,7 +305,7 @@ class Welcome extends CI_Controller {
         }
         $this->session->set_userdata('login_otp',$otp);
         $data['otp'] = $otp_resu;
-        // $data['otp1'] = $otp;
+        $data['otp1'] = $otp;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }
@@ -535,7 +535,7 @@ class Welcome extends CI_Controller {
     }
 
     public function service_address_delete(){
-        $id=$_GET['id'];
+        $id=$_POST['id'];
         $this->db->where('id',$id);
         $this->db->delete('shipping_address');
         redirect(base_url('account?show=myaccount'));
@@ -658,6 +658,73 @@ class Welcome extends CI_Controller {
                 }
             }
             redirect(base_url('checkout'));
+        }
+        else if($this->input->post('submit') == 'add'){
+            $data=array(
+                "name"=>$this->input->post('username'),
+                "contact"=>$this->input->post('mobile'),
+                "email"=>$this->input->post('email_id'),
+                "city"=>$this->input->post('city'),
+                "address"=>$this->input->post('address'),
+                "pincode"=>$this->input->post('pincode'),
+                "customer_id"=>$session_cust,
+                "created_on"=>date('Y-m-d h:i:s'),
+            );
+            if($this->db->insert('shipping_address',$data)){
+                $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                min-height: 50px;
+                z-index: 9;padding:10px;background:#fff">
+                <div class="toast-header">
+                  <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                  <strong class="mr-auto">OTG</strong>
+                  
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="toast-body">
+                Successfully Add
+                </div>
+              </div>
+                ';
+            }
+            else{
+                $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+                min-height: 50px;
+                z-index: 9;padding:10px;background:#fff">
+                <div class="toast-header">
+                  <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+                  <strong class="mr-auto">OTG</strong>
+                  
+                  <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="toast-body">
+                Something Went Wrong. Please try again.
+                </div>
+              </div>
+                ';
+            }
+            redirect(base_url('checkout'));
+        }
+        else{
+            $page_data['message'] = '<div class="toast" role="alert" aria-live="assertive" id="toaster" aria-atomic="true" style="position: absolute;
+            min-height: 50px;
+            z-index: 9;padding:10px;background:#fff">
+            <div class="toast-header">
+              <img src="'.base_url().'assets/images/logo/favicon.png" class="rounded mr-2" alt="..." width="20">
+              <strong class="mr-auto">OTG</strong>
+              
+              <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="toast-body">
+            Something Went Wrong. Please try again.
+            </div>
+          </div>
+            ';
         }
     }
 
@@ -1094,6 +1161,15 @@ class Welcome extends CI_Controller {
         $page_data['dropdown']=$this->menu->menu_all();
         $page_data['page_title']="Track Service Request";
         $page_data['page']="tracker";
+        $this->load->view('index',$page_data);
+    }
+
+    public function service_tracker($id=false){
+        $track = $this->menu->track($id);
+        $page_data['track'] = $track;
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Track Service Request";
+        $page_data['page']="service_tracker";
         $this->load->view('index',$page_data);
     }
 

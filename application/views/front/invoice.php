@@ -62,9 +62,10 @@
 
 	.logo {
 		display: inline-block;
-		vertical-align: middle;
-		width: 110px;
-		overflow: hidden;
+    vertical-align: middle;
+    width: 25%;
+    margin-bottom: 20px;
+    overflow: hidden;
 	}
 
 	.info {
@@ -82,7 +83,7 @@
 	.clientinfo {
 		display: inline-block;
 		vertical-align: middle;
-		margin-left: 20px
+
 	}
 
 	.title {
@@ -150,7 +151,7 @@
 
 	.tabletitle th {
 		border: 2px solid #fff;
-		background: #0e7668 !important;
+		background: #0db19e !important;
 		text-align: right;
 		color: #fff;
 	}
@@ -198,22 +199,23 @@
 				<div id="invoice" class="effect2">
 
 					<div id="invoice-top">
+					<div class="logo"><img src="<?php echo base_url();?>assets/images/logo/header.png"
+										alt="OTG CARES" /></div>
 						<div class="clearfix">
 							<div class="col-left">
-								<div class="logo"><img src="<?php echo base_url();?>assets/images/logo/header.png"
-										alt="OTG CARES" /></div>
+								
 								<div class="clientinfo">
-									<h2 id="supplier">OTGcares</h2>
-									<p><span id="address">S-53, Haware Fantasia Business park, <br> Vashi Navi Mumbai
+									<h2 id="supplier"  style="color:#4c3418;font-weight:bold">OTGcares</h2>
+									<p><span id="address">2nd floor, Haware Fantasia Business park, <br> Vashi Navi Mumbai
 											Thane
-											Maharashtra 400708</span><br>
+											Maharashtra 400705</span><br>
 										<span><b>Phone : </b> <span>9076020306</span></span><br>
-										<span><b>Email : </b> <span>support@otgcares.com</span></span></p>
-
+										<span><b>Email : </b> <span>support@otgcares.com</span></span><br>
+										<span><b>GSTIN : </b> <span>27AAHFO5291Q1ZF</span></span></p>
 								</div>
 							</div>
 							<div class="col-right">
-								<h2 id="supplier">INVOICE</h2>
+								<h2 id="supplier" style="color:#f8b11b;">INVOICE</h2>
 								<table class="table">
 									<tbody>
 										<tr>
@@ -242,7 +244,8 @@
 						<div id="message">
 							<h2>Bill To,</h2>
 							<p><?= $invoice_create[0]['cust_name'] ?> <span id="supplier_name"></span><br>+91
-								<?= $invoice_create[0]['contact'] ?></p>
+								<?= $invoice_create[0]['contact'] ?><br>
+								<?= $invoice_create[0]['addr'] ?></p>
 						</div>
 					</div>
 					<!--End Invoice Mid-->
@@ -311,13 +314,13 @@
 								<tr class="">
 									<th>Notes <p>Thank You For Doing Business With Us</p>
 									</th>
-									<th>Bank Details</th>
+									<!-- <th>Bank Details</th>
 									<th><span>Due Amount</span><span>
 											0.00
-										</span></th>
+										</span></th> -->
 								</tr>
 
-								<tr class="">
+								<!-- <tr class="">
 									<td colspan='2'>
 										<h2>Terms And Conditions</h2>
 										<p><?php
@@ -330,14 +333,14 @@
 										heelo
 										<p> For OTGCares</p>
 									</td>
-								</tr>
+								</tr> -->
 							</table>
 						</div>
 						<!--End Table-->
 					</div>
 				</div>
 				<!--End Invoice-->
-				<div class="container">
+				<div class="container mt-4">
 					<div class="cta-group">
 						<button class="btn btn-primary invoice">Download Invoice</button>
 					</div>
