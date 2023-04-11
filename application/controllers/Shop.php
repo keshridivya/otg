@@ -39,7 +39,7 @@ class Shop extends CI_Controller{
         //         }
         //     }
         // }
-        if(get_cookie('sid')){
+        if(@$_COOKIE['sid']){
             $page_data['page_title'] = 'Dashboard';
             $page_data['page']="dashboard";
             $this->load->view('shop/index',$page_data);
@@ -313,7 +313,7 @@ class Shop extends CI_Controller{
                             }
                             if($_FILES['invoice_photo']['name']!= ""){
                                 // $absolute_path1=base_url('uploads/shop_invoice/');
-                        $uploaded_data1=$this->uploadimg1(array('upload_path'=>'./uploads/shop_invoice/','name'=>'invoice_photo'));
+                        $uploaded_data1=$this->uploadimg(array('upload_path'=>'./uploads/shop_invoice/','name'=>'invoice_photo'));
                     }
                     $shop_id = get_cookie('sid');
                             $data = [
@@ -373,18 +373,19 @@ class Shop extends CI_Controller{
     {
             $config['upload_path']          = $data['upload_path'];
             $config['allowed_types']        = 'gif|jpg|png';
-            $config['max_size']             = 400;
             $config['max_width']            = 1024;
             $config['max_height']           = 768;
 
             $this->load->library('upload', $config);
-            if ( ! $this->upload->do_upload($data['name']))
+            if (!$this->upload->do_upload($data['name']))
             {
                 print_r($this->upload->display_errors());
             }
             else
             {
-                return $this->upload->data();
+                $uploaded_data = $this->upload->data();
+                unset($this->upload);
+                return $uploaded_data;
             }
     }
 

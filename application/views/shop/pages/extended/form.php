@@ -2,6 +2,10 @@
 	.form-group span{
 		color:red;
 	}
+	img{
+		width:100%;
+		height:auto;
+	}
 </style>
 <div class="container-fluid">
 	<!-- Page Heading -->

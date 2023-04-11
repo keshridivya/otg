@@ -253,7 +253,11 @@ $route['admin/shop/delete/(:any)']="admin/shop/delete/$1";
 $route['admin/shop/active/(:any)']="admin/shop/active/$1";
 $route['admin/shop/inactive/(:any)']="admin/shop/inactive/$1";
 
-
+//shop registration
+$route['admin/extended'] = 'admin/extended/view';
+$route['admin/extended/add'] = 'admin/extended/add';
+$route['admin/extended/edit/(:any)']="admin/extended/edit/$1";
+$route['admin/extended/delete/(:any)']="admin/extended/delete/$1";
 
 
 //enginner login
@@ -291,8 +295,8 @@ $route['shop/registration'] = 'shop/registration';
 //shop registration
 $route['shop/extended'] = 'shop/extended/view';
 $route['shop/extended/add'] = 'shop/extended/add';
-$route['admin/extended/edit/(:any)']="admin/extended/edit/$1";
-$route['admin/extended/delete/(:any)']="admin/extended/delete/$1";
+$route['shop/extended/edit/(:any)']="shop/extended/edit/$1";
+$route['shop/extended/delete/(:any)']="shop/extended/delete/$1";
 
 
 

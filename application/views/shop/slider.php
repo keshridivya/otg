@@ -422,7 +422,7 @@
 			success: function (response) {
 				$('.csrf').val(response.token);
 				if (response.otp != 'error') {
-					history.back();
+					window.location.href="<?= base_url('shop') ?>"
 				} else {
 					$('.login_err').html(
 						'<div class="alert alert-danger">OTP is Incorrect</div>'

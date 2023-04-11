@@ -77,6 +77,11 @@
                     <span>AMC's</span></a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="<?php echo base_url();?>admin/extended">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Extended Warranty</span></a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<?php echo base_url();?>admin/one_time_service">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>One time services</span></a>
