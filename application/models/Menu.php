@@ -300,6 +300,49 @@ class Menu extends CI_model {
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    //shop all warranty
+    public function warranty($id){
+        $this->db->select('* , count("*") as count');
+        $this->db->from('warrenty');
+        $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
+        $this->db->where('warrenty.shop_id',$id);
+        $query = $this->db->get();
+        return $query->row();        
+    }
+
+    //shop geyser warranty
+    public function geyser($id){
+        $this->db->select('* , count("*") as countgey');
+        $this->db->from('warrenty');
+        $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
+        $this->db->where('warrenty.shop_id',$id);
+        $this->db->where('category_product.cproduct_name','Geyser');
+        $query = $this->db->get();
+        return $query->row();         
+    }
+
+     //shop geyser warranty
+     public function laptop($id){
+        $this->db->select('* , count("*") as countgey');
+        $this->db->from('warrenty');
+        $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
+        $this->db->where('warrenty.shop_id',$id);
+        $this->db->where('category_product.cproduct_name','Laptop');
+        $query = $this->db->get();
+        return $query->row();         
+    }
+
+      //shop ac warranty
+      public function ac($id){
+        $this->db->select('* , count("*") as countgey');
+        $this->db->from('warrenty');
+        $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
+        $this->db->where('warrenty.shop_id',$id);
+        $this->db->where('category_product.cproduct_name','Air Conditioner');
+        $query = $this->db->get();
+        return $query->row();         
+    }
     
 }
 ?>

@@ -47,9 +47,9 @@
 			text-decoration: underline;
 		}
 
-        span{
-            color:red;
-        }
+		span {
+			color: red;
+		}
 
 	</style>
 
@@ -114,55 +114,58 @@
 											</form>
 										</div>
 									</div>
-                                    <!-- form_hide -->
+									<!-- form_hide -->
 									<div class="form_hide">
 										<form class="user" method="post">
-                                        <input type="hidden"
-													name="<?php echo $this->security->get_csrf_token_name(); ?>"
-													value="<?php echo $this->security->get_csrf_hash();?>" class='csrf'>
+											<input type="hidden"
+												name="<?php echo $this->security->get_csrf_token_name(); ?>"
+												value="<?php echo $this->security->get_csrf_hash();?>" class='csrf'>
 											<div class="form-group row">
 												<div class="col-sm-6 mb-3 mb-sm-0">
-													<input type="text" class="form-control form-control-user" name="name"
-														id="name" placeholder="Shop Name">
-                                                        <span id="spanname">Please Enter Shop Name</span>
+													<input type="text" class="form-control form-control-user"
+														name="name" id="name" placeholder="Shop Name">
+													<span id="spanname">Please Enter Shop Name</span>
 												</div>
 												<div class="col-sm-6">
-													<input type="text" class="form-control form-control-user" name="contact"
-														id="contact" placeholder="Contact">
-                                                        <span id="spancontact">Please Enter Contact Number</span>
+													<input type="text" class="form-control form-control-user"
+														name="contact" id="contact" placeholder="Contact">
+													<span id="spancontact">Please Enter Contact Number</span>
 												</div>
 											</div>
 											<div class="form-group">
 												<input type="email" class="form-control form-control-user" name="email"
 													id="email" placeholder="Email Address">
-                                                    <span id="spanemail">Please Enter Email Address</span>
+												<span id="spanemail">Please Enter Email Address</span>
 											</div>
 											<div class="form-group row">
 												<div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" name="city" id="city"
-            										class="form-control form-control-user " placeholder="City">
-                                                    <span id="spancity">Please Enter city</span>
+													<input type="text" name="city" id="city"
+														class="form-control form-control-user " placeholder="City">
+													<span id="spancity">Please Enter city</span>
 												</div>
 												<div class="col-sm-6">
-                                                <input type="text" name="pincode"
-            										class="form-control form-control-user " placeholder="Pincode" id="pincode"
-            										required>
-                                                    <span id="spanpincode">Please Enter 6 digit pincode</span>
+													<input type="text" name="pincode"
+														class="form-control form-control-user " placeholder="Pincode"
+														id="pincode" required>
+													<span id="spanpincode">Please Enter 6 digit pincode</span>
 												</div>
 											</div>
-                                            <div class="form-group">
-                                            <textarea name="address" id="address"
-            										class="form-control form-control-user" placeholder ="Enter Address"></textarea>
-                                                    <span id="spanaddress">Please Enter 6 digit pincode</span>
+											<div class="form-group">
+												<textarea name="address" id="address"
+													class="form-control form-control-user"
+													placeholder="Enter Address"></textarea>
+												<span id="spanaddress">Please Enter 6 digit pincode</span>
 											</div>
-											<button type="submit"  id="info_check" class="btn btn-primary btn-user btn-block">
+											<button type="submit" id="info_check"
+												class="btn btn-primary btn-user btn-block">
 												Register Account
-											</a>
+												</a>
 										</form>
 									</div>
 									<hr>
 									<div class="text-center">
-										<a class="small" href="<?= base_url('shop/index') ?>">Already have an account? Login!</a>
+										<a class="small" href="<?= base_url('shop/index') ?>">Already have an account?
+											Login!</a>
 									</div>
 								</div>
 							</div>
@@ -182,7 +185,7 @@
 
 	<!-- Custom scripts for all pages-->
 	<script src="<?php echo base_url();?>assets/admin/js/sb-admin-2.min.js"></script>
-<?php include_once('slider.php'); ?>
+	<?php include_once('slider.php'); ?>
 </body>
 
 </html>

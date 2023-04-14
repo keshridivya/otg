@@ -40,6 +40,11 @@ class Shop extends CI_Controller{
         //     }
         // }
         if(@$_COOKIE['sid']){
+            $id = get_cookie('sid');
+            $page_data['all'] = $this->menu->warranty($id);
+            $page_data['geyser'] = $this->menu->geyser($id);
+            $page_data['laptop'] = $this->menu->laptop($id);
+            $page_data['ac'] = $this->menu->ac($id);
             $page_data['page_title'] = 'Dashboard';
             $page_data['page']="dashboard";
             $this->load->view('shop/index',$page_data);
@@ -135,17 +140,17 @@ class Shop extends CI_Controller{
                 set_cookie('sid',$query->shop_id,time()+60*60*24*90);
                 set_cookie('semail',$query->email_id,time()+60*60*24*90);
                 set_cookie('sname',$query->name,time()+60*60*24*90);
-                        if(get_cookie('sid')){
-                            redirect('shop/');
-                        }
-                        else{
-                        $this->load->view('shop/login');
-                        }
+                       
             }else{
                 $page_data['message']="Problem occured while adding customer.";
             }
         }
-        $this->load->view('shop/registration');
+        if($this->session->userdata('sid') || get_cookie('sid')){
+            redirect('shop/');
+        }
+        else{
+            $this->load->view('shop/registration');
+        }
     }
 
     // registration otp
@@ -178,7 +183,7 @@ class Shop extends CI_Controller{
         }
         }
         $this->session->set_userdata('reg_login_otp',$otp);
-        // $data['otp1'] = $otp;
+        $data['otp1'] = $otp;
         $data['otp'] = $otp_res;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
@@ -262,7 +267,10 @@ class Shop extends CI_Controller{
                             $uploaded_data=$this->uploadimg(array('upload_path'=>'./uploads/shop_device/','name'=>'device_photo'));
                         }
 
-                $shop_id = get_cookie('sid');
+                        $shop_id = get_cookie('sid');
+                        $st_date = $this->input->post('st_date');
+                        $duration = $this->input->post('duration');
+                        $expire_date = date('y-m-d', strtotime($st_date . '+ '.$duration));
                         $data = [
                             'name' => $this->input->post('name'),
                             'contact' => $this->input->post('contact'),
@@ -273,8 +281,11 @@ class Shop extends CI_Controller{
                             'original_price' => $this->input->post('orprice'),
                             'amount' => $this->input->post('waprice'),
                             'duration' => $this->input->post('duration'),
-                            'created_on' => $this->input->post('st_date'),
+                            'created_on' => date('y-m-d'),
+                            'start_date' => $this->input->post('st_date'),
+                            'invoice_date' => $this->input->post('invoice_date'),
                             'device_serial_no' => $this->input->post('de_se_no'),
+                            'expires_on' => $expire_date,
                             'serial_no_image' => $this->input->post('device_photo'),
                             'invoice_image' => $this->input->post('invoice_photo'),
                             'status' => $this->input->post('status'),
@@ -372,7 +383,7 @@ class Shop extends CI_Controller{
     public function uploadimg($data)
     {
             $config['upload_path']          = $data['upload_path'];
-            $config['allowed_types']        = 'gif|jpg|png';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
             $config['max_width']            = 1024;
             $config['max_height']           = 768;
 

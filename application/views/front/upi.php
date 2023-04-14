@@ -14,3 +14,11 @@
 		</div>
 	</div>
 </div>
+
+<div>
+	<?php
+	$current_date = date('2023-5-23'); // get current date
+	$validity_date = date('Y-m-d', strtotime($current_date . ' + 2 years')); // calculate date validity for 2 years
+    echo $validity_date;
+	?>
+</div>

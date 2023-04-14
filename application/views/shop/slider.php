@@ -109,21 +109,21 @@
 
 	//validate contact
 	$('#otp_number').keyup(function () {
-		validatecontact();
+		validatecontact2();
 	});
 
-	function validatecontact() {
-		let contact = $('#otp_number').val();
+	function validatecontact2() {
+		let contact2 = $('#otp_number').val();
 		var pattern = /^[6,7,8,9][0-9]{0,9}$/;
-		if (contact.length == '') {
+		if (contact2.length == '') {
 			$("#spanotpnumber2").show();
 			userphoneError = false;
 			return false;
-		} else if (contact.length != 10) {
+		} else if (contact2.length != 10) {
 			$("#spanotpnumber2").show();
 			userphoneError = false;
 			return false;
-		} else if (!pattern.test(contact)) {
+		} else if (!pattern.test(contact2)) {
 			$("#spanotpnumber2").show().html('please enter correct mobile number starting with 6,7,8,9');
 			userphoneError = false;
 			return false;

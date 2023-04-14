@@ -104,7 +104,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="" id="userDropdown1" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hello <?php echo (get_cookie('cname') ?? '');?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hello <?php echo (get_cookie('sname') ?? '');?></span>
                                 <i class="fa-solid fa-bars"></i>
                             </a>
                             <!-- Dropdown - User Information -->

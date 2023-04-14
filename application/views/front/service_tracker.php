@@ -43,7 +43,10 @@
 		position: relative;
 		z-index: 1;
 	}
-
+	.font-weight-bold {
+    font-weight: 900!important;
+	color:var(--var-brown);
+}
 	/*ProgressBar connectors*/
 	#progressbar li:after {
 		content: '';
@@ -117,7 +120,7 @@
     margin-left: 15px;
 }
 .font-weight-bold {
-    font-weight: 700!important;
+    font-weight: 900!important;
     font-size: 10px;
 }
 .top {

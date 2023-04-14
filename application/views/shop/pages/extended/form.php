@@ -31,38 +31,37 @@
 								value="<?php echo $this->security->get_csrf_hash();?>">
 							<div class="form-group row">
 								<div class="col-sm-6 mb-3 ">
-									<label for="sc_name">Name</label>
+									<label for="sc_name">Name <span style="color:red">*</span></label>
 									<input type="text" name="name" value="<?php echo $info[0]['name'] ?? '';?>"
-										id="exname" class="form-control form-control-user"  required>
-										<span id="spanexname">Please Enter Name</span>
+										id="exname" class="form-control form-control-user"  >
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Contact</label>
 									<input type="text" name="contact" value="<?php echo $info[0]['contact'] ?? '';?>"
-										id="excontact" class="form-control form-control-user"  required>
+										id="excontact" class="form-control form-control-user"  >
 										<span id="spancontactex">Please Enter 10 digit number</span>
 								</div>
 								<div class="col-sm-6 mb-3">
 									<label for="sc_name">Email</label>
 									<input type="email" name="email" value="<?php echo $info[0]['email'] ?? '';?>"
-										id="exemail" class="form-control form-control-user"  required>
+										id="exemail" class="form-control form-control-user"  >
 										<span id="spanemailex">Please Enter Correct Email </span>
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Full Address</label>
 									<input type="text" name="address" value="<?php echo $info[0]['address'] ?? '';?>"
-										id="exaddress" class="form-control form-control-user" required>
+										id="exaddress" class="form-control form-control-user" >
 										<span id="spanaddressex">Please Full Address</span>
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Pincode</label>
 									<input type="text" name="pincode" value="<?php echo $info[0]['pincode'] ?? '';?>"
-										id="expincode" class="form-control form-control-user" required>
+										id="expincode" class="form-control form-control-user" >
 										<span id="spanpicodeex">Please Enter 6 digit pincode</span>
 								</div>
 								<div class="col-sm-6 mb-3 ">
-									<label for="cp_name">Device</label>
-									<select name="device" id="cp_name" class="form-control one_eng_name" required>
+									<label for="cp_name">Device <span style="color:red">*</span></label>
+									<select name="device" id="device" class="form-control one_eng_name" >
 										<option value="" disabled selected>Select Device</option>
 										<?php
                                        foreach($product as $product){
@@ -76,51 +75,54 @@
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									Original Price <input type="text" name="orprice" value="<?php echo $info[0]['original_price'] ?? '';?>"
-										id="exorprice" class="form-control form-control-user" required>
+										id="exorprice" class="form-control form-control-user" >
 										<span id="spanorpeicex">Please Enter Original Price</span>
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									Warranty Price <input type="text" name="waprice" value="<?php echo $info[0]['amount'] ?? '';?>"
-										id="exwrprice" class="form-control form-control-user" required>
+										id="exwrprice" class="form-control form-control-user" >
 										<span id="spanwrrpriceex">Please Enter Warranty Price</span>
 								</div>
 								<div class="col-sm-6 mb-3  ">
-									<label for="sc_name">Duration</label>
-									<select name="duration" id="" class="form-control" required>
-										<option value="6 month">6 Month</option>
-										<option value="1 year">1 Year</option>
-										<option value="2 year">2 Year</option>
+									<label for="sc_name">Duration<span style="color:red">*</span></label>
+									<select name="duration" id="" class="form-control" >
+										<option value="1 years">1 Year</option>
+										<option value="2 years">2 Year</option>
 									</select>
 									<!-- <input type="text" name="duration" value="<?php echo $info[0]['duration'] ?? '';?>"
 										id="sc_name" class="form-control form-control-user" > -->
 								</div>
 								<div class="col-sm-6 mb-3  ">
-									<label for="sc_name">Start date</label>
+									<label for="sc_name">Start date<span style="color:red">*</span></label>
 									<input type="date" name="st_date" value="<?php echo $info[0]['created_on'] ?? '';?>"
-										id="sc_name" class="form-control form-control-user"  required>
+										id="date" class="form-control form-control-user"  >
 								</div>
 								<div class="col-sm-6 mb-3  ">
-									<label for="sc_name">Device Serial Number</label>
+									<label for="sc_name">Invoice date<span style="color:red">*</span></label>
+									<input type="date" name="invoice_date" value="<?php echo $info[0]['created_on'] ?? '';?>"
+										id="invoice_date" class="form-control form-control-user"  >
+								</div>
+								<div class="col-sm-6 mb-3  ">
+									<label for="sc_name">Device Serial Number<span style="color:red">*</span></label>
 									<input type="text" name="de_se_no" value="<?php echo $info[0]['device_serial_no'] ?? '';?>"
-										id="exserialno" class="form-control form-control-user" required >
-										<span id="spanserialnoex">Please Enter Serial Number</span>
+										id="exserialno" class="form-control form-control-user"  >
 								</div>
 								<div class="col-sm-6 mb-3  ">
-									<label for="device_photo">Device Serial Number Photo</label>
+									<label for="device_photo">Device Serial Number Photo<span style="color:red">*</span></label>
 									<?php
                                     if($info[0]['serial_no_image'] ?? FALSE){ ?>
 								<div class="row">
 									<div class="col-12">
-									<img src='<?php echo base_url($info[0]['serial_no_image']); ?>' alt='logo' width='500' height='400'>
+									<img src='<?php echo base_url($info[0]['serial_no_image']); ?>' alt='logo' width='500' height='400' >
 									</div>
 								</div>
 								<?php }
                                     ?>
 									<input type="file" name="device_photo" value=""
-										id="sc_name" class="form-control form-control-user" >
+										id="device_photo" class="form-control form-control-user"  accept="image/png, image/jpeg, image/jpg, image/webp">
 								</div>
 								<div class="col-sm-6 mb-3  ">
-									<label for="sc_name">Invoice Upload</label>
+									<label for="sc_name">Invoice Upload<span style="color:red">*</span></label>
 									<?php
                                     if($info[0]['invoice_image'] ?? FALSE){ ?>
 								<div class="row">
@@ -131,11 +133,11 @@
 								<?php }
                                     ?>
 									<input type="file" name="invoice_photo" value=""
-										id="sc_name" class="form-control form-control-user" >
+										id="invoice_photo" class="form-control form-control-user"  accept="image/*,.pdf">
 								</div>
 								<div class="col-sm-6 mb-3">
 									<label for="sc_status">Status</label>
-									<select class="form-control" name="status" id="sc_status" required>
+									<select class="form-control" name="status" id="sc_status" >
 										<option value="active" <?php echo (($info[0]['status'] ?? ' ') =='active') ? 'selected': ''; ?>>
 											Active
 										</option>
@@ -168,7 +170,6 @@
 		$('#spanpicodeex').hide();
 		$("#spanorpeicex").hide();
 		$("#spanwrrpriceex").hide();
-		$("#spanserialnoex").hide();
 		let usernameErrorex = true;
 		let useremailErrorex = true;
 		let userphoneErrorex = true;
@@ -176,12 +177,6 @@
 		let pinErrorex = true;
 		let orpriceErrorex = true;
 		let wrpriceex = true;
-		let esrialErrorex = true;
-
-			//message validation
-		$('#exserialno').keyup(function () {
-			validateserial();
-		});
 
 		function validateserial() {
 			let message = $('#exserialno').val();
@@ -348,29 +343,23 @@
 
 		// Submit button
 		$(".exten_btn").click(function () {
-			usernameErrorex = true;
-			useremailErrorex = true;
-			userphoneErrorex = true;
-			usertextErrorex = true;
-			orpriceErrorex = true;
-			pinErrorex = true;
-			wrpriceex = true;
-			esrialErrorex = true;
-			validatenameex();
-			usevalidateEmailex();
-			validatecontactex();
-			validateaddress();
-			validatebookpinex();
-			validateorprice();
-			validatewrpriceex();
-			validateserial();
-			if (usernameErrorex == true && useremailErrorex == true && userphoneErrorex == true &&
-				usertextErrorex == true && pinErrorex == true && orpriceErrorex == true && wrpriceex == true && esrialErrorex == true) {
-				return true;
+    let date = $('#date').val();
+    let exserialno = $('#exserialno').val();
+    let device_photo = $('#device_photo').val();
+    let invoice_photo = $('#invoice_photo').val();
+    let invoice_date = $('#invoice_date').val();
+	let device = $('#device').val();
+    usernameErrorex = true;
+    validatenameex();
+    if (usernameErrorex == true && date != "" && exserialno != "" &&
+	device_photo != "" && invoice_photo != "" && invoice_date != "" && device != "" ) {
 
-			} else {
-				return false;
-			}
+        return true;
+
+    } else {
+		alert('Please fill all the field');
+        return false;
+    }
 		});
 	});
 
