@@ -7,7 +7,7 @@ class Menu extends CI_model {
     }
 
     public function menu_all(){
-        $this->db->select('*,group_concat(category_name) as category_name');
+        $this->db->select('*,group_concat(category_name) as categ_name');
         $this->db->from('category_product');
         $this->db->where('status','active');
         $this->db->group_by('cproduct_name');
@@ -291,6 +291,39 @@ class Menu extends CI_model {
         return $query->result_array();
     }
 
+    //admin extended
+    public function adminextended($id){
+        $this->db->select('*');
+        $this->db->from('warrenty');
+        $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
+        // $this->db->where('warrenty.shop_id',$id);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+     //admin new
+     public function extendednew($id){
+        $this->db->select('*');
+        $this->db->from('warrenty');
+        $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
+        // $this->db->where('warrenty.shop_id',$id);
+        $this->db->where('warrenty.status','new');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    //admin new
+    public function extendedongoing($id){
+        $this->db->select('*');
+        $this->db->from('warrenty');
+        $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
+        $this->db->join('engineer','engineer.eng_id = warrenty.eng_id');
+        // $this->db->where('warrenty.shop_id',$id);
+        $this->db->where('warrenty.eng_id !=','0');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
      //shop extended edit
      public function extendededit($id){
         $this->db->select('*');
@@ -342,6 +375,17 @@ class Menu extends CI_model {
         $this->db->where('category_product.cproduct_name','Air Conditioner');
         $query = $this->db->get();
         return $query->row();         
+    }
+
+    //front checkpriveval
+    public function checkpriveval($price,$device){
+        $this->db->select('*');
+        $this->db->from('warranty_price');
+        $this->db->join('category_product','category_product.cproduct_id = warranty_price.device');
+        $this->db->where('category_product.cproduct_name',$device);
+        $this->db->where("$price BETWEEN warranty_price.fromprice AND warranty_price.toprice");
+        $query = $this->db->get();
+        return $query->row();  
     }
     
 }

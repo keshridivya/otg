@@ -50,12 +50,12 @@ class Admin extends CI_Controller {
 				$otp_resu = 'success';
 				$timestamp =  $_SERVER["REQUEST_TIME"];  
                 $_SESSION['time'] = $timestamp;
-                  $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
-                  if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
-                      $data['message'] = "success";
-                      } else {
-                      $data['message'] = "Something went wrong, please try again later.";
-                      }
+                //   $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
+                //   if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
+                //       $data['message'] = "success";
+                //       } else {
+                //       $data['message'] = "Something went wrong, please try again later.";
+                //       }
             }
             else
             {
@@ -1582,17 +1582,19 @@ class Admin extends CI_Controller {
 	//extended
     public function extended($action,$id=false){
 		if(@$this->session->userdata['a_id']){
-			$id = $this->session->userdata('a_id');
+			// $id = $this->session->userdata('a_id');
 			switch($action){
-				case 'view':
+				    case 'view':
 						$page_data['shopname'] = $this->db->get('shop_owner')->result_array();
-						$page_data['info'] = $this->menu->extended($id);
+						$page_data['info'] = $this->menu->adminextended($id);
+						$page_data['new'] = $this->menu->extendednew($id);
+						$page_data['ongoing'] = $this->menu->extendedongoing($id);
 						$page_data['page_title'] = 'Extented Warranty Registration';
 						$page_data['page'] = 'extended/view';
 						$this->load->view('admin/index',$page_data);
 					break;
-				case 'add':
-					if(get_cookie('sid')){
+				    case 'add':
+					if($this->session->userdata('a_id')){
 						if($this->input->post()){
 							if($_FILES['invoice_photo']['name'] == TRUE){
 								$absolute_path=base_url('uploads/shop_invoice/');
@@ -1602,23 +1604,27 @@ class Admin extends CI_Controller {
 								$uploaded_data=$this->uploadimg(array('upload_path'=>'./uploads/shop_device/','name'=>'device_photo'));
 							}
 
-					       $shop_id = get_cookie('sid');
+							$st_date = $this->input->post('st_date');
+							$duration = $this->input->post('duration');
+							$expire_date = date('y-m-d', strtotime($st_date . '+ '.$duration));
 							$data = [
 								'name' => $this->input->post('name'),
-								'contact' => $this->input->post('contact'),
-								'email' => $this->input->post('email'),
-								'address' => $this->input->post('address'),
-								'pincode' => $this->input->post('pincode'),
-								'device' => $this->input->post('device'),
-								'original_price' => $this->input->post('orprice'),
-								'amount' => $this->input->post('waprice'),
-								'duration' => $this->input->post('duration'),
-								'created_on' => $this->input->post('st_date'),
-								'device_serial_no' => $this->input->post('de_se_no'),
-								'serial_no_image' => $this->input->post('device_photo'),
-								'invoice_image' => $this->input->post('invoice_photo'),
-								'status' => $this->input->post('status'),
-								'shop_id' => $shop_id,
+                            'contact' => $this->input->post('contact'),
+                            'email' => $this->input->post('email'),
+                            'address' => $this->input->post('address'),
+                            'pincode' => $this->input->post('pincode'),
+                            'device' => $this->input->post('device'),
+                            'original_price' => $this->input->post('orprice'),
+                            'amount' => $this->input->post('waprice'),
+                            'duration' => $this->input->post('duration'),
+                            'created_on' => date('y-m-d'),
+                            'start_date' => $this->input->post('st_date'),
+                            'invoice_date' => $this->input->post('invoice_date'),
+                            'device_serial_no' => $this->input->post('de_se_no'),
+                            'expires_on' => $expire_date,
+                            'serial_no_image' => $this->input->post('device_photo'),
+                            'invoice_image' => $this->input->post('invoice_photo'),
+                            'shop_id' => $this->input->post('shop_id'),
 							];
 
 							if(is_countable($uploaded_data) && count($uploaded_data)>=1){
@@ -1639,13 +1645,15 @@ class Admin extends CI_Controller {
 						}
 						// $page_data['info'] = $this->menu->extendededit($id);
 						$page_data['product'] = $this->db->get_where('category_product',['category_name'=>'Extended Warrenty'])->result_array();
+						$page_data['shopname'] = $this->db->get('shop_owner')->result_array();
+
 						$page_data['page_title'] = 'Add Warranty';
 						$page_data['page'] = 'extended/form';
 						$this->load->view('admin/index',$page_data);
 					}
 					break;
 					case 'edit':
-						if(get_cookie('sid')){
+						if($this->session->userdata('a_id')){
 							if($this->input->post()){
 								if($_FILES['device_photo']['name'] != ""){
 											// $absolute_path=base_url('uploads/shop_device/');
@@ -1687,6 +1695,7 @@ class Admin extends CI_Controller {
 								$this->db->update('warrenty',$data);
 							}
 							$page_data['info'] = $this->menu->extendededit($id);
+							$page_data['shopname'] = $this->db->get('shop_owner')->result_array();
 							$page_data['product'] = $this->db->get_where('category_product',['category_name'=>'Extended Warrenty'])->result_array();
 							$page_data['page_title'] = 'Edit Warranty';
 							$page_data['page'] = 'extended/form';
@@ -1705,6 +1714,57 @@ class Admin extends CI_Controller {
 
 		}
     }
+
+	//warranty price
+	public function warranty_price($action,$id=false){
+		if(@$this->session->userdata['a_id']){
+			switch($action){
+				case 'view':
+					$page_data['page_title']="Warranty Price";
+					$page_data['page']="contact";
+					$this->load->view('admin/index',$page_data);
+				break;
+				case 'add':
+					if($this->input->post()){
+
+						$from = $this->input->post('fromPrice');
+						for($wp=0; $wp<count($from);$wp++){
+							$data = [
+								'device' => $this->input->post('device'),
+								'fromprice' => $this->input->post('fromPrice')[$wp],
+								'toprice' => $this->input->post('toPrice')[$wp],
+								'oneyearvan' => $this->input->post('oneyeavan')[$wp],
+								'oneyear' => $this->input->post('oneyear')[$wp],
+								'twoyearvan' => $this->input->post('twoyearvan')[$wp],
+								'twoyear' => $this->input->post('twoyear')[$wp],
+								'threeyearvan' => $this->input->post('threeyearvan')[$wp],
+								'threeyear' => $this->input->post('threeyear')[$wp],
+								'fouryearvan' => $this->input->post('fouryearvan')[$wp],
+								'fouryear' => $this->input->post('fouryear')[$wp],
+								'created_on' => date('y-m-d'),
+							];
+							$query = $this->db->insert('warranty_price',$data);
+						}
+						if($query){
+							$page_data['message'] = 'Warranty Price Submit Successfully';
+						}
+						else{
+							$page_data['message'] = 'Something went wrong. Please try again';
+						}
+					}
+					$page_data['product'] = $this->db->get_where('category_product',['category_name'=>'Extended Warrenty'])->result_array();
+					$page_data['page_title']="Add Warranty";
+					$page_data['page']="warranty_price/form";
+					$this->load->view('admin/index',$page_data);
+				break;
+			}
+		}else{
+			$page_data['page_title']="Login Admin";
+		$this->load->view('admin/login',$page_data);
+
+		}
+	}
+
 	//contact in admin
 	public function contact($action,$id=false){
 		if(@$this->session->userdata['a_id']){
@@ -1713,6 +1773,7 @@ class Admin extends CI_Controller {
 					$contact_data=$this->db->get("contact-form")->result_array();
 					$page_data['page_title']="All Contact Query";
 					$page_data['contact_data']=$contact_data;
+					$page_data['page_title']="Contact Us";
 					$page_data['page']="contact";
 					$this->load->view('admin/index',$page_data);
 					break;

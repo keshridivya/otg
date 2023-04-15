@@ -135,7 +135,7 @@ $(document).ready(function () {
         if (usernameError == true  && useremailError == true && userphoneError == true && usertextError == true && pin_error == true) {
 			// $('#info_check').attr('disabled',false);
 			$('.set1').css('display','none');
-			$('.set2').css('display','block');
+			$('.set2').css('display','block').css('opacity','1');
             return true;
             
         } else {
@@ -363,6 +363,59 @@ $(document).ready(function () {
 		});
 	});
 
+</script>
+
+<script>
+	$('#spandeviceplan').hide();
+	  $("#device_check").click(function () {
+		let device = $('#device').val();
+        if (device != null) {
+			$('#spandeviceplan').hide();
+			$('.set1').css('display','none');
+			$('.set2').css('display','block').css('opacity','1');
+            return true;
+            
+        } else {
+			$('#spandeviceplan').show().css('color','red');
+			$('.set1').css('display','block');
+			$('.set2').css('display','none');
+			return false;
+        }
+    });
+</script>
+
+<script>
+	//add input field
+$(document).ready(function(){
+	$('.adddevicebutton').click(function(){
+		let field = '<hr><label class="fieldlabels">From Price: </label>\
+													<input type="text" name="fromPrice[]" id="product"\
+														 required/>\
+													<label class="fieldlabels">To Price: </label>\
+													<input type="text" name="toPrice[]" id="qua"  required/>\
+													<label class="fieldlabels">1Year Van No : </label>\
+													<input type="text" name="oneyeavan[]" id="mrp"  />\
+													<label class="fieldlabels">1 Year : </label>\
+													<input type="text" name="oneyear[]" id="dis"  />\
+													<label class="fieldlabels">2Year Van No : </label>\
+													<input type="text" name="twoyearvan[]" id="mrp"  />\
+													<label class="fieldlabels">2 Year : </label>\
+													<input type="text" name="twoyear[]" id="dis"  />\
+													<label class="fieldlabels">3Year Van No : </label>\
+													<input type="text" name="threeyearvan[]" id="mrp"\ />\
+													<label class="fieldlabels">3 Year : </label>\
+													<input type="text" name="threeyear[]" id="dis"  />\
+													<label class="fieldlabels">4Year Van No : </label>\
+													<input type="text" name="fouryearvan[]" id="mrp"  />\
+													<label class="fieldlabels">4 Year : </label>\
+													<input type="text" name="fouryear[]" id="dis"  />';
+	$('.addinput').append(field);
+	$("body").on("click", "#removefield", function () {
+		$(this).parents("#row").remove();
+	})
+
+	})
+});
 </script>
 
 

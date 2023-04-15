@@ -19,7 +19,6 @@
                             echo "<div class='alert alert-info'>".$message."</div>";
                           }
                           ?>
-
 						<form class="customer" method="post" enctype="multipart/form-data">
 							<input type="hidden" class="form-control form-control-user"
 								value="<?php echo $info[0]['warrenty_id'] ?? '';?>" name="id">
@@ -70,6 +69,17 @@
                                                     ?>
 									</select>
 								</div>
+								<div class="col-sm-6 mb-3 ">
+									<label for="cp_name">Shop Name</label>
+									<select name="shop_id" id="shop_id" class="form-control one_eng_name" required>
+									<option value="">Select shop</option>
+										<?php
+												foreach($shopname as $shopname){
+												?>
+										<option value="<?= $shopname['shop_id'] ?>"><?= $shopname['name'] ?></option>
+										<?php } ?>
+									</select>
+								</div>
 								<div class="col-sm-6 mb-3  ">
 									Original Price <input type="text" name="orprice" value="<?php echo $info[0]['original_price'] ?? '';?>"
 										id="exorprice" class="form-control form-control-user" required>
@@ -83,9 +93,8 @@
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Duration</label>
 									<select name="duration" id="" class="form-control" required>
-										<option value="6 month">6 Month</option>
-										<option value="1 year">1 Year</option>
-										<option value="2 year">2 Year</option>
+										<option value="1 years">1 Year</option>
+										<option value="2 years">2 Year</option>
 									</select>
 									<!-- <input type="text" name="duration" value="<?php echo $info[0]['duration'] ?? '';?>"
 										id="sc_name" class="form-control form-control-user" > -->
@@ -94,6 +103,11 @@
 									<label for="sc_name">Start date</label>
 									<input type="date" name="st_date" value="<?php echo $info[0]['created_on'] ?? '';?>"
 										id="sc_name" class="form-control form-control-user"  required>
+								</div>
+								<div class="col-sm-6 mb-3  ">
+									<label for="sc_name">Invoice date<span style="color:red">*</span></label>
+									<input type="date" name="invoice_date" value="<?php echo $info[0]['created_on'] ?? '';?>"
+										id="invoice_date" class="form-control form-control-user"  >
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Device Serial Number</label>
@@ -113,7 +127,7 @@
 								<?php }
                                     ?>
 									<input type="file" name="device_photo" value=""
-										id="sc_name" class="form-control form-control-user" >
+										id="sc_name" class="form-control form-control-user" accept="image/png, image/jpeg, image/jpg, image/webp" required>
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Invoice Upload</label>
@@ -127,17 +141,23 @@
 								<?php }
                                     ?>
 									<input type="file" name="invoice_photo" value=""
-										id="sc_name" class="form-control form-control-user" >
+										id="sc_name" class="form-control form-control-user" accept="image/*,.pdf" required>
 								</div>
 								<div class="col-sm-6 mb-3">
 									<label for="sc_status">Status</label>
 									<select class="form-control" name="status" id="sc_status" required>
-										<option value="active" <?php echo (($info[0]['status'] ?? ' ') =='active') ? 'selected': ''; ?>>
-											Active
+										<option value="active" <?php echo (($info[0]['status'] ?? ' ') =='new') ? 'selected': ''; ?>>
+											New
 										</option>
 										<option value="inactive"
-											<?php echo (($info[0]['status'] ?? '') =='inactive') ? 'selected': ''; ?>>
-											Inactive</option>
+											<?php echo (($info[0]['status'] ?? '') =='process') ? 'selected': ''; ?>>
+											Process</option>
+											<option value="inactive"
+											<?php echo (($info[0]['status'] ?? '') =='completed') ? 'selected': ''; ?>>
+											Completed</option>
+											<option value="inactive"
+											<?php echo (($info[0]['status'] ?? '') =='close') ? 'selected': ''; ?>>
+											Close</option>
 									</select>
 								</div>
 							</div>

@@ -147,33 +147,6 @@
 														</ul>
 													</div>
 												</div>
-												<!-- <div class="type-plan-details">
-                                                                            <div class="plan-title">
-                                                                                <h2 class="heading"><?php echo $plandata['cplan_name'];?></h2>
-                                                                                    
-                                                                            </div>
-                                                                            <div class="plan-desc">
-                                                                                <p>Lorem ipsum dolor sit amet, anfdsconsectetuer
-                                                                                    adipiscing elit, sed diam nonum Lorem ipsum dolor
-                                                                                    sit amet, consectetuer adipiscing elit, sed diam</p>
-                                                                            </div>
-                                                                            <div class="plan-price">
-                                                                                <h2><i class="fa fa-inr" aria-hidden="true"></i><?php echo $plandata['cplan_price'];?></h2>
-                                                                            </div>
-                                                                        
-                                                                            <div class="plan-btns">
-                                                                                <a href="">View More</a>
-                                                                                <a href="<?php echo base_url('addtocart/'.$plandata['cplan_id'])?>">Add to Cart</a>
-                                                                            </div>
-                                                                            <div class="product-accordion">
-                                                                                <a href="#" class="" data-toggle="collapse" data-target="#faq1" aria-expanded="true" aria-controls="<?php echo "faq".$plandata['cplan_id'];?>">dasdas</a>
-                                                              
-                                                                             </div>
-                                                                             <div id="faq1" class="collapse accord-text" aria-labelledby="<?php echo "faqhead".$plandata['cplan_id'];?>" data-parent="#faq">
-                                                                               fsdfsdgsdgsdg asfjaoieruoirej mnrkjhfoia
-                                                                             </div>
-
-                                                                    </div> -->
 											</div>
 											<?php
                                                                 
@@ -288,36 +261,6 @@
                                             }
                                         }
                                                     ?>
-							<!-- <div class="tab-pane container active" id="home">
-
-                                        <div class="type-content">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class="type-plan-details">
-                                                                <div class="plan-title">
-                                                                    <h2 class="heading">Jet Service</h2>
-                                                                        
-                                                                </div>
-                                                                <div class="plan-desc">
-                                                                    <p>Lorem ipsum dolor sit amet, anfdsconsectetuer
-                                                                        adipiscing elit, sed diam nonum Lorem ipsum dolor
-                                                                        sit amet, consectetuer adipiscing elit, sed diam</p>
-                                                                </div>
-                                                                <div class="plan-price">
-                                                                    <h2><i class="fa fa-inr" aria-hidden="true"></i>499</h2>
-                                                                </div>
-                                                                <div class="plan-btns">
-                                                                    <a href="">View More</a>
-                                                                    <a href="">Add to Cart</a>
-                                                                </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
-
 
 						</div>
 					</div>

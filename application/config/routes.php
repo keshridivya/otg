@@ -253,13 +253,15 @@ $route['admin/shop/delete/(:any)']="admin/shop/delete/$1";
 $route['admin/shop/active/(:any)']="admin/shop/active/$1";
 $route['admin/shop/inactive/(:any)']="admin/shop/inactive/$1";
 
-//shop registration
+//admin registration
 $route['admin/extended'] = 'admin/extended/view';
 $route['admin/extended/add'] = 'admin/extended/add';
 $route['admin/extended/edit/(:any)']="admin/extended/edit/$1";
 $route['admin/extended/delete/(:any)']="admin/extended/delete/$1";
 
-
+//admin warranty price
+$route['admin/warranty_price'] = 'admin/warranty_price/view';
+$route['admin/warranty_price/add'] = 'admin/warranty_price/add';
 //enginner login
 $route['engineer']='engineer/index';
 

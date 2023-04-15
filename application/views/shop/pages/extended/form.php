@@ -135,7 +135,8 @@
 									<input type="file" name="invoice_photo" value=""
 										id="invoice_photo" class="form-control form-control-user"  accept="image/*,.pdf">
 								</div>
-								<div class="col-sm-6 mb-3">
+							
+								<!-- <div class="col-sm-6 mb-3">
 									<label for="sc_status">Status</label>
 									<select class="form-control" name="status" id="sc_status" >
 										<option value="active" <?php echo (($info[0]['status'] ?? ' ') =='active') ? 'selected': ''; ?>>
@@ -145,7 +146,7 @@
 											<?php echo (($info[0]['status'] ?? '') =='inactive') ? 'selected': ''; ?>>
 											Inactive</option>
 									</select>
-								</div>
+								</div> -->
 							</div>
 							<input type="submit" name="submit"
 								class="btn btn-primary btn-user btn-block exten_btn">

@@ -380,7 +380,7 @@ class Welcome extends CI_Controller {
     public function extended($action)
     {
         $product_arg=urldecode($action);
-        $product_data=$this->db->get_where('category_product',array('cproduct_name'=>$product_arg,'category_name'=>'Extended Warrenty'))->result_array();
+        $product_data=$this->db->get_where('category_product',array('cproduct_name'=>$product_arg,'category_name'=>'Extended Warranty'))->result_array();
         $page_data['product_data']=$product_data;
         $page_data['dropdown']=$this->menu->menu_all();
         $page_data['page']="extended";
@@ -388,21 +388,79 @@ class Welcome extends CI_Controller {
         $this->load->library('cart');
     }
 
+    public function checkPrice(){
+        $price = $this->input->post('price');
+        $device = $this->input->post('device');
+        if($price){
+            $check = $this->menu->checkpriveval($price,$device);
+            if($check){
+                $result = 'success';
+
+                $fetchdata = '
+                <input type="hidden" value="'.$check->id.'" class="planid">
+                    <div class="button-wrap">
+                        <input class="hidden radio-label year" type="radio" name="accept-offers" id="yes-button"
+                            checked value="' . $check->oneyear . '"/>
+                        <label class="button-label" for="yes-button">
+                            <h1><i class="fa fa-inr"></i> ' . $check->oneyear . '</h1><p>1 Year</p>
+                        </label>';
+                if ($check->twoyear != "") {
+                    $fetchdata .= '<input class="hidden radio-label year" type="radio" name="accept-offers" value="' . $check->twoyear . '" id="no-button" />
+                        <label class="button-label" for="no-button">
+                            <h1><i class="fa fa-inr"></i> ' . $check->twoyear . '</h1><p>2 Year</p>
+                        </label>';
+                }
+                if ($check->threeyear != "") {
+                $fetchdata .= '<input class="hidden radio-label year"  type="radio" name="accept-offers" id="maybe-button" value="' . $check->threeyear . '" />
+                    <label class="button-label" for="maybe-button">
+                        <h1><i class="fa fa-inr"></i> ' . $check->threeyear . '</h1><p>3 Year</p>
+                    </label>';
+                }
+                if ($check->fouryear != "") {
+                    $fetchdata .= '<input class="hidden radio-label year"  type="radio" name="accept-offers" id="four-button" value="' . $check->fouryear . '" />
+                        <label class="button-label" for="four-button">
+                            <h1><i class="fa fa-inr"></i> ' . $check->fouryear . '</h1><p>4 Year</p>
+                        </label>';
+                }
+                $fetchdata .= '</div>';
+            }else{
+                $result = 'error';
+            }
+        }
+        $data['result'] = $result;
+        $data['token']  = $this->security->get_csrf_hash();
+        $data['fetch']  = $fetchdata;
+        echo json_encode($data); 
+    }
+    // $proid
     function addtocart($proid){
-        $plans=$this->db->get_where('category_plans',array('cplan_id'=>$proid))->result_array();
-        $products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
-        $data=array(
-            'id'=>$plans[0]['cplan_id'],
-            'qty'=>1,
-            'price'=>$plans[0]['cplan_price'],
-            'name'=>$plans[0]['cplan_name'],
-            'image'=>$products[0]['cproduct_img'],
-            'product_name'=>$products[0]['cproduct_name'],
-            'category_name'=>$products[0]['category_name'],
-            'product_category'=>$products[0]['category_name'],
-        );
-        $this->cart->insert($data);
-        redirect(base_url('cart'));
+        $planid = $this->input->post('planid');
+        $year = $this->input->post('year');
+        $warranty = $this->input->post('warranty');
+        $cart_items = $this->cart->contents();
+        foreach ($cart_items as $item) {
+            if ($item['category_name'] == $warranty) {
+                print_r('dsalready');
+                die;
+            }
+            else{
+                $plans=$this->db->get_where('category_plans',array('cplan_id'=>$proid))->result_array();
+                $products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
+                $data=array(
+                    'id'=>$plans[0]['cplan_id'],
+                    'qty'=>1,
+                    'price'=>$plans[0]['cplan_price'],
+                    'name'=>$plans[0]['cplan_name'],
+                    'image'=>$products[0]['cproduct_img'],
+                    'product_name'=>$products[0]['cproduct_name'],
+                    'category_name'=>$products[0]['category_name'],
+                    'product_category'=>$products[0]['category_name'],
+                );
+                $this->cart->insert($data);
+                redirect(base_url('cart'));
+            }
+        }
+       
     }
 
     public function cart(){

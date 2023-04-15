@@ -121,7 +121,7 @@
 												<ul class="row grid">
 													<?php foreach($dropdown as $drop){  
 														$all_cate = array();
-														$langs = explode(",", $drop['category_name']);
+														$langs = explode(",", $drop['categ_name']);
 														?>
 													<li class="grid__item lvl-1 col-md-3 col-lg-3">
 
@@ -129,18 +129,18 @@
 														<ul class="subLinks">
 															<li class="lvl-2">
 															<?php 
-							if(in_array('Maintenance and repair', $langs)){ ?> 
-							
-								<a class="maintenancefont"
-								href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>">Maintenance and repair</a>
-							<?php }
-							?>
-							<?php 
-							if(in_array('Extended Warrenty', $langs)){ ?> 
-								<a class="maintenancefont"
-								href="<?php echo base_url('extended/'. $drop['cproduct_name'])?>">Extended Warranty</a>
-							<?php }
-							?>
+																if(in_array('Maintenance and repair', $langs)){ ?> 
+																
+																	<a class="maintenancefont"
+																	href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>">Maintenance and repair</a>
+																<?php }
+																?>
+																<?php 
+																if(in_array('Extended Warranty', $langs)){ ?> 
+																	<a class="maintenancefont"
+																	href="<?php echo base_url('extended/'. $drop['cproduct_name'])?>">Extended Warranty</a>
+																<?php }
+																?>
 																<!-- <a
 																	href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>"
 																	class="site-nav lvl-2"><?= $drop['category_name']; ?></a> -->
@@ -296,7 +296,7 @@
 					<li class='row'>
 						<?php
 					foreach($dropdown as $drop){
-						$langs = explode(",", $drop['category_name']);
+						$langs = explode(",", $drop['categ_name']);
 					 ?>
 						<div class="mobile-sublink col-6">
 							<p><?= $drop['cproduct_name']; ?></p>
@@ -307,13 +307,11 @@
 							<?php }
 							?>
 							<?php 
-							if(in_array('Extended Warrenty', $langs)){ ?> 
+							if(in_array('Extended Warranty', $langs)){ ?> 
 								<a class="maintenancefont"
 								href="<?php echo base_url('extended/'. $drop['cproduct_name'])?>">Extended Warranty</a>
 							<?php }
 							?>
-							<!-- <a class="maintenancefont"
-								href="<?php echo base_url('maintenance/'. $drop['cproduct_name'])?>"><?= $drop['category_name']; ?></a> -->
 						</div>
 						<?php } ?>
 					</li>

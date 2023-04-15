@@ -288,7 +288,6 @@ class Shop extends CI_Controller{
                             'expires_on' => $expire_date,
                             'serial_no_image' => $this->input->post('device_photo'),
                             'invoice_image' => $this->input->post('invoice_photo'),
-                            'status' => $this->input->post('status'),
                             'shop_id' => $shop_id,
                         ];
 
