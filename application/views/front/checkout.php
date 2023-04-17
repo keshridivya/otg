@@ -24,12 +24,17 @@
                                                 foreach($cartItems as $item){
 												echo "<img src='".base_url($item['image'])."' width='40'>";
                                             ?>
-											<?php echo $item['product_name']?>
-											-
-											<?php echo $item['name']?><br>
+											<?php echo $item['product_name']?>(<?php echo $item['category_name']?>)
+
 											<?php
 											if($item['category_name'] == 'Maintenance and repair'){
+												echo '- '.
+												$item['name'].'<br>';
 												echo '<input type="hidden" value="One Time Service" class="mainten" >'; 
+											}
+											else{
+												echo '<input type="hidden" value="'.$item['category_name'].'" class="mainten" >'; 
+												
 											}
                                                 }
                                             }
@@ -211,6 +216,9 @@
 												</div> -->
 											</div>
 										</div>
+										<?php
+										if($item['category_name'] != 'Extended Warranty'){
+										?>
 										<div class="col-sm-6 col-12 ">
 											<h3 class="">Time Slot</h3>
 											<div class="row justify-content-center" style="    margin-left: 20px;">
@@ -220,21 +228,9 @@
 															value="<?= date('y-m-d h:i') ?>" name="time_slot">
 													</label>
 												</div>
-												<!-- <div class="form-check col-sm-3 col-12 text-left mb-3">
-													<label class="form-check-label">
-													<input type="radio" class="form-check-input" value="1 pm to 5pm"
-															name="time_slot" >1 pm to 5pm
-													</label>
-												</div>
-												<div class="form-check col-sm-3 col-12 text-left mb-3">
-													<label class="form-check-label">
-													<input type="radio" class="form-check-input" value="5 pm to 9pm"
-															name="time_slot" >5 pm to 9pm
-													</label>
-												</div> -->
 											</div>
 										</div>
-
+										<?php } ?>
 									</div>
 
 									<!-- <div class="form-group row">
@@ -493,7 +489,7 @@
 	});
 
 	// checkdata();
-	function checkdata(){
+	function checkdata() {
 		let cartItems = "<?=  $item['product_name'] ?>";
 		var csrfName = $('.csrf').attr('name');
 		var csrfHash = $('.csrf').val();
@@ -512,10 +508,10 @@
 				if (response.msg == 'success') {
 					alert('sorry, this pincode is not serviceable on this product');
 					pincheck_error = false;
-					window.location.href='<?= base_url("welcome/checkout") ?>';
+					window.location.href = '<?= base_url("welcome/checkout") ?>';
 					return false;
 				} else {
-					pincheck_error =true;
+					pincheck_error = true;
 					return true;
 				}
 			},

@@ -37,6 +37,7 @@
 								<input type="hidden" class="form-control form-control-user"
 									value="<?php echo $_SESSION['c_address'] .' '. $_SESSION['c_city'] .' '. $_SESSION['c_pincode'];?>"
 									name="c_address[]">
+									<!-- <input type="hidden" value="<?= $item['duration'] ?>" class="duration" > -->
 
 								<input type="hidden" class="form-control form-control-user" id="perge"
 									value="<?php echo $_SESSION['percentage'];?>" name="percentage[]">
@@ -57,12 +58,14 @@
 										<img src='<?= base_url($item['image']) ?>' width='40'>
 									</div>
 									<div class="col-sm-4 col-8">
-										<!-- <label for="s_device">Service Device</label> -->
 										<input type="text" name="s_device[]"
 											value="<?php  echo $item['product_name']; ?>" id="s_device"
 											class="form-control form-control-user" placeholder="Service Device"
 											readonly>
 									</div>
+									<?php
+										if($item['category_name'] != 'Extended Warranty'){
+										?>
 									<div class="col-sm-4 col-7 mb-3 mb-sm-0">
 										<!-- <label for="s_plan">Service Plan</label> -->
 										<input type="text" name="s_plan[]" value="<?php echo $item['name']; ?>"
@@ -75,6 +78,13 @@
 										</span>
 
 									</div>
+									<?php } else{ ?>
+										<div class="col-sm-4 col-7 mb-3 mb-sm-0">
+										<input type="text" name="duration[]" value="<?php echo $item['duration']; ?>" id="duration" class="form-control form-control-user text-center" readonly>
+									</div>
+										
+									<?php } ?>
+									<input type="hidden" name="catename[]" value="<?php echo $item['category_name']; ?>" id="catename" class="form-control form-control-user text-center" readonly>
 									<div class="col-sm-3 col-3 mb-3 mb-sm-0 text-right">
 										<label for="sub_total">Subtotal</label>
 										<input type="text" name="sub_total[]" id="sub_total"
@@ -84,13 +94,7 @@
 									</div>
 
 								</div>
-								<!-- <div class="form-group row">
-									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
-										<label for="quantity">Total Devices</label>
-										
-									</div>
-									
-								</div> -->
+
 								<hr>
 								<?php  } } ?>
 								<div class="col-sm-12 mb-3 mb-sm-0">
@@ -143,40 +147,54 @@
 								<input type="hidden" class="form-control form-control-user"
 									value="<?php echo $_SESSION['time_slot'];?>" name="time_slot[]">
 								<input type="hidden" value='OTG-<?= time().rand(100, 999) ?>' name='order_id'>
+								<!-- <input type="hidden" value="<?= $item['duration'] ?>" class="duration" > -->
 
 								<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 									value="<?php echo $this->security->get_csrf_hash();?>">
-								<div class="form-group row">
-									<input type="hidden" name="c_name" value="<?php echo $_SESSION['c_name'];?>"
+									<div class="form-group row">
+									<input type="hidden" name="c_name[]" value="<?php echo $_SESSION['c_name'];?>"
 										id="c_name" class="form-control form-control-user" placeholder="Customer Name"
 										readonly>
-									<!--</div>-->
-									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
-										<label for="s_plan">Service Plan</label>
-										<input type="text" name="s_plan[]" value="<?php echo $item['name']; ?>"
-											id="s_plan" class="form-control form-control-user"
-											placeholder="Service Plan" readonly>
+
+									<div class="">
+										<img src='<?= base_url($item['image']) ?>' width='40'>
 									</div>
-									<div class="col-sm-4 col-6">
-										<label for="s_device">Service Device</label>
-										<input type="text" name="s_device[]" value="<?php 
-                                                     echo $item['product_name']; ?>" id="s_device"
+									<div class="col-sm-4 col-8">
+										<input type="text" name="s_device[]"
+											value="<?php  echo $item['product_name']; ?>" id="s_device"
 											class="form-control form-control-user" placeholder="Service Device"
 											readonly>
 									</div>
-								</div>
-								<div class="form-group row">
-									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
-										<label for="quantity">Total Devices</label>
-										<input type="text" name="quantity[]" id="quantity" value="<?= $item['qty'] ?>"
-											class="form-control form-control-user" placeholder="Total Amount" readonly>
+									<?php
+										if($item['category_name'] != 'Extended Warranty'){
+										?>
+									<div class="col-sm-4 col-7 mb-3 mb-sm-0">
+										<!-- <label for="s_plan">Service Plan</label> -->
+										<input type="text" name="s_plan[]" value="<?php echo $item['name']; ?>"
+											id="s_plan" class="form-control form-control-user text-center"
+											placeholder="Service Plan" readonly>
+										<span class="d-flex" style="margin-left: 53px;">
+											Qty: <input type="text" name="quantity[]" id="quantity"
+												value="<?= $item['qty'] ?>" class="form-control-user"
+												style="height:20px" placeholder="Total Amount" readonly>
+										</span>
+
 									</div>
-									<div class="col-sm-4 col-6 mb-3 mb-sm-0">
+									<?php } else{ ?>
+										<div class="col-sm-4 col-7 mb-3 mb-sm-0">
+										<input type="text" name="duration[]" value="<?php echo $item['duration']; ?>" id="duration" class="form-control form-control-user text-center" readonly>
+									</div>
+										
+									<?php } ?>
+									<input type="hidden" name="catename[]" value="<?php echo $item['category_name']; ?>" id="catename" class="form-control form-control-user text-center" readonly>
+									<div class="col-sm-3 col-3 mb-3 mb-sm-0 text-right">
 										<label for="sub_total">Subtotal</label>
 										<input type="text" name="sub_total[]" id="sub_total"
-											value="<?= $item['price'] ?>" class="form-control form-control-user"
-											placeholder="Total Amount" readonly>
+											value="<?= $item['price'] ?>"
+											class="form-control form-control-user text-right" placeholder="Total Amount"
+											readonly>
 									</div>
+
 								</div>
 								<hr>
 								<?php  } } ?>

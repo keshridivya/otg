@@ -22,23 +22,25 @@
 										<input type="hidden" value="<?= $item["rowid"]?>" name="<?= $item["rowid"]?>"
 											id="rowid">
 
-										<div class="col-lg-1 col-12 cart-row">
-											<h6>Product</h6>
+										<div class="col-lg-5 col-12 cart-row">
+											<!-- <h6>Product</h6> -->
 											<?php $imageURL=!empty($item["image"])?base_url($item["image"]):base_url("demo.jpeg"); 
                                                                 ?>
-											<img src="<?php echo $imageURL;?>" alt="" width="50">
+											<img src="<?php echo $imageURL;?>" alt="" width="50"><p><?php echo $item['product_name']?> (<?php echo $item['product_category']?>)</p>
 										</div>
 
-										<div class="col-lg-1 col-12 cart-row">
+										<!-- <div class="col-lg-1 col-12 cart-row">
 											<h6>Product Name</h6>
 											<p><?php echo $item['product_name']?></p>
-										</div>
-										<div class="col-lg-2 col-12 cart-row">
+										</div> -->
+										<!-- <div class="col-lg-2 col-12 cart-row">
 											<h6>Service Name</h6>
 											<p><?php echo $item['product_category']?></p>
 
-										</div>
-										<div class="col-lg-2 col-12 cart-row">
+										</div> -->
+										<?php 
+										if($item['product_category'] != 'Extended Warranty'){ ?>
+										<div class="col-lg-1 col-12 cart-row">
 											<h6>Plan Name</h6>
 											<p><?php echo $item['name']?></p>
 
@@ -49,6 +51,24 @@
 											<p><i class="fa-solid fa-indian-rupee-sign"></i>
 												<?php echo $item['price'] ?></p>
 										</div>
+										<?php }else{ ?>
+										<div class="col-lg-2 col-12 cart-row">
+											<h6>Price</h6>
+
+											<p><i class="fa-solid fa-indian-rupee-sign"></i>
+												<?php echo $item['price'] ?></p>
+										</div>
+										<?php 
+										}
+										if($item['product_category'] == 'Extended Warranty'){ ?>
+											<div class="col-lg-2 col-12 cart-row">
+											<h6>Duration </h6>
+
+											<p>
+												<?php echo $item['duration'] ?></p>
+										</div>
+										<?php }else{
+										?>
 										<div class="col-lg-2 col-12 cart-row">
 											<h6>Quantity</h6>
 											<input type="hidden" class="txt_csrfname"
@@ -64,6 +84,7 @@
 											</div>
 
 										</div>
+										<?php } ?>
 										<input type="hidden"
 											name="<?php echo $this->security->get_csrf_token_name(); ?>"
 											value="<?php echo $this->security->get_csrf_hash();?>">
@@ -112,7 +133,7 @@
 							<div class="row justify-content-center">
 								<div class="cart-btns col-lg-6">
 									<div class="theme-btn offer-btn">
-										<a href="<?php echo base_url('services');?>" class="">Continue shopping</a>
+										<a href="<?php echo base_url('services');?>" class="contisho">Continue shopping</a>
 									</div>
 									<?php
                                                     if($this->cart->total_items()>0){
@@ -121,9 +142,9 @@
 										<?php
 									if(!@get_cookie('cid')){
 									?>
-										<a href="<?php echo base_url('sign-up');?>" class="">Checkout</a>
+										<a href="<?php echo base_url('sign-up');?>" class="" style="line-height: 40px;">Checkout</a>
 										<?php }else{ ?>
-										<a href="<?php echo base_url('checkout');?>" class="">Checkout</a>
+										<a href="<?php echo base_url('checkout');?>" class=""style="line-height: 40px;">Checkout</a>
 										<?php } ?>
 
 									</div>

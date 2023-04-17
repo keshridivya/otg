@@ -1300,6 +1300,7 @@ a.collapsed::after {
 .plan-btns {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .lvl1.sign-in a {

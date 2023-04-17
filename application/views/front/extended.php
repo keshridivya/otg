@@ -155,7 +155,7 @@
 	}
 
 	.txt {
-		padding: 0 1rem;
+		padding: 0 0rem;
 		margin-bottom: 2rem;
 		font-size: 1rem;
 		line-height: 2;
@@ -197,23 +197,6 @@
 		transform: translateY(-.2rem);
 	}
 
-	.link-1 {
-		font-size: 1.8rem;
-		color: hsl(0, 0%, 100%);
-		background: linear-gradient(to right bottom, #fff, #ec2F4B);
-		box-shadow: .4rem .4rem 2.4rem .2rem hsla(236, 50%, 50%, 0.3);
-		border-radius: 100rem;
-		padding: 1.4rem 3.2rem;
-		transition: .2s;
-	}
-
-	.link-1:hover,
-	.link-1:focus {
-		-webkit-transform: translateY(-.2rem);
-		transform: translateY(-.2rem);
-		box-shadow: 0 0 4.4rem .2rem hsla(236, 50%, 50%, 0.4);
-	}
-
 	.link-2 {
 		width: 2rem;
 		height: 2rem;
@@ -241,12 +224,12 @@
 		border-color: hsla(0, 0%, 100%, .6);
 		-webkit-transform: translateY(-.2rem);
 		transform: translateY(-.2rem);
+		text-decoration:none;
 	}
 
 	@media(max-width:768px) {
 		.modaldisplay {
 			padding: 1rem 1rem;
-			margin-top: 45%;
 			width: 90%;
 		}
 
@@ -255,7 +238,7 @@
 		}
 
 		.txt {
-			margin-bottom: 2rem;
+			margin-bottom: 1rem;
 			font-size: 1rem;
 		}
 
@@ -266,7 +249,7 @@
 	}
 
 </style>
-<div class="cont1" id="modal-opened">
+<div class="cont1 contfirstmoddla" id="modal-opened">
 	<div class="modal modaldisplay alertmodal">
 
 		<div class="details">
@@ -276,9 +259,26 @@
 		<p class="txt">
 			Device Price entered is outside the plan purchase limit.</p>
 
-		<button class="closebtn">ok &rarr;</button>
+		<button class="closebtn closemodal">ok &rarr;</button>
 
-		<a href="#modal-closed" class="link-2"></a>
+		<a href="#modal-closed" class="link-2 closemodal"></a>
+
+	</div>
+</div>
+
+<div class="cont1 contsec" id="modal-opened">
+	<div class="modal modaldisplay modalalready">
+		<div class="details">
+			<h1 class="title">Oops!</h1>
+		</div>
+		<p class="txt">
+			<b>Want to Replace the Plan in Your Cart?</b></p>
+			<p>Your cart contains Repair and Services plan. Would you like to discard it and replace it with Protection plans?</p>
+
+		<button class="closesec">No &rarr;</button>
+		<button class="closebtn2">Yes &rarr;</button>
+
+		<a href="#modal-closed" class="link-2 closesec"></a>
 
 	</div>
 </div>
@@ -426,12 +426,13 @@
 			},
 			dataType: "json",
 			success: function (response) {
+				$('.csrf').val(response.token);
 				if (response.result == 'success') {
 					$('#priceamt').text(price);
 					$('.fetch').html(response.fetch);
 					$('#planbox').show();
 				} else {
-					$('.cont1').css('display', 'block');
+					$('.contfirstmoddla').css('display', 'block');
 					$('.alertmodal').modal('show');
 				}
 				$('.pricebox').hide();
@@ -459,21 +460,60 @@
 			},
 			dataType: "json",
 			success: function (response) {
+				$('.csrf').val(response.token);
 				if (response.result == 'success') {
-					$('#priceamt').text(price);
-					$('.fetch').html(response.fetch);
-					$('#planbox').show();
+					window.location.href = "<?= base_url('cart') ?>";
 				} else {
-					$('.cont1').css('display', 'block');
-					$('.alertmodal').modal('show');
+					$('.contsec').css('display', 'block');
+					$('.modalalready').modal('show');
 				}
-				$('.pricebox').hide();
 			},
 			error: function () {
 				alert('Something went wrong. Please try again');
 			}
 		})
-		window.location.href = "<?= base_url() ?>" + 'addtocart/' + planid;
+	});
+
+	$('.closebtn2').click(function () {
+		let year = $('.year:checked').val();
+		let planid = $('.planid').val();
+		let cookid = <?= get_cookie("cid") ?>;
+		let csrfHash = $('.csrf').val();
+		let csrfName = $('.csrf').attr('name');
+		$.ajax({
+			url: "<?= base_url('welcome/removecart'); ?>",
+			method: 'post',
+			data: {
+				planid: planid,
+				year: year,
+				warranty:'Extended Warranty',
+				[csrfName]: csrfHash,
+			},
+			dataType: "json",
+			success: function (response) {
+				$('.csrf').val(response.token);
+				if (response.result == 'success') {
+					window.location.href = "<?= base_url('cart') ?>";
+				} else {
+					alert('Item not added in the card');
+				}
+			},
+			error: function () {
+				alert('Something went wrong. Please try again');
+			}
+		})
+	});
+
+	$('.closemodal').click(function(){
+		$('.pricebox').show();
+		$('.alertmodal').modal('hide');
+		$('.contfirstmoddla').css('display', 'none');
+	})
+
+	$('.closesec').click(function(){
+		$('.pricebox').show();
+		$('.modalalready').modal('hide');
+		$('.contsec').css('display', 'none');
 	})
 
 </script>

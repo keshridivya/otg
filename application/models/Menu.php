@@ -387,6 +387,17 @@ class Menu extends CI_model {
         $query = $this->db->get();
         return $query->row();  
     }
+
+     //front checkpriveval
+     public function extendeprice($planid){
+        $this->db->select('*');
+        $this->db->from('warranty_price');
+        $this->db->join('category_product','category_product.cproduct_id = warranty_price.device');
+        $this->db->where('warranty_price.id ',$planid);
+        $query = $this->db->get();
+        // print_r($this->db->last_QUERY());
+        return $query->row();  
+    }
     
 }
 ?>

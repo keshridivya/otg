@@ -425,6 +425,7 @@ class Welcome extends CI_Controller {
                 $fetchdata .= '</div>';
             }else{
                 $result = 'error';
+                $fetchdata = '';
             }
         }
         $data['result'] = $result;
@@ -432,19 +433,19 @@ class Welcome extends CI_Controller {
         $data['fetch']  = $fetchdata;
         echo json_encode($data); 
     }
-    // $proid
-    function addtocart($proid){
+
+    //removecart
+    public function removecart(){
         $planid = $this->input->post('planid');
         $year = $this->input->post('year');
         $warranty = $this->input->post('warranty');
+        $destroy = $this->cart->destroy();
         $cart_items = $this->cart->contents();
-        foreach ($cart_items as $item) {
-            if ($item['category_name'] == $warranty) {
-                print_r('dsalready');
-                die;
-            }
-            else{
-                $plans=$this->db->get_where('category_plans',array('cplan_id'=>$proid))->result_array();
+
+        if(empty($cart_items)){
+            $result = 'success';
+            if($warranty == 'Maintenance and repair'){
+                $plans=$this->db->get_where('category_plans',array('cplan_id'=>$planid))->result_array();
                 $products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
                 $data=array(
                     'id'=>$plans[0]['cplan_id'],
@@ -457,10 +458,141 @@ class Welcome extends CI_Controller {
                     'product_category'=>$products[0]['category_name'],
                 );
                 $this->cart->insert($data);
-                redirect(base_url('cart'));
+            }
+            else if($warranty == 'Extended Warranty'){
+                $yearprice = '';
+                $query = $this->menu->extendeprice($planid);
+                if($year == $query->oneyear){
+                    $yearprice = '1 years';
+                }else if( $year == $query->twoyear){
+                    $yearprice = '2 years';
+                }else if( $year == $query->threeyear){
+                    $yearprice = '3 years';
+                }else{ $yearprice = '4 years';}
+        
+                $data=array(
+                    'id'=>$query->id,
+                            'qty'=>1,
+                            'price'=>$year,
+                            'image'=>$query->cproduct_img,
+                            'name'=>'rr',
+                            'duration'=>$yearprice,
+                            'product_name'=>$query->cproduct_name,
+                            'category_name'=>$query->category_name,
+                            'product_category'=>$query->category_name,
+                );
+                $this->cart->insert($data);
             }
         }
-       
+        else{
+            $result = 'error';
+        }
+        $data['result'] = $result;
+        $data['token']  = $this->security->get_csrf_hash();
+        echo json_encode($data);
+    }
+    // $proid
+    function addtocart(){
+        $planid = $this->input->post('planid');
+        $year = $this->input->post('year');
+        $warranty = $this->input->post('warranty');
+        $cart_items = $this->cart->contents();
+
+        if(empty($cart_items)) {
+            $result = 'success';
+
+            if($warranty == 'Maintenance and repair'){
+                $plans=$this->db->get_where('category_plans',array('cplan_id'=>$planid))->result_array();
+                $products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
+                $data=array(
+                    'id'=>$plans[0]['cplan_id'],
+                    'qty'=>1,
+                    'price'=>$plans[0]['cplan_price'],
+                    'name'=>$plans[0]['cplan_name'],
+                    'image'=>$products[0]['cproduct_img'],
+                    'product_name'=>$products[0]['cproduct_name'],
+                    'category_name'=>$products[0]['category_name'],
+                    'product_category'=>$products[0]['category_name'],
+                );
+                $this->cart->insert($data);
+            }
+            else if($warranty == 'Extended Warranty'){
+                $query = $this->menu->extendeprice($planid);
+                if($query->oneyear == $year){
+                    $yearprice = '1 years';
+                }else if($query->twoyear == $year){
+                    $yearprice = '2 years';
+                }else if($query->threeyear == $year){
+                    $yearprice = '3 years';
+                }else{ $yearprice = '4 years';}
+        
+                $data=array(
+                    'id'=>$query->id,
+                    'qty'=>1,
+                    'price'=>$year,
+                    'image'=>$query->cproduct_img,
+                    'name'=>'rr',
+                    'duration'=>$yearprice,
+                    'product_name'=>$query->cproduct_name,
+                    'category_name'=>$query->category_name,
+                    'product_category'=>$query->category_name,
+                );
+                $this->cart->insert($data);
+            }
+        } else {
+            foreach ($cart_items as $item) {
+                if (($item['category_name'] ?? '') == $warranty) {
+                $result = 'success';
+                    if($warranty == 'Maintenance and repair'){
+                        $plans=$this->db->get_where('category_plans',array('cplan_id'=>$planid))->result_array();
+                        $products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
+                        $data=array(
+                            'id'=>$plans[0]['cplan_id'],
+                            'qty'=>1,
+                            'price'=>$plans[0]['cplan_price'],
+                            'name'=>$plans[0]['cplan_name'],
+                            'image'=>$products[0]['cproduct_img'],
+                            'product_name'=>$products[0]['cproduct_name'],
+                            'category_name'=>$products[0]['category_name'],
+                            'product_category'=>$products[0]['category_name'],
+                        );
+                        $this->cart->insert($data);
+                    }
+                    else if($warranty == 'Extended Warranty'){
+                        $query = $this->menu->extendeprice($planid);
+                        if($query->oneyear == $year){
+                            $yearprice = '1 years';
+                        }else if($query->twoyear == $year){
+                            $yearprice = '2 years';
+                        }else if($query->threeyear == $year){
+                            $yearprice = '3 years';
+                        }else{ $yearprice = '4 years';}
+                
+                        $data=array(
+                            'id'=>$query->id,
+                            'qty'=>1,
+                            'price'=>$year,
+                            'image'=>$query->cproduct_img,
+                            'name'=>'rr',
+                            'duration'=>$yearprice,
+                            'product_name'=>$query->cproduct_name,
+                            'category_name'=>$query->category_name,
+                            'product_category'=>$query->category_name,
+                        );
+                        $this->cart->insert($data);
+                    }
+                }
+                else{
+                    $result = 'error';
+                }
+            }
+        }
+        // redirect(base_url('cart'));
+
+        $data['result'] = $result;
+        $data['token']  = $this->security->get_csrf_hash();
+        // $data['fetch']  = $fetchdata;
+        echo json_encode($data);
     }
 
     public function cart(){
@@ -988,6 +1120,8 @@ class Welcome extends CI_Controller {
                     "cust_timeslot"     =>  $data['time_slot'][$i],
 					"service_plan"      =>  $data['s_plan'][$i],
 					"service_device"    =>  $data['s_device'][$i],
+                    "service_warranty"  =>  $data['catename'][$i],
+                    "duration"          =>  $data['duration'][$i],
 					"quantity"          =>  $data['quantity'][$i],
 					"total_amount"      =>  $data['sub_total'][$i],
                     "order_id"          =>  $data['order_id'],
@@ -1076,7 +1210,7 @@ class Welcome extends CI_Controller {
 		if($this->input->post()){
             $main_arr=array();
             $data=$this->input->post();
-            for($i=0;$i<count($data['s_plan']);$i++){
+            for($i=0;$i<count($data['s_device']);$i++){
 				$arr=array(
 					"cust_id"           =>  $data['customer_id'],
 					"cust_name"         =>  $data['c_name'][$i],
@@ -1087,6 +1221,8 @@ class Welcome extends CI_Controller {
                     "cust_timeslot"     =>  $data['time_slot'][$i],
 					"service_plan"      =>  $data['s_plan'][$i],
 					"service_device"    =>  $data['s_device'][$i],
+                    "service_warranty"  =>  $data['catename'][$i],
+                    "duration"          =>  $data['duration'][$i],
 					"quantity"          =>  $data['quantity'][$i],
 					"total_amount"      =>  $data['sub_total'][$i],
                     "order_id"          =>  $data['order_id'],

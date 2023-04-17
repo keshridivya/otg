@@ -21,6 +21,8 @@
 	<input type="hidden" name="quantity[]" id="quantity" value="<?= $item['qty'] ?>"
 		class="form-control form-control-user" placeholder="Total Amount" readonly>
         <input type="hidden" name="sub_total" value='<?= $item['price'] ?>'>
+		<input type="text" name="duration[]" value="<?php echo $item['duration']; ?>" id="duration" class="form-control form-control-user text-center" readonly>
+		<input type="hidden" name="catename[]" value="<?php echo $item['category_name']; ?>" id="catename" class="form-control form-control-user text-center" readonly>
         <?php  } } ?>
 	<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 		value="<?php echo $this->security->get_csrf_hash();?>">

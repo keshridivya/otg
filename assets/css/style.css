@@ -8156,7 +8156,7 @@ font-weight: 500 !important;
 }
   .card-body p{
 color:var(--var-brown);
-font-size: .975rem;
+font-size: .855rem;
   }
 
   .card-footer {
@@ -8421,4 +8421,9 @@ font-size: .975rem;
 }
 .floatright{
   margin-bottom: 28px;
+}
+@media(min-width:327px){
+    .contisho{
+        line-height: 40px;
+    }
 }
