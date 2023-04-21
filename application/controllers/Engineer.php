@@ -53,6 +53,7 @@ class Engineer extends CI_Controller {
             $bookings_table=$this->db->get("bookings")->result_array();
 			$page_data['bookings']=$bookings_table;
             $page_data['page']="dashboard";
+            $page_data['page_title'] = "Dashboard";
             $this->load->view('engineer/index',$page_data);
         }else{
             $this->load->view('engineer/login',$page_data);
@@ -81,6 +82,7 @@ class Engineer extends CI_Controller {
             }
             $page_data['info']=$this->db->get_where('engineer',array('eng_id'=>$id))->result_array();
             $page_data['page']='myaccount';
+            $page_data['page_title'] = "Account";
             $this->load->view('engineer/index',$page_data);
         }else{
             redirect(base_url('engineer'));
@@ -94,6 +96,7 @@ class Engineer extends CI_Controller {
                 $id=$this->session->userdata['eng_id'];
                 $page_data['booking_data']=$this->menu->ongoing_assign($id);
                 $page_data['page'] = 'ongoing_assign/view';
+                $page_data['page_title'] = "Onging-view";
                 $this->load->view('engineer/index',$page_data);
                 break;
             case 'edit':
@@ -188,7 +191,7 @@ class Engineer extends CI_Controller {
                         );
                         $this->db->where('request_id_value',$breq_id);
                         $this->db->update('bookings',$data1);
-                        print_r($this->db->last_query());
+                        // print_r($this->db->last_query());
                         $page_data['message'] = 'Submitted Succesfully';
                         $data1['procees']='proceed';
                         redirect('engineer/ongoing/add/'.$rid);
@@ -199,8 +202,12 @@ class Engineer extends CI_Controller {
                     }
                 }else{
                 $eid=$this->session->userdata['eng_id'];
-                $page_data['assign_data']=$this->menu->ongoing_assign_client($id,$eid);
+                $assign_data = $this->menu->ongoing_assign_client($id,$eid);
+                $page_data['assign_data']= $assign_data;
+                $product_arg = $assign_data[0]['service_device'];
+                $page_data['subcat_data']=$this->db->get_where('subcategories',array('cproduct_name'=>$product_arg))->result_array();
                 $page_data['page']='ongoing_assign/form';
+                $page_data['page_title'] = "Ongoing";
                 $this->load->view('engineer/index',$page_data);
                 }
                 break;
@@ -283,6 +290,7 @@ class Engineer extends CI_Controller {
                 $page_data['assign_data']=$this->menu->ongoing_assign_client_detail($id,$eid);
                 $page_data['submit_data']=$this->menu->check_upload($id,$eid);
                 $page_data['page']='ongoing_assign/add';
+                $page_data['page_title'] = "Ongoing";
                 $this->load->view('engineer/index',$page_data);
         }
     }else{
@@ -317,6 +325,7 @@ class Engineer extends CI_Controller {
 				$id=$this->session->userdata['eng_id'];
                 $page_data['booking_data']=$this->menu->reschedule($id);
                 $page_data['page']='reschedule/view';
+                $page_data['page_title'] = "Rescheduled";
                 $this->load->view('engineer/index',$page_data);
 
 				break;
@@ -343,6 +352,7 @@ class Engineer extends CI_Controller {
 			
 				$id=$this->session->userdata['eng_id'];
                 $page_data['page']='ongoing_assign/upi';
+                $page_data['page_title'] = "Engineer upi";
                 $this->load->view('engineer/index',$page_data);
 
 				break;

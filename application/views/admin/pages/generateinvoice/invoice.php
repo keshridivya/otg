@@ -62,10 +62,10 @@
 
 	.logo {
 		display: inline-block;
-    vertical-align: middle;
-    width: 25%;
-    margin-bottom: 20px;
-    overflow: hidden;
+		vertical-align: middle;
+		width: 25%;
+		margin-bottom: 20px;
+		overflow: hidden;
 	}
 
 	.info {
@@ -198,24 +198,24 @@
 				<div id="invoice" class="effect2">
 
 					<div id="invoice-top">
-					<div class="logo"><img src="<?php echo base_url();?>assets/images/logo/header.png"
-										alt="OTG CARES" /></div>
+						<div class="logo"><img src="<?php echo base_url();?>assets/images/logo/header.png"
+								alt="OTG CARES" /></div>
 						<div class="clearfix">
 							<div class="col-left">
-								
+
 								<div class="clientinfo">
 									<h2 id="supplier" style="color:#4c3418;font-weight:bold">OTGcares</h2>
-									<p><span id="address">2nd floor, Haware Fantasia Business park, <br> Vashi Navi Mumbai
+									<p><span id="address">2nd floor, Haware Fantasia Business park, <br> Vashi Navi
+											Mumbai
 											Thane
 											Maharashtra 400705</span><br>
 										<span><b>Phone : </b> <span>9076020306</span></span><br>
 										<span><b>Email : </b> <span>support@otgcares.com</span></span><br>
 										<span><b>GSTIN : </b> <span>27AAHFO5291Q1ZF</span></span></p>
-
 								</div>
 							</div>
 							<div class="col-right">
-								<h2 id="supplier"style="color:#f8b11b;">INVOICE</h2>
+								<h2 id="supplier" style="color:#f8b11b;">INVOICE</h2>
 								<table class="table">
 									<tbody>
 										<tr>
@@ -238,7 +238,7 @@
 						</div>
 						<!--End Title-->
 					</div>
-
+					<hr>
 					<!--End InvoiceTop-->
 					<div id="invoice-mid">
 						<div id="message">
@@ -256,9 +256,9 @@
 						<div id="table">
 							<table class="table-main ">
 								<thead>
-									
+
 									<tr class="tabletitle">
-										<th>S.No</th>
+										<th class="text-left">S.No</th>
 										<th>Product/Services</th>
 										<th>Qty</th>
 										<th>MRP</th>
@@ -282,62 +282,57 @@
 									<td data-label="Tax Code" class="tableitem chDiscount" id=''>
 										<?= $invoice1['discount'] ?> %
 									</td>
-									<td data-label="Tax Amount" class="tableitem amt" id='result'><?= $invoice1['amt'] ?></td>
+									<td data-label="Tax Amount" class="tableitem amt" id='result'>
+										<?= $invoice1['amt'] ?></td>
 								</tr>
-								
+
 								<?php $count++; } ?>
 								<tr class="list-item">
-									<td colspan="5" style="border-left:2px solid #dee2e6;text-transform:capitalize"
-										class='words text-left'></td>
-									<td data-label="Grand Total" class="tableitem">Subtotal</td>
-									<td data-label="Grand Total" class="tableitem numberword result" id='result'></td>
-								</tr>
-								<tr class="list-item">
-									<td colspan="5" style="border-left:2px solid #dee2e6" class=' text-left'> Total Quantity: <span id="qty"></span></td>
-									<td data-label="Grand Total" class="tableitem">Total Payable</td>
-									<td data-label="Grand Total" class="tableitem result" id='result'>
+									<td colspan="4"
+										style="border-left:2px solid #dee2e6;text-transform:capitalize ;border-bottom:1px solid #dee2e6;padding:5px 10px 5px 10px"
+										class=' text-left'><span class="words"></span><br>Total
+										Quantity: <span id="qty"></span></td>
+									<td colspan="3">
+										<table>
+											<tr>
+												<td data-label="Grand Total" class="tableitem text-left">Total</td>
+												<td data-label="Grand Total" class="tableitem"></td>
+												<td data-label="Grand Total" class="tableitem"></td>
+												<td data-label="Grand Total"
+													class="tableitem numberword result totalPayable" id='result'></td>
+											</tr>
+											<tr>
+												<td data-label="Grand Total" class="tableitem"></td>
+												<td data-label="Grand Total" class="tableitem">SGST</td>
+												<td data-label="Grand Total" class="tableitem "><span
+														id='gst'><?= $invoice[0]['sgst'] ?? '0'?></span><span>%</span>
+												</td>
+												<td data-label="Grand Total"
+													class="tableitem gsttotresult totalPayable"></td>
+											</tr>
+											<tr>
+												<td data-label="Grand Total" class="tableitem"></td>
+												<td data-label="Grand Total" class="tableitem">CGST</td>
+												<td data-label="Grand Total" class="tableitem ">
+													<span
+														id='cgst'><?= $invoice[0]['cgst'] ?? "0" ?></span><span>%</span>
+												</td>
+												<td data-label="Grand Total"
+													class="tableitem cgsttotresult totalPayable" id=''></td>
+											</tr>
+											<tr>
+												<td data-label="Grand Total" class="tableitem text-left" colspan="2">
+													Total Payable</td>
+												<td data-label="Grand Total" class="tableitem"></td>
+												<td data-label="Grand Total" class="tableitem gstresult " id=''></td>
+											</tr>
+										</table>
 									</td>
-								</tr>
-								<tr class="list-item">
-									<td colspan="5"
-										style="border-bottom: 2px solid #dee2e6;border-left:2px solid #dee2e6">
-									</td>
-									<td data-label="Grand Total" class="tableitem">Received</td>
-									<td data-label="Grand Total" class="tableitem result" id='result'>
-									</td>
+
 								</tr>
 							</table>
 						</div>
 
-						<div id="table">
-							<table class="table table-bordered ">
-								<tr class="">
-									<th>Notes <p>Thank You For Doing Business With Us</p>
-									</th>
-									<!-- <th>Bank Details</th>
-									<th><span>Due Amount</span><span>
-											0.00
-										</span></th> -->
-								</tr>
-
-								<!-- <tr class="">
-									<td colspan='2'>
-										<h2>Terms And Conditions</h2>
-										<p> 
-										<?php
-										foreach($invoice as $invoices){
-											echo $invoices['qua'].' '.$invoices['product'];
-										}
-										?>,	
-									</td>
-									<td class="">
-										heelo
-										<p> For OTGCares</p>
-									</td>
-								</tr> -->
-							</table>
-						</div>
-						<!--End Table-->
 					</div>
 				</div>
 				<!--End Invoice-->
@@ -357,18 +352,44 @@
 <script>
 	$(window).on("load", function () {
 		let sum = 0;
-		$('.amt').each(function(){
+		$('.amt').each(function () {
 			let amt = $(this).text();
-			sum += parseInt(amt);
+			sum += parseFloat(amt);
 		});
-		$('.result').text(sum);
-		console.log(sum);
+		let resulsum = sum.toFixed(2)
+		$('.result').text(resulsum);
 	});
 
-	$(window).on("load",function(){
-		let qusum = 0 ;
-		$('.qua').each(function(){
-			let qty =$(this).text();
+	$(window).on('load', function () {
+		let result = Math.round($('.result').text());
+		let gst = $('#gst').text();
+		var dec = (gst / 100).toFixed(2);
+		var mult = result * dec;
+		let round = mult.toFixed(2)
+		$('.gsttotresult').text(round);
+	})
+	$(window).on('load', function () {
+		let result = Math.round($('.result').text());
+		let gst = $('#cgst').text();
+		var dec = (gst / 100).toFixed(2);
+		var mult = result * dec;
+		let round = mult.toFixed(2)
+		$('.cgsttotresult').text(round);
+	})
+	$(window).on("load", function () {
+		let totsum = 0;
+		$('.totalPayable').each(function () {
+			let amt = $(this).text();
+			totsum += parseFloat(amt);
+		});
+		let resultotal = totsum.toFixed(2)
+		$('.gstresult').text(resultotal);
+	});
+
+	$(window).on("load", function () {
+		let qusum = 0;
+		$('.qua').each(function () {
+			let qty = $(this).text();
 			qusum += parseInt(qty);
 		});
 		$('#qty').text(qusum);
@@ -427,5 +448,6 @@
 	}
 
 </script>
+
 
 </body>

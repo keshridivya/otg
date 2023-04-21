@@ -1,7 +1,7 @@
 <style>
-		/*modal*/
+	/*modal*/
 
-		.cont1 {
+	.cont1 {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -120,7 +120,7 @@
 		border-color: hsla(0, 0%, 100%, .6);
 		-webkit-transform: translateY(-.2rem);
 		transform: translateY(-.2rem);
-		text-decoration:none;
+		text-decoration: none;
 	}
 
 	@media(max-width:768px) {
@@ -143,21 +143,23 @@
 		}
 
 	}
+
 </style>
-<input type="hidden" class='csrf'
-								name="<?php echo $this->security->get_csrf_token_name(); ?>"
-								value="<?php echo $this->security->get_csrf_hash();?>"><div class="cont1 contsec" id="modal-opened">
+<input type="hidden" class='csrf' name="<?php echo $this->security->get_csrf_token_name(); ?>"
+	value="<?php echo $this->security->get_csrf_hash();?>">
+<div class="cont1 contsec" id="modal-opened">
 	<div class="modal modaldisplay modalalready">
 		<div class="details">
 			<h1 class="title">Oops!</h1>
 		</div>
 		<p class="txt">
 			<b>Want to Replace the Plan in Your Cart?</b></p>
-			<p>Your cart contains Repair and Services plan. Would you like to discard it and replace it with Protection plans?</p>
+		<p>Your cart contains Repair and Services plan. Would you like to discard it and replace it with Protection
+			plans?</p>
 
 		<button class="closesec">No &rarr;</button>
 		<button class="closebtn2">Yes &rarr;</button>
-<input type="hidden" id="planid">
+		<input type="hidden" id="planid">
 		<a href="#modal-closed" class="link-2 closesec"></a>
 
 	</div>
@@ -205,11 +207,7 @@
 							<?php
                                         for($i = 0; $i < count($subcat_data); $i++) {
                                             if($subcat_data[$i]['subcat_name']==""){
-                                               
                                                 ?>
-							<!-- <li class="nav-item">
-								<a class="nav-link active show" data-toggle="pill" href="#home"></a>
-							</li> -->
 							<?php
                                             }else{
                                                 
@@ -219,26 +217,15 @@
 								<a class="nav-link <?php echo ($i==0) ? 'active show': '';?>" data-toggle="pill"
 									href="#<?php $new_str = str_replace(' ', '', $subcat_data[$i]['subcat_name']); echo $new_str; ?>"><?php  echo $subcat_data[$i]['subcat_name']; ?></a>
 							</li>
-
-							<?php 
-                                         } 
-                                        }
-                                        ?>
-
-
+							<?php  }    }    ?>
 						</ul>
-
-
 					</div>
 
 					<div class="type-plans">
 						<div class="tab-content">
-							<?php
-                                       
-                                       for($i = 0; $i < count($subcat_data); $i++) {
+							<?php   for($i = 0; $i < count($subcat_data); $i++) {
                                         if($subcat_data[$i]['subcat_name']==""){
                                        ?>
-
 							<div class="tab-pane container active show" id="home">
 
 								<div class="type-content">
@@ -270,7 +257,8 @@
 																</h2>
 															</div>
 															<div class="plan-btns">
-																<a data-id="<?= $plandata['cplan_id']; ?>" class="addcart">Add</a>
+																<a data-id="<?= $plandata['cplan_id']; ?>" data-plan="<?= $plandata['subcat_name']; ?>"
+																	class="addcart">Add</a>
 															</div>
 															<div class="product-accordion">
 																<a href="#" class="accordionanchor"
@@ -306,15 +294,9 @@
 												</div>
 											</div>
 											<?php
-                                                                
                                                             }
                                                         }
                                                     ?>
-
-
-
-
-
 										</div>
 									</div>
 								</div>
@@ -356,7 +338,8 @@
 																</h2>
 															</div>
 															<div class="plan-btns">
-																<a data-id="<?= $plandata['cplan_id']; ?>" class="addcart">Add</a>
+																<a data-id="<?= $plandata['cplan_id']; ?>" data-plan="<?= $plandata['subcat_name']; ?>"
+																	class="addcart">Add</a>
 															</div>
 															<div class="product-accordion">
 																<a href="#" class="accordionanchor"
@@ -546,7 +529,7 @@
 			method: 'post',
 			data: {
 				planid: planid,
-				warranty:'Maintenance and repair',
+				warranty: 'Maintenance and repair',
 				[csrfName]: csrfHash,
 			},
 			dataType: "json",
@@ -576,7 +559,7 @@
 			method: 'post',
 			data: {
 				planid: planid,
-				warranty:'Maintenance and repair',
+				warranty: 'Maintenance and repair',
 				[csrfName]: csrfHash,
 			},
 			dataType: "json",
@@ -594,11 +577,12 @@
 		})
 	});
 
-	$('.closesec').click(function(){
+	$('.closesec').click(function () {
 		$('.pricebox').show();
 		$('.modalalready').modal('hide');
 		$('.contsec').css('display', 'none');
 	})
+
 </script>
 <!--End Body Content-->
 

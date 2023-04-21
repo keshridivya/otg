@@ -1,3 +1,32 @@
+<script type="text/javascript">
+	var citiesByState = {
+		Maharashtra: ["Mumbai", "Pune", "Nagpur", "Thane", "Pimpri Chinchwad", "Nashik", "Kalyan Dombivli",
+			"Vasai Virar", "Chhatrapati Sambhajinagar", "Navi Mumbai", "Solapur", "Mira Bhayandar",
+			"Bhiwandi Nizampur", "Amravati", "Nanded Waghala", "Kolhapur", "Ulhasnagar", "Sangli Miraj Kupwad",
+			"Malegaon", "Jalgaon", "Akola", "Latur", "Dhule", "Ahmednagar", "Chandrapur", "Parbhani",
+			"Ichalkaranji", "Jalna", "Ambarnath", "Panvel", "Bhusawal", "Badlapur", "Beed", "Gondia", "Satara",
+			"Barshi", "Yavatmal", "Achalpur", "Dharashiv", "Nandurbar", "Wardha", "Udgir", "Hinganghat"
+		],
+		Delhi: ["New Delhi", "Bhalswa Jahangir Village", "Kirari Suleman Nagar Village", "Karawal Nagar", "Hastsal", "Mandoli", "Deoli", "Gokalpuri", "Dallupura", "Taj Pul", "Nangloi","Chilla Sarda Banger", "Pooth Kalan", "Burari", "Gharoli", "Jafrabad", "Noida", "Ghaziabad", "Fatehpur Beri", "Delhi Cantonment", "Alipur", "Kair", "Karala Village", "Siraspur","Chhawla", "Ghitorni", "Sultanpur"]
+	}
+
+	function makeSubmenu(value) {
+		if (value.length == 0) document.getElementById("customer_city").innerHTML = "<option></option>";
+		else {
+			var citiesOptions = "";
+			for (cityId in citiesByState[value]) {
+				citiesOptions += "<option>" + citiesByState[value][cityId] + "</option>";
+			}
+			document.getElementById("city").innerHTML = citiesOptions;
+		}
+	}
+
+	function resetSelection() {
+		document.getElementById("countrySelect").selectedIndex = 0;
+		document.getElementById("city").selectedIndex = 0;
+	}
+
+</script>
 <div class="container-fluid">
 
 	<!-- Page Heading -->
@@ -30,6 +59,20 @@
 							<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 								value="<?php echo $this->security->get_csrf_hash();?>">
 							<div class="form-group row">
+							<div class="col-sm-6 mb-3">
+								<label for="c_city">State</label>
+								<select id="countrySelect" size="1"  class="form-control" onchange="makeSubmenu(this.value)">
+									<option value="" disabled selected>Choose State</option>
+									<option>Maharashtra</option>
+									<!-- <option>Delhi</option> -->
+								</select>
+							</div>
+							<div class="col-sm-6 mb-3">
+								<label for="c_city">City</label>
+								<select name="city" id="city" value="" class="form-control form-control-user">
+									<option value="">Select City</option>
+								</select>
+							</div>
 								<div class="col-sm-6 mb-3">
 									<label for="ct_name">Pincode</label>
 									<input type="text" name="pincode" value="<?= $pincode->pincode ?? '' ?>" id="pincode"

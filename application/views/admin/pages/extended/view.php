@@ -12,11 +12,10 @@
 		</div>
 	</div>
 	<div class="row mt-3 mb-3">
-		<h5>Filter: </h5>
+		<!-- <h5>Filter: </h5> -->
 	<div class="col-sm-3">
-			<form action="" method="post">
-			<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" class="csrf" 
-								value="<?php echo $this->security->get_csrf_hash();?>">
+			<!-- <form action="" method="post">
+			<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" class="csrf" 	value="<?php echo $this->security->get_csrf_hash();?>">
 				<select name="" id="shopname" class="form-control">
 					<option value="">Select shop</option>
 					<?php
@@ -25,7 +24,7 @@
 					<option value="<?= $shopname['shop_id'] ?>"><?= $shopname['name'] ?></option>
 					<?php } ?>
 				</select>
-			</form>
+			</form> -->
 		</div>
 	</div>
 
@@ -39,9 +38,9 @@
 		<li class="nav-item">
 			<a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Ongoing Warranties</a>
 		</li>
-		<li class="nav-item">
+		<!-- <li class="nav-item">
 			<a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">Ticket</a>
-		</li>
+		</li> -->
 	</ul>
 
 	<div class="tab-content" id="ex1-content">
@@ -56,9 +55,10 @@
 								<tr>
 									<th>Warrenty Id</th>
 									<th>Name</th>
+									<th>Shop Name</th>
 									<th>Service Device</th>
 									<th>Status</th>
-									<th>Total Amount</th>
+									<th>Year</th>
 									<th>Start date</th>
 									<th>Expire date</th>
 									<th>Update date</th>
@@ -69,9 +69,10 @@
 							<tr>
 								<td><?php echo $info['warranty_code']; ?></td>
 								<td><?php echo $info['name']; ?></td>
+								<td><?php echo $info['naam']; ?></td>
 								<td><?php echo $info['cproduct_name']; ?></td>
-								<td><?php echo $info['status']; ?></td>
-								<td><?php echo $info['amount']; ?></td>
+								<td><?php echo $info['sta']; ?></td>
+								<td><?php echo $info['duration']; ?></td>
 								<td><?php echo $info['created_on']; ?></td>
 								<td><?php echo $info['expires_on']?></td>
 								<td><?php echo $info['modified_on']?></td>
@@ -101,6 +102,7 @@
 								<tr>
 									<th>Warrenty Id</th>
 									<th>Name</th>
+									<th>Shop Name</th>
 									<th>Service Device</th>
 									<th>Status</th>
 									<th>Total Amount</th>
@@ -108,15 +110,15 @@
 									<th>Expire date</th>
 									<th>Update date</th>
 									<th>Action</th>
-
 								</tr>
 							</thead>
 							<?php  foreach($new as $new){  ?>
 							<tr>
 								<td><?php echo $new['warranty_code']; ?></td>
 								<td><?php echo $new['name']; ?></td>
+								<td><?php echo $info['naam']; ?></td>
 								<td><?php echo $new['cproduct_name']; ?></td>
-								<td><?php echo $new['status']; ?></td>
+								<td><?php echo $new['sta']; ?></td>
 								<td><?php echo $new['amount']; ?></td>
 								<td><?php echo $new['created_on']; ?></td>
 								<td><?php echo $new['expires_on']?></td>
@@ -147,6 +149,7 @@
 								<tr>
 									<th>Warrenty Id</th>
 									<th>Name</th>
+									<th>Shop Name</th>
 									<th>Service Device</th>
 									<th>Status</th>
 									<th>Engineer Name</th>
@@ -160,8 +163,9 @@
 							<tr>
 								<td><?php echo $ongoing['warranty_code']; ?></td>
 								<td><?php echo $ongoing['name']; ?></td>
+								<td><?php echo $info['naam']; ?></td>
 								<td><?php echo $ongoing['cproduct_name']; ?></td>
-								<td><?php echo $ongoing['status']; ?></td>
+								<td><?php echo $ongoing['sta']; ?></td>
 								<td><?php echo $ongoing['eng_name']; ?></td>
 								<td><?php echo $ongoing['created_on']; ?></td>
 								<td><?php echo $ongoing['expires_on']?></td>
@@ -192,6 +196,7 @@
 								<tr>
 									<th>Warrenty Id</th>
 									<th>Name</th>
+									<th>Shop Name</th>
 									<th>Service Device</th>
 									<th>Status</th>
 									<th>Total Amount</th>

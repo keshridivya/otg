@@ -289,15 +289,15 @@ class Welcome extends CI_Controller {
             {
                 $otp = rand(10000, 99999);
                 $otp_resu = 'success';
-                  $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
-                  Do not share it with anyone';
-                  if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
-                      $page_data['status'] = true;
-                      $page_data['message'] = "success";
-                      } else {
-                      $page_data['status'] = false;
-                      $page_data['message'] = "Something went wrong, please try again later.";
-                      }
+                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                //   Do not share it with anyone';
+                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                //       $page_data['status'] = true;
+                //       $page_data['message'] = "success";
+                //       } else {
+                //       $page_data['status'] = false;
+                //       $page_data['message'] = "Something went wrong, please try again later.";
+                //       }
             }
             else
             {
@@ -308,7 +308,7 @@ class Welcome extends CI_Controller {
         }
         $this->session->set_userdata('login_otp',$otp);
         $data['otp'] = $otp_resu;
-        // $data['otp1'] = $otp;
+        $data['otp1'] = $otp;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
     }
@@ -360,6 +360,7 @@ class Welcome extends CI_Controller {
         $subcat_data=$this->db->get_where('subcategories',array('cproduct_name'=>$product_arg))->result_array();
         $page_data['subcat_data']=$subcat_data;
         $plans_data=$this->db->get_where('category_plans',array('cproduct_name'=>$product_arg))->result_array();
+
         $page_data['plans_data']=$plans_data;
         $plan_features=$this->db->get('plan_features')->result_array();
         $page_data['plan_features']=$plan_features;
@@ -372,9 +373,6 @@ class Welcome extends CI_Controller {
         $page_data['page']="maintenance";
         $this->load->view('index',$page_data);
         $this->load->library('cart');
-    
-
-        
     }
 
     public function extended($action)
@@ -946,18 +944,32 @@ class Welcome extends CI_Controller {
 
     public function checkpin(){
         if($this->input->post('c_pincode')){
-            $c_pincode = $this->input->post('c_pincode');
             $cartItems =$this->input->post('cartItems');
-            $result=$this->menu->checkpin($c_pincode,$cartItems);
+            $c_city =   $this->input->post('c_city');
+            $result=$this->menu->checkcity($cartItems,$c_city);
             if (count($result) > 0)
             {
-                $msg = 'success';
+                $c_pincode = $this->input->post('c_pincode');
+                $cartItems =$this->input->post('cartItems');
+                $c_city =   $this->input->post('c_city');
+                $result=$this->menu->checkpin($c_pincode,$cartItems,$c_city);
+                if (count($result) > 0)
+                {
+                    $msg = 'success';
+                }
+                else
+                {
+                    $msg = 'error';
+                }
             }
             else
             {
-                $msg = 'error';
+                $msg = 'nocity';
             }
         }
+        // if($this->input->post('c_pincode')){
+           
+        // }
         $data['msg'] = $msg;
         $data['token'] = $this->security->get_csrf_hash();
         echo json_encode($data);
@@ -1120,6 +1132,7 @@ class Welcome extends CI_Controller {
                     "cust_timeslot"     =>  $data['time_slot'][$i],
 					"service_plan"      =>  $data['s_plan'][$i],
 					"service_device"    =>  $data['s_device'][$i],
+                    "sub_cateplanid"    =>  $data['cplan_id'][$i],
                     "service_warranty"  =>  $data['catename'][$i],
                     "duration"          =>  $data['duration'][$i],
 					"quantity"          =>  $data['quantity'][$i],
@@ -1221,6 +1234,7 @@ class Welcome extends CI_Controller {
                     "cust_timeslot"     =>  $data['time_slot'][$i],
 					"service_plan"      =>  $data['s_plan'][$i],
 					"service_device"    =>  $data['s_device'][$i],
+                    "sub_cateplanid"    =>  $data['cplan_id'][$i],
                     "service_warranty"  =>  $data['catename'][$i],
                     "duration"          =>  $data['duration'][$i],
 					"quantity"          =>  $data['quantity'][$i],

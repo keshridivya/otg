@@ -1,7 +1,8 @@
 <style>
-	.form-group span{
-		color:red;
+	.form-group span {
+		color: red;
 	}
+
 </style>
 <div class="container-fluid">
 	<!-- Page Heading -->
@@ -28,141 +29,176 @@
 								<div class="col-sm-6 mb-3 ">
 									<label for="sc_name">Name</label>
 									<input type="text" name="name" value="<?php echo $info[0]['name'] ?? '';?>"
-										id="exname" class="form-control form-control-user"  required>
-										<span id="spanexname">Please Enter Name</span>
+										id="exname" class="form-control form-control-user">
+									<span id="spanexname">Please Enter Name</span>
 								</div>
+								<?php
+								if($info[0]['name']){
+								?>
+								<div class="col-sm-6 mb-3 ">
+									<label for="sc_name">Assign Engineer </label>
+									<select name="assigneng" id="cp_name" class="form-control one_eng_name">
+										<option value="" disabled selected>Select Device</option>
+										<?php
+                                       foreach($engineer_data as $engineer){
+                                       ?>
+										<option value="<?php echo ($engineer['eng_id']) ?>"
+											<?php echo (($info[0]['engi_id']  ?? '' ) == $engineer['eng_id']) ? 'selected' : ''; ?>>
+											<?php echo $engineer['eng_name']; ?></option>
+										<?php    }     ?>
+									</select>
+
+								</div>
+								<?php } ?>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Contact</label>
 									<input type="text" name="contact" value="<?php echo $info[0]['contact'] ?? '';?>"
-										id="excontact" class="form-control form-control-user"  required>
-										<span id="spancontactex">Please Enter 10 digit number</span>
+										id="excontact" class="form-control form-control-user">
+									<span id="spancontactex">Please Enter 10 digit number</span>
 								</div>
 								<div class="col-sm-6 mb-3">
 									<label for="sc_name">Email</label>
 									<input type="email" name="email" value="<?php echo $info[0]['email'] ?? '';?>"
-										id="exemail" class="form-control form-control-user"  required>
-										<span id="spanemailex">Please Enter Correct Email </span>
+										id="exemail" class="form-control form-control-user">
+									<span id="spanemailex">Please Enter Correct Email </span>
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Full Address</label>
 									<input type="text" name="address" value="<?php echo $info[0]['address'] ?? '';?>"
-										id="exaddress" class="form-control form-control-user" required>
-										<span id="spanaddressex">Please Full Address</span>
+										id="exaddress" class="form-control form-control-user">
+									<span id="spanaddressex">Please Full Address</span>
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Pincode</label>
 									<input type="text" name="pincode" value="<?php echo $info[0]['pincode'] ?? '';?>"
-										id="expincode" class="form-control form-control-user" required>
-										<span id="spanpicodeex">Please Enter 6 digit pincode</span>
+										id="expincode" class="form-control form-control-user">
+									<span id="spanpicodeex">Please Enter 6 digit pincode</span>
 								</div>
 								<div class="col-sm-6 mb-3 ">
 									<label for="cp_name">Device</label>
-									<select name="device" id="cp_name" class="form-control one_eng_name" required>
+									<select name="device" id="cp_name" class="form-control one_eng_name">
 										<option value="" disabled selected>Select Device</option>
 										<?php
                                        foreach($product as $product){
                                        ?>
-										<option value="<?php echo ($product['cproduct_id']) ?>" <?php echo (($info[0]['device']  ?? '' ) == $product['cproduct_id']) ? 'selected' : ''; ?>>
+										<option value="<?php echo ($product['cproduct_id']) ?>"
+											<?php echo (($info[0]['device']  ?? '' ) == $product['cproduct_id']) ? 'selected' : ''; ?>>
 											<?php echo $product['cproduct_name']; ?></option>
-										<?php 
-                                            }
-                                                    ?>
+										<?php    }     ?>
 									</select>
 								</div>
 								<div class="col-sm-6 mb-3 ">
 									<label for="cp_name">Shop Name</label>
-									<select name="shop_id" id="shop_id" class="form-control one_eng_name" required>
-									<option value="">Select shop</option>
+									<select name="shop_id" id="shop_id" class="form-control one_eng_name">
+										<option value="">Select shop</option>
 										<?php
 												foreach($shopname as $shopname){
 												?>
-										<option value="<?= $shopname['shop_id'] ?>"><?= $shopname['name'] ?></option>
+										<option value="<?= $shopname['shop_id'] ?>"
+											<?php if($info[0]['shop_id'] == $shopname['shop_id']){ echo 'selected'; } ?>>
+											<?= $shopname['name'] ?></option>
 										<?php } ?>
 									</select>
 								</div>
 								<div class="col-sm-6 mb-3  ">
-									Original Price <input type="text" name="orprice" value="<?php echo $info[0]['original_price'] ?? '';?>"
-										id="exorprice" class="form-control form-control-user" required>
-										<span id="spanorpeicex">Please Enter Original Price</span>
+									Original Price <input type="text" name="orprice"
+										value="<?php echo $info[0]['original_price'] ?? '';?>" id="exorprice"
+										class="form-control form-control-user">
+									<span id="spanorpeicex">Please Enter Original Price</span>
 								</div>
 								<div class="col-sm-6 mb-3  ">
-									Warranty Price <input type="text" name="waprice" value="<?php echo $info[0]['amount'] ?? '';?>"
-										id="exwrprice" class="form-control form-control-user" required>
-										<span id="spanwrrpriceex">Please Enter Warranty Price</span>
+									Warranty Price <input type="text" name="waprice"
+										value="<?php echo $info[0]['amount'] ?? '';?>" id="exwrprice"
+										class="form-control form-control-user">
+									<span id="spanwrrpriceex">Please Enter Warranty Price</span>
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Duration</label>
-									<select name="duration" id="" class="form-control" required>
-										<option value="1 years">1 Year</option>
-										<option value="2 years">2 Year</option>
+									<select name="duration" id="" class="form-control">
+										<option value="1 years"
+											<?php if($info[0]['duration'] == '1 years'){ echo 'selected'; } ?>>1 Year
+										</option>
+										<option value="2 years"
+											<?php if($info[0]['duration'] == '2 years'){ echo 'selected'; } ?>>2 Year
+										</option>
 									</select>
 									<!-- <input type="text" name="duration" value="<?php echo $info[0]['duration'] ?? '';?>"
 										id="sc_name" class="form-control form-control-user" > -->
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Start date</label>
-									<input type="date" name="st_date" value="<?php echo $info[0]['created_on'] ?? '';?>"
-										id="sc_name" class="form-control form-control-user"  required>
+									<?php 
+									$date = date_create($info[0]['created_on']);
+									$starts = date_format($date, 'Y-m-d') ?>
+									<input type="date" name="st_date" value="<?php echo $starts ?? '';?>" id="sc_name"
+										class="form-control form-control-user">
 								</div>
 								<div class="col-sm-6 mb-3  ">
-									<label for="sc_name">Invoice date<span style="color:red">*</span></label>
-									<input type="date" name="invoice_date" value="<?php echo $info[0]['created_on'] ?? '';?>"
-										id="invoice_date" class="form-control form-control-user"  >
+									<label for="sc_name">Invoice date</label>
+									<?php 
+									$date1 = date_create($info[0]['created_on']);
+									$end = date_format($date1, 'Y-m-d') ?>
+									<input type="date" name="invoice_date" value="<?php echo $end ?? '';?>"
+										id="invoice_date" class="form-control form-control-user">
 								</div>
 								<div class="col-sm-6 mb-3  ">
-									<label for="sc_name">Device Serial Number</label>
-									<input type="text" name="de_se_no" value="<?php echo $info[0]['device_serial_no'] ?? '';?>"
-										id="exserialno" class="form-control form-control-user" required >
-										<span id="spanserialnoex">Please Enter Serial Number</span>
+									<label for="sc_name">Device Serial Number </label>
+									<input type="text" name="de_se_no"
+										value="<?php echo $info[0]['device_serial_no'] ?? '';?>" id="exserialno"
+										class="form-control form-control-user">
+									<span id="spanserialnoex">Please Enter Serial Number</span>
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="device_photo">Device Serial Number Photo</label>
 									<?php
                                     if($info[0]['serial_no_image'] ?? FALSE){ ?>
-								<div class="row">
-									<div class="col-12">
-									<img src='<?php echo base_url($info[0]['serial_no_image']); ?>' alt='logo' width='500' height='400'>
+									<div class="row">
+										<div class="col-12">
+											<img src='<?php echo base_url($info[0]['serial_no_image']); ?>' alt='logo'
+												width='500' height='400'>
+										</div>
 									</div>
-								</div>
-								<?php }
+									<?php }
                                     ?>
-									<input type="file" name="device_photo" value=""
-										id="sc_name" class="form-control form-control-user" accept="image/png, image/jpeg, image/jpg, image/webp" required>
+									<input type="file" name="device_photo" value="" id="sc_name"
+										class="form-control form-control-user"
+										accept="image/png, image/jpeg, image/jpg, image/webp">
 								</div>
 								<div class="col-sm-6 mb-3  ">
 									<label for="sc_name">Invoice Upload</label>
 									<?php
                                     if($info[0]['invoice_image'] ?? FALSE){ ?>
-								<div class="row">
-									<div class="col-12">
-									<img src='<?php echo base_url($info[0]['invoice_image']); ?>' alt='logo' width='500' height='400'>
+									<div class="row">
+										<div class="col-12">
+											<img src='<?php echo base_url($info[0]['invoice_image']); ?>' alt='logo'
+												width='500' height='400'>
+										</div>
 									</div>
-								</div>
-								<?php }
+									<?php }
                                     ?>
-									<input type="file" name="invoice_photo" value=""
-										id="sc_name" class="form-control form-control-user" accept="image/*,.pdf" required>
+									<input type="file" name="invoice_photo" value="" id="sc_name"
+										class="form-control form-control-user" accept="image/*,.pdf">
 								</div>
 								<div class="col-sm-6 mb-3">
 									<label for="sc_status">Status</label>
-									<select class="form-control" name="status" id="sc_status" required>
-										<option value="active" <?php echo (($info[0]['status'] ?? ' ') =='new') ? 'selected': ''; ?>>
+									<select class="form-control" name="status" id="sc_status">
+										<option value="active"
+											<?php echo (($info[0]['status'] ?? ' ') =='new') ? 'selected': ''; ?>>
 											New
 										</option>
 										<option value="inactive"
 											<?php echo (($info[0]['status'] ?? '') =='process') ? 'selected': ''; ?>>
 											Process</option>
-											<option value="inactive"
+										<option value="inactive"
 											<?php echo (($info[0]['status'] ?? '') =='completed') ? 'selected': ''; ?>>
 											Completed</option>
-											<option value="inactive"
+										<option value="inactive"
 											<?php echo (($info[0]['status'] ?? '') =='close') ? 'selected': ''; ?>>
 											Close</option>
 									</select>
 								</div>
 							</div>
-							<input type="submit" name="submit"
-								class="btn btn-primary btn-user btn-block exten_btn">
+							<input type="submit" name="submit" class="btn btn-primary btn-user btn-block exten_btn">
 							<div class='error_message'></div>
 						</form>
 						<hr>
@@ -173,7 +209,7 @@
 	</div>
 
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
 	$(document).ready(function () {
 		// Validate Username
@@ -194,7 +230,7 @@
 		let wrpriceex = true;
 		let esrialErrorex = true;
 
-			//message validation
+		//message validation
 		$('#exserialno').keyup(function () {
 			validateserial();
 		});
@@ -341,7 +377,7 @@
 			}
 		}
 
-			//validate contact
+		//validate contact
 		$('#exwrprice').keyup(function () {
 			validatewrpriceex();
 		});
@@ -363,31 +399,31 @@
 		}
 
 		// Submit button
-		$(".exten_btn").click(function () {
-			usernameErrorex = true;
-			useremailErrorex = true;
-			userphoneErrorex = true;
-			usertextErrorex = true;
-			orpriceErrorex = true;
-			pinErrorex = true;
-			wrpriceex = true;
-			esrialErrorex = true;
-			validatenameex();
-			usevalidateEmailex();
-			validatecontactex();
-			validateaddress();
-			validatebookpinex();
-			validateorprice();
-			validatewrpriceex();
-			validateserial();
-			if (usernameErrorex == true && useremailErrorex == true && userphoneErrorex == true &&
-				usertextErrorex == true && pinErrorex == true && orpriceErrorex == true && wrpriceex == true && esrialErrorex == true) {
-				return true;
+		// $(".exten_btn").click(function () {
+		// 	usernameErrorex = true;
+		// 	useremailErrorex = true;
+		// 	userphoneErrorex = true;
+		// 	usertextErrorex = true;
+		// 	orpriceErrorex = true;
+		// 	pinErrorex = true;
+		// 	wrpriceex = true;
+		// 	esrialErrorex = true;
+		// 	validatenameex();
+		// 	usevalidateEmailex();
+		// 	validatecontactex();
+		// 	validateaddress();
+		// 	validatebookpinex();
+		// 	validateorprice();
+		// 	validatewrpriceex();
+		// 	validateserial();
+		// 	if (usernameErrorex == true && useremailErrorex == true && userphoneErrorex == true &&
+		// 		usertextErrorex == true && pinErrorex == true && orpriceErrorex == true && wrpriceex == true && esrialErrorex == true) {
+		// 		return true;
 
-			} else {
-				return false;
-			}
-		});
+		// 	} else {
+		// 		return false;
+		// 	}
+		// });
 	});
 
 </script>

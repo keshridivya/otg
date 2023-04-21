@@ -443,7 +443,6 @@ class Admin extends CI_Controller {
 				
 					break;
 				case 'edit':
-					
 					if($this->input->post()){
 						$data=array(
 							"cust_name"=>$this->input->post('c_name'),
@@ -1381,6 +1380,7 @@ class Admin extends CI_Controller {
 				case 'add':
 					if($this->input->post()){
 						$data=array(
+							"city"=>$this->input->post('city'),
 							"pincode"=>$this->input->post('pincode'),
 							"service_product"=>$this->input->post('category'),
 						);
@@ -1400,6 +1400,7 @@ class Admin extends CI_Controller {
 				case 'edit':
 					if($this->input->post()){
 						$data=array(
+							"city"=>$this->input->post('city'),
 							"pincode"=>$this->input->post('pincode'),
 							"service_product"=>$this->input->post('category'),
 						);
@@ -1598,10 +1599,10 @@ class Admin extends CI_Controller {
 						if($this->input->post()){
 							if($_FILES['invoice_photo']['name'] == TRUE){
 								$absolute_path=base_url('uploads/shop_invoice/');
-								$uploaded_data1=$this->uploadimg(array('upload_path'=>'./uploads/shop_invoice/','name'=>'invoice_photo'));
+								$uploaded_data1=$this->uploadimgex(array('upload_path'=>'./uploads/shop_invoice/','name'=>'invoice_photo'));
 							}
 							if($_FILES['device_photo']['name'] == TRUE){						$absolute_path=base_url('uploads/shop_device/');
-								$uploaded_data=$this->uploadimg(array('upload_path'=>'./uploads/shop_device/','name'=>'device_photo'));
+								$uploaded_data=$this->uploadimgex(array('upload_path'=>'./uploads/shop_device/','name'=>'device_photo'));
 							}
 
 							$st_date = $this->input->post('st_date');
@@ -1644,7 +1645,7 @@ class Admin extends CI_Controller {
 							// $this->db->update('warrenty',$data);
 						}
 						// $page_data['info'] = $this->menu->extendededit($id);
-						$page_data['product'] = $this->db->get_where('category_product',['category_name'=>'Extended Warrenty'])->result_array();
+						$page_data['product'] = $this->db->get_where('category_product',['category_name'=>'Extended Warranty'])->result_array();
 						$page_data['shopname'] = $this->db->get('shop_owner')->result_array();
 
 						$page_data['page_title'] = 'Add Warranty';
@@ -1657,15 +1658,16 @@ class Admin extends CI_Controller {
 							if($this->input->post()){
 								if($_FILES['device_photo']['name'] != ""){
 											// $absolute_path=base_url('uploads/shop_device/');
-									$uploaded_data=$this->uploadimg(array('upload_path'=>'./uploads/shop_device/','name'=>'device_photo'));
+									$uploaded_data=$this->uploadimgex(array('upload_path'=>'./uploads/shop_device/','name'=>'device_photo'));
 								}
 								if($_FILES['invoice_photo']['name']!= ""){
 									// $absolute_path1=base_url('uploads/shop_invoice/');
-							$uploaded_data1=$this->uploadimg1(array('upload_path'=>'./uploads/shop_invoice/','name'=>'invoice_photo'));
+							$uploaded_data1=$this->uploadimgex(array('upload_path'=>'./uploads/shop_invoice/','name'=>'invoice_photo'));
 						}
 						$shop_id = get_cookie('sid');
 								$data = [
 									'name' => $this->input->post('name'),
+									'engi_id' => $this->input->post('assigneng'),
 									'contact' => $this->input->post('contact'),
 									'email' => $this->input->post('email'),
 									'address' => $this->input->post('address'),
@@ -1696,7 +1698,8 @@ class Admin extends CI_Controller {
 							}
 							$page_data['info'] = $this->menu->extendededit($id);
 							$page_data['shopname'] = $this->db->get('shop_owner')->result_array();
-							$page_data['product'] = $this->db->get_where('category_product',['category_name'=>'Extended Warrenty'])->result_array();
+							$page_data['product'] = $this->db->get_where('category_product',['category_name'=>'Extended Warranty'])->result_array();
+							$page_data['engineer_data']=$this->db->get("engineer")->result_array();
 							$page_data['page_title'] = 'Edit Warranty';
 							$page_data['page'] = 'extended/form';
 							$this->load->view('admin/index',$page_data);
@@ -1720,8 +1723,9 @@ class Admin extends CI_Controller {
 		if(@$this->session->userdata['a_id']){
 			switch($action){
 				case 'view':
+					$page_data['warranty'] = $this->menu->warrantyprice();
 					$page_data['page_title']="Warranty Price";
-					$page_data['page']="contact";
+					$page_data['page']="warranty_price/view";
 					$this->load->view('admin/index',$page_data);
 				break;
 				case 'add':
@@ -1752,10 +1756,50 @@ class Admin extends CI_Controller {
 							$page_data['message'] = 'Something went wrong. Please try again';
 						}
 					}
-					$page_data['product'] = $this->db->get_where('category_product',['category_name'=>'Extended Warrenty'])->result_array();
+					$page_data['product'] = $this->db->get_where('category_product',['category_name'=>'Extended Warranty'])->result_array();
 					$page_data['page_title']="Add Warranty";
 					$page_data['page']="warranty_price/form";
 					$this->load->view('admin/index',$page_data);
+				break;
+				case 'edit':
+					if($this->input->post()){
+
+						$from = $this->input->post('fromPrice');
+						// for($wp=0; $wp<count($from);$wp++){
+							$data = [
+								'device' => $this->input->post('device'),
+								'fromprice' => $this->input->post('fromPrice'),
+								'toprice' => $this->input->post('toPrice'),
+								'oneyearvan' => $this->input->post('oneyeavan'),
+								'oneyear' => $this->input->post('oneyear'),
+								'twoyearvan' => $this->input->post('twoyearvan'),
+								'twoyear' => $this->input->post('twoyear'),
+								'threeyearvan' => $this->input->post('threeyearvan'),
+								'threeyear' => $this->input->post('threeyear'),
+								'fouryearvan' => $this->input->post('fouryearvan'),
+								'fouryear' => $this->input->post('fouryear'),
+								'modified_on' => date('y-m-d'),
+							];
+							$this->db->where('id',$id);
+							$query = $this->db->update('warranty_price',$data);
+						// }
+						if($query){
+							$page_data['message'] = 'Warranty Price Updated Successfully';
+						}
+						else{
+							$page_data['message'] = 'Something went wrong. Please try again';
+						}
+					}
+					$page_data['product'] = $this->db->get_where('category_product',['category_name'=>'Extended Warranty'])->result_array();
+					$page_data['warranty'] = $this->menu->editwarrantyprice($id);
+					$page_data['page_title']="Add Warranty";
+					$page_data['page']="warranty_price/edit";
+					$this->load->view('admin/index',$page_data);
+				break;
+				case 'delete':
+					$this->db->where('id',$id);
+						$this->db->delete('warranty_price');
+						redirect('admin/warranty_price');
 				break;
 			}
 		}else{
@@ -2031,6 +2075,10 @@ class Admin extends CI_Controller {
 								'product' => $this->input->post('Product')[$i],
 								'qua' => $this->input->post('qua')[$i],
 								'mrp' => $this->input->post('mrp')[$i],
+								'subcate' => $this->input->post('subcate')[$i],
+								'sgst' => $this->input->post('sgst'),
+								'cgst' => $this->input->post('cgst'),
+								'cateplan' => $this->input->post('cateplan')[$i],
 								'discount' => $this->input->post('dis')[$i],
 								'created_date' => date('y-m-d')
 							];
@@ -2045,6 +2093,10 @@ class Admin extends CI_Controller {
 							$page_data['message'] = 'Something went wrong. Please try again';
 						}
 					}
+					$this->db->select('*');
+					$this->db->from('category_product');
+					$this->db->group_by('cproduct_name');
+					$page_data['product'] = $this->db->get()->result_array();
 					$page_data['page_title'] = 'Add Invoice';
 					$page_data['page']="generateinvoice/add";
 					$this->load->view('admin/index',$page_data);
@@ -2108,14 +2160,20 @@ class Admin extends CI_Controller {
 							for ($i = 0; $i < count($post); $i++) 
 							{
 								$datainvoice = [
+									'code' => $this->input->post('code'),
 									'name' => $this->input->post('name'),
 									'contact' => $this->input->post('contact_login'),
 									'address' => $this->input->post('address'),
 									'email' => $this->input->post('email'),
 									'pincode' => $this->input->post('pincode'),
-									'gst' => $this->input->post('gst'),
+									'contactpersonname' => $this->input->post('contactpersonname'),
+									'contactperno' => $this->input->post('contactperno'),
+									'sgst' => $this->input->post('sgst'),
+									'cgst' => $this->input->post('cgst'),
 									'terms' => $this->input->post('terms'),
 									'product' => $this->input->post('Product')[$i],
+									'subcate' => $this->input->post('subcate')[$i],
+									'cateplan' => $this->input->post('cateplan')[$i],
 									'qty' => $this->input->post('qua')[$i],
 									'mrp' => $this->input->post('mrp')[$i],
 									'discount' => $this->input->post('dis')[$i],
@@ -2124,7 +2182,7 @@ class Admin extends CI_Controller {
 								$QUERY = $this->db->insert('quotation',$datainvoice);
 								$last_id = $this->db->insert_id();
 								$quo_id = $this->db->get_where('quotation',['id'=>$last_id])->row();
-								$code = $quo_id->quo_code;
+								$code = $quo_id->code;
 							}
 							if($QUERY){
 								$page_data['message'] = 'Invoice Submit Successfully';
@@ -2135,6 +2193,10 @@ class Admin extends CI_Controller {
 							}
 						}
 						$page_data['page_title'] = 'Add Quotation';
+						$this->db->select('*');
+						$this->db->from('category_product');
+						$this->db->group_by('cproduct_name');
+						$page_data['product'] = $this->db->get()->result_array();
 						$page_data['page']="quotation/add";
 						$this->load->view('admin/index',$page_data);
 						break;
@@ -2146,14 +2208,15 @@ class Admin extends CI_Controller {
 						break;
 					case 'generateinvoice':
 						// if($this->session->userdata('cid')){
-							$invoice_generate = $this->db->get_where('quotation',['quo_code'=>$id])->result_array();
-							$quo_code = $invoice_generate[0]['quo_code'];
+							$invoice_generate = $this->db->get_where('quotation',['code'=>$id])->result_array();
+							$quo_code = $invoice_generate[0]['code'];
 							$data = [
 								'quo_code' => $id,
 								'created_date' => date('y-m-d'),
 								'name' =>  $invoice_generate[0]['name'],
+								'code' => $invoice_generate[0]['code'],
 							];
-							$checkdata = $this->db->get_where('quotation_invoice',array('quo_code'=>$quo_code))->result_array();
+							$checkdata = $this->db->get_where('quotation_invoice',array('code'=>$quo_code))->result_array();
 							if(count($checkdata) == 0){
 								$this->db->insert('quotation_invoice',$data);
 							}
@@ -2174,23 +2237,54 @@ class Admin extends CI_Controller {
 							$this->load->view('admin/index',$page_data);
 						break;
 					case 'edit':
-						if($this->input->post()){
-							$datainvoice = [
-								'name' => $this->input->post('name'),
-								'contact' => $this->input->post('contact_login'),
-								'address' => $this->input->post('address'),
-								'email' => $this->input->post('email'),
-								'pincode' => $this->input->post('pincode'),
-								'gst' => $this->input->post('gst'),
-								'terms' => $this->input->post('terms'),
-								'product' => $this->input->post('Product'),
-								'qty' => $this->input->post('qua'),
-								'mrp' => $this->input->post('mrp'),
-								'discount' => $this->input->post('dis'),
-								'created_date' => date('y-m-d')
-							];
-							$this->db->where('id',$id);
-							$query = $this->db->update('quotation',$datainvoice);
+						if($this->input->post('submit')){
+							$post = $this->input->post('id');
+							for ($i = 0; $i < count($post); $i++) 
+							{
+								$pid=$this->input->post('id')[$i];
+								$datainvoice = [
+									'name' => $this->input->post('name'),
+									'contact' => $this->input->post('contact_login'),
+									'address' => $this->input->post('address'),
+									'email' => $this->input->post('email'),
+									'pincode' => $this->input->post('pincode'),
+									'contactpersonname' => $this->input->post('contactpersonname'),
+									'contactperno' => $this->input->post('contactperno'),
+									'sgst' => $this->input->post('sgst'),
+									'cgst' => $this->input->post('cgst'),
+									'terms' => $this->input->post('terms'),
+									'product' => $this->input->post('Product')[$i],
+									'subcate' => $this->input->post('subcate')[$i],
+									'cateplan' => $this->input->post('cateplan')[$i],
+									'qty' => $this->input->post('qua')[$i],
+									'mrp' => $this->input->post('mrp')[$i],
+									'discount' => $this->input->post('dis')[$i],
+									'created_date' => date('y-m-d')
+								];
+								$this->db->where('id',$pid);
+							    $query = $this->db->update('quotation',$datainvoice);
+							}
+							// $datainvoice = [
+							// 	'name' => $this->input->post('name'),
+							// 	'contact' => $this->input->post('contact_login'),
+							// 	'address' => $this->input->post('address'),
+							// 	'email' => $this->input->post('email'),
+							// 	'pincode' => $this->input->post('pincode'),
+							// 	'contactpersonname' => $this->input->post('contactpersonname'),
+							// 	'contactperno' => $this->input->post('contactperno'),
+							// 	'sgst' => $this->input->post('sgst'),
+							// 	'cgst' => $this->input->post('cgst'),
+							// 	'terms' => $this->input->post('terms'),
+							// 	'product' => $this->input->post('Product'),
+							// 	'subcate' => $this->input->post('subcate'),
+							// 	'cateplan' => $this->input->post('cateplan'),
+							// 	'qty' => $this->input->post('qua'),
+							// 	'mrp' => $this->input->post('mrp'),
+							// 	'discount' => $this->input->post('dis'),
+							// 	'created_date' => date('y-m-d')
+							// ];
+							// $this->db->where('id',$id);
+							// $query = $this->db->update('quotation',$datainvoice);
 							if($query){
 								$page_data['message'] = 'Invoice Update Successfully';
 							}
@@ -2198,13 +2292,48 @@ class Admin extends CI_Controller {
 								$page_data['message'] = 'Something went wrong. Please try again';
 							}
 						}
-						$page_data['invoice'] = $this->db->get_where('quotation',['id'=>$id])->row();
+						else if($this->input->post('addextra')){
+							$post = $this->input->post('Product');
+							for ($i = 0; $i < count($post); $i++) 
+							{
+								$datainvoice = [
+									'code' => $this->input->post('quoname'),
+									'name' => $this->input->post('name'),
+									'contact' => $this->input->post('contact_login'),
+									'address' => $this->input->post('address'),
+									'email' => $this->input->post('email'),
+									'pincode' => $this->input->post('pincode'),
+									'contactpersonname' => $this->input->post('contactpersonname'),
+									'contactperno' => $this->input->post('contactperno'),
+									'sgst' => $this->input->post('sgst'),
+									'cgst' => $this->input->post('cgst'),
+									'terms' => $this->input->post('terms'),
+									'product' => $this->input->post('Product')[$i],
+									'subcate' => $this->input->post('subcate')[$i],
+									'cateplan' => $this->input->post('cateplan')[$i],
+									'qty' => $this->input->post('qua')[$i],
+									'mrp' => $this->input->post('mrp')[$i],
+									'discount' => $this->input->post('dis')[$i],
+									'created_date' => date('y-m-d')
+								];
+								$QUERY = $this->db->insert('quotation',$datainvoice);
+								$last_id = $this->db->insert_id();
+								$quo_id = $this->db->get_where('quotation',['id'=>$last_id])->row();
+								$code = $quo_id->quo_code;
+							}
+						}
+						$page_data['invoice'] = $this->db->get_where('quotation',['code'=>$id])->result_array();
+						$this->db->select('*');
+						$this->db->from('category_product');
+						$this->db->group_by('cproduct_name');
+						$page_data['product'] = $this->db->get()->result_array();
+
 						$page_data['page_title'] = 'Edit Quotation';
 								$page_data['page']="quotation/edit";
 								$this->load->view('admin/index',$page_data);
 							break;
 					case 'delete':
-							$this->db->where('id',$id);
+							$this->db->where('code',$id);
 							$this->db->delete('quotation');
 							redirect('admin/quotation');
 							break;
@@ -2216,6 +2345,37 @@ class Admin extends CI_Controller {
 			}
 		}
 
+		//admin checkproduct
+		public function checkproduct(){
+			if($this->input->post('product')){
+				$product = $this->input->post('product');
+				$query = $this->db->get_where('subcategories',array('cproduct_name' => $product))->result_array();
+				if(count($query)>0){
+					$result = $query;
+				}
+				else{
+					$result = 'error';
+				}
+			}
+			else if($this->input->post('subcate')){
+				$subcate = $this->input->post('subcate');
+				$query = $this->db->get_where('category_plans',array('subcat_name' => $subcate))->result_array();
+				if(count($query)>0){
+					$result = $query;
+				}
+				else{
+					$result = 'error';
+				}
+			}
+			else{
+				$result = 'error';
+			}
+			
+			$data['result'] = $result;
+			$data['token'] = $this->security->get_csrf_hash();
+			echo json_encode($data);
+		}
+
 	//Logout session
 	public function logout()
 	{
@@ -2223,6 +2383,25 @@ class Admin extends CI_Controller {
 		redirect('admin');
 	}
 	
+	public function uploadimgex($data)
+    {
+            $config['upload_path']          = $data['upload_path'];
+            $config['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
+            $config['max_width']            = 1024;
+            $config['max_height']           = 768;
+
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload($data['name']))
+            {
+                print_r($this->upload->display_errors());
+            }
+            else
+            {
+                $uploaded_data = $this->upload->data();
+                unset($this->upload);
+                return $uploaded_data;
+            }
+    }
 			public function uploadimg($data)
 			{
 				// print_r($data);
@@ -2370,3 +2549,9 @@ class Admin extends CI_Controller {
 					}
 			}
 }
+
+// BEGIN
+//   DECLARE serial_num INT;
+//   SELECT MAX(SUBSTRING(code, 11)) INTO serial_num FROM request_id_value WHERE code LIKE CONCAT('%', DATE_FORMAT(NOW(), '%y%m%d'), '-%');
+//   SET NEW.code = CONCAT(DATE_FORMAT(NOW(), '%y%m%d'), '-', LPAD(IFNULL(serial_num + 1, 1), 4, '0'));
+// END

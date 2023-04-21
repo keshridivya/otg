@@ -141,7 +141,7 @@ class Menu extends CI_model {
     public function adminquotation($id){
         $this->db->select('*,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qty as amt,CONCAT(address,", ", pincode) as addr');
         $this->db->from('quotation');
-        $this->db->where(array('quotation.quo_code'=>$id));
+        $this->db->where(array('quotation.code'=>$id));
         $query = $this->db->get();
             return $query->result_array();
     }
@@ -150,7 +150,7 @@ class Menu extends CI_model {
     public function adminquoview(){
         $this->db->select('*,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qty as amt,CONCAT(address,", ", pincode) as addr');
         $this->db->from('quotation');
-        $this->db->group_by('quo_code');
+        $this->db->group_by('code');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -159,7 +159,7 @@ class Menu extends CI_model {
      public function adminquoinvoice(){
         $this->db->select('*,mrp-(mrp*discount/100) as rate,(mrp-(mrp*discount/100))*qty as amt,CONCAT(address,", ", pincode) as addr');
         $this->db->from('quotation');
-        $this->db->join('quotation_invoice','quotation.quo_code=quotation_invoice.quo_code');
+        $this->db->join('quotation_invoice','quotation.code=quotation_invoice.code');
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -179,6 +179,16 @@ class Menu extends CI_model {
         $this->db->from('pincode');
         $this->db->join('category_product','category_product.cproduct_id=pincode.service_product');
         $this->db->where(['category_product.cproduct_name'=>$cartItems, 'pincode.pincode'=>$c_pincode]);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    //front pincode view
+    public function checkcity($cartItems, $c_city){
+        $this->db->select('*');
+        $this->db->from('pincode');
+        $this->db->join('category_product','category_product.cproduct_id=pincode.service_product');
+        $this->db->where(['pincode.city'=>$c_city]);
         $query = $this->db->get();
         // print_r($this->db->last_query());
         return $query->result_array();
@@ -293,19 +303,20 @@ class Menu extends CI_model {
 
     //admin extended
     public function adminextended($id){
-        $this->db->select('*');
+        $this->db->select('*,shop_owner.name as naam, warrenty.name as name,warrenty.status as sta');
         $this->db->from('warrenty');
         $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
-        // $this->db->where('warrenty.shop_id',$id);
+        $this->db->join('shop_owner','shop_owner.shop_id = warrenty.shop_id');
         $query = $this->db->get();
         return $query->result_array();
     }
 
      //admin new
      public function extendednew($id){
-        $this->db->select('*');
+        $this->db->select('*,shop_owner.name as naam, warrenty.name as name,warrenty.status as sta');
         $this->db->from('warrenty');
         $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
+        $this->db->join('shop_owner','shop_owner.shop_id = warrenty.shop_id');
         // $this->db->where('warrenty.shop_id',$id);
         $this->db->where('warrenty.status','new');
         $query = $this->db->get();
@@ -314,19 +325,19 @@ class Menu extends CI_model {
 
     //admin new
     public function extendedongoing($id){
-        $this->db->select('*');
+        $this->db->select('*, warrenty.name as name,warrenty.status as sta');
         $this->db->from('warrenty');
         $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
-        $this->db->join('engineer','engineer.eng_id = warrenty.eng_id');
+        $this->db->join('engineer','engineer.eng_id = warrenty.engi_id');
         // $this->db->where('warrenty.shop_id',$id);
-        $this->db->where('warrenty.eng_id !=','0');
+        $this->db->where('warrenty.engi_id !=','0');
         $query = $this->db->get();
         return $query->result_array();
     }
 
      //shop extended edit
      public function extendededit($id){
-        $this->db->select('*');
+        $this->db->select('*,warrenty.name as name,warrenty.status as sta');
         $this->db->from('warrenty');
         $this->db->join('category_product','category_product.cproduct_id = warrenty.device');
         $this->db->where('warrenty.warrenty_id',$id);
@@ -375,6 +386,27 @@ class Menu extends CI_model {
         $this->db->where('category_product.cproduct_name','Air Conditioner');
         $query = $this->db->get();
         return $query->row();         
+    }
+
+     //admin checkpriveval
+     public function warrantyprice(){
+        $this->db->select('*');
+        $this->db->from('warranty_price');
+        $this->db->join('category_product','category_product.cproduct_id = warranty_price.device');
+        $query = $this->db->get();
+        // print_r($this->db->last_QUERY());
+        return $query->result_array();  
+    }
+
+    //admin edit warrantyprice
+    public function editwarrantyprice($id){
+        $this->db->select('*');
+        $this->db->from('warranty_price');
+        $this->db->join('category_product','category_product.cproduct_id = warranty_price.device');
+        $this->db->where('warranty_price.id',$id);
+        $query = $this->db->get();
+        // print_r($this->db->last_QUERY());
+        return $query->row();  
     }
 
     //front checkpriveval

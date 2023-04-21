@@ -1,4 +1,48 @@
 <!--Body Content-->
+<style>
+	.modal.fade.in .lab-modal-body {
+  bottom: 0;
+  opacity: 1;
+}
+
+.lab-modal-body h1 {
+  font-size: 1.76rem;
+}
+
+.lab-modal-body p {
+  margin: 0 0 1.62rem 0;
+  line-height: 1.62;
+  font-weight: 300;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.lab-modal-body {
+  position: relative;
+  bottom: -250px;
+  margin: 150px auto 0;
+  padding: 40px;
+  max-width:100%;
+  height: auto;
+  background-color: rgb(248, 250, 247);
+  border: 1px solid #BEBEBE;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-out, bottom 0.3s ease-out;
+  -moz-transition: opacity 0.3s ease-out, bottom 0.3s ease-out;
+  -o-transition: opacity 0.3s ease-out, bottom 0.3s ease-out;
+  transition: opacity 0.3s ease-out, bottom 0.3s ease-out;
+}
+
+.close {
+  margin-top: -20px;
+  margin-right: -20px;
+  text-shadow: 0 1px 0 #ffffff;
+}
+
+.popup-button {
+  margin-top: 70px;
+}
+</style>
 <div id="page-content">
 
 	<!-- <?php print_r($cartItems);?> -->
@@ -153,6 +197,7 @@
                                                     ?>
 
 								</div>
+								<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#lab-slide-bottom-popup"> Launch demo modal </button>
 							</div>
 						</div>
 					</div>
@@ -162,12 +207,71 @@
 	</div>
 	<div class="section"></div>
 
+<!-- MODAL CONTENT SAMPLE STARTS HERE -->
+<div class="modal fade" id="lab-slide-bottom-popup" data-keyboard="false" data-backdrop="false" tabindex="-1"
+		aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="lab-modal-body">
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+    <h1>Verify Your Mobile number</h1>
 
+			<div class="signup-forms">
+
+<form method="post" action="">
+	<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
+		class="csrf" value="<?php echo $this->security->get_csrf_hash();?>">
+	<!-- <input type="hidden" id='login_vrf_otp'> -->
+
+	<div class="row justify-content-center">
+		<div class="col-lg-6">
+			<div class="form-group">
+				<input type="text" value="" class='form-control number' id='usernumber'
+					Placeholder='Mobile no' name='number'>
+			</div>
+			<span id='spanotpnumber'>Mobile Number is required</span>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-lg-6">
+			<div class="form-group loginotpbox">
+				<input type="text" class="form-control " id="loginotp" name="loginotp"
+					placeholder="OTP">
+			</div>
+		</div>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-lg-6 login_err">
+		</div>
+	</div>
+	<button type="button" name="submit" value="login" class="btn login_send_otp"
+		id='login_btn' disabled>Send OTP</button>
+	<button type="button" name="submit" value="login" class="btn login_verify_otp"
+		id='login_otp_verify'>Verify OTP</button>
+</form>
+<!-- <a href="<?= base_url('forget') ?>">Forgot password?</a> -->
+</div>  </div>
+  <!-- /.modal-body -->
+</div>
 </div>
 <!--End Body Content-->
 
 <!--Footer-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script>
+	$(document).ready(function($) {
+  // auto timer
+  setTimeout(function() {
+    $('#lab-slide-bottom-popup').modal('show');
+  }, 5000); // optional - automatically opens in xxxx milliseconds
+
+  $(document).ready(function() {
+    $('.lab-slide-up').find('a').attr('data-toggle', 'modal');
+    $('.lab-slide-up').find('a').attr('data-target', '#lab-slide-bottom-popup');
+  });
+
+});
+</script>
 
 <script>
 	$(document).ready(function () {
@@ -212,3 +316,115 @@
 	});
 
 </script>
+
+<script>
+	$(document).ready(function () {
+		$('.loginotpbox').hide();
+		$('.login_verify_otp').hide();
+		$('#resend_otp').hide();
+			$('#login_btn').click(function () {
+			let number = $('#usernumber').val();
+			var csrfName = $('.csrf').attr('name');
+			var csrfHash = $('.csrf').val();
+			$.ajax({
+				url: "<?= base_url('regloginotp'); ?>",
+				method: "post",
+				data: {
+					number: number,
+					[csrfName]: csrfHash
+				},
+				dataType: 'json',
+				success: function (response) {
+					$('.csrf').val(response.token);
+					// $('#login_vrf_otp').val(response.otp);
+					if (response.otp != 'error') {
+						$('.login_err').html(
+							'<div class="alert alert-success">OTP is send on your mobile</div>'
+						);
+						$('.loginotpbox').show();
+						$('.login_send_otp').hide();
+						$('.login_verify_otp').show();
+					} else {
+						$('.login_err').html(
+							'<div class="alert alert-danger">This Number is incorrect</div>'
+						);
+					}
+				},
+				error: function () {
+					alert('OTP not send .Please try again');
+				}
+			})
+		});
+
+		$('#login_otp_verify').click(function () {
+			let loginotp = $('#loginotp').val();
+			let number = $('#usernumber').val();
+			var csrfName = $('.csrf').attr('name');
+			var csrfHash = $('.csrf').val();
+			$.ajax({
+				url: "<?= base_url('login-otp-verify'); ?>",
+				method: "post",
+				data: {
+					loginotp: loginotp,
+					number: number,
+					[csrfName]: csrfHash
+				},
+				dataType: 'json',
+				success: function (response) {
+					$('.csrf').val(response.token);
+					if (response.otp != 'error') {
+						history.back();
+					} else {
+						$('.login_err').html(
+							'<div class="alert alert-danger">OTP is Incorrect</div>'
+						);
+					}
+				},
+				error: function () {
+					alert('OTP not send .Please try again');
+				}
+			})
+
+		});
+	});
+		document.getElementById('timer').innerHTML =
+		05 + ":" + 00;
+	startTimer();
+
+
+	function startTimer() {
+		var presentTime = document.getElementById('timer').innerHTML;
+		var timeArray = presentTime.split(/[:]+/);
+		var m = timeArray[0];
+		var s = checkSecond((timeArray[1] - 1));
+		if (s == 59) {
+			m = m - 1
+		}
+		if (m < 0) {
+			return
+		}
+
+		document.getElementById('timer').innerHTML =
+			m + ":" + s;
+		console.log(m)
+		setTimeout(startTimer, 1000);
+
+	}
+
+	function checkSecond(sec) {
+		if (sec < 10 && sec >= 0) {
+			sec = "0" + sec
+		}; // add zero in front of numbers < 10
+		if (sec < 0) {
+			sec = "59"
+		};
+		return sec;
+	}
+
+	setTimeout(function () {
+		// alert('545');
+		$('#set_otp').val('');
+	}, 300000);
+
+</script>
+

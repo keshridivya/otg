@@ -1,5 +1,7 @@
 <!--Body Content-->
+<style>
 
+</style>
 <div id="page-content">
 	<div class="section summery">
 		<div class="container">
@@ -89,7 +91,13 @@
 							textwrit +=
 								'<li class="tracker_list_item" tabindex="0"><form action="" method="post"><input type="hidden" name="req_id" value="' +
 								response.data[index].request_id_value +
-								'"><label for="211220-000804" class="tracker_list_item_wrap"><div class="tracker_details"><h4> Others  Split AC (AMC - Breakdown)</h4><div class="tracker_details_box"><div class="tracker_detail_list"><div class="tracker_detail_list_item_"><span class="tracker_head">Request ID</span><span class="tracker_val">: ' +
+								'"><label for="211220-000804" class="tracker_list_item_wrap"><div class="tracker_details"><h4>' +
+								response.data[index].service_plan +
+								' ' +
+								response.data[index].service_device +
+								' (' +
+								response.data[index].service_warranty +
+								')</h4><div class="tracker_details_box"><div class="tracker_detail_list"><div class="tracker_detail_list_item_"><span class="tracker_head">Request ID</span><span class="tracker_val">: ' +
 								response.data[index].request_id_value +
 								'</span></div><div class="tracker_detail_list_item_"><span class="tracker_head">Request Date</span><span class="tracker_val">: ' +
 								response.data[index].created_on +

@@ -262,6 +262,8 @@ $route['admin/extended/delete/(:any)']="admin/extended/delete/$1";
 //admin warranty price
 $route['admin/warranty_price'] = 'admin/warranty_price/view';
 $route['admin/warranty_price/add'] = 'admin/warranty_price/add';
+$route['admin/warranty_price/edit'] = 'admin/warranty_price/edit';
+
 //enginner login
 $route['engineer']='engineer/index';
 

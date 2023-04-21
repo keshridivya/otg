@@ -26,6 +26,7 @@
 						<tr>
 
 							<th>S.no</th>
+							<th>City</th>
 							<th>Pincode</th>
 							<th>Product Name</th>
 							<th>Action</th>
@@ -37,6 +38,7 @@
                                     ?>
 					<tr>
 						<td><?= $count; ?></td>
+						<td><?php echo $pincode['city']; ?></td>
 						<td><?php echo $pincode['pincode']; ?></td>
 						<td><?php echo $pincode['service_product']?></td>
 						<td>

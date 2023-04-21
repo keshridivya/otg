@@ -228,6 +228,18 @@
 										$date=strtotime($input);
 										echo date('d  M  Y',$date) ?></label></td>
 										</tr>
+										<?php if($invoice[0]['contactpersonname'] != ''){ ?>
+										<tr>
+											<td><span>Contact Person : </span><label id="order-number"
+													class='float-right'><?= $invoice[0]['contactpersonname'] ?></label></td>
+										</tr>
+										<?php } ?>
+										<?php if($invoice[0]['contactpersonname'] != ''){ ?>
+										<tr>
+											<td><span>Contact Number : </span><label id="order-number"
+													class='float-right'><?= $invoice[0]['contactperno'] ?></label></td>
+										</tr>
+										<?php } ?>
 									</tbody>
 								</table>
 							</div>
@@ -236,6 +248,8 @@
 					</div>
 
 					<!--End InvoiceTop-->
+					<hr>
+					<div class="container text-black text-center"><span><b>CLIENTS &nbsp;&nbsp;DETAILS</b> <span></div>
 					<hr>
 					<div id="invoice-mid">
 						<div class="clearfix">
@@ -250,9 +264,9 @@
 							<div class="col-right">
 								<div class="">
 									<p>
-										<span><b>Contact Person : </b>
+										<span><b>Client Name : </b>
 											<span><?= $invoice[0]['name'] ?></span></span><br>
-										<span><b>Number : </b> <span>+91
+										<span><b>Client Number : </b> <span>+91
 												<?= $invoice[0]['contact'] ?></span></span><br>
 									</p>
 
@@ -287,7 +301,7 @@
 								?>
 								<tr class="list-item">
 									<td data-label="Type" class="tableitem"><?= $count; ?></td>
-									<td data-label="Description" class="tableitem"><?= $invoice1['product'] ?>
+									<td data-label="Description" class="tableitem"><?= $invoice1['cateplan'] ?> (<?= $invoice1['product'] ?>)
 									</td>
 									<td data-label="Quantity" class="tableitem qua" id=""><?= $invoice1['qty'] ?></td>
 									<td data-label="Unit Price" class="tableitem cBalance" id=""><?= $invoice1['mrp'] ?>
@@ -303,8 +317,10 @@
 								<?php $count++; } ?>
 								<tr class="list-item">
 									<td colspan="4" style="border-left:2px solid #dee2e6;text-transform:capitalize"
-										class=' text-left'><span class="words"></span><br>Total
-										Quantity: <span id="qty"></span></td>
+										class=' text-left'>
+										<!-- <span class="words"></span><br>Total
+										Quantity: 
+										<span id="qty"></span></td> -->
 									<td colspan="3">
 										<table>
 											<tr>
@@ -318,15 +334,15 @@
 												<td data-label="Grand Total" class="tableitem"></td>
 												<td data-label="Grand Total" class="tableitem">SGST</td>
 												<td data-label="Grand Total" class="tableitem "><span
-														id='gst'><?= $invoice[0]['gst'] ?? '0'?></span><span>%</span></td>
+														id='gst'><?= $invoice[0]['sgst'] ?? '0'?></span><span>%</span></td>
 												<td data-label="Grand Total" class="tableitem gsttotresult totalPayable"></td>
 											</tr>
 											<tr>
 												<td data-label="Grand Total" class="tableitem"></td>
 												<td data-label="Grand Total" class="tableitem">CGST</td>
 												<td data-label="Grand Total" class="tableitem ">
-													<span><?= $invoice[0]['gst'] ?? "0" ?></span><span>%</span></td>
-												<td data-label="Grand Total" class="tableitem gsttotresult totalPayable" id=''></td>
+													<span id='cgst'><?= $invoice[0]['cgst'] ?? "0" ?></span><span>%</span></td>
+												<td data-label="Grand Total" class="tableitem cgsttotresult totalPayable" id=''></td>
 											</tr>
 											<tr>
 												<td data-label="Grand Total" class="tableitem text-left" colspan="2">
@@ -336,7 +352,14 @@
 											</tr>
 										</table>
 									</td>
+									
 
+								</tr>
+								<tr class=" text-left" style="border:1px solid #dcd7d7">
+									<td colspan="7">
+									<span class="words" style=";padding:5px 10px 5px 10px;text-transform:capitalize"></span>
+									</td>
+									
 								</tr>
 								<tr class=" text-right" style="border:1px solid #dcd7d7">
 									<th colspan="4">
@@ -393,6 +416,16 @@
 		let round = mult.toFixed(2)
 		$('.gsttotresult').text(round);
 	})
+
+	$(window).on('load', function () {
+		let result = Math.round($('.result').text());
+		let gst = $('#cgst').text();
+		var dec = (gst / 100).toFixed(2);
+		var mult = result * dec;
+		let round = mult.toFixed(2)
+		$('.cgsttotresult').text(round);
+	})
+
     $(window).on("load", function () {
 		let totsum = 0;
 		$('.totalPayable').each(function () {

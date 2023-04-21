@@ -10,7 +10,7 @@
 				<a href="<?php echo base_url()?>admin/quotation/invoicelist" class="pull-right">Quotation Invoice List</a>
 			</div>
 			<div class="add-btn ml-3">
-				<a href="<?php echo base_url()?>admin/quotation/add" class="pull-right">Add Invoice</a>
+				<a href="<?php echo base_url()?>admin/quotation/add" class="pull-right">Add quotation</a>
 			</div>
 		</div>
 	</div>
@@ -42,13 +42,13 @@
 							<td><?= $invoice['quo_code'] ?></td>
 							<td><?= $invoice['created_date'] ?></td>
 							<td>
-								<a href="<?= base_url('admin/quotation/invoice/'.$invoice['quo_code']) ?>" class="btn btn-primary" title="quotation"><i class="fas fa-file-invoice"></i></a>
-										<a href="<?php echo base_url('admin/quotation/delete/'.$invoice['id']); ?>" type="button"
+								<a href="<?= base_url('admin/quotation/invoice/'.$invoice['code']) ?>" class="btn btn-primary" title="quotation"><i class="fas fa-file-invoice"></i></a>
+										<a href="<?php echo base_url('admin/quotation/delete/'.$invoice['code']); ?>" type="button"
 								class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this item?');"><i
 									class="fas fa-trash" aria-hidden="true"></i></a>
-									<a href="<?= base_url('admin/quotation/generateinvoice/'.$invoice['quo_code']) ?>" class="btn btn-primary" title="invoice"><i
+									<a href="<?= base_url('admin/quotation/generateinvoice/'.$invoice['code']) ?>" class="btn btn-primary" title="invoice"><i
 										class="fa fa-download"></i></a>
-										<a href="<?= base_url('admin/quotation/edit/'.$invoice['id']) ?>" class="btn btn-primary" title="edit"><i
+										<a href="<?= base_url('admin/quotation/edit/'.$invoice['code']) ?>" class="btn btn-primary" title="edit"><i
 										class="fa fa-edit"></i></a>
 							</td>
 						</tr>

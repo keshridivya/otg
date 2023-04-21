@@ -234,33 +234,6 @@ $(document).ready(function () {
 });
 
 
-//add input field
-$(document).ready(function(){
-	$('.addbutton').click(function(){
-		let field = '<hr><div class="form-card" id="row">\
-		<div class="row">\
-			<div class="col-7">\
-				<h2 class="fs-title">Product : </h2>\
-			</div>\
-		</div>\
-		<label class="fieldlabels">Product: </label>\
-		<input type="text" name="Product[]" id="product"\
-			placeholder="Product" />\
-		<label class="fieldlabels">Quantity: </label>\
-		<input type="text" name="qua[]" id="qua" placeholder="Quantity" />\
-		<label class="fieldlabels">MRP : </label>\
-		<input type="text" name="mrp[]" id="mrp" placeholder="MRp" />\
-		<label class="fieldlabels">Discount : </label>\
-		<input type="text" name="dis[]" id="dis" placeholder="Discount" />\
-		<button class="btn btn-danger" id="removefield" type="button"><i class="fa fa-trash"></i> Remove</button>\
-	</div>';
-	$('.addinput').append(field);
-	$("body").on("click", "#removefield", function () {
-		$(this).parents("#row").remove();
-	})
-
-	})
-});
 
 $(document).ready(function(){
 	$('#coupon_add').click(function(){

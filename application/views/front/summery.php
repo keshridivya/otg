@@ -37,7 +37,7 @@
 								<input type="hidden" class="form-control form-control-user"
 									value="<?php echo $_SESSION['c_address'] .' '. $_SESSION['c_city'] .' '. $_SESSION['c_pincode'];?>"
 									name="c_address[]">
-									<!-- <input type="hidden" value="<?= $item['duration'] ?>" class="duration" > -->
+									<input type="hidden" value="<?= $item['id'] ?>" class="cplan_id" name="cplan_id[]">
 
 								<input type="hidden" class="form-control form-control-user" id="perge"
 									value="<?php echo $_SESSION['percentage'];?>" name="percentage[]">
@@ -147,7 +147,7 @@
 								<input type="hidden" class="form-control form-control-user"
 									value="<?php echo $_SESSION['time_slot'];?>" name="time_slot[]">
 								<input type="hidden" value='OTG-<?= time().rand(100, 999) ?>' name='order_id'>
-								<!-- <input type="hidden" value="<?= $item['duration'] ?>" class="duration" > -->
+								<input type="hidden" value="<?= $item['id'] ?>" class="cplan_id" name="cplan_id[]">
 
 								<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>"
 									value="<?php echo $this->security->get_csrf_hash();?>">

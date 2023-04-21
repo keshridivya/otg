@@ -1,3 +1,6 @@
+<?php
+$results = $product;
+?>
 <style>
 	#heading {
 		text-transform: uppercase;
@@ -286,8 +289,8 @@
 												<input type="button" name="next" class="next action-button"
 													value="Next" />
 											</fieldset>
-											<fieldset class='fieldset'>
-												<div class="form-card">
+											<fieldset class='fieldset '>
+												<div class="form-card " >
 													<div class="row">
 														<div class="col-7">
 															<h2 class="fs-title">Product : </h2>
@@ -297,8 +300,26 @@
 														</div>
 													</div>
 													<label class="fieldlabels">Product: </label>
-													<input type="text" name="Product[]" id='product'
-														placeholder="Product" />
+													<select class="form-control product" name="Product[]" id='product'
+														placeholder="Product" required>
+														<option value="">select Product</option>
+														<?php
+														foreach($results as $product){ ?>
+														<option value="<?= $product['cproduct_name'] ?>">
+															<?= $product['cproduct_name'] ?></option>
+
+														<?php }	?>
+													</select>
+
+													<label class="fieldlabels mt-3">Sub categories: </label>
+													<select class="form-control selectbody " name="subcate[]"
+														id='subcate' placeholder="" required>
+													</select>
+
+													<label class="fieldlabels mt-3">Categories Plan: </label>
+													<select class="form-control cateplan " name="cateplan[]"
+														id='cateplan' placeholder="" required>
+													</select>
 													<label class="fieldlabels">Quantity: </label>
 													<input type="text" name="qua[]" id='qua' placeholder="Quantity" />
 													<label class="fieldlabels">MRP : </label>
@@ -307,8 +328,14 @@
 													<input type="text" name="dis[]" id='dis' placeholder="Discount" />
 												</div>
 												<div class="addinput"></div>
+												<label class="fieldlabels">SGST : </label>
+												<input type="text" name="sgst" id='sgst' placeholder="SGST" />
+												<label class="fieldlabels">CGST : </label>
+												<input type="text" name="cgst" id='cgst' placeholder="CGST" />
 												<div class="text-left">
 												<button class='btn btn-success addbutton' type="button">+</button>
+												<button class='btn btn-success addquofield' type="button">Add
+														Other</button>
 												</div> 
 												<input type="submit" name="next" class="next action-button"
 													value="Submit" id='submit' /> <input type="button" name="previous"

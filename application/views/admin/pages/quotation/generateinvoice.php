@@ -272,7 +272,7 @@
 								?>
 								<tr class="list-item">
 									<td data-label="Type" class="tableitem"><?= $count; ?></td>
-									<td data-label="Description" class="tableitem"><?= $invoice1['product'] ?>
+									<td data-label="Description" class="tableitem"><?= $invoice1['cateplan'] ?> (<?= $invoice1['product'] ?>)
 									</td>
 									<td data-label="Quantity" class="tableitem qua" id=""><?= $invoice1['qty'] ?></td>
 									<td data-label="Unit Price" class="tableitem cBalance" id=""><?= $invoice1['mrp'] ?>
@@ -303,15 +303,15 @@
 												<td data-label="Grand Total" class="tableitem"></td>
 												<td data-label="Grand Total" class="tableitem">SGST</td>
 												<td data-label="Grand Total" class="tableitem "><span
-														id='gst'><?= $invoice[0]['gst'] ?? '0'?></span><span>%</span></td>
+														id='gst'><?= $invoice[0]['sgst'] ?? '0'?></span><span>%</span></td>
 												<td data-label="Grand Total" class="tableitem gsttotresult totalPayable"></td>
 											</tr>
 											<tr>
 												<td data-label="Grand Total" class="tableitem"></td>
 												<td data-label="Grand Total" class="tableitem">CGST</td>
 												<td data-label="Grand Total" class="tableitem ">
-													<span><?= $invoice[0]['gst'] ?? "0" ?></span><span>%</span></td>
-												<td data-label="Grand Total" class="tableitem gsttotresult totalPayable"  id=''></td>
+													<span id='cgst'><?= $invoice[0]['cgst'] ?? "0" ?></span><span>%</span></td>
+												<td data-label="Grand Total" class="tableitem cgsttotresult totalPayable"  id=''></td>
 											</tr>
 											<tr>
 												<td data-label="Grand Total" class="tableitem text-left" colspan="2">
@@ -360,6 +360,16 @@
 		let round = mult.toFixed(2)
 		$('.gsttotresult').text(round);
 	})
+
+	$(window).on('load', function () {
+		let result = Math.round($('.result').text());
+		let gst = $('#cgst').text();
+		var dec = (gst / 100).toFixed(2);
+		var mult = result * dec;
+		let round = mult.toFixed(2)
+		$('.cgsttotresult').text(round);
+	})
+
     $(window).on("load", function () {
 		let totsum = 0;
 		$('.totalPayable').each(function () {

@@ -1,4 +1,28 @@
 <!--Body Content-->
+<script type="text/javascript">
+	var citiesByState = {
+		Maharashtra: ["Mumbai", "Pune", "Nagpur", "Thane", "Pimpri Chinchwad", "Nashik", "Kalyan Dombivli","Vasai Virar", "Chhatrapati Sambhajinagar", "Navi Mumbai", "Solapur", "Mira Bhayandar", "Bhiwandi Nizampur", "Amravati", "Nanded Waghala", "Kolhapur", "Ulhasnagar", "Sangli Miraj Kupwad", "Malegaon", "Jalgaon", "Akola", "Latur", "Dhule", "Ahmednagar", "Chandrapur", "Parbhani", "Ichalkaranji", "Jalna", "Ambarnath", "Panvel", "Bhusawal", "Badlapur", "Beed", "Gondia", "Satara", "Barshi", "Yavatmal", "Achalpur", "Dharashiv", "Nandurbar", "Wardha", "Udgir", "Hinganghat"],
+		Delhi: ["New Delhi", "Bhalswa Jahangir Village", "Kirari Suleman Nagar Village", "Karawal Nagar", "Hastsal", "Mandoli", "Deoli", "Gokalpuri", "Dallupura", "Taj Pul", "Nangloi","Chilla Sarda Banger", "Pooth Kalan", "Burari", "Gharoli", "Jafrabad", "Noida", "Ghaziabad", "Fatehpur Beri", "Delhi Cantonment", "Alipur", "Kair", "Karala Village", "Siraspur","Chhawla", "Ghitorni", "Sultanpur"]
+	}
+
+	function makeSubmenu(value) {
+		if (value.length == 0) document.getElementById("customer_city").innerHTML = "<option></option>";
+		else {
+			var citiesOptions = "";
+			for (cityId in citiesByState[value]) {
+				citiesOptions += "<option>" + citiesByState[value][cityId] + "</option>";
+			}
+			document.getElementById("customer_city").innerHTML = citiesOptions;
+			document.getElementById("city").innerHTML = citiesOptions;
+		}
+	}
+	function resetSelection() {
+		document.getElementById("countrySelect").selectedIndex = 0;
+		document.getElementById("customer_city").selectedIndex = 0;
+		document.getElementById("city").selectedIndex = 0;
+	}
+
+</script>
 <div id="page-content">
 	<!-- <?php print_r($ex_cust);?> -->
 	<div class="section summery">
@@ -98,7 +122,7 @@
 								</div>
 								<hr>
 								<div class="row text-left">
-									<div class="col-lg-6  mb-4 ">
+									<div class="col-sm-6  mb-4 ">
 										<div class=" b0x-shadow">
 											<div class="section-header account_heading">
 												<input type="hidden" class="cbtn" value="booking">
@@ -109,7 +133,10 @@
 												<h3 class="cname"><?php echo $ex_cust[0]['cust_name'];?></h3>
 												<p class="ccont"><?php echo $ex_cust[0]['contact'];?></p>
 												<p class="cemail"><?php echo $ex_cust[0]['email_id'];?></p>
-												<p class="caddress"><?php echo $ex_cust[0]['address'];?>,</p>
+												<p class="caddress d-inline">
+													<?php echo $ex_cust[0]['address'];?>,
+												</p>
+												<span><?php echo $ex_cust[0]['city'];?></span>
 												<p class="cpincode"><?php echo $ex_cust[0]['pincode'];?></p>
 											</div>
 											<div><a class="cust_edit">Edit</a>
@@ -120,7 +147,7 @@
 									<?php
 								foreach($shipping_address as $add){
 								?>
-									<div class="col-lg-6 mb-4 ">
+									<div class="col-sm-6 mb-4 ">
 										<div class=" b0x-shadow">
 											<div class="section-header account_heading">
 												<input type="hidden" class="cbtn" value="shipping">
@@ -129,7 +156,9 @@
 												<h3 class="cname"><?php echo $add['name'];?></h3>
 												<p class="ccont"><?php echo $add['contact'];?></p>
 												<p class="cemail"><?php echo $add['email'];?></p>
-												<p class="caddress"><?php echo $add['address'];?>,</p>
+												<p class="caddress d-inline">
+													<?php echo $add['address'];?>,</p>
+													<span><?php echo $add['city'];?></span>
 												<p class="cpincode"><?php echo $add['pincode'];?></p>
 											</div>
 											<div><a class="cust_edit"> Edit</a> <button class="btn-booking">Booking to
@@ -333,15 +362,26 @@
 									<span id='spancustomer_email'>Please enter correct email address</span>
 								</div>
 								<div class="col-sm-6 mb-3">
-									<label for="c_city">City</label>
-									<input type="text" name="customer_city" id="customer_city" value=""
-										class="form-control form-control-user" placeholder="City">
+									<label for="c_city">State</label>
+									<select id="countrySelect" size="1" onchange="makeSubmenu(this.value)">
+										<option value="" disabled selected>Choose State</option>
+										<option>Maharashtra</option>
+										<!-- <option>Delhi</option> -->
+									</select>
+								</div>
+								<div class="col-sm-6 mb-3">
+
+								<label for="c_city">City</label>
+									<!-- <input type="text" name="customer_city" id="customer_city" value="" class="form-control form-control-user" placeholder="City"> -->
+									<select name="customer_city" id="customer_city" value=""
+										class="form-control form-control-user citySelect">
+										<option value="">Select City</option>
+									</select>
 									<span id='spancustomer_city'>Please enter correct city</span>
 								</div>
 								<div class="col-sm-6 mb-3">
 									<label for="c_address">Address</label>
-									<input type="text" name="customer_address" value="" id="customer_address"
-										class="form-control form-control-user" placeholder="Address">
+									<input type="text" name="customer_address" value="" id="customer_address" class="form-control form-control-user" placeholder="Address">
 									<span id='spancustomer_address'>Please enter correct address</span>
 								</div>
 								<div class="col-sm-6 mb-3">
@@ -399,12 +439,42 @@
 										class="form-control form-control-user" placeholder="Email Address">
 									<span id='spanemail'>Please enter correct email address</span>
 								</div>
-								<div class="col-sm-6 mb-3 ">
+								<div class="col-sm-6 mb-3">
+									<label for="c_city">State</label>
+									<select id="countrySelect" size="1" onchange="makeSubmenu(this.value)">
+										<option value="" disabled selected>Choose State</option>
+										<option>Maharashtra</option>
+										<!-- <option>Delhi</option> -->
+									</select>
+								</div>
+								<div class="col-sm-6 mb-3">
+								<label for="c_city">City</label>
+								<select name="city" id="city" value="" class="form-control form-control-user">
+										<option value="">Select City</option>
+									</select>
+									<span id='spancity'>Please enter correct city</span>
+								</div>
+								<!-- <div class="col-sm-6 mb-3 ">
 									<label for="c_city">City</label>
 									<input type="text" name="city" id="city" value=""
 										class="form-control form-control-user" placeholder="City">
+									<select name="city" id="city" value="" class="form-control form-control-user">
+										<option value="">Select City</option>
+										<option value="Mumbai">Mumbai</option>
+										<option value="Thane">Thane</option>
+										<option value="Kalyan-Dombivli">Kalyan-Dombivli</option>
+										<option value="Navi Mumbai">Navi Mumbai</option>
+										<option value="Mira Bhayandar">Mira Bhayandar</option>
+										<option value="Bhiwandi Nizampur">Bhiwandi Nizampur</option>
+										<option value="Ulhasnagar">Ulhasnagar</option>
+										<option value="Panvel">Panvel</option>
+										<option value="Badlapur">Badlapur</option>
+										<option value="Ambarnath">Ambarnath</option>
+										<option value="Amravati">Amravati</option>
+										<option value="Delhi">Delhi</option>
+									</select>
 									<span id='spancity'>Please enter correct city</span>
-								</div>
+								</div> -->
 
 								<div class="col-sm-6 mb-3 ">
 									<label for="c_address">Address</label>
@@ -434,6 +504,7 @@
 			</div>
 		</div>
 	</div>
+
 
 </div>
 <!--End Body Content-->
@@ -494,11 +565,13 @@
 		var csrfName = $('.csrf').attr('name');
 		var csrfHash = $('.csrf').val();
 		let c_pincode = $('#c_pincode').val();
+		let c_city = $('#c_city').val();
 		$.ajax({
 			url: "<?= base_url('welcome/checkpin') ?>",
 			method: "post",
 			data: {
 				c_pincode: c_pincode,
+				c_city :c_city,
 				cartItems: cartItems,
 				[csrfName]: csrfHash,
 			},
@@ -510,7 +583,13 @@
 					pincheck_error = false;
 					window.location.href = '<?= base_url("welcome/checkout") ?>';
 					return false;
-				} else {
+				} else if(response.msg == 'nocity'){
+					alert('sorry, City is not serviceable');
+					pincheck_error = false;
+					window.location.href = '<?= base_url("welcome/checkout") ?>';
+					return false;
+				}
+				else {
 					pincheck_error = true;
 					return true;
 				}

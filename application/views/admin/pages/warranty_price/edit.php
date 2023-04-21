@@ -1,26 +1,4 @@
 <style>
-	#heading {
-		text-transform: uppercase;
-		color: #673AB7;
-		font-weight: normal
-	}
-
-	#msform {
-		text-align: center;
-		position: relative;
-		margin-top: 20px
-	}
-
-	#msform fieldset {
-		background: white;
-		border: 0 none;
-		border-radius: 0.5rem;
-		box-sizing: border-box;
-		width: 100%;
-		margin: 0;
-		padding-bottom: 20px;
-		position: relative
-	}
 
 	.form-card {
 		text-align: left
@@ -123,98 +101,14 @@
 		text-align: left
 	}
 
-	#progressbar {
-		margin-bottom: 30px;
-		overflow: hidden;
-		color: lightgrey
-	}
-
-	#progressbar .active {
-		color: #673AB7
-	}
-
-	#progressbar li {
-		list-style-type: none;
-		font-size: 15px;
-		width: 25%;
-		float: left;
-		position: relative;
-		font-weight: 400
-	}
-
-	#progressbar #account:before {
-		font-family: FontAwesome;
-		content: "\f13e"
-	}
-
-	#progressbar #personal:before {
-		font-family: FontAwesome;
-		content: "\f007"
-	}
-
-	#progressbar #payment:before {
-		font-family: FontAwesome;
-		content: "\f030"
-	}
-
-	#progressbar #confirm:before {
-		font-family: FontAwesome;
-		content: "\f00c"
-	}
-
-	#progressbar li:before {
-		width: 50px;
-		height: 50px;
-		line-height: 45px;
-		display: block;
-		font-size: 20px;
-		color: #ffffff;
-		background: lightgray;
-		border-radius: 50%;
-		margin: 0 auto 10px auto;
-		padding: 2px
-	}
-
-	#progressbar li:after {
-		content: '';
-		width: 100%;
-		height: 2px;
-		background: lightgray;
-		position: absolute;
-		left: 0;
-		top: 25px;
-		z-index: -1
-	}
-
-	#progressbar li.active:before,
-	#progressbar li.active:after {
-		background: #673AB7
-	}
-
-	.progress {
-		height: 20px
-	}
-
-	.progress-bar {
-		background-color: #673AB7
-	}
-
-	.fit-image {
-		width: 100%;
-		object-fit: cover
-	}
-
-	.check {
-		display: block;
-		color: red;
-	}
 
 </style>
 <div class="container-fluid">
 	<!-- Page Heading -->
-	<div class="row">
+    <div class="row">
 		<div class="col-lg-6">
 			<h1 class="h3 mb-2 text-gray-800"><?php echo $page_title;?></h1>
+
 		</div>
 		<div class="col-lg-6">
 			<div class="add-btn">
@@ -244,66 +138,63 @@
 											<input type="hidden" class='csrf'
 												name="<?php echo $this->security->get_csrf_token_name(); ?>"
 												value="<?php echo $this->security->get_csrf_hash();?>">
-											<fieldset class='fieldset set1'>
 												<div class="form-card">
 													<label class="fieldlabels">Device: *</label>
-													<select name="device" id="device" class="form-control one_eng_name"
-														>
+													<select name="device" id="device" class="form-control one_eng_name">
 														<option value="" disabled selected>Select Device</option>
 														<?php
 															foreach($product as $product){
 															?>
 														<option value="<?php echo ($product['cproduct_id']) ?>"
-															<?php echo (($info[0]['device']  ?? '' ) == $product['cproduct_id']) ? 'selected' : ''; ?>>
+															<?php echo (($warranty->device  ?? '' ) == $product['cproduct_id']) ? 'selected' : ''; ?>>
 															<?php echo $product['cproduct_name']; ?></option>
 														<?php  }
                                                     ?>
 													</select>
 													<span id="spandeviceplan">Please select device</span>
 
-
 												</div>
-												<input type="button" name="" id="device_check" class="action-button "
-													value="Next" />
-											</fieldset>
-											<fieldset class='fieldset set2'>
-												<div class="form-card">
-													<!-- <div class="row">
-														<div class="col-7">
-															<h2 class="fs-title">Product : </h2>
-														</div>
-													</div> -->
+
+												<div class="form-card mt-3">
 													<label class="fieldlabels">From Price: </label>
-													<input type="text" name="fromPrice[]" id='product'  required/>
+													<input type="text" name="fromPrice" id='product'  required value="<?= $warranty->fromprice ?>"/>
 													<label class="fieldlabels">To Price: </label>
-													<input type="text" name="toPrice[]" id='qua'  required/>
+													<input type="text" value="<?= $warranty->toprice ?>" name="toPrice" id='qua'  required/>
 													<label class="fieldlabels">1Year Van No : </label>
-													<input type="text" name="oneyeavan[]" id='mrp'  />
+													<input type="text" value="<?= $warranty->oneyearvan ?>" name="oneyeavan" id='mrp'  />
 													<label class="fieldlabels">1 Year : </label>
-													<input type="text" name="oneyear[]" id='dis'  />
+													<input type="text" value="<?= $warranty->oneyear ?>" name="oneyear" id='dis'  />
+
+                                                    <?php if($warranty->twoyearvan){ ?>
 													<label class="fieldlabels">2Year Van No : </label>
-													<input type="text" name="twoyearvan[]" id='mrp'  />
+													<input type="text" value="<?= $warranty->twoyearvan ?>" name="twoyearvan" id='mrp'  />
 													<label class="fieldlabels">2 Year : </label>
-													<input type="text" name="twoyear[]" id='dis'  />
+													<input type="text" value="<?= $warranty->twoyear ?>" name="twoyear" id='dis'  />
+                                                    <?php } ?>
+
+                                                    <?php if($warranty->threeyearvan){ ?>
 													<label class="fieldlabels">3Year Van No : </label>
-													<input type="text" name="threeyearvan[]" id='mrp'  />
+													<input type="text" value="<?= $warranty->threeyearvan ?>" name="threeyearvan" id='mrp'  />
 													<label class="fieldlabels">3 Year : </label>
-													<input type="text" name="threeyear[]" id='dis'  />
+													<input type="text" value="<?= $warranty->threeyear ?>" name="threeyear" id='dis'  />
+                                                    <?php } ?>
+
+                                                    <?php if($warranty->fouryearvan){ ?>
 													<label class="fieldlabels">4Year Van No : </label>
-													<input type="text" name="fouryearvan[]" id='mrp'  />
+													<input type="text" value="<?= $warranty->fouryearvan ?>" name="fouryearvan" id='mrp'  />
 													<label class="fieldlabels">4 Year : </label>
-													<input type="text" name="fouryear[]" id='dis'  />
+													<input type="text" value="<?= $warranty->fouryear ?>" name="fouryear" id='dis'  />
+                                                    <?php } ?>
 
 												</div>
 												<div class="addinput text-left"></div>
 												<div class="text-left">
-													<button class='btn btn-success adddevicebutton'
-														type="button">+</button>
+													<!-- <button class='btn btn-success adddevicebutton'
+														type="button">+</button> -->
 												</div>
 												<input type="submit" name="next" class="next action-button"
-													value="Submit" id='submit' /> <input type="button" name="previous"
-													class="previous action-button-previous" value="Previous" />
-											</fieldset>
+													value="Submit" id='submit' /> 
+                                                  
 										</form>
 									</div>
 								</div>

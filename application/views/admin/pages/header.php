@@ -122,6 +122,7 @@
                         <a class="collapse-item" href="<?php echo base_url();?>admin/coupon">Coupon</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/pincode">Pincode</a>
                         <a class="collapse-item" href="<?php echo base_url();?>admin/shop">Shop</a>
+                        <a class="collapse-item" href="<?php echo base_url();?>admin/warranty_price">Warranty Price</a>
                     </div>
                 </div>
             </li>

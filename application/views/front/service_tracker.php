@@ -43,10 +43,12 @@
 		position: relative;
 		z-index: 1;
 	}
+
 	.font-weight-bold {
-    font-weight: 900!important;
-	color:var(--var-brown);
-}
+		font-weight: 900 !important;
+		color: var(--var-brown);
+	}
+
 	/*ProgressBar connectors*/
 	#progressbar li:after {
 		content: '';
@@ -113,36 +115,56 @@
 		.icon-content {
 			width: 25%;
 		}
+
 		.icon {
-    width: 30px;
-    height: 30px;
-    margin-bottom: 6px;
-    margin-left: 15px;
-}
-.font-weight-bold {
-    font-weight: 900!important;
-    font-size: 10px;
-}
-.top {
-    padding-top: 2px;
-}
+			width: 30px;
+			height: 30px;
+			margin-bottom: 6px;
+			margin-left: 15px;
+		}
+
+		.font-weight-bold {
+			font-weight: 900 !important;
+			font-size: 12px;
+		}
+
+		.top {
+			padding-top: 2px;
+		}
+	}
+
+	@media(max-width:768px) {
+		h5 {
+			font-size: 13px;
+		}
+
+		.font-weight-bold {
+			font-weight: 600 !important;
+		}
+
+		.icon {
+			margin-left: 7px;
+		}
 	}
 
 </style>
 <div id="page-content">
 	<div class="section summery">
-    <div class="container px-1 px-md-4 py-5 mx-auto">
+		<div class="container px-1 px-md-4 py-5 mx-auto">
 			<div class="card">
-            <h4 class="user-titles text-center pt-4">Track Service Request</h4>
-								<hr>
+				<h4 class="user-titles text-center pt-4">Track Service Request</h4>
+				<hr>
 				<div class="row d-flex justify-content-between px-3 top">
 					<div class="d-flex">
-						<h5>Request Id: <span class="text-primary font-weight-bold" ><?= $track->request_id_value ?></span></h5>
+						<h5>Request Id: <span
+								class="text-primary font-weight-bold"><?= $track->request_id_value ?></span></h5>
 					</div>
 					<div class="d-flex flex-column text-sm-right">
-						<p class="mb-0">Created Date <span id="reqdate"><?= $track->cdate ?></span></p>
-						<p class="mb-0">Last Date <span><?= $track->mdate ?></span></span></p>
-						<p>Device <span class="font-weight-bold" id="requestid"><?= $track->service_device  ?> (<?= $track->service_plan ?>)</span></p>
+						<p class="mb-0">Created Date : <span id="reqdate"><?= $track->cdate ?></span></p>
+						<p class="mb-0">Last Date : <span><?= $track->mdate ?></span></span></p>
+						<p>Device : <span class="font-weight-bold"
+								id="requestid"><?= $track->service_device; if($track->service_plan){  ?>
+								(<?= $track->service_plan ?>) <?php } ?></span></p>
 					</div>
 				</div>
 				<!-- Add class 'active' to progress -->
@@ -152,10 +174,16 @@
 							<ul id="progressbar" class="text-center">
 								<li class="active step0"></li>
 								<li class="<?= ($track->eng_name != '0') ? 'active': ''; ?> step0">
-                            <p><?= ($track->eng_name != '0') ? 'Engineer appointment confirmed': ''; ?></p></li>
-								<li class="<?php if ($track->status == 'pending' || $track->status == 'process'  || $track->status == 'completed'  ||  $track->status == 'close' ) {echo 'active'; } ?> step0">
-                                <p><?= ($track->status == 'pending') ? 'Service Reschduled date('.$track->mdate.')': ''; ?></p></li> 
-								<li class="<?php if ($track->status == 'completed'  ||  $track->status == 'close' ) {echo 'active'; } ?>"></li>
+									<p><?= ($track->eng_name != '0') ? 'Engineer appointment confirmed': ''; ?></p>
+								</li>
+								<li
+									class="<?php if ($track->status == 'pending' || $track->status == 'process'  || $track->status == 'completed'  ||  $track->status == 'close' ) {echo 'active'; } ?> step0">
+									<p><?= ($track->status == 'pending') ? 'Service Reschduled date('.$track->mdate.')': ''; ?>
+									</p>
+								</li>
+								<li
+									class="<?php if ($track->status == 'completed'  ||  $track->status == 'close' ) {echo 'active'; } ?>">
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -173,7 +201,7 @@
 							</div>
 						</div>
 						<div class="row d-flex icon-content">
-						<img class="icon" src="<?= base_url('assets/images/service.png') ?>">
+							<img class="icon" src="<?= base_url('assets/images/service.png') ?>">
 							<div class="d-flex flex-column">
 								<p class="font-weight-bold">Service in <br>Progress</p>
 							</div>
@@ -196,4 +224,3 @@
 
 <!--Footer-->
 <script src="<?php echo base_url();?>assets/js/vendor/jquery-3.3.1.min.js"></script>
-
