@@ -8427,3 +8427,6 @@ font-size: .855rem;
         line-height: 40px;
     }
 }
+.modal{
+    overflow-y: auto !important;
+}

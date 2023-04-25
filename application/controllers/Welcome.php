@@ -289,15 +289,15 @@ class Welcome extends CI_Controller {
             {
                 $otp = rand(10000, 99999);
                 $otp_resu = 'success';
-                //   $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
-                //   Do not share it with anyone';
-                //   if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
-                //       $page_data['status'] = true;
-                //       $page_data['message'] = "success";
-                //       } else {
-                //       $page_data['status'] = false;
-                //       $page_data['message'] = "Something went wrong, please try again later.";
-                //       }
+                  $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                  Do not share it with anyone';
+                  if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                      $page_data['status'] = true;
+                      $page_data['message'] = "success";
+                      } else {
+                      $page_data['status'] = false;
+                      $page_data['message'] = "Something went wrong, please try again later.";
+                      }
             }
             else
             {
@@ -313,22 +313,40 @@ class Welcome extends CI_Controller {
         echo json_encode($data);
     }
 
+    // public function forgetotp(){
+    public function cartregloginotp(){
+            if($this->input->post('number')){
+                $this->load->helper('msg');
+                $number = $this->input->post('number');
+                $result=$this->db->get_where('customer',array('contact'=>$number))->result_array();
+                    $otp = rand(10000, 99999);
+                    $otp_resu = 'success';
+                      $msg = 'Dear Customer, '.$otp.' is your OTP(One Time Password) to authenticate your login to OTGCares.
+                      Do not share it with anyone';
+                      if (sendsms($number,$dltId='1207167758050869200',$header="OTGCRS", $msg)) {
+                          $page_data['status'] = true;
+                          $page_data['message'] = "success";
+                          } else {
+                          $page_data['status'] = false;
+                          $page_data['message'] = "Something went wrong, please try again later.";
+                          }
+            }
+            $this->session->set_userdata('login_otp',$otp);
+            $data['otp'] = $otp_resu;
+            $data['otp1'] = $otp;
+            $data['token'] = $this->security->get_csrf_hash();
+            echo json_encode($data);
+    }
+
     public function login_otp_verify(){
         if($this->input->post('loginotp')){
             $loginotp=$this->input->post('loginotp');
             $number = $this->input->post('number');
             if($this->session->userdata['login_otp'] == $loginotp){
-                $otp = 'success';
+               
                     $result=$this->menu->checklogin($number);
                     if(!empty($result)){
-                        // $cookie = array(
-                        //     'cid'   => $result->cust_id,
-                        //     'cemail'  =>$result->email_id,
-                        //     'cname' => $result->cust_name,
-                        //     'expire' => '7776000',
-                        //     'secure' => TRUE
-                        // );
-                        // $this->input->set_cookie($cookie);
+                        $otp = 'success';
                         set_cookie('cid',$result->cust_id,time()+60*60*24*90);
                         set_cookie('cemail',$result->email_id,time()+60*60*24*90);
                         set_cookie('cname',$result->cust_name,time()+60*60*24*90);
@@ -337,6 +355,7 @@ class Welcome extends CI_Controller {
                         $this->session->set_userdata('cname', $result->cust_name);
                         $this->session->unset_userdata('login_otp');
                     }else{
+                        $otp = 'User not found';
                         $page_data['message']="User not found";
                     }
             }
@@ -1529,6 +1548,15 @@ class Welcome extends CI_Controller {
         else{
             redirect(base_url());
         }
+    }
+
+    public function certificate(){
+        $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['page_title']="Invoice";
+        $page_data['page']="certificate";
+        $this->load->view('index',$page_data);
+        // $this->load->view('welcome/certificate');
+
     }
 
 }

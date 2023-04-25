@@ -145,7 +145,7 @@
 	<h1 class="h3 mb-2 text-gray-800"><?= $assign_data[0]['request_id_value']  ?></h1>
 	<!-- DataTales Example -->
 
-
+<!-- 
 	<div class="wrapper center-block">
 		<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 			<div class="panel panel-default">
@@ -436,7 +436,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<div class="card o-hidden border-0 shadow-lg my-5">
 		<div class="card-body p-0">
