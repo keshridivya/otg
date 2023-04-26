@@ -5,12 +5,21 @@
 	.footer-2 {
 		display: none !important;
 	}
-
+	#invoiceholder {
+		width: 100%;
+		height: 100%;
+		padding: 50px 0;
+		overflow-x: scroll;
+	}
 	:root {
 		--var-green: #0db19e;
 		--var-yellow: #f8b11b;
 		--var-brown: #4c3418;
 		--var-regular: 600;
+	}
+	.maindiv{
+		width: 85%;
+    padding: 15px 0px 40px 20px;
 	}
 
 	h2,
@@ -35,25 +44,26 @@
 	}
 
 	body {
-		color: black;
+		color: var(--var-brown);
 		display: table;
-		font-family: Georgia, serif;
+		/* font-family: Georgia, serif; */
 		font-size: 24px;
 		text-align: center;
 	}
 
 	.contentext p {
 		font-size: 14px;
-		width: 150px;
+		width: 50%;
 	}
 
 	.contentext {
 		display: flex;
+		width:100%;
 	}
 
 	.underline {
 		width: 100%;
-		background: #e4b424;
+		/* background: #e4b424; */
 		height: 26px;
 		margin-top: 20px;
 	}
@@ -65,14 +75,12 @@
 	}
 
 	.container1 {
-		display: -webkit-inline-box;
-		vertical-align: middle;
-		padding-right: 0px;
-		padding-left: 0px;
-		background: #f2e9da;
-		position: relative;
-		margin: 60px 0 20px 0;
-		width: 90%;
+	display: table;
+    background: #f2e9da;
+    position: relative;
+    margin: 60px auto 20px auto;
+    width: 96%;
+    /* height: 550px; */
 	}
 
 	.logoimg {
@@ -86,37 +94,18 @@
 		bottom: 0;
 		text-align: center;
 	}
-
-	.curve::before {
-		content: '';
-		display: block;
-		position: absolute;
-		border-radius: 120px 0 0px 0;
-		width: 22%;
-		height: 40%;
-		transform: translate(355%, 150%);
-		background-color: var(--var-brown);
-
+	.curve>div>img{
+		    height: 309px;
+    width: 100%;
 	}
-
-	.curve::after {
-		content: '';
-		display: block;
-		position: absolute;
-		border-radius: 0 0 120px 0;
-		width: 20%;
-		height: 40%;
-		top: 0;
-		background-color: var(--var-brown);
-		;
-		z-index: 1;
-		/* background-image: radial-gradient(circle at 10px 15px, white 12px, transparent 13px);
-     background-image: url(assets/images/border.svg) !important; */
-	}
-
-	.logo {
-		color: tan;
-		width: 70%;
+	.logo1 {
+	    color: var(--var-green);
+    width: 70%;
+    font-size: 32px;
+    margin: auto;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 30px;
 	}
 
 	.marquee {
@@ -124,17 +113,14 @@
 		font-size: 48px;
 		margin: 20px;
 	}
-
-	/* .assignment {
-		margin: 20px;
-	} */
-
 	.person {
 		border-bottom: 2px solid #e4b424;
-		font-size: 25px;
-		font-style: italic;
+		font-size: 23px;
+		/* font-style: italic; */
 		margin: 15px auto;
 		width: 350px;
+		text-transform: capitalize;
+    font-weight: bold;
 	}
 
 	.reason {
@@ -144,18 +130,19 @@
 
 	.border1 {
 		border: 3px solid #e4b424;
-		margin: 20px;
-		position: inherit;
-		z-index: 1;
-		padding: 10px;
-		width: 96%;
+    margin: 15px;
+    position: inherit;
+    z-index: 1;
+    padding: 10px;
+    width: 97%;
 	}
 
 	.bg-white {
 		background: #fff;
 		width: 100%;
 		height: 100%;
-		padding: 20px;
+		padding: 50px 3px 20px 49px;
+		display: flex;
 	}
 
 	.divtag {
@@ -174,48 +161,70 @@
 	}
 
 	.quiz-medal__circle {
+		z-index: 5;
 		font-family: "Roboto", sans-serif;
-		font-size: 22px;
+		font-size: 42px;
 		font-weight: 500;
-		width: 70px;
-		height: 70px;
+		width: 150px;
+		height: 150px;
 		border-radius: 100%;
-		color: white;
+		color: var(--var-brown);
 		text-align: center;
-		line-height: 70px;
+		line-height: 143px;
 		vertical-align: middle;
 		position: relative;
-		border-width: 0.2em;
+		border-width: 5px;
 		border-style: solid;
-		z-index: 1;
+		/* z-index: 1; */
 		box-shadow: inset 0 0 0 #a7b2b8, 2px 2px 0 rgba(0, 0, 0, 0.08);
-		border-color: #edeff1;
+		border-color: #c7a658;
+		/* border-image:  linear-gradient(to bottom right, #d1d7da 50%, #c3cbcf 50%); */
+		/* border-image-source: linear-gradient(to left, #743ad5, #d53a9d); */
 		text-shadow: 2px 2px 0 #98a6ad;
-		background: linear-gradient(to bottom right, #d1d7da 50%, #c3cbcf 50%);
+		background: #fff;
+		margin-bottom: -12px;
 	}
 
 	.quiz-medal__circle.quiz-medal__circle--gold {
 		box-shadow: inset 0 0 0 #b67d05, 2px 2px 0 rgba(0, 0, 0, 0.08);
 		border-color: #fadd40;
 		text-shadow: 0 0 4px #9d6c04;
-		background: linear-gradient(to bottom right, #f9ad0e 50%, #e89f06 50%);
+		background:#fff;
+		/* background: linear-gradient(to bottom right, #f9ad0e 50%, #e89f06 50%); */
 	}
 
 	.quiz-medal__ribbon {
 		content: "";
-		display: block;
+		/* display: block; */
 		position: absolute;
 		border-style: solid;
-		border-width: 6px 10px;
-		width: 0;
-		height: 30px;
-		top: 65px;
+		border-width: 29px 28px;
+		/* width: 5px; */
+		height: 420px;
+		top: -70px;
 	}
 
 	.quiz-medal__ribbon--left {
-		border-color: #FC402D #FC402D transparent #FC402D;
-		left: 8px;
-		transform: rotate(20deg) translateZ(-32px);
+		border-color: #4c3418 #4c3418 transparent #4c3418;
+		left: 48px;
+		border-top-right-radius: 28px;
+    border-top-left-radius: 28px;
+	}
+	.quiz-medal__ribbon--left:before{
+		content: '';
+    position: inherit;
+    border: 1px solid #dab22e;
+    height: 111%;
+    left: 20px;
+    top: -19px;
+	}
+	.quiz-medal__ribbon--left:after{
+		content: '';
+    position: inherit;
+    border: 1px solid #dab22e;
+    height: 111%;
+    right: 20px;
+    top: -19px;
 	}
 
 	.quiz-medal__ribbon--right {
@@ -239,6 +248,88 @@
 		text-align: initial;
 		font-size: 18px;
 		width: 150px;
+	}
+
+	[class^=ribbon-] {
+		position: relative;
+		margin-bottom: 80px;
+	}
+
+	[class^=ribbon-]:before,
+	[class^=ribbon-]:after {
+		content: "";
+		position: absolute;
+	}
+
+	.ribbon-4 {
+		width: 170px;
+		height: 50px;
+		margin-left: -10px;
+		margin-right: -10px;
+		background-image: linear-gradient(to right, #d4a452, #fff198, #d4a452);
+	}
+
+	.ribbon-4:before {
+		height: 0;
+		width: 0;
+		border-top: 10px solid #FFDE2E;
+		border-left: 10px solid transparent;
+		bottom: -10px;
+	}
+
+	.ribbon-4:after {
+		height: 0;
+		width: 0;
+		border-top: 10px solid #cd8d11;
+		border-right: 10px solid transparent;
+		right: 0;
+		bottom: -10px;
+	}
+
+	.ribbon-4:before {
+		height: 0;
+		width: 0;
+		border-width: 20px 20px;
+		border-style: solid;
+		border-color: #ffef9d #ffef9d #ffef9d transparent;
+		top: 20px;
+		left: -30px;
+	}
+
+	.ribbon-4:after {
+		height: 0;
+		width: 0;
+		border-width: 20px 20px;
+		border-style: solid;
+		border-color: #ffef9d transparent #ffef9d #ffef9d;
+		top: 20px;
+		right: -30px;
+	}
+
+	.ribbon-content {
+		height: inherit;
+		margin-bottom: 0;
+		background-image: linear-gradient(to bottom, #d4a452, #fff198);
+		z-index: 100;
+		font-size: 15px;
+	}
+
+	.ribbon-content:before {
+		height: 0;
+		width: 0;
+		border-top: 10px solid #c49a31;
+		border-left: 10px solid transparent;
+		bottom: -10px;
+		left: 0;
+	}
+
+	.ribbon-content:after {
+		height: 0;
+		width: 0;
+		border-top: 10px solid #c49a31;
+		border-right: 10px solid transparent;
+		right: 0;
+		bottom: -10px;
 	}
 
 	.multi-steps>li:before {
@@ -343,7 +434,7 @@
 	}
 
 	.step:before {
-		content: '>';
+		content: '';
 		position: absolute;
 		top: 34px;
 		left: 0;
@@ -399,74 +490,106 @@
 </style>
 <!--Body Content-->
 <div id="page-content">
-	<div class="row">
-		<div class="col-12 mt-3 ml-3">
-			<div class=" container">
+	<div class="row" >
+		<div class="col-12 mt-3 ml-3" >
+			<div class="container " id="invoiceholder">
 				<div class="logoimg">
 					<a href="<?php echo base_url();?>">
 						<img src="<?php echo base_url();?>assets/images/logo/header.png" alt="OTG CARES"
 							title="OTG CARES" />
 					</a>
 				</div>
-				<div class="underline"></div>
+				<!-- <div class="underline"></div> -->
 				<div class="container1">
-					<div class="curve"></div>
+					<div class="curve">
+						<div class=""><img src="<?php echo base_url();?>assets/images/wave.png" alt=""></div>
+					</div>
 					<div class="border1">
 						<div class="bg-white">
-							<div class="divtag">
-								<div class="quiz-medal">
-									<div class="quiz-medal__circle quiz-medal__circle--gold">
-										<span>
-											AMC
-										</span>
-									</div>
-									<div class="quiz-medal__ribbon quiz-medal__ribbon--left"></div>
-									<div class="quiz-medal__ribbon quiz-medal__ribbon--right"></div>
+							<div class="quiz-medal">
+							<!-- <div class="flower">
+									<div class="petal petal-1"></div>
+									<div class="petal petal-2"></div>
+									<div class="petal petal-3"></div>
+									<div class="petal petal-4"></div>
+									<div class="petal petal-5"></div>
+									<div class="core"></div>
+								</div> -->
+								<div class="quiz-medal__circle quiz-medal__circle--gold">
+									<span>
+										AMC
+									</span>
 								</div>
-								<div class="logo">
+								
+								<div class="ribbon-4">
+									<div class="ribbon-content"><span class="d-block">ORDER ID</span><span class=""><?= $data->request_id_value; ?></span></div>
+								</div>
+								<div class="quiz-medal__ribbon quiz-medal__ribbon--left"></div>
+								<!-- <div class="quiz-medal__ribbon quiz-medal__ribbon--right"></div> -->
+							</div>
+							<div class="maindiv">
+								<div class="logo1">
 									Certificate of Protection
 								</div>
-							</div>
-							<div class="assignment">
-								This certificate is issued to
-							</div>
+								<div class="assignment">
+									This certificate is issued to
+								</div>
 
-							<div class="person">
-								Divya
-							</div>
+								<div class="person">
+								<?= $data->cust_name; ?> 
+								</div>
 
-							<div class="reason">
-								<div class="row justify-content-center">
-									<div class="col-sm-5">
-										<div class="mb-3"><strong>Plan Start Date: 16 Nov, 2022 </strong></div>
-										<div class="contentext">
-											<p>Email : </p>
-											<p>a1@gmail.com</p>
+								<div class="reason">
+									<div class="row justify-content-center">
+										<div class="col-sm-5">
+										<?php 
+													$date = $data->created_on;
+													$date_str = strtotime($date);
+													$date_formatted = date('d M, Y', $date_str);
+													?>
+											<div class="mb-3"><strong>Plan Start Date: <?= $date_formatted ?> </strong></div>
+											<div class="contentext">
+												<p>Email : </p>
+												<p><?= $data->cust_email; ?></p>
+											</div>
+											<div class="contentext">
+												<p>Phone : </p>
+												<p><?= $data->cust_contact; ?></p>
+											</div>
+											<div class="contentext">
+												<p>Plan : </p>
+												<p>Annual Maintenance Contract </p>
+											</div>
 										</div>
-										<div class="contentext">
-											<p>Phone : </p>
-											<p>9930173191</p>
-										</div>
-										<div class="contentext">
-											<p>Plan : </p>
-											<p>Annual Maintenance Contract </p>
-										</div>
-									</div>
-									<div class="col-sm-5">
-										<div class="mb-3"><b>Plan End Date: 15 Nov, 2023 </b></div>
-										<div class="contentext">
-											<p>Device : </p>
-											<p>O General Split AC
-											</p>
-										</div>
-										<div class="contentext">
-											<p>Serial No : </p>
-											<p>Pending</p>
-										</div>
-										<div class="contentext">
-											<p>Plan Purchase
-												Date : </p>
-											<p>16 Nov, 2022</p>
+										<div class="col-sm-5">
+											<?php 
+											$current_date = date($data->created_on); // get current date
+											$validity_date = date('j M, Y', strtotime($current_date . ' + 1 years'));
+											?>
+											<div class="mb-3"><b>Plan End Date: <?= $validity_date ?> </b></div>
+											<div class="contentext">
+												<p>Device : </p>
+												<p>
+													<?php
+													if($subdata->subcat_id == $data->sub_cateplanid ){
+													?>
+													<?php echo  $data->sub_cateplanid; }else{ echo '0'; }?> <?= $data->service_device; ?>
+												</p>
+											</div>
+											<div class="contentext">
+												<p>Serial No : </p>
+												<p><?= $data->status; ?></p>
+											</div>
+											<div class="contentext">
+												<p>Purchase
+													Date : </p>
+													<?php 
+													$date = $data->created_on;
+													$date_str = strtotime($date);
+													$date_formatted = date('d M, Y', $date_str);
+													?>
+												<p><?= $date_formatted ?></p>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -474,7 +597,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="" style="margin-top: 10rem;">
+				<!-- <div class="" style="margin-top: 10rem;">
 					<div class="container-fluid">
 						<br /><br />
 						<ul class="list-unstyled multi-steps">
@@ -535,7 +658,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<div class="mt-9" style="margin-top: 10rem;">
 					<div class="title mb-5">
@@ -544,7 +667,7 @@
 					<div class="step-progress pt-4">
 						<div class="step">
 							<img src="<?= base_url() ?>/assets/images/icons/grab.png" alt="Step 2">
-							<p><b>Visit Onsitego</b></p>
+							<p><b>Visit OTGCares</b></p>
 							<p><a href="https://otgcares.com/">Visit</a></p>
 						</div><span>></span>
 						<div class="step">
@@ -570,7 +693,49 @@
 					</div>
 
 				</div>
+				<!-- <button class="invoice">pdf</button> -->
 			</div>
 		</div>
 	</div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.js"></script>
+
+<script type="text/javascript">
+	// $(document).on("click", ".invoice", function () {
+	// 	$(this).css('display', 'none');
+	// 	Convert_HTML_To_PDF();
+	// });
+	$(window).on("load", function () {
+		Convert_HTML_To_PDF();
+	});
+
+	function Convert_HTML_To_PDF() {
+		window.jsPDF = window.jspdf.jsPDF;
+		var doc = new jsPDF();
+		var elementHTML = document.getElementById("invoiceholder");
+		doc.html(elementHTML, {
+			callback: function (doc) {
+				// Save the PDF
+				doc.save('invoice.pdf');
+			},
+			x: 15,
+			y: 15,
+			width: 170, //target width in the PDF document
+			windowWidth: 850 //window width in CSS pixels
+		}).then(function() {
+			// window.location.href = "<?= base_url() ?>account?show=booking";
+});
+		
+	}
+
+	// function redirectfunction(){
+	// 	window.location.href = "<?= base_url() ?>account?show=booking";
+	// }
+
+</script>
+

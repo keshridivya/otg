@@ -1,8 +1,121 @@
 <!--Body Content-->
+<style>
+	ul li {
+		list-style: none;
+	}
+
+	.radiobtn {
+		display: none;
+	}
+
+	.radio-label {
+		border-left: 2px solid #210D30;
+		*/ background-color: #fff;
+		display: block;
+		margin: 4vh 0;
+		width: 100%;
+		padding: 5px;
+		border: 1px solid lightblue;
+	}
+
+	.radio-label {
+		vertical-align: middle;
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0);
+		box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+		-moz-osx-font-smoothing: grayscale;
+		position: relative;
+		-webkit-transition-property: color;
+		transition-property: color;
+		-webkit-transition-duration: 0.5s;
+		transition-duration: 0.5s;
+		width: 100%;
+	}
+
+	.radio-label:before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: var(--var-green);
+		-webkit-transform: scaleX(0);
+		transform: scaleX(0);
+		-webkit-transform-origin: 0 50%;
+		transform-origin: 0 50%;
+		-webkit-transition-property: transform;
+		transition-property: transform;
+		-webkit-transition-duration: 0.5s;
+		transition-duration: 0.5s;
+		-webkit-transition-timing-function: ease-in-out;
+		transition-timing-function: ease-in-out;
+	}
+
+	.radio-label.checked {
+		color: white !important;
+	}
+
+	.radio-label.checked:before {
+		-webkit-transform: scaleX(1);
+		transform: scaleX(1);
+	}
+
+	.slick-next {
+    right: -3px;
+
+}
+.slick-prev {
+    left: 3px;
+}
+.slick-arrow {
+	background: var(--var-green);
+	border-radius:50%;
+}
+.week_slide{
+	padding:0 20px;
+}
+.slick-prev::after{
+	content: "<";
+    position: absolute;
+    color: #fff;
+    font-size: 13px;
+    width: 100%;
+    height: 100%;
+    top: 10px;
+    left: 0;
+    font-weight: 700;
+}
+.slick-next::after{
+	content: ">";
+    position: absolute;
+    color: #fff;
+    font-size: 13px;
+    width: 100%;
+    height: 100%;
+    top: 10px;
+    left: 0;
+    font-weight: 700;
+}
+
+</style>
 <script type="text/javascript">
 	var citiesByState = {
-		Maharashtra: ["Mumbai", "Pune", "Nagpur", "Thane", "Pimpri Chinchwad", "Nashik", "Kalyan Dombivli","Vasai Virar", "Chhatrapati Sambhajinagar", "Navi Mumbai", "Solapur", "Mira Bhayandar", "Bhiwandi Nizampur", "Amravati", "Nanded Waghala", "Kolhapur", "Ulhasnagar", "Sangli Miraj Kupwad", "Malegaon", "Jalgaon", "Akola", "Latur", "Dhule", "Ahmednagar", "Chandrapur", "Parbhani", "Ichalkaranji", "Jalna", "Ambarnath", "Panvel", "Bhusawal", "Badlapur", "Beed", "Gondia", "Satara", "Barshi", "Yavatmal", "Achalpur", "Dharashiv", "Nandurbar", "Wardha", "Udgir", "Hinganghat"],
-		Delhi: ["New Delhi", "Bhalswa Jahangir Village", "Kirari Suleman Nagar Village", "Karawal Nagar", "Hastsal", "Mandoli", "Deoli", "Gokalpuri", "Dallupura", "Taj Pul", "Nangloi","Chilla Sarda Banger", "Pooth Kalan", "Burari", "Gharoli", "Jafrabad", "Noida", "Ghaziabad", "Fatehpur Beri", "Delhi Cantonment", "Alipur", "Kair", "Karala Village", "Siraspur","Chhawla", "Ghitorni", "Sultanpur"]
+		Maharashtra: ["Mumbai", "Pune", "Nagpur", "Thane", "Pimpri Chinchwad", "Nashik", "Kalyan Dombivli",
+			"Vasai Virar", "Chhatrapati Sambhajinagar", "Navi Mumbai", "Solapur", "Mira Bhayandar",
+			"Bhiwandi Nizampur", "Amravati", "Nanded Waghala", "Kolhapur", "Ulhasnagar", "Sangli Miraj Kupwad",
+			"Malegaon", "Jalgaon", "Akola", "Latur", "Dhule", "Ahmednagar", "Chandrapur", "Parbhani",
+			"Ichalkaranji", "Jalna", "Ambarnath", "Panvel", "Bhusawal", "Badlapur", "Beed", "Gondia", "Satara",
+			"Barshi", "Yavatmal", "Achalpur", "Dharashiv", "Nandurbar", "Wardha", "Udgir", "Hinganghat"
+		],
+		Delhi: ["New Delhi", "Bhalswa Jahangir Village", "Kirari Suleman Nagar Village", "Karawal Nagar", "Hastsal",
+			"Mandoli", "Deoli", "Gokalpuri", "Dallupura", "Taj Pul", "Nangloi", "Chilla Sarda Banger",
+			"Pooth Kalan", "Burari", "Gharoli", "Jafrabad", "Noida", "Ghaziabad", "Fatehpur Beri",
+			"Delhi Cantonment", "Alipur", "Kair", "Karala Village", "Siraspur", "Chhawla", "Ghitorni", "Sultanpur"
+		]
 	}
 
 	function makeSubmenu(value) {
@@ -16,6 +129,7 @@
 			document.getElementById("city").innerHTML = citiesOptions;
 		}
 	}
+
 	function resetSelection() {
 		document.getElementById("countrySelect").selectedIndex = 0;
 		document.getElementById("customer_city").selectedIndex = 0;
@@ -48,16 +162,16 @@
                                                 foreach($cartItems as $item){
 												echo "<img src='".base_url($item['image'])."' width='40'>";
                                             ?>
-											<?php echo $item['product_name']?>(<?php echo $item['category_name']?>)
+											<?php echo $item['product_name']?>(<?php echo $item['product_category']?>)
 
 											<?php
 											if($item['category_name'] == 'Maintenance and repair'){
 												echo '- '.
 												$item['name'].'<br>';
-												echo '<input type="hidden" value="One Time Service" class="mainten" >'; 
+												echo '<input type="hidden" value="Maintenance and repair" class="mainten" >'; 
 											}
 											else{
-												echo '<input type="hidden" value="'.$item['category_name'].'" class="mainten" >'; 
+												echo '<input type="hidden" value="'.$item['product_category'].'" class="mainten" >'; 
 												
 											}
                                                 }
@@ -158,7 +272,7 @@
 												<p class="cemail"><?php echo $add['email'];?></p>
 												<p class="caddress d-inline">
 													<?php echo $add['address'];?>,</p>
-													<span><?php echo $add['city'];?></span>
+												<span><?php echo $add['city'];?></span>
 												<p class="cpincode"><?php echo $add['pincode'];?></p>
 											</div>
 											<div><a class="cust_edit"> Edit</a> <button class="btn-booking">Booking to
@@ -229,7 +343,7 @@
 									</div>
 
 									<div class="form-group row">
-										<div class="col-lg-6 mt-3">
+										<div class="col-lg-5 mt-3">
 											<div class="row justify-content-center" style="    margin-left: 20px;">
 												<div class="form-check col-lg-8 text-left mb-3">
 													<label class="form-check-label float-left">
@@ -248,13 +362,122 @@
 										<?php
 										if($item['category_name'] != 'Extended Warranty'){
 										?>
-										<div class="col-sm-6 col-12 ">
-											<h3 class="">Time Slot</h3>
-											<div class="row justify-content-center" style="    margin-left: 20px;">
-												<div class="form-check col-sm-8 col-12 text-left mb-3">
-													<label class="form-check-label float-left">
-														<input type="datetime-local" class="form-check-input"
-															value="<?= date('y-m-d h:i') ?>" name="time_slot">
+										<div class="col-sm-7 col-12 mt-4">
+											<h3 class="">Select date and time for Maintenance & Repair Service</h3>
+
+											<ul class="row week_slide">
+											
+												<li class="col-sm-2 col-4">
+													<?php
+													$today = date('Y-m-d'); 
+													$day =date("l");
+													$current_time = time(); 
+													$given_time = strtotime('2023-04-26 12:00:00');
+													?>
+													<label class="full-width radio-label ">
+														<?php
+														if ($current_time >= $given_time) { ?>
+													
+													<input type="radio"
+															class="radiobtn"
+															value="<?php echo "$day, not available"; ?>"
+															name="time_slot" disabled><?php echo "$day<br> not available"; ?></input>
+															<?php } else { ?> 
+																<input type="radio"
+															class="radiobtn"
+															value="<?php echo "$day<br> $today"; ?>"
+															name="time_slot"><?php echo "$day<br> $today"; ?></input>
+															<?php }
+														?>
+													</label>
+												</li>
+												<li class="col-sm-2 col-4">
+													<?php
+													$today = date('Y-m-d');  
+													$one_day_after = date('Y-m-d', strtotime($today . ' +1 day'));  
+													$day_after = date('l', strtotime($one_day_after)); 
+													?>
+													<label class="full-width radio-label checked"><input type="radio"
+															class="radiobtn"
+															value="<?php echo "$day_after, $one_day_after"; ?>"
+															name="time_slot"><?php echo "$day_after<br> $one_day_after"; ?></input></label>
+												</li>
+												<li class="col-sm-2 col-4">
+													<?php
+													$two_days_after = date('Y-m-d', strtotime($today . ' +2 day')); 
+													$day_after = date('l', strtotime($two_days_after));
+													?>
+													<label class="full-width radio-label"><input type="radio"
+															class="radiobtn"
+															value="<?php echo "$day_after, $two_days_after"; ?>"
+															name="time_slot"><?php echo "$day_after<br> $two_days_after"; ?></input></label>
+												</li>
+												<li class="col-sm-2 col-4">
+													<?php
+													$three_days_after = date('Y-m-d', strtotime($today . ' +3 day')); 
+													$day_after = date('l', strtotime($three_days_after)); 
+													?>
+													<label class="full-width radio-label"><input type="radio"
+															class="radiobtn"
+															value="<?php echo "$day_after, $three_days_after"; ?>"
+															name="time_slot"><?php echo "$day_after<br> $three_days_after"; ?></input></label>
+												</li>
+												<li class="col-sm-2 col-4">
+													<?php
+													$four_days_after = date('Y-m-d', strtotime($today . ' +4 day')); 
+													$day_after = date('l', strtotime($four_days_after));
+													?>
+													<label class="full-width radio-label"><input type="radio"
+															class="radiobtn"
+															value="<?php echo "$day_after, $four_days_after"; ?>"
+															name="time_slot"><?php echo "$day_after<br> $four_days_after"; ?></input></label>
+												</li>
+												<li class="col-sm-2 col-4">
+													<?php
+													$five_days_after = date('Y-m-d', strtotime($today . ' +5 day')); 
+													$day_after = date('l', strtotime($five_days_after));
+													?>
+													<label class="full-width radio-label"><input type="radio"
+															class="radiobtn"
+															value="<?php echo "$day_after, $five_days_after"; ?>"
+															name="time_slot"><?php echo "$day_after<br> $five_days_after"; ?></input></label>
+												</li>
+												<li class="col-sm-2 col-4">
+													<?php
+													$six_days_after = date('Y-m-d', strtotime($today . ' +6 day')); 
+													$day_after = date('l', strtotime($six_days_after));
+													?>
+													<label class="full-width radio-label"><input type="radio"
+															class="radiobtn"
+															value="<?php echo "$day_after, $six_days_after"; ?>"
+															name="time_slot"><?php echo "$day_after<br> $six_days_after"; ?></input></label>
+												</li>
+											</ul>
+											<!-- <div class="row justify-content-center" style="    margin-left: 20px;">
+													<div class="form-check col-sm-8 col-12 text-left mb-3">
+														<label class="form-check-label float-left">
+															<input type="datetime-local" class="form-check-input"
+																value="<?= date('y-m-d h:i') ?>" name="time_slot">
+														</label>
+													</div>
+												</div> -->
+											<div class="row justify-content-center">
+												<div class="form-check col-sm-3 col-4 text-left mb-3">
+													<label class="form-check-label">
+														<input type="radio" class="form-check-input" value="1 pm to 5pm"
+															name="timepm">9 am to 1pm
+													</label>
+												</div>
+												<div class="form-check col-sm-3 col-4 text-left mb-3">
+													<label class="form-check-label">
+														<input type="radio" class="form-check-input" value="1 pm to 5pm"
+															name="timepm">1 pm to 5pm
+													</label>
+												</div>
+												<div class="form-check col-sm-3 col-4 text-left mb-3">
+													<label class="form-check-label">
+														<input type="radio" class="form-check-input" value="5 pm to 9pm"
+															name="timepm">5 pm to 9pm
 													</label>
 												</div>
 											</div>
@@ -262,9 +485,7 @@
 										<?php } ?>
 									</div>
 
-									<!-- <div class="form-group row">
-										
-									</div> -->
+
 
 
 
@@ -371,7 +592,7 @@
 								</div>
 								<div class="col-sm-6 mb-3">
 
-								<label for="c_city">City</label>
+									<label for="c_city">City</label>
 									<!-- <input type="text" name="customer_city" id="customer_city" value="" class="form-control form-control-user" placeholder="City"> -->
 									<select name="customer_city" id="customer_city" value=""
 										class="form-control form-control-user citySelect">
@@ -381,7 +602,8 @@
 								</div>
 								<div class="col-sm-6 mb-3">
 									<label for="c_address">Address</label>
-									<input type="text" name="customer_address" value="" id="customer_address" class="form-control form-control-user" placeholder="Address">
+									<input type="text" name="customer_address" value="" id="customer_address"
+										class="form-control form-control-user" placeholder="Address">
 									<span id='spancustomer_address'>Please enter correct address</span>
 								</div>
 								<div class="col-sm-6 mb-3">
@@ -448,8 +670,8 @@
 									</select>
 								</div>
 								<div class="col-sm-6 mb-3">
-								<label for="c_city">City</label>
-								<select name="city" id="city" value="" class="form-control form-control-user">
+									<label for="c_city">City</label>
+									<select name="city" id="city" value="" class="form-control form-control-user">
 										<option value="">Select City</option>
 									</select>
 									<span id='spancity'>Please enter correct city</span>
@@ -571,7 +793,7 @@
 			method: "post",
 			data: {
 				c_pincode: c_pincode,
-				c_city :c_city,
+				c_city: c_city,
 				cartItems: cartItems,
 				[csrfName]: csrfHash,
 			},
@@ -583,13 +805,12 @@
 					pincheck_error = false;
 					window.location.href = '<?= base_url("welcome/checkout") ?>';
 					return false;
-				} else if(response.msg == 'nocity'){
+				} else if (response.msg == 'nocity') {
 					alert('sorry, City is not serviceable');
 					pincheck_error = false;
 					window.location.href = '<?= base_url("welcome/checkout") ?>';
 					return false;
-				}
-				else {
+				} else {
 					pincheck_error = true;
 					return true;
 				}
@@ -599,5 +820,41 @@
 			}
 		})
 	}
+
+</script>
+<script>
+	$(document).ready(function () {
+		$("input[name=time_slot]").click(function () {
+			$('input[name=time_slot]:not(:checked)').parent().removeClass("checked");
+			$('input[name=time_slot]:checked').parent().addClass("checked");
+		});
+	});
+	$(document).ready(function(){
+		$('.week_slide').slick({
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  responsive: [
+    {
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 3
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 1
+      }
+    }
+  ]
+});
+});
+
 
 </script>

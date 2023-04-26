@@ -105,6 +105,10 @@
 
 	/*modal*/
 
+	/*modal*/
+	h1.title{
+	color: var(--var-brown);
+}
 	.cont1 {
 		position: fixed;
 		top: 0;
@@ -126,10 +130,10 @@
 		top: 35%;
 		width: 42%;
 		margin: auto;
-		padding: 1rem 1rem;
+		padding: 2rem 1rem 2rem 1rem;
 		border-radius: .0rem;
 		color: hsl(0, 0%, 100%);
-		background: linear-gradient(to right bottom, #fff, #28a745);
+		background: #fff;
 		box-shadow: .4rem .4rem 2.4rem .2rem hsla(236, 50%, 50%, 0.3);
 		position: relative;
 		overflow: hidden;
@@ -141,11 +145,11 @@
 		text-align: center;
 		margin-bottom: 1rem;
 		padding-bottom: 1rem;
-		border-bottom: 1px solid hsla(0, 0%, 100%, .4);
+		border-bottom: 1px solid var(--var-brown);
 	}
 
 	.title {
-		font-size: 1.6rem;
+		font-size: 1.375rem;
 	}
 
 	.description {
@@ -161,7 +165,7 @@
 		line-height: 2;
 	}
 
-	.txt::before {
+	/* .txt::before {
 		content: '';
 		position: absolute;
 		top: 0%;
@@ -170,13 +174,13 @@
 		transform: translate(-50%, -50%);
 		width: 15rem;
 		height: 11rem;
-		border: 1px solid hsla(0, 0%, 100%, .2);
+		border: 1px solid var(--var-brown);
 		border-radius: 100rem;
 		pointer-events: none;
-	}
+	} */
 
 	.closebtn {
-		border: 1px solid hsla(0, 0%, 100%, .4);
+		border: 1px solid var(--var-brown);
 		border-radius: 100rem;
 		color: inherit;
 		background: transparent;
@@ -192,25 +196,25 @@
 
 	.closebtn:hover,
 	.closebtn:focus {
-		border-color: hsla(0, 0%, 100%, .6);
+		border-color: var(--var-brown);
 		-webkit-transform: translateY(-.2rem);
 		transform: translateY(-.2rem);
 	}
 
 	.link-2 {
 		width: 2rem;
-		height: 2rem;
-		border: 1px solid hsla(0, 0%, 100%, .4);
-		border-radius: 50%;
-		color: inherit;
-		font-size: 1.7rem;
-		position: absolute;
-		top: 1.2rem;
-		right: 2rem;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		transition: .2s;
+    height: 2rem;
+    border: 1px solid var(--var-brown);
+    border-radius: 50%;
+    color: var(--var-brown);
+    font-size: 1.7rem;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .2s;
 	}
 
 	.link-2::before {
@@ -224,26 +228,34 @@
 		border-color: hsla(0, 0%, 100%, .6);
 		-webkit-transform: translateY(-.2rem);
 		transform: translateY(-.2rem);
-		text-decoration:none;
+		text-decoration: none;
 	}
 
+	button.addcart1{
+		background: var(--var-yellow);
+    border-radius: 20px;
+    padding: 8px 25px;
+    text-align: end;
+    float: right;
+    border: navajowhite;
+    margin-right: 15px;
+    font-size: 17px;
+	}
+	.para{
+		padding:10px 0;
+		font-size:1rem;
+	}
 	@media(max-width:768px) {
 		.modaldisplay {
-			padding: 1rem 1rem;
 			width: 90%;
 		}
 
 		.title {
-			font-size: 1.5rem;
+    font-family: gilroy;
 		}
 
 		.txt {
 			margin-bottom: 1rem;
-			font-size: 1rem;
-		}
-
-		.txt:before {
-			width: 13rem;
 		}
 
 	}
@@ -251,34 +263,30 @@
 </style>
 <div class="cont1 contfirstmoddla" id="modal-opened">
 	<div class="modal modaldisplay alertmodal">
-
-		<div class="details">
-			<h1 class="title">Oops!</h1>
-		</div>
-
 		<p class="txt">
-			Device Price entered is outside the plan purchase limit.</p>
+		<h1 class="title">Oops!</h1>
+			<p  class="para">Device Price entered is outside the plan purchase limit.</p>
 
-		<button class="closebtn closemodal">ok &rarr;</button>
+		<button class="closebtn closemodal addcart1">ok </button>
 
-		<a href="#modal-closed" class="link-2 closemodal"></a>
+		<!-- <a href="#modal-closed" class="link-2 closemodal"></a> -->
 
 	</div>
 </div>
 
 <div class="cont1 contsec" id="modal-opened">
 	<div class="modal modaldisplay modalalready">
-		<div class="details">
+		<!-- <div class="details">
 			<h1 class="title">Oops!</h1>
-		</div>
+		</div> -->
 		<p class="txt">
-			<b>Want to Replace the Plan in Your Cart?</b></p>
-			<p>Your cart contains Repair and Services plan. Would you like to discard it and replace it with Protection plans?</p>
+		<h1 class="title">Want to Replace the Plan in Your Cart?</h1>
+			<p class="para">Your cart contains Repair and Services plan. Would you like to discard it and replace it with Protection plans?</p>
 
-		<button class="closesec">No &rarr;</button>
-		<button class="closebtn2">Yes &rarr;</button>
+		<button class="closesec addcart1">No </button>
+		<button class="closebtn2 addcart1">Yes</button>
 
-		<a href="#modal-closed" class="link-2 closesec"></a>
+		<!-- <a href="#modal-closed" class="link-2 closesec"></a> -->
 
 	</div>
 </div>
@@ -506,12 +514,14 @@
 
 	$('.closemodal').click(function(){
 		$('.pricebox').show();
+		$('#planbox').hide();
 		$('.alertmodal').modal('hide');
 		$('.contfirstmoddla').css('display', 'none');
 	})
 
 	$('.closesec').click(function(){
 		$('.pricebox').show();
+		$('#planbox').hide();
 		$('.modalalready').modal('hide');
 		$('.contsec').css('display', 'none');
 	})

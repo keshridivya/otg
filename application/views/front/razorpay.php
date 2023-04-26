@@ -10,7 +10,11 @@
 	<input type="hidden" class="form-control form-control-user" value="<?php echo $_SESSION['c_email'];?>"
 		name="c_email">
 	<input type="hidden" value="<?= $item['id'] ?>" class="cplan_id" name="cplan_id[]">
-
+	<input type="hidden" class="form-control form-control-user"
+									value="<?php echo $_SESSION['time_slot'];?>" name="time_slot[]">
+								
+								<input type="hidden" class="form-control form-control-user"
+									value="<?php echo $_SESSION['timepm'];?>" name="timepm[]">
 	<input type="hidden" class="form-control form-control-user" value="<?php echo $_SESSION['c_contact'];?>"
 		name="c_contact">
 	<input type="hidden" name="c_name" value="<?php echo $_SESSION['c_name'];?>" id="c_name"

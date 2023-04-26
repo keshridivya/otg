@@ -423,6 +423,7 @@
 </script>
 
 <script>
+	$('.modal').css('display', 'none');
 	$(document).ready(function () {
 		$('.loginotpbox').hide();
 		$('.login_verify_otp').hide();

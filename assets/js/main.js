@@ -1954,28 +1954,10 @@ $(document).ready(function(){
         $('#customer_address').val($(this).parents('.col-sm-6').children('.b0x-shadow').children('.section-header').children('.caddress').text());
         $('#customer_pincode').val($(this).parents('.col-sm-6').children('.b0x-shadow').children('.section-header').children('.cpincode').text());
         $('#modal_edit').modal('show');
-        alert($(this).parents('.col-sm-6').children('.b0x-shadow').children('.section-header').children('.caddress').text());
+        // alert($(this).parents('.col-sm-6').children('.b0x-shadow').children('.section-header').children('.caddress').text());
         // $('.cust_form_field').toggle();
     })
 });
-
-// $(document).ready(function(){
-//     // $('.cust_form_field').hide();
-//     $('.cust_edit1').click(function(){
-//         alert($(this).parents('.col-lg-6').children('.section-header').children('.cid').val());
-//         $('#customer_btn').val($(this).parents('.col-lg-6').children('.section-header').children('.cbtn').val());
-//         $('#customer_id').val($(this).parents('.col-lg-6').children('.section-header').children('.cid').val());
-//         $('#customer_name').val($(this).parents('.col-lg-6').children('.section-header').children('.cname').text());
-//         $('#customer_contact').val($(this).parents('.col-lg-6').children('.section-header').children('.ccont').text());
-//         $('#customer_city').val($(this).parents('.col-lg-6').children('.section-header').children('.ccity').val());
-//         $('#customer_email').val($(this).parents('.col-lg-6').children('.section-header').children('.cemail').text());
-//         $('#customer_address').val($(this).parents('.col-lg-6').children('.section-header').children('.caddress').text());
-//         $('#customer_pincode').val($(this).parents('.col-lg-6').children('.section-header').children('.cpincode').text());
-//         $('#modal_edit').modal('show');
-
-//         // $('.cust_form_field').toggle();
-//     })
-// });
 
 $(document).ready(function(){
     $('.btn-booking').click(function(){

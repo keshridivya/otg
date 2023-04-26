@@ -91,7 +91,7 @@ $route['summerydetail']='welcome/summerydetail';
 $route['invoice/(:any)']='welcome/invoice/$1';
 $route['resg_otp_verify'] = 'welcome/resg_otp_verify';
 $route['service_tracker/(:any)'] = 'welcome/service_tracker/$1';
-$route['certificate'] = 'welcome/certificate';
+$route['certificate/(:any)'] = 'welcome/certificate/$1';
 
 // $route['update_cart']='welcome/update_cart';
 

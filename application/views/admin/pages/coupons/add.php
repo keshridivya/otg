@@ -73,8 +73,8 @@
 									</select>
 								</div>
 								<div class="col-sm-3 mb-3">
-									<input type="checkbox" id="vehicle1" name="service[]" value="One Time Service">
-									<label for="vehicle1"> One Time Service</label>
+									<input type="checkbox" id="vehicle1" name="service[]" value="Maintenance and repair">
+									<label for="vehicle1"> Maintenance and repair</label>
 								</div>
 								<div class="col-sm-3 mb-3">
 									<input type="checkbox" id="vehicle2" name="service[]" value="Extended Warranty">

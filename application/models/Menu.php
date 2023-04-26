@@ -245,12 +245,14 @@ class Menu extends CI_model {
 
     //front coupon
     function couponcheck($cartItems,$inputcoupon,$servicename,$service){
+        $expiry_date = date('Y-m-d');
         $this->db->select('*');
         $this->db->from('coupons');
         $this->db->join('category_product','category_product.cproduct_name = coupons.cproduct');
         $this->db->join('category_plans','category_plans.cplan_id = coupons.cplan');
         $this->db->where("FIND_IN_SET('$service',coupons.service_name) !=", 0);
-         $this->db->where(['category_product.cproduct_name'=>$cartItems,'coupons.code'=>$inputcoupon,'category_plans.cplan_name'=>$servicename,'coupons.status'=>'active']);
+        $this->db->where(['category_product.cproduct_name'=>$cartItems,'coupons.code'=>$inputcoupon,'category_plans.cplan_name'=>$servicename,'coupons.status'=>'active']);
+        $this->db->where('coupons.expiry_date >=', $expiry_date);
         $query = $this->db->get();
         // print_r($this->db->last_query());
         return $query->row();
@@ -430,6 +432,8 @@ class Menu extends CI_model {
         // print_r($this->db->last_QUERY());
         return $query->row();  
     }
+
+
     
 }
 ?>

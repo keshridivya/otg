@@ -44,6 +44,9 @@
 
 								<input type="hidden" class="form-control form-control-user"
 									value="<?php echo $_SESSION['time_slot'];?>" name="time_slot[]">
+								
+								<input type="hidden" class="form-control form-control-user"
+									value="<?php echo $_SESSION['timepm'];?>" name="timepm[]">
 
 								<input type="hidden" value='OTG-<?= time().rand(100, 999) ?>' name='order_id'>
 
@@ -84,7 +87,7 @@
 									</div>
 										
 									<?php } ?>
-									<input type="hidden" name="catename[]" value="<?php echo $item['category_name']; ?>" id="catename" class="form-control form-control-user text-center" readonly>
+									<input type="hidden" name="catename[]" value="<?php echo $item['product_category']; ?>" id="catename" class="form-control form-control-user text-center" readonly>
 									<div class="col-sm-3 col-3 mb-3 mb-sm-0 text-right">
 										<label for="sub_total">Subtotal</label>
 										<input type="text" name="sub_total[]" id="sub_total"
@@ -146,6 +149,10 @@
 
 								<input type="hidden" class="form-control form-control-user"
 									value="<?php echo $_SESSION['time_slot'];?>" name="time_slot[]">
+
+								<input type="hidden" class="form-control form-control-user"
+									value="<?php echo $_SESSION['timepm'];?>" name="timepm[]">
+
 								<input type="hidden" value='OTG-<?= time().rand(100, 999) ?>' name='order_id'>
 								<input type="hidden" value="<?= $item['id'] ?>" class="cplan_id" name="cplan_id[]">
 
@@ -186,7 +193,7 @@
 									</div>
 										
 									<?php } ?>
-									<input type="hidden" name="catename[]" value="<?php echo $item['category_name']; ?>" id="catename" class="form-control form-control-user text-center" readonly>
+									<input type="hidden" name="catename[]" value="<?php echo $item['product_category']; ?>" id="catename" class="form-control form-control-user text-center" readonly>
 									<div class="col-sm-3 col-3 mb-3 mb-sm-0 text-right">
 										<label for="sub_total">Subtotal</label>
 										<input type="text" name="sub_total[]" id="sub_total"

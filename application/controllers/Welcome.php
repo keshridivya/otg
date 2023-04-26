@@ -458,10 +458,17 @@ class Welcome extends CI_Controller {
         $warranty = $this->input->post('warranty');
         $destroy = $this->cart->destroy();
         $cart_items = $this->cart->contents();
+        $strplan = $this->input->post('strplan');
 
         if(empty($cart_items)){
             $result = 'success';
             if($warranty == 'Maintenance and repair'){
+                if($strplan == 'AMC'){
+                    $warra = 'AMC';
+                }
+                else{
+                    $warra = 'Maintenance and repair';
+                }
                 $plans=$this->db->get_where('category_plans',array('cplan_id'=>$planid))->result_array();
                 $products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
                 $data=array(
@@ -472,7 +479,7 @@ class Welcome extends CI_Controller {
                     'image'=>$products[0]['cproduct_img'],
                     'product_name'=>$products[0]['cproduct_name'],
                     'category_name'=>$products[0]['category_name'],
-                    'product_category'=>$products[0]['category_name'],
+                    'product_category'=>$warra,
                 );
                 $this->cart->insert($data);
             }
@@ -496,7 +503,7 @@ class Welcome extends CI_Controller {
                             'duration'=>$yearprice,
                             'product_name'=>$query->cproduct_name,
                             'category_name'=>$query->category_name,
-                            'product_category'=>$query->category_name,
+                            'product_category'=>$warra,
                 );
                 $this->cart->insert($data);
             }
@@ -513,12 +520,20 @@ class Welcome extends CI_Controller {
         $planid = $this->input->post('planid');
         $year = $this->input->post('year');
         $warranty = $this->input->post('warranty');
+        $strplan = $this->input->post('strplan');
+        
         $cart_items = $this->cart->contents();
 
         if(empty($cart_items)) {
             $result = 'success';
 
             if($warranty == 'Maintenance and repair'){
+                if($strplan == 'AMC'){
+                    $warra = 'AMC';
+                }
+                else{
+                    $warra = 'Maintenance and repair';
+                }
                 $plans=$this->db->get_where('category_plans',array('cplan_id'=>$planid))->result_array();
                 $products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
                 $data=array(
@@ -529,7 +544,7 @@ class Welcome extends CI_Controller {
                     'image'=>$products[0]['cproduct_img'],
                     'product_name'=>$products[0]['cproduct_name'],
                     'category_name'=>$products[0]['category_name'],
-                    'product_category'=>$products[0]['category_name'],
+                    'product_category'=>$warra,
                 );
                 $this->cart->insert($data);
             }
@@ -561,6 +576,12 @@ class Welcome extends CI_Controller {
                 if (($item['category_name'] ?? '') == $warranty) {
                 $result = 'success';
                     if($warranty == 'Maintenance and repair'){
+                        if($strplan == 'AMC'){
+                            $warra = 'AMC';
+                        }
+                        else{
+                            $warra = 'Maintenance and repair';
+                        }
                         $plans=$this->db->get_where('category_plans',array('cplan_id'=>$planid))->result_array();
                         $products=$this->db->get_where('category_product',array('cproduct_name'=>$plans[0]['cproduct_name']))->result_array();
                         $data=array(
@@ -570,8 +591,8 @@ class Welcome extends CI_Controller {
                             'name'=>$plans[0]['cplan_name'],
                             'image'=>$products[0]['cproduct_img'],
                             'product_name'=>$products[0]['cproduct_name'],
-                            'category_name'=>$products[0]['category_name'],
-                            'product_category'=>$products[0]['category_name'],
+                            'category_name'=> $products[0]['category_name'],
+                            'product_category'=> $warra,
                         );
                         $this->cart->insert($data);
                     }
@@ -792,6 +813,7 @@ class Welcome extends CI_Controller {
                 $_SESSION['codeper'] = $this->input->post('codeper');
                 $_SESSION['percentage'] = $this->input->post('percentage');
                 $_SESSION['time_slot'] = $this->input->post('time_slot');
+                $_SESSION['timepm'] = $this->input->post('timepm');
             }
             $page_data['cartItems']=$this->cart->contents();
             $session_cust=get_cookie('cid');
@@ -1149,6 +1171,7 @@ class Welcome extends CI_Controller {
                     "cust_address"      =>  $data['c_address'][$i],
                     "cust_percentage"   =>  $data['percentage'][$i],
                     "cust_timeslot"     =>  $data['time_slot'][$i],
+                    "cust_time"         =>  $data['timepm'][$i],
 					"service_plan"      =>  $data['s_plan'][$i],
 					"service_device"    =>  $data['s_device'][$i],
                     "sub_cateplanid"    =>  $data['cplan_id'][$i],
@@ -1251,6 +1274,7 @@ class Welcome extends CI_Controller {
                     "cust_address"      =>  $data['c_address'][$i],
                     "cust_percentage"   =>  $data['percentage'][$i],
                     "cust_timeslot"     =>  $data['time_slot'][$i],
+                    "cust_time"         =>  $data['timepm'][$i],
 					"service_plan"      =>  $data['s_plan'][$i],
 					"service_device"    =>  $data['s_device'][$i],
                     "sub_cateplanid"    =>  $data['cplan_id'][$i],
@@ -1550,8 +1574,10 @@ class Welcome extends CI_Controller {
         }
     }
 
-    public function certificate(){
+    public function certificate($id){
         $page_data['dropdown']=$this->menu->menu_all();
+        $page_data['data']=$this->db->get_where('bookings',array('request_id_value'=>$id))->row();
+        $page_data['subdata']=$this->db->get('subcategories')->row();
         $page_data['page_title']="Invoice";
         $page_data['page']="certificate";
         $this->load->view('index',$page_data);

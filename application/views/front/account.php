@@ -30,11 +30,12 @@
 
 </script>
 <style>
-	.cancelbtn,
+	/* .cancelbtn,
 	.deletebtn {
 		float: left;
 		width: 50%;
-	}
+		
+	} */
 
 	.deletebtn1 {
 		color: var(--var-green) !important;
@@ -59,18 +60,17 @@
 	}
 
 	.cont1 {
-		padding: 40px 16px;
-		text-align: center;
+		padding: 40px 16px 20px;
 	}
 
-	.cancelbtn {
+	/* .cancelbtn {
 		background-color: #ccc;
 		color: black;
 	}
 
 	.deletebtn {
-		background-color: #f44336;
-	}
+		background-color: var(--var-green);
+	} */
 
 	/* The Modal (background) */
 	.modal1 {
@@ -97,11 +97,12 @@
 		background-color: #fefefe;
 		margin: 5% auto 15% auto;
 		border: 1px solid #888;
-		width: 80%;
+		width: 60%;
 		transform: translate(-50%, -50%);
 		top: 50%;
 		position: absolute;
 		left: 50%;
+		border-radius: 15px;
 	}
 
 
@@ -128,13 +129,26 @@
 		display: table;
 	}
 
-	/* Change styles for cancel button and delete button on extra small screens */
+	/* Change styles for cancel button and delete button on extra small screens
 	@media screen and (max-width: 300px) {
 
 		.cancelbtn,
 		.deletebtn {
 			width: 100%;
 		}
+	} */
+	button.addcart1{
+		background: var(--var-yellow);
+    border-radius: 20px;
+    padding: 8px 20px;
+    text-align: end;
+    float: right;
+    border: navajowhite;
+    margin-right: 15px;
+    font-size: 14px;
+	}
+	.para{
+		font-size:1rem;
 	}
 
 </style>
@@ -203,15 +217,28 @@ if($message ?? ''){
 														</p>
 														<br>
 														<?php
+														$req_id=$book_table['request_id_value'];
 														if($book_table['status'] == 'completed'){
                                                                             $req_id=$book_table['request_id_value'];
                                                                             ?>
 														<div class="accnt-order">
 															<h6><a href="<?= base_url("invoice/$req_id") ?>">Download
 																	Invoice</a></h6>
+																	
+														</div>
+														<?php } ?>
+														<?php
+														$req_id=$book_table['request_id_value'];
+														if($book_table['service_warranty'] == 'AMC'){
+                                                                            $req_id=$book_table['request_id_value'];
+                                                                            ?>
+														<div class="accnt-order">
+														<h6><a href="<?= base_url("certificate/$req_id") ?>">Certificate of Protection
+																	</a></h6>
 														</div>
 														<?php } ?>
 														<?php //} ?>
+														
 
 													</div>
 												</div>
@@ -382,16 +409,19 @@ if($message ?? ''){
 
 
 <div id="id01" class="modal1">
-	<span onclick="document.getElementById('id01').style.display='none'" class="close1" title="Close Modal">×</span>
+	<!-- <span onclick="document.getElementById('id01').style.display='none'" class="close1" title="Close Modal">×</span> -->
 	<form class="modal-content1" action="/action_page.php">
 		<input type="hidden" name="id" id="deleteid">
 		<div class="container cont1">
-			<h1>Delete Account</h1>
-			<p>Are you sure you want to delete your account?</p>
+			<h1>Delete Address</h1>
+			<p class="para">Are you sure you want to delete your Address?</p>
 
-			<div class="clearfix">
-				<button type="button" class="cancelbtn button">Cancel</button>
-				<button type="button" class="deletebtn button">Delete</button>
+			<div class="clearfix mt-5">
+			<button type="button" class="addcart1" onclick="document.getElementById('id01').style.display='none'">Cancel </button>
+			<button type="button" class="deletebtn addcart1">Delete</button>
+		
+				<!-- <button type="button" class="cancelbtn button" onclick="document.getElementById('id01').style.display='none'">Cancel</button>
+				<button type="button" class="deletebtn button">Delete</button> -->
 			</div>
 		</div>
 	</form>
