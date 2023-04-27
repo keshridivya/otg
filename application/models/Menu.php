@@ -275,6 +275,7 @@ class Menu extends CI_model {
         $this->db->where('cust_contact',$serviceno);
         $this->db->or_where('cust_email',$serviceno);
         $this->db->or_where('request_id_value',$serviceno);
+        $this->db->or_where('order_id',$serviceno);
         $query = $this->db->get();
         return $query->result_array();
     }

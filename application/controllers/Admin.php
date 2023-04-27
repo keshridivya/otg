@@ -50,12 +50,12 @@ class Admin extends CI_Controller {
 				$otp_resu = 'success';
 				$timestamp =  $_SERVER["REQUEST_TIME"];  
                 $_SESSION['time'] = $timestamp;
-                //   $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
-                //   if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
-                //       $data['message'] = "success";
-                //       } else {
-                //       $data['message'] = "Something went wrong, please try again later.";
-                //       }
+                  $msg = 'Your Verification code for Login to OTG Cares admin panel is '.$otp.'. Please do not share your OTP with anyone.';
+                  if (sendsms($number,$dltId='1207167835592949172',$header="OTGCRS", $msg)) {
+                      $data['message'] = "success";
+                      } else {
+                      $data['message'] = "Something went wrong, please try again later.";
+                      }
             }
             else
             {

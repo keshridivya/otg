@@ -1308,7 +1308,7 @@ class Welcome extends CI_Controller {
 	}
 
     public function receipt(){
-        
+        $this->load->helper('msg');
         $page_data['cartItems']=$this->cart->contents();
         if($this->session->userdata('reqid')){
             $reqid=$this->session->userdata('reqid');
@@ -1331,7 +1331,18 @@ class Welcome extends CI_Controller {
                         else{
                             $page_data['message']="Problem occured while email notification";
                         }
-                        
+
+                        //send sms
+                        $cust_name = $new_booking[0]['cust_name'];
+                        $cust_contact = $new_booking[0]['cust_contact'];
+                        $msg = 'Hi '.$cust_name.',Your booking has been confirmed. Your tracking ID is '.$reqid.' to track your booking . LINK https://otgcares.com/tracker';
+                  if (sendsms($cust_contact,$dltId='1207167835667837491',$header="OTGCRS", $msg)) {
+                      $data['message'] = "success";
+                      } else {
+                      $data['message'] = "Something went wrong, please try again later.";
+                      }
+
+                      //send sms
                         $page_data['new_booking']=$new_booking;
                         $page_data['message']="New Service Booked";
                         $page_data['dropdown']=$this->menu->menu_all();

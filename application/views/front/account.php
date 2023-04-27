@@ -238,8 +238,6 @@ if($message ?? ''){
 														</div>
 														<?php } ?>
 														<?php //} ?>
-														
-
 													</div>
 												</div>
 											</div>
